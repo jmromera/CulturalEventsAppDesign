@@ -1,0 +1,13 @@
+import type { Artist } from "../types/Event";
+
+export const artists: Record<string, Artist> = {
+  karmento: {
+    id: "karmento",
+    name: "Karmento",
+    bio: "Artista folclórica manchega, Karmento es una de las figuras del neofolclore español. Con su álbum La Serrana profundiza en sus raíces y en la identidad de las mujeres de su pueblo. Fue finalista del Benidorm Fest 2023.",
+    image: "https://www.surefolk.es/wp-content/uploads/karmento-c.jpg",
+    website: "https://www.surefolk.es/artista/karmento/",
+    youtube: "https://www.youtube.com/@Karmento",
+    spotify: "https://open.spotify.com/intl-es/artist/5QcmgtNbUfqgAOgj7XRRZF",
+  },
+};
