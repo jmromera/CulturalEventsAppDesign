@@ -1,0 +1,10 @@
+{
+  "description": "Discover and filter local cultural events like concerts and exhibitions, create a personal event list, and easily book tickets for a tailored experience.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
