@@ -1,4 +1,4 @@
-import type { EventItem } from "../types/Event";
+import type { City, EventItem } from "../types/Event";
 
 export const imgs = {
   city: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1800&q=85",
@@ -19,8 +19,16 @@ export const imgs = {
   rayo: "https://statics-maker.llt-services.com/ray/images/2026/10/03/xlarge/21ea1f3d-f8c1-4c87-8a43-c06822d810bd-685.jpg",
 };
 
-const make = (id: number, category: string, title: string, date: string, time: string, venue: string, image: string, url: string, extra: Partial<EventItem> = {}): EventItem => ({
-  id, category, title, date, time, venue, image, ticketUrl: url, duration: category === "Deportes" ? "2 h aprox." : "2 h 15 min aprox.",
+export const cityImages: Record<City, string> = {
+  Madrid: imgs.city,
+  Barcelona: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1800&q=85",
+  Valencia: "https://images.unsplash.com/photo-1593081891731-fda0877988da?auto=format&fit=crop&w=1800&q=85",
+  Sevilla: "https://images.unsplash.com/photo-1559386484-97dfc0e15539?auto=format&fit=crop&w=1800&q=85",
+  Bilbao: "https://images.unsplash.com/photo-1562883676-8c7feb83f09b?auto=format&fit=crop&w=1800&q=85",
+};
+
+const make = (id: number, category: string, title: string, date: string, time: string, venue: string, image: string, url: string, extra: Partial<EventItem> = {}, city: City = "Madrid"): EventItem => ({
+  id, city, category, title, date, time, venue, image, ticketUrl: url, duration: category === "Deportes" ? "2 h aprox." : "2 h 15 min aprox.",
   address: venue.includes("Teatro Real") ? "Plaza de Isabel II, s/n, Madrid" : `${venue}, Madrid`,
   distance: `${(1.2 + id * .35).toFixed(1).replace(".", ",")} km`, price: "Precio pendiente de publicación",
   availability: id > 12 ? "Calendario pendiente" : "Disponible próximamente", organizer: venue.includes("Teatro Real") ? "Teatro Real" : category === "Deportes" ? title.split("—")[0].trim() : "Ticketmaster España",

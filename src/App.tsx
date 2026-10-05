@@ -1,7 +1,7 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { events, imgs } from "./data/events";
+import { cityImages, events } from "./data/events";
 import { copy } from "./data/translations";
-import type { EventItem } from "./types/Event";
+import { cities, type City, type EventItem } from "./types/Event";
 
 type Page = "home" | "filters" | "detail" | "saved" | "about";
 type Language = "es" | "en" | "fr";
@@ -69,15 +69,16 @@ function SectionTitle({ kicker, title, action, onAction }: { kicker: string; tit
   return <div className="section-title"><div><span>{kicker}</span><h2>{title}</h2></div>{action && <button onClick={onAction}>{action}<Icon name="chevron" /></button>}</div>;
 }
 
-function Home({ saved, toggleSaved, openEvent, goFilters, t }: { saved: number[]; toggleSaved: (id: number) => void; openEvent: (id: number) => void; goFilters: () => void; t: typeof copy.es }) {
+function Home({ city, setCity, saved, toggleSaved, openEvent, goFilters, t }: { city: City; setCity: (city: City) => void; saved: number[]; toggleSaved: (id: number) => void; openEvent: (id: number) => void; goFilters: () => void; t: typeof copy.es }) {
   const [category, setCategory] = useState("Todos");
-  const filtered = category === "Todos" ? events : events.filter((event) => event.category === category);
+  const cityEvents = events.filter((event) => event.city === city);
+  const filtered = cityEvents.filter((event) => category === "Todos" || event.category === category);
   return <main>
-    <section className="hero"><img src={imgs.city} alt="Vista aérea de la Gran Vía de Madrid" /><div className="hero-shade" /><div className="hero-copy"><span><Icon name="spark" />{t.live}</span><h1>{t.hero}</h1><p>{t.heroText}</p><button className="hero-search" onClick={goFilters}><Icon name="search" /><span>{t.searchPlaceholder}</span><kbd>⌘ K</kbd></button></div><div className="hero-note"><Icon name="location" /><span><small>Tu ubicación</small><strong>Madrid · Centro</strong></span></div></section>
+    <section className="hero"><img src={cityImages[city]} alt={city} /><div className="hero-shade" /><div className="hero-copy"><span><Icon name="spark" />{t.live.replace("Madrid", city)}</span><h1>{t.hero}</h1><p>{t.heroText}</p><label className="city-picker"><Icon name="location" /><span className="sr-only">{t.city}</span><select value={city} onChange={(event) => setCity(event.target.value as City)} aria-label={t.city}>{cities.map((item) => <option key={item} value={item}>{item}</option>)}</select><Icon name="chevron" /></label><button className="hero-search" onClick={goFilters}><Icon name="search" /><span>{t.searchPlaceholder}</span><kbd>⌘ K</kbd></button></div><div className="hero-note"><Icon name="location" /><span><small>{t.city}</small><strong>{city}</strong></span></div></section>
     <div className="home-content">
-      <section><SectionTitle kicker={t.recommendedSub} title={t.recommended} action={t.all} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><div className="featured-grid">{events.slice(0, 3).map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div></section>
+      <section><SectionTitle kicker={t.recommendedSub} title={t.recommended} action={t.all} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><div className="featured-grid">{cityEvents.slice(0, 3).map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div></section>
       <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending}</small><strong>Ópera · Folk · Fútbol</strong></span></div><div><Icon name="location" /><span><small>{t.nearby}</small><strong>6 planes a menos de 5 km</strong></span></div><div><Icon name="star" /><span><small>{t.popular}</small><strong>Norma · 4,8</strong></span></div></section>
-      <section id="catalogue"><SectionTitle kicker="MADRID · 2027" title={t.all} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", "Música", "Ópera", "Danza", "Deportes"].map((item) => <button className={category === item ? "active" : ""} onClick={() => setCategory(item)} key={item}>{item}</button>)}</div><button className="filter-control" onClick={goFilters}><Icon name="filter" />{t.filters}</button></div><div className="event-grid">{filtered.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div></section>
+      <section id="catalogue"><SectionTitle kicker={`${city.toLocaleUpperCase()} · 2027`} title={t.all} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", "Música", "Ópera", "Danza", "Deportes"].map((item) => <button className={category === item ? "active" : ""} onClick={() => setCategory(item)} key={item}>{item}</button>)}</div><button className="filter-control" onClick={goFilters}><Icon name="filter" />{t.filters}</button></div>{filtered.length ? <div className="event-grid">{filtered.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div> : <p className="city-empty">{t.noCityEvents}</p>}</section>
     </div>
   </main>;
 }
@@ -91,7 +92,7 @@ function Filters({ back, t }: { back: () => void; t: typeof copy.es }) {
 function Detail({ event, saved, toggleSaved, back, openEvent, t }: { event: EventItem; saved: boolean; toggleSaved: () => void; back: () => void; openEvent: (id: number) => void; t: typeof copy.es }) {
   const related = events.filter((item) => item.category === event.category && item.id !== event.id).slice(0, 3);
   return <main className="detail-page"><div className="detail-top"><button onClick={back}><Icon name="arrow" />{t.back}</button><div><button aria-label="Compartir"><Icon name="share" /></button><SaveButton active={saved} onClick={toggleSaved} t={t} /></div></div>
-    <section className="detail-gallery"><img className="gallery-main" src={event.image} alt={`Imagen principal de ${event.title}`} /><img src={imgs.city} alt="Madrid, ciudad del evento" /><div className="gallery-card"><span>{t.gallery}</span><strong>2</strong><small>imágenes</small></div></section>
+    <section className="detail-gallery"><img className="gallery-main" src={event.image} alt={`Imagen principal de ${event.title}`} /><img src={cityImages[event.city]} alt={event.city} /><div className="gallery-card"><span>{t.gallery}</span><strong>2</strong><small>imágenes</small></div></section>
     <div className="detail-content"><div className="detail-main"><span className="category">{event.category}</span><h1>{event.title}</h1><div className="detail-social"><span><Icon name="star" filled />{event.rating.toFixed(1)} · {event.popularity}</span><span>{event.tags.join(" · ")}</span></div><p className="detail-lead">{event.description}</p>
       <section><h2>{t.description}</h2><p>{event.fullDescription}</p><p>{event.description}</p></section>
       <section><h2>{t.practical}</h2><div className="info-grid"><Info icon="calendar" label={t.date} value={`${event.date} · ${event.time}`} /><Info icon="time" label={t.duration} value={event.duration} /><Info icon="location" label={t.location} value={event.address} /><Info icon="profile" label={t.organizer} value={event.organizer} /></div></section>
@@ -116,6 +117,7 @@ function About() {
 
 export default function App() {
   const [page, setPage] = useState<Page>("home");
+  const [city, setCity] = useState<City>("Madrid");
   const [language, setLanguage] = useState<Language>("es");
   const [selectedId, setSelectedId] = useState(1);
   const [saved, setSaved] = useState([1, 8]);
@@ -127,7 +129,7 @@ export default function App() {
   const toggleSaved = (id: number) => setSaved((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
   const createList = () => { const name = window.prompt(t.listPrompt); if (name?.trim()) setLists((current) => [...current, name.trim()]); };
   return <div className="app-shell"><Nav page={page} navigate={navigate} language={language} setLanguage={setLanguage} t={t} /><MobileChrome page={page} navigate={navigate} language={language} setLanguage={setLanguage} t={t} /><div className="main-shell">
-    {page === "home" && <Home saved={saved} toggleSaved={toggleSaved} openEvent={openEvent} goFilters={() => navigate("filters")} t={t} />}
+    {page === "home" && <Home city={city} setCity={setCity} saved={saved} toggleSaved={toggleSaved} openEvent={openEvent} goFilters={() => navigate("filters")} t={t} />}
     {page === "filters" && <Filters back={() => navigate("home")} t={t} />}
     {page === "detail" && <Detail event={event} saved={saved.includes(event.id)} toggleSaved={() => toggleSaved(event.id)} back={() => navigate("home")} openEvent={openEvent} t={t} />}
     {page === "saved" && <Saved saved={saved} lists={lists} createList={createList} toggleSaved={toggleSaved} openEvent={openEvent} explore={() => navigate("home")} t={t} />}
