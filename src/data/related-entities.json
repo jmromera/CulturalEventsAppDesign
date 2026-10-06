@@ -65,5 +65,93 @@
     "aboutTitle": { "es": "Sobre Karol G", "en": "About Karol G", "fr": "À propos de Karol G" },
     "relatedEventsTitle": { "es": "Conciertos de Karol G", "en": "Karol G concerts", "fr": "Concerts de Karol G" },
     "profileEventsTitle": { "es": "Próximos conciertos", "en": "Upcoming concerts", "fr": "Prochains concerts" }
+  },
+  "fito-y-fitipaldis": {
+    "id": "fito-y-fitipaldis",
+    "name": "Fito y Fitipaldis",
+    "kind": "artist",
+    "description": "Fito y Fitipaldis es el grupo de rock liderado por Fito Cabrales. En su gira Aullidos Tour recorre teatros y auditorios con canciones de su nuevo disco y clásicos de su repertorio.",
+    "image": "https://www.fitoyfitipaldis.com/wp-content/uploads/2026/06/silueta-cabecera-fyf-768x498.png",
+    "links": [
+      { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.fitoyfitipaldis.com/" },
+      { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/user/fitoyfitipaldis/videos" },
+      { "label": { "es": "Spotify", "en": "Spotify", "fr": "Spotify" }, "url": "https://open.spotify.com/artist/1tZ99AnqyjgrmPwLfGU5eo" }
+    ],
+    "aboutTitle": { "es": "Sobre Fito y Fitipaldis", "en": "About Fito y Fitipaldis", "fr": "À propos de Fito y Fitipaldis" },
+    "relatedEventsTitle": { "es": "Conciertos de Fito y Fitipaldis", "en": "Fito y Fitipaldis concerts", "fr": "Concerts de Fito y Fitipaldis" },
+    "profileEventsTitle": { "es": "Próximos conciertos", "en": "Upcoming concerts", "fr": "Prochains concerts" }
+  },
+  "tini": {
+    "id": "tini",
+    "name": "TINI",
+    "kind": "artist",
+    "description": "Martina Stoessel, conocida artísticamente como TINI, es una cantante y compositora argentina de pop. En 2027 presenta en España FUTTTURA, la gira más ambiciosa de su carrera.",
+    "image": "https://s1.ticketm.net/img/tat/dam/a/51a/83c6ba6d-f258-4bfe-a477-1b347ec3151a_CUSTOM.jpg",
+    "links": [
+      { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://tinistoessel.com/" },
+      { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/@TiniStoessel" },
+      { "label": { "es": "Spotify", "en": "Spotify", "fr": "Spotify" }, "url": "https://open.spotify.com/intl-es/artist/7vXDAI8JwjW531ouMGbfcp" }
+    ],
+    "aboutTitle": { "es": "Sobre TINI", "en": "About TINI", "fr": "À propos de TINI" },
+    "relatedEventsTitle": { "es": "Conciertos de TINI", "en": "TINI concerts", "fr": "Concerts de TINI" },
+    "profileEventsTitle": { "es": "Próximos conciertos", "en": "Upcoming concerts", "fr": "Prochains concerts" }
+  },
+  "amaral": {
+    "id": "amaral",
+    "name": "Amaral",
+    "kind": "artist",
+    "description": "Amaral es el dúo español de pop rock formado por Eva Amaral y Juan Aguirre, con una trayectoria marcada por canciones emblemáticas y una sólida carrera en directo.",
+    "image": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20251027181215-evento.png&v=2",
+    "links": [
+      { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.amaral.es/" },
+      { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/channel/UCjH_5vNh4ry5FZ9mzfJN8dA/?sub_confirmation=1" },
+      { "label": { "es": "Spotify", "en": "Spotify", "fr": "Spotify" }, "url": "https://open.spotify.com/artist/4OkeTQCk0fvX6VBYpOOxDi" }
+    ],
+    "aboutTitle": { "es": "Sobre Amaral", "en": "About Amaral", "fr": "À propos d'Amaral" },
+    "relatedEventsTitle": { "es": "Conciertos de Amaral", "en": "Amaral concerts", "fr": "Concerts d'Amaral" },
+    "profileEventsTitle": { "es": "Próximos conciertos", "en": "Upcoming concerts", "fr": "Prochains concerts" }
+  },
+  "el-kanka": {
+    "id": "el-kanka",
+    "name": "El Kanka",
+    "kind": "artist",
+    "description": "Juan Gómez Canca, conocido como El Kanka, es un cantautor malagueño que combina canción de autor, humor y ritmos populares en sus discos y conciertos.",
+    "image": "https://prismic-images.tmol.io/ticketmaster-tm-global/ZzIePK8jQArT0sSN_tmes_elkanka24-header.jpg?auto=format,compress&rect=0,0,1024,432&w=1024&h=432",
+    "links": [
+      { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://elkanka.com/" },
+      { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/user/kankautor" }
+    ],
+    "aboutTitle": { "es": "Sobre El Kanka", "en": "About El Kanka", "fr": "À propos d'El Kanka" },
+    "relatedEventsTitle": { "es": "Conciertos de El Kanka", "en": "El Kanka concerts", "fr": "Concerts d'El Kanka" },
+    "profileEventsTitle": { "es": "Próximos conciertos", "en": "Upcoming concerts", "fr": "Prochains concerts" }
+  },
+  "la-oreja-de-van-gogh": {
+    "id": "la-oreja-de-van-gogh",
+    "name": "La Oreja de Van Gogh",
+    "kind": "artist",
+    "description": "La Oreja de Van Gogh es una banda donostiarra de pop formada en 1996, conocida por sus melodías y letras que han marcado varias generaciones.",
+    "image": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20251016184615-evento.png&v=2",
+    "links": [
+      { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.laorejadevangogh.com/" },
+      { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/watch?v=p9huAz5f_9A" }
+    ],
+    "aboutTitle": { "es": "Sobre La Oreja de Van Gogh", "en": "About La Oreja de Van Gogh", "fr": "À propos de La Oreja de Van Gogh" },
+    "relatedEventsTitle": { "es": "Conciertos de La Oreja de Van Gogh", "en": "La Oreja de Van Gogh concerts", "fr": "Concerts de La Oreja de Van Gogh" },
+    "profileEventsTitle": { "es": "Próximos conciertos", "en": "Upcoming concerts", "fr": "Prochains concerts" }
+  },
+  "carolina-durante": {
+    "id": "carolina-durante",
+    "name": "Carolina Durante",
+    "kind": "artist",
+    "description": "Carolina Durante es una banda madrileña de punk pop conocida por sus guitarras directas, letras generacionales y enérgicos conciertos en directo.",
+    "image": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/carolina-durante-2026_400.jpg",
+    "links": [
+      { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://carolinadurante.com/" },
+      { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/@carolinadurante8774" },
+      { "label": { "es": "Spotify", "en": "Spotify", "fr": "Spotify" }, "url": "https://open.spotify.com/intl-es/artist/2BVE7Pqd8kxv9xEsuvoJoE" }
+    ],
+    "aboutTitle": { "es": "Sobre Carolina Durante", "en": "About Carolina Durante", "fr": "À propos de Carolina Durante" },
+    "relatedEventsTitle": { "es": "Conciertos de Carolina Durante", "en": "Carolina Durante concerts", "fr": "Concerts de Carolina Durante" },
+    "profileEventsTitle": { "es": "Próximos conciertos", "en": "Upcoming concerts", "fr": "Prochains concerts" }
   }
 }

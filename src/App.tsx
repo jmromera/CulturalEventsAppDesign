@@ -348,6 +348,7 @@ function Home({ selectedCity, saved, toggleSaved, openEvent, goFilters, searchQu
   const recommendationCandidates = [...cityEvents.filter((event) => event.featured), ...cityEvents.filter((event) => !event.featured)];
   const seenRecommendationArtists = new Set<string>();
   const highlightedEvents = recommendationCandidates.filter((event) => {
+    if (!event.title?.trim()) return false;
     const artistName = event.title.split(/\s+[—–-]\s+/)[0];
     const artistKey = event.relatedEntityId ?? normalizeSearch(artistName);
     if (seenRecommendationArtists.has(artistKey)) return false;
