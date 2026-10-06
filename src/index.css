@@ -73,3 +73,39 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
 .about-modal h2{font-size:24px;margin-bottom:12px}
 .about-modal p{color:var(--muted);line-height:1.6;margin:0 0 12px}
 @media(max-width:600px){.site-footer-meta{align-items:flex-start}}
+
+/* Category accents */
+[data-cat]{--cat:var(--forest);--cat-soft:#eff6ff}
+[data-cat="music"]{--cat:#7c3aed;--cat-soft:#f3edff}
+[data-cat="opera"]{--cat:#9f1239;--cat-soft:#fff0f3}
+[data-cat="theatre"]{--cat:#b91c1c;--cat-soft:#fef0f0}
+[data-cat="dance"]{--cat:#a21caf;--cat-soft:#fdf0ff}
+[data-cat="museums"]{--cat:#0f766e;--cat-soft:#e9faf7}
+[data-cat="art"]{--cat:#b45309;--cat-soft:#fff6e5}
+[data-cat="sports"]{--cat:#15803d;--cat-soft:#ecfaf0}
+.event-card[data-cat] .event-body{border-top:3px solid var(--cat)}
+.event-card[data-cat]:hover{border-color:color-mix(in srgb,var(--cat) 45%,var(--line));box-shadow:0 14px 38px color-mix(in srgb,var(--cat) 14%,transparent)}
+.event-card[data-cat] .event-image .category{background:var(--cat);color:#fff}
+.tag-row span{background:#faf6f0;color:#6b5b45;border:1px solid #efe6d8}
+.tag-row span.tag-category{background:var(--cat-soft);color:var(--cat);border-color:color-mix(in srgb,var(--cat) 25%,transparent);font-weight:700}
+.category-tabs button[data-cat]::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cat);margin-right:7px}
+.category-tabs button[data-cat]:hover{border-color:var(--cat);color:var(--cat)}
+.category-tabs button[data-cat].active{background:var(--cat);border-color:var(--cat);color:#fff}
+.category-tabs button[data-cat].active::before{background:#fff}
+.detail-hero[data-cat]{background:linear-gradient(135deg,#111827 55%,color-mix(in srgb,var(--cat) 38%,#111827))}
+.detail-hero[data-cat] .category{background:var(--cat-soft);color:var(--cat);font-weight:700}
+.venue-directory-kind[data-cat]{color:var(--cat)}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(120deg,rgba(29,78,216,.32),rgba(124,58,237,.2) 55%,rgba(245,158,11,.14))}
+.hero-shade{background:linear-gradient(90deg,rgba(15,23,60,.88),rgba(30,27,75,.5) 50%,rgba(15,23,60,.08))}
+@media(max-width:900px){.hero-shade{background:linear-gradient(180deg,rgba(15,23,60,.08),rgba(15,23,60,.92))}}
+
+.detail-hero[data-cat]{color:#f8fafc}
+.detail-hero[data-cat] .detail-intro h1{color:#fff}
+.detail-hero[data-cat] .detail-social{color:#e2e8f0;font-weight:600}
+.detail-hero[data-cat] .detail-social>span:first-child{color:#fff}
+.detail-hero[data-cat] .detail-social>span:first-child .icon{color:#fbbf24}
+.detail-hero[data-cat] .detail-lead{color:#e2e8f0;font-size:17px}
+.detail-hero[data-cat] .detail-intro-facts{color:#f1f5f9;font-size:14px;font-weight:500}
+.detail-hero[data-cat] .detail-intro-facts .icon{color:#93c5fd}
+.hero-copy p{color:#f1f5f9}
+.hero-copy>span{color:#fff}
