@@ -436,6 +436,57 @@
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=San%20Mam%C3%A9s%2C%20Rafael%20Moreno%20Pitxitxi%20Kalea%2C%20s%2Fn%2C%2048013%20Bilbao"
   },
   {
+    "city": "Bilbao",
+    "name": "Bizkaia Arena - BEC",
+    "address": "Azkue Kalea, 1, 48902 Barakaldo, Bizkaia",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNLVIdQCbjppzJLd6NRIIe7FANoIAx91J9YakkQJ31Eg&s=10",
+    "kind": { "es": "Pabellón multiusos", "en": "Multi-purpose arena", "fr": "Salle polyvalente" },
+    "description": {
+      "es": "Un pabellón de Bizkaia para conciertos y grandes eventos.",
+      "en": "A Bizkaia arena for concerts and major events.",
+      "fr": "Une salle de Bizkaia pour les concerts et grands événements."
+    },
+    "id": "bilbao-bizkaia-arena-bec",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bizkaia%20Arena%20BEC%2C%20Azkue%20Kalea%2C%201%2C%2048902%20Barakaldo"
+  },
+  {
+    "city": "Bilbao",
+    "name": "Bilbao Arena",
+    "address": "Askatasuna Etorbidea, 13, 48003 Bilbao",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRujHnp8QOWR3SsVf4_lHYUoHy6ru41eKJQ6x_rNixEg&s=10",
+    "kind": { "es": "Pabellón deportivo", "en": "Sports arena", "fr": "Salle omnisports" },
+    "description": {
+      "es": "Un pabellón bilbaíno para eventos deportivos y conciertos.",
+      "en": "A Bilbao arena for sporting events and concerts.",
+      "fr": "Une salle bilbaïenne pour les événements sportifs et les concerts."
+    },
+    "id": "bilbao-bilbao-arena",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bilbao%20Arena%2C%20Askatasuna%20Etorbidea%2C%2013%2C%2048003%20Bilbao"
+  },
+  {
+    "city": "Bilbao",
+    "name": "Sala Santana 27",
+    "address": "Telleria Kalea, 27, 48004 Bilbao",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAjlA1e3L5T4Y0ISkBGLsriQpFcfE7fQIJF-1tk4npeA&s=10",
+    "kind": { "es": "Sala de conciertos", "en": "Live music venue", "fr": "Salle de concerts" },
+    "description": {
+      "es": "Una sala bilbaína dedicada a conciertos y música en directo.",
+      "en": "A Bilbao venue dedicated to concerts and live music.",
+      "fr": "Une salle bilbaïenne dédiée aux concerts et à la musique live."
+    },
+    "id": "bilbao-sala-santana-27",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20Santana%2027%2C%20Telleria%20Kalea%2C%2027%2C%2048004%20Bilbao"
+  },
+  {
     "city": "Valencia",
     "name": "Palau de la Música de València",
     "address": "Passeig de l'Albereda, 30, 46023 València",
@@ -611,5 +662,90 @@
     },
     "id": "madrid-movistar-arena",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Movistar%20Arena%2C%20Av.%20de%20Felipe%20II%2C%20s%2Fn%2C%2028009%20Madrid"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Palau Sant Jordi",
+    "address": "Passeig Olímpic, 5-7, 08038 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ2o4G0-RONJYyHnCKP2zuUqG5eA5VBhX5GOUbRpHxag&s=10",
+    "kind": { "es": "Pabellón multiusos", "en": "Multi-purpose arena", "fr": "Salle polyvalente" },
+    "description": {
+      "es": "Un recinto de Barcelona para conciertos y grandes espectáculos.",
+      "en": "A Barcelona venue for concerts and major live shows.",
+      "fr": "Une salle barcelonaise pour les concerts et grands spectacles."
+    },
+    "id": "barcelona-palau-sant-jordi",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20Sant%20Jordi%2C%20Passeig%20Ol%C3%ADmpic%2C%205-7%2C%2008038%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Estadi Olímpic Lluís Companys",
+    "address": "Passeig Olímpic, 15-17, 08038 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRo500km9IYbtPCWn_7EDS23_vLaxwBwUXkBVjNmUU3g&s=10",
+    "kind": { "es": "Estadio", "en": "Stadium", "fr": "Stade" },
+    "description": {
+      "es": "Un estadio de Barcelona para grandes conciertos y eventos deportivos.",
+      "en": "A Barcelona stadium for major concerts and sporting events.",
+      "fr": "Un stade barcelonais accueillant de grands concerts et événements sportifs."
+    },
+    "id": "barcelona-estadi-olimpic-lluis-companys",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadi%20Ol%C3%ADmpic%20Llu%C3%ADs%20Companys%2C%20Passeig%20Ol%C3%ADmpic%2C%2015-17%2C%2008038%20Barcelona"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Estadio La Cartuja de Sevilla",
+    "address": "Isla de la Cartuja, Sector Norte, 41092 Sevilla",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL418_VrCgSlK5MOI4uBi4VY7UPAPsHptGjBl-BdcZCQ&s=10",
+    "kind": { "es": "Estadio", "en": "Stadium", "fr": "Stade" },
+    "description": {
+      "es": "Un estadio de Sevilla para grandes conciertos y eventos deportivos.",
+      "en": "A Seville stadium for major concerts and sporting events.",
+      "fr": "Un stade sévillan accueillant de grands concerts et événements sportifs."
+    },
+    "id": "sevilla-estadio-la-cartuja-de-sevilla",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20La%20Cartuja%20de%20Sevilla%2C%20Isla%20de%20la%20Cartuja%2C%20Sector%20Norte%2C%2041092%20Sevilla"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Cartuja Center CITE",
+    "address": "Calle Leonardo da Vinci, 7, 41092 Sevilla",
+    "websiteUrl": "https://cartujacenter.com/",
+    "programmeUrl": "https://cartujacenter.com/",
+    "programmeLabel": { "es": "Programa oficial", "en": "Official programme", "fr": "Programme officiel" },
+    "image": "https://meyersound.es/es/wp-content/uploads/2022/03/Meyer-Sound-Cartuja-Center-1.jpg",
+    "kind": { "es": "Auditorio y centro de espectáculos", "en": "Auditorium and entertainment venue", "fr": "Auditorium et salle de spectacles" },
+    "description": {
+      "es": "Un auditorio de Sevilla para conciertos y grandes espectáculos.",
+      "en": "A Seville auditorium for concerts and major live shows.",
+      "fr": "Un auditorium sévillan pour les concerts et grands spectacles."
+    },
+    "id": "sevilla-cartuja-center-cite",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cartuja%20Center%20CITE%2C%20Calle%20Leonardo%20da%20Vinci%2C%207%2C%2041092%20Sevilla"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Sala Custom",
+    "address": "Sala Custom, Sevilla",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM4Q6EPblhwmCfyU-PnlNbhGoQZtFs1pO-dxd0ByxgZg&s=10",
+    "kind": { "es": "Sala de conciertos", "en": "Concert venue", "fr": "Salle de concert" },
+    "description": {
+      "es": "Una sala sevillana para conciertos de rock y música en directo.",
+      "en": "A Seville venue for rock concerts and live music.",
+      "fr": "Une salle sévillane pour les concerts rock et la musique live."
+    },
+    "id": "sevilla-sala-custom",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20Custom%2C%20Sevilla"
   }
 ]

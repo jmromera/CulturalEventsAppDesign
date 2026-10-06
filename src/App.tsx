@@ -80,13 +80,13 @@ function SaveButton({ active, onClick, t, compact = false }: { active: boolean; 
 function EventCard({ event, saved, onSave, onOpen, t, featured = false }: { event: EventItem; saved: boolean; onSave: () => void; onOpen: () => void; t: typeof copy.es; featured?: boolean }) {
   const venue = venueFor(event.venueId);
   return <article className={`event-card ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
-    <button className="event-image" onClick={onOpen} aria-label={`${t.details}: ${event.title}`}><img src={event.image} alt={`Imagen promocional de ${event.title}`} /><span className="category">{event.category}</span><span className="rating"><Icon name="star" filled />{event.rating.toFixed(1)}</span></button>
+    <button className="event-image" onClick={onOpen} aria-label={`${t.details}: ${event.title}`}><img src={event.image} alt={`Imagen promocional de ${event.title}`} /><span className="category">{event.category}</span>{event.rating !== undefined && <span className="rating"><Icon name="star" filled />{event.rating.toFixed(1)}</span>}</button>
     <div className="event-body"><div className="event-title-row"><button className="event-title" onClick={onOpen}>{event.title}</button><SaveButton active={saved} onClick={onSave} t={t} compact /></div>
       <p className="event-description">{event.description}</p>
       <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {event.distance}</span><span><Icon name="time" />{event.duration}</span></div>
       <div className="tag-row">{event.tags.slice(0, 3).map((tag, index) => <span key={tag} className={index === 0 ? "tag-category" : undefined}>{tag}</span>)}</div>
       <div className="event-footer"><div><small>{event.organizer}</small><strong>{event.price}</strong></div><Button variant="secondary" onClick={onOpen}>{t.details}<Icon name="chevron" /></Button></div>
-      <div className={`availability ${event.confirmed ? "" : "pending"}`}><i />{event.availability} · {event.popularity} de popularidad</div>
+      <div className={`availability ${event.confirmed ? "" : "pending"}`}><i />{event.availability}{event.popularity ? ` · ${event.popularity} de popularidad` : ""}</div>
     </div>
   </article>;
 }
@@ -110,7 +110,7 @@ function RelatedEventsSection({ entity, relatedEvents, title, t, showCount = tru
   const countLabel = countTemplate.replace("{count}", String(relatedEvents.length));
   return <section className="artist-events-section">
     <div className="artist-events-heading"><div><span className="kicker">{title}</span>{showCount && <h2>{countLabel}</h2>}</div>{showProfileLink && <Link to={`/entity/${entity.id}`} className="artist-profile-link">{t.viewEntity}<Icon name="chevron" /></Link>}</div>
-    <div className="artist-events-grid">{relatedEvents.slice(0, 6).map((relatedEvent) => <RelatedEventCard key={relatedEvent.id} event={relatedEvent} />)}</div>
+    <div className="artist-events-grid">{relatedEvents.map((relatedEvent) => <RelatedEventCard key={relatedEvent.id} event={relatedEvent} />)}</div>
   </section>;
 }
 
@@ -345,7 +345,15 @@ function Home({ selectedCity, saved, toggleSaved, openEvent, goFilters, searchQu
     const matchesQuery = !query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query);
     return matchesCategory && matchesQuery;
   });
-  const highlightedEvents = [...cityEvents.filter((event) => event.featured), ...cityEvents.filter((event) => !event.featured)].slice(0, 3);
+  const recommendationCandidates = [...cityEvents.filter((event) => event.featured), ...cityEvents.filter((event) => !event.featured)];
+  const seenRecommendationArtists = new Set<string>();
+  const highlightedEvents = recommendationCandidates.filter((event) => {
+    const artistName = event.title.split(/\s+[—–-]\s+/)[0];
+    const artistKey = event.relatedEntityId ?? normalizeSearch(artistName);
+    if (seenRecommendationArtists.has(artistKey)) return false;
+    seenRecommendationArtists.add(artistKey);
+    return true;
+  }).slice(0, 3);
   const updateFeaturedIndex = (container: HTMLDivElement) => {
     const cards = Array.from(container.children);
     if (!cards.length) return;
@@ -471,7 +479,7 @@ function Detail({ event, saved, toggleSaved, back, openEvent, openVenue, languag
     await copyEventLink();
   };
   return <main className="detail-page">{structuredEvent && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredEvent).replace(/</g, "\\u003c") }} />}<div className="detail-top detail-top--event"><button onClick={back}><Icon name="arrow" /><span>{t.back}</span></button><div className="detail-actions"><DetailActionButton icon="share" label={actionLabels.share} onClick={() => { void shareEvent(); }} /><DetailActionButton icon={saved ? "heart" : "bookmark"} label={saved ? t.savedLabel : t.save} onClick={toggleSaved} active={saved} /><DetailActionButton icon={copyConfirmed ? "check" : "copy"} label={copyConfirmed ? actionLabels.copied : actionLabels.copyLink} onClick={() => { void copyEventLink(); }} /><CalendarAction labels={actionLabels} url={calendarUrl} onDownload={() => { if (calendarTiming) downloadEventCalendar(event, venue, calendarTiming); }} /></div></div>
-    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><img className="gallery-main" src={event.image} alt={`Imagen principal de ${event.title}`} /></div><div className="detail-intro"><span className="category">{event.category}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span><span><Icon name="time" />{event.duration}</span></div><div className="detail-social"><span><Icon name="star" filled />{event.rating.toFixed(1)} · {event.popularity}</span><span>{event.tags.join(" · ")}</span></div><p className="detail-lead">{event.description}</p></div></section>
+    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><img className="gallery-main" src={event.image} alt={`Imagen principal de ${event.title}`} /></div><div className="detail-intro"><span className="category">{event.category}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span><span><Icon name="time" />{event.duration}</span></div><div className="detail-social">{event.rating !== undefined && <span><Icon name="star" filled />{event.rating.toFixed(1)}{event.popularity ? ` · ${event.popularity}` : ""}</span>}<span>{event.tags.join(" · ")}</span></div><p className="detail-lead">{event.description}</p></div></section>
     <div className="detail-content"><div className="detail-main">
       <section><h2>{t.description}</h2><p>{event.fullDescription}</p><p>{event.description}</p></section>
       {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}>{entity.image && <img src={entity.image} alt="" />}<div className="artist-profile-copy"><h3>{entity.name}<span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></h3><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}
