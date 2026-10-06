@@ -1,20 +1,14 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
 import { artists } from "./data/artists";
-import { cityEventCounts, cityImages, events } from "./data/events";
-import { artistCopy, copy, eventActionCopy, venueLinkCopy } from "./data/translations";
-import { venueFor, venues } from "./data/venues";
+import { cityEventCounts, cityImages, events } from "./data/event-catalog";
+import { artistCopy, copy, eventActionCopy, interfaceText, venueLinkCopy } from "./data/translations";
+import { venueFor, venues } from "./data/venue-catalog";
 import { cities, eventCategories, type City, type EventItem } from "./types/Event";
 
 type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail";
 type Language = "es" | "en" | "fr";
 type IconName = "arrow" | "bookmark" | "calendar" | "check" | "chevron" | "copy" | "download" | "filter" | "heart" | "home" | "location" | "profile" | "search" | "share" | "spark" | "star" | "ticket" | "time" | "trending";
-
-const interfaceText = {
-  es: { events: "Eventos", venues: "Recintos", favourites: "Favoritos", guest: "Invitado", venueHeading: "Recintos en", venueIntro: "Explora recintos y espacios culturales de la ciudad.", eventCount: "eventos", availableEvents: "eventos disponibles", comingSoon: "Próximamente", cityPlaceholder: "Busca cualquier ciudad", cityEmptyTitle: "No hemos encontrado eventos para {city} en este momento.", cityEmptyText: "Estamos ampliando continuamente nuestro catálogo de eventos y experiencias. Vuelve a consultar próximamente o explora los eventos disponibles en otras ciudades.", citySuggestions: "Explora otras ciudades", cityScope: "Agenda cultural de", viewEvents: "Ver eventos", searchResults: "Resultados", noSearchResults: "No hay eventos que coincidan con la búsqueda." },
-  en: { events: "Events", venues: "Venues", favourites: "Favourites", guest: "Guest", venueHeading: "Venues in", venueIntro: "Explore the city's cultural spaces and venues.", eventCount: "events", availableEvents: "events available", comingSoon: "Coming soon", cityPlaceholder: "Search any city", cityEmptyTitle: "We haven't found events for {city} right now.", cityEmptyText: "We are continuously expanding our catalogue of events and experiences. Check back soon or explore the events available in other cities.", citySuggestions: "Explore other cities", cityScope: "Cultural events in", viewEvents: "View events", searchResults: "Results", noSearchResults: "No events match your search." },
-  fr: { events: "Événements", venues: "Lieux", favourites: "Favoris", guest: "Invité", venueHeading: "Lieux à", venueIntro: "Découvrez les lieux culturels de la ville.", eventCount: "événements", availableEvents: "événements disponibles", comingSoon: "Bientôt disponible", cityPlaceholder: "Recherchez n'importe quelle ville", cityEmptyTitle: "Nous n'avons trouvé aucun événement pour {city} pour le moment.", cityEmptyText: "Nous élargissons continuellement notre catalogue d'événements et d'expériences. Revenez bientôt ou découvrez les événements disponibles dans d'autres villes.", citySuggestions: "Découvrez d'autres villes", cityScope: "Agenda culturel à", viewEvents: "Voir les événements", searchResults: "Résultats", noSearchResults: "Aucun événement ne correspond à votre recherche." },
-} satisfies Record<Language, Record<string, string>>;
 
 const icons: Record<IconName, ReactNode> = {
   home: <><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10M9 20v-6h6v6" /></>,

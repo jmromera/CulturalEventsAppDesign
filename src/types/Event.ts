@@ -1,5 +1,7 @@
-export const cities = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao"] as const;
-export type City = (typeof cities)[number];
+import cityImages from "../data/city-images.json";
+
+export type City = keyof typeof cityImages;
+export const cities = Object.keys(cityImages) as City[];
 
 export const eventCategories = ["Música", "Ópera", "Danza", "Deportes", "Teatro", "Museos", "Arte"] as const;
 export type EventCategory = (typeof eventCategories)[number];

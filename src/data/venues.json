@@ -1,0 +1,563 @@
+[
+  {
+    "city": "Madrid",
+    "name": "Lula Club",
+    "address": "Gran Vía 54, Madrid",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://static.ra.co/images/clubs/lg/capturadepantalla2023-10-30alas16.06.48.png?dateUpdated=1698678498017",
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Live music venue",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Un espacio madrileño para conciertos y programación musical en directo.",
+      "en": "A Madrid venue for concerts and live music programming.",
+      "fr": "Une salle madrilène dédiée aux concerts et à la musique live."
+    },
+    "id": "madrid-lula-club",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lula%20Club%2C%20Gran%20V%C3%ADa%2054%2C%20Madrid"
+  },
+  {
+    "city": "Madrid",
+    "name": "Sala But",
+    "address": "Sala But, Madrid",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://www.salabut.es/wp-content/uploads/2025/12/20726e5d0a9f687d3f8420f50cb58c32_088d0fc71e.webp",
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Live music venue",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Un espacio madrileño para conciertos y programación musical en directo.",
+      "en": "A Madrid venue for concerts and live music programming.",
+      "fr": "Une salle madrilène dédiée aux concerts et à la musique live."
+    },
+    "id": "madrid-sala-but",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20But%2C%20Sala%20But%2C%20Madrid"
+  },
+  {
+    "city": "Madrid",
+    "name": "Teatro Eslava",
+    "address": "Teatro Eslava, Madrid",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/55/Madrid_-_Teatro_Joy_Eslava_3.jpg",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
+    "description": {
+      "es": "Un espacio escénico con programación de teatro, danza y música.",
+      "en": "A performing arts venue presenting theatre, dance and music.",
+      "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
+    },
+    "id": "madrid-teatro-eslava",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Eslava%2C%20Teatro%20Eslava%2C%20Madrid"
+  },
+  {
+    "city": "Madrid",
+    "name": "Teatro Real",
+    "address": "Plaza de Isabel II, s/n, Madrid",
+    "websiteUrl": "https://www.teatroreal.es/es",
+    "programmeUrl": "https://www.teatroreal.es/es/temporada-actual",
+    "programmeLabel": {
+      "es": "Programa oficial",
+      "en": "Official programme",
+      "fr": "Programme officiel"
+    },
+    "image": "https://www.teatroreal.es/sites/default/files/2019-02/teatro-real.jpg",
+    "kind": {
+      "es": "Ópera y música",
+      "en": "Opera and music",
+      "fr": "Opéra et musique"
+    },
+    "description": {
+      "es": "Un escenario dedicado a la ópera y a la programación musical en directo.",
+      "en": "A stage dedicated to opera and live music programming.",
+      "fr": "Une scène consacrée à l’opéra et aux concerts."
+    },
+    "id": "madrid-teatro-real",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Real%2C%20Plaza%20de%20Isabel%20II%2C%20s%2Fn%2C%20Madrid"
+  },
+  {
+    "city": "Madrid",
+    "name": "Estadio Santiago Bernabéu",
+    "address": "Estadio Santiago Bernabéu, Madrid",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://assets.realmadrid.com/is/image/realmadrid/Bernabeu?$Desktop$&fit=wrap&wid=1024",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio que acoge los partidos como local y la agenda deportiva del club.",
+      "en": "A stadium hosting home fixtures and the club’s sports calendar.",
+      "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
+    },
+    "id": "madrid-estadio-santiago-bernabeu",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Santiago%20Bernab%C3%A9u%2C%20Estadio%20Santiago%20Bernab%C3%A9u%2C%20Madrid"
+  },
+  {
+    "city": "Madrid",
+    "name": "Riyadh Air Metropolitano",
+    "address": "Riyadh Air Metropolitano, Madrid",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wanda-Metropolitano.jpg/1280px-Wanda-Metropolitano.jpg",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio que acoge los partidos como local y la agenda deportiva del club.",
+      "en": "A stadium hosting home fixtures and the club’s sports calendar.",
+      "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
+    },
+    "id": "madrid-riyadh-air-metropolitano",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Riyadh%20Air%20Metropolitano%2C%20Riyadh%20Air%20Metropolitano%2C%20Madrid"
+  },
+  {
+    "city": "Madrid",
+    "name": "Estadio de Vallecas",
+    "address": "Estadio de Vallecas, Madrid",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Estadio_de_Vallecas.jpg/1280px-Estadio_de_Vallecas.jpg",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio que acoge los partidos como local y la agenda deportiva del club.",
+      "en": "A stadium hosting home fixtures and the club’s sports calendar.",
+      "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
+    },
+    "id": "madrid-estadio-de-vallecas",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20de%20Vallecas%2C%20Estadio%20de%20Vallecas%2C%20Madrid"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Palau de la Música Catalana",
+    "address": "Carrer del Palau de la Música, 4-6, 08003 Barcelona",
+    "websiteUrl": "https://www.palaumusica.cat/en",
+    "programmeUrl": "https://www.palaumusica.cat/en/programme_1158636",
+    "programmeLabel": {
+      "es": "Programa de conciertos",
+      "en": "Concert programme",
+      "fr": "Programme des concerts"
+    },
+    "image": "https://www.palaumusica.cat/images/1479156/full_inner_page.jpg",
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Concert hall",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Un espacio de Barcelona para conciertos y propuestas musicales en directo.",
+      "en": "A Barcelona venue for concerts and live music performances.",
+      "fr": "Un lieu barcelonais consacré aux concerts et à la musique live."
+    },
+    "id": "barcelona-palau-de-la-musica-catalana",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20de%20la%20M%C3%BAsica%20Catalana%2C%20Carrer%20del%20Palau%20de%20la%20M%C3%BAsica%2C%204-6%2C%2008003%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Teatre Nacional de Catalunya",
+    "address": "Plaça de les Arts, 1, 08013 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Teatre_Nacional_de_Catalunya.jpg",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
+    "description": {
+      "es": "Un espacio escénico con programación de teatro, danza y música.",
+      "en": "A performing arts venue presenting theatre, dance and music.",
+      "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
+    },
+    "id": "barcelona-teatre-nacional-de-catalunya",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Nacional%20de%20Catalunya%2C%20Pla%C3%A7a%20de%20les%20Arts%2C%201%2C%2008013%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Teatre Lliure de Gràcia",
+    "address": "Carrer de Montseny, 47, 08012 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Teatre_Lliure_de_Gr%C3%A0cia.jpg/1280px-Teatre_Lliure_de_Gr%C3%A0cia.jpg",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
+    "description": {
+      "es": "Un espacio escénico con programación de teatro, danza y música.",
+      "en": "A performing arts venue presenting theatre, dance and music.",
+      "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
+    },
+    "id": "barcelona-teatre-lliure-de-gracia",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Lliure%20de%20Gr%C3%A0cia%2C%20Carrer%20de%20Montseny%2C%2047%2C%2008012%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "MACBA",
+    "address": "Plaça dels Àngels, 1, 08001 Barcelona",
+    "websiteUrl": "https://www.macba.cat/en/",
+    "programmeUrl": "https://www.macba.cat/en/exhibitions/",
+    "programmeLabel": {
+      "es": "Exposiciones",
+      "en": "Exhibitions",
+      "fr": "Expositions"
+    },
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/67/Barcelona_Museum_of_Contemporary_Art.jpg",
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "Un museo barcelonés dedicado al arte contemporáneo y a sus exposiciones.",
+      "en": "A Barcelona museum devoted to contemporary art and exhibitions.",
+      "fr": "Un musée barcelonais consacré à l’art contemporain et aux expositions."
+    },
+    "id": "barcelona-macba",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=MACBA%2C%20Pla%C3%A7a%20dels%20%C3%80ngels%2C%201%2C%2008001%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Museu Picasso de Barcelona",
+    "address": "Carrer de Montcada, 15-23, 08003 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Museo_PIcasso_._Palau_Berenguer_._Barcelona.JPG",
+    "kind": {
+      "es": "Museo de arte",
+      "en": "Art museum",
+      "fr": "Musée d’art"
+    },
+    "description": {
+      "es": "Un museo de Barcelona para recorrer la obra de Picasso y su relación con la ciudad.",
+      "en": "A Barcelona museum exploring Picasso’s work and his connection to the city.",
+      "fr": "Un musée barcelonais consacré à l’œuvre de Picasso et à son lien avec la ville."
+    },
+    "id": "barcelona-museu-picasso-de-barcelona",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Museu%20Picasso%20de%20Barcelona%2C%20Carrer%20de%20Montcada%2C%2015-23%2C%2008003%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Spotify Camp Nou",
+    "address": "Carrer d'Arístides Maillol, 12, 08028 Barcelona",
+    "websiteUrl": "https://www.fcbarcelona.com/en/club/facilities/spotify-camp-nou",
+    "programmeUrl": "https://www.fcbarcelona.com/en/tickets/camp-nou-experience",
+    "programmeLabel": {
+      "es": "Visita al estadio",
+      "en": "Stadium visits",
+      "fr": "Visite du stade"
+    },
+    "image": "https://www.fcbarcelona.com/photo-resources/2021/08/09/c4f2dddd-2152-4b8b-acf8-826b4377e29d/Camp-Nou-4.jpg?width=1600",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio que acoge los partidos como local y la agenda deportiva del club.",
+      "en": "A stadium hosting home fixtures and the club’s sports calendar.",
+      "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
+    },
+    "id": "barcelona-spotify-camp-nou",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Spotify%20Camp%20Nou%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Estadi Johan Cruyff",
+    "address": "Carrer d'Arístides Maillol, 12, 08028 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Estadi_Johan_Cruyff.jpg/1280px-Estadi_Johan_Cruyff.jpg",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio que acoge los partidos como local y la agenda deportiva del club.",
+      "en": "A stadium hosting home fixtures and the club’s sports calendar.",
+      "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
+    },
+    "id": "barcelona-estadi-johan-cruyff",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadi%20Johan%20Cruyff%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Palau Blaugrana",
+    "address": "Carrer d'Arístides Maillol, 12, 08028 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Palau_Blaugrana_%28Barcelona%2C_ESP%29.jpg/1280px-Palau_Blaugrana_%28Barcelona%2C_ESP%29.jpg",
+    "kind": {
+      "es": "Pabellón deportivo",
+      "en": "Sports arena",
+      "fr": "Salle omnisports"
+    },
+    "description": {
+      "es": "Un pabellón de Barcelona para competiciones y eventos deportivos.",
+      "en": "A Barcelona arena for sports competitions and events.",
+      "fr": "Une salle barcelonaise accueillant des compétitions et événements sportifs."
+    },
+    "id": "barcelona-palau-blaugrana",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20Blaugrana%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Gran Teatre del Liceu",
+    "address": "La Rambla, 51-59, 08002 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Gran_Teatre_del_Liceu%2C_fa%C3%A7ana_Rambla.jpg",
+    "kind": {
+      "es": "Ópera y música",
+      "en": "Opera and music",
+      "fr": "Opéra et musique"
+    },
+    "description": {
+      "es": "Un escenario dedicado a la ópera y a la programación musical en directo.",
+      "en": "A stage dedicated to opera and live music programming.",
+      "fr": "Une scène consacrée à l’opéra et aux concerts."
+    },
+    "id": "barcelona-gran-teatre-del-liceu",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gran%20Teatre%20del%20Liceu%2C%20La%20Rambla%2C%2051-59%2C%2008002%20Barcelona"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Teatre Lliure de Montjuïc",
+    "address": "Plaça de Margarida Xirgu, 1, 08004 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Teatre_Lliure_de_Montjuic.jpg/1280px-Teatre_Lliure_de_Montjuic.jpg",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
+    "description": {
+      "es": "Un espacio escénico con programación de teatro, danza y música.",
+      "en": "A performing arts venue presenting theatre, dance and music.",
+      "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
+    },
+    "id": "barcelona-teatre-lliure-de-montjuic",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Lliure%20de%20Montju%C3%AFc%2C%20Pla%C3%A7a%20de%20Margarida%20Xirgu%2C%201%2C%2008004%20Barcelona"
+  },
+  {
+    "city": "Bilbao",
+    "name": "Guggenheim Bilbao",
+    "address": "Avenida Abandoibarra, 2, 48009 Bilbao",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://cms.guggenheim-bilbao.eus/uploads/2019/03/edificio-tulipanes-guggenheim-bilbao-museoa.jpeg",
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "Un museo de Bilbao dedicado al arte moderno y contemporáneo, junto a la ría.",
+      "en": "A Bilbao museum devoted to modern and contemporary art beside the river.",
+      "fr": "Un musée de Bilbao consacré à l’art moderne et contemporain, au bord de la ria."
+    },
+    "id": "bilbao-guggenheim-bilbao",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Guggenheim%20Bilbao%2C%20Avenida%20Abandoibarra%2C%202%2C%2048009%20Bilbao"
+  },
+  {
+    "city": "Bilbao",
+    "name": "Euskalduna",
+    "address": "Abandoibarra Etorbidea, 4, 48011 Bilbao",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://www.euskaldunabilbao.com/src/uploads/2015/06/palacio_1B.jpg?x72554",
+    "kind": {
+      "es": "Palacio de congresos",
+      "en": "Conference centre",
+      "fr": "Palais des congrès"
+    },
+    "description": {
+      "es": "Un centro de congresos y conciertos junto a la ría de Bilbao, en un edificio de arquitectura contemporánea.",
+      "en": "A conference and concert centre beside the Bilbao estuary in a striking contemporary building.",
+      "fr": "Un centre de congrès et de concerts au bord de la ria de Bilbao, dans un bâtiment contemporain remarquable."
+    },
+    "id": "bilbao-euskalduna",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Euskalduna%2C%20Abandoibarra%20Etorbidea%2C%204%2C%2048011%20Bilbao"
+  },
+  {
+    "city": "Bilbao",
+    "name": "San Mamés",
+    "address": "Rafael Moreno Pitxitxi Kalea, s/n, 48013 Bilbao",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/24/San_Mames_stadium.jpg",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio que acoge los partidos como local y la agenda deportiva del club.",
+      "en": "A stadium hosting home fixtures and the club’s sports calendar.",
+      "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
+    },
+    "id": "bilbao-san-mames",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=San%20Mam%C3%A9s%2C%20Rafael%20Moreno%20Pitxitxi%20Kalea%2C%20s%2Fn%2C%2048013%20Bilbao"
+  },
+  {
+    "city": "Valencia",
+    "name": "Palau de la Música de València",
+    "address": "Passeig de l'Albereda, 30, 46023 València",
+    "websiteUrl": "https://palauvalencia.com/",
+    "programmeUrl": "https://palauvalencia.com/programacio-i-vendes/",
+    "programmeLabel": {
+      "es": "Programa oficial",
+      "en": "Official programme",
+      "fr": "Programme officiel"
+    },
+    "image": "https://images.unsplash.com/photo-1719401542194-95139aed215c?auto=format&fit=crop&w=1400&q=85",
+    "kind": {
+      "es": "Auditorio de música",
+      "en": "Concert hall",
+      "fr": "Salle de concert"
+    },
+    "description": {
+      "es": "Un auditorio dedicado a la música sinfónica, de cámara y a la programación cultural.",
+      "en": "A concert hall for symphonic, chamber music and cultural programming.",
+      "fr": "Une salle consacrée à la musique symphonique, de chambre et à la programmation culturelle."
+    },
+    "id": "valencia-palau-de-la-musica-de-valencia",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20de%20la%20M%C3%BAsica%20de%20Val%C3%A8ncia%2C%20Passeig%20de%20l'Albereda%2C%2030%2C%2046023%20Val%C3%A8ncia"
+  },
+  {
+    "city": "Valencia",
+    "name": "Roig Arena",
+    "address": "C/ Bomber Ramón Duart, 12, Quatre Carreres, 46013 Valencia",
+    "websiteUrl": "https://www.roigarena.com/es/",
+    "programmeUrl": "https://www.roigarena.com/es/eventos/",
+    "programmeLabel": {
+      "es": "Eventos",
+      "en": "Events",
+      "fr": "Événements"
+    },
+    "image": "https://www.roigarena.com/storyblok/f/336002/2557x1287/4b7ab73d36/roig-arena_exterior_fachada_01.png?optimize=high&format=auto&quality=70",
+    "kind": {
+      "es": "Arena multiusos",
+      "en": "Multi-purpose arena",
+      "fr": "Arène polyvalente"
+    },
+    "description": {
+      "es": "Un recinto valenciano para baloncesto, conciertos y grandes espectáculos.",
+      "en": "A Valencia venue for basketball, concerts and major live events.",
+      "fr": "Une enceinte valencienne pour le basket, les concerts et les grands spectacles."
+    },
+    "id": "valencia-roig-arena",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Roig%20Arena%2C%20C%2F%20Bomber%20Ram%C3%B3n%20Duart%2C%2012%2C%20Quatre%20Carreres%2C%2046013%20Valencia"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Teatro de la Maestranza",
+    "address": "Paseo de Cristóbal Colón, 22, 41001 Sevilla",
+    "websiteUrl": "https://www.teatrodelamaestranza.es/",
+    "programmeUrl": "https://www.teatrodelamaestranza.es/en/shows/programacion/",
+    "programmeLabel": {
+      "es": "Programa oficial",
+      "en": "Official programme",
+      "fr": "Programme officiel"
+    },
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Teatro_de_la_Maestranza_001.jpg",
+    "kind": {
+      "es": "Ópera y música",
+      "en": "Opera and music",
+      "fr": "Opéra et musique"
+    },
+    "description": {
+      "es": "Un escenario dedicado a la ópera y a la programación musical en directo.",
+      "en": "A stage dedicated to opera and live music programming.",
+      "fr": "Une scène consacrée à l’opéra et aux concerts."
+    },
+    "id": "sevilla-teatro-de-la-maestranza",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20de%20la%20Maestranza%2C%20Paseo%20de%20Crist%C3%B3bal%20Col%C3%B3n%2C%2022%2C%2041001%20Sevilla"
+  },
+  {
+    "city": "Albacete",
+    "name": "Teatro Circo",
+    "address": "Calle Isaac Peral, 2, 02001 Albacete",
+    "websiteUrl": "https://www.globalentradas.com/culturalalbacete",
+    "programmeUrl": "https://www.globalentradas.com/culturalalbacete",
+    "programmeLabel": {
+      "es": "Entradas y programa",
+      "en": "Tickets and programme",
+      "fr": "Billets et programme"
+    },
+    "image": "https://www.globalentradas.com/uploads/promotor/1/promotor-programacion-cultural-albacete.webp",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
+    "description": {
+      "es": "Un espacio escénico con programación de teatro, música y espectáculos en directo.",
+      "en": "A performing arts venue presenting theatre, music and live shows.",
+      "fr": "Un lieu de spectacle proposant théâtre, musique et spectacles en direct."
+    },
+    "id": "albacete-teatro-circo",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Circo%2C%20Calle%20Isaac%20Peral%2C%202%2C%2002001%20Albacete"
+  },
+  {
+    "city": "Albacete",
+    "name": "Teatro de La Paz",
+    "address": "Plaza de la Paz, s/n, 02002 Albacete",
+    "websiteUrl": "https://www.globalentradas.com/culturalalbacete",
+    "programmeUrl": "https://www.globalentradas.com/culturalalbacete",
+    "programmeLabel": {
+      "es": "Entradas y programa",
+      "en": "Tickets and programme",
+      "fr": "Billets et programme"
+    },
+    "image": "https://laguiaw.com/contenido/documentos/99306/fotografia.jpg",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
+    "description": {
+      "es": "Un espacio escénico con programación de teatro, música y espectáculos en directo.",
+      "en": "A performing arts venue presenting theatre, music and live shows.",
+      "fr": "Un lieu de spectacle proposant théâtre, musique et spectacles en direct."
+    },
+    "id": "albacete-teatro-de-la-paz",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20de%20La%20Paz%2C%20Plaza%20de%20la%20Paz%2C%20s%2Fn%2C%2002002%20Albacete"
+  }
+]
