@@ -335,6 +335,8 @@ function CalendarAction({ labels, url, onDownload }: { labels: typeof eventActio
 function Home({ selectedCity, saved, toggleSaved, openEvent, goFilters, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; openEvent: (id: number) => void; goFilters: () => void; searchQuery: string; language: Language; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const [category, setCategory] = useState("Todos");
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const featuredRef = useRef<HTMLDivElement>(null);
   const cityEvents = events.filter((event) => venueFor(event.venueId).city === selectedCity);
   const query = normalizeSearch(searchQuery.trim());
   const filtered = cityEvents.filter((event) => {
@@ -344,7 +346,24 @@ function Home({ selectedCity, saved, toggleSaved, openEvent, goFilters, searchQu
     return matchesCategory && matchesQuery;
   });
   const highlightedEvents = [...cityEvents.filter((event) => event.featured), ...cityEvents.filter((event) => !event.featured)].slice(0, 3);
-  const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.all} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><div className="featured-grid">{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div></section>;
+  const updateFeaturedIndex = (container: HTMLDivElement) => {
+    const cards = Array.from(container.children);
+    if (!cards.length) return;
+    const left = container.getBoundingClientRect().left;
+    const index = cards.reduce((closest, card, current) => Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[closest].getBoundingClientRect().left - left) ? current : closest, 0);
+    setFeaturedIndex(index);
+  };
+  const moveFeatured = (direction: -1 | 1) => {
+    const container = featuredRef.current;
+    if (!container) return;
+    const cards = Array.from(container.children);
+    if (!cards.length) return;
+    const left = container.getBoundingClientRect().left;
+    const current = cards.reduce((closest, card, index) => Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[closest].getBoundingClientRect().left - left) ? index : closest, 0);
+    const target = cards[Math.max(0, Math.min(cards.length - 1, current + direction))];
+    container.scrollBy({ left: target.getBoundingClientRect().left - left, behavior: "smooth" });
+  };
+  const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.all} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} />{highlightedEvents.length > 1 && <div className="recommendation-carousel-controls"><span aria-live="polite">{featuredIndex + 1} / {highlightedEvents.length}</span><div><button type="button" aria-label={labels.previousEvent} title={labels.previousEvent} disabled={featuredIndex === 0} onClick={() => moveFeatured(-1)}><Icon name="arrow" /></button><button type="button" aria-label={labels.nextEvent} title={labels.nextEvent} disabled={featuredIndex >= highlightedEvents.length - 1} onClick={() => moveFeatured(1)}><Icon name="chevron" /></button></div></div>}<div className="featured-grid" ref={featuredRef} onScroll={(event) => updateFeaturedIndex(event.currentTarget)}>{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div></section>;
   const discovery = <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("Madrid", selectedCity)}</small><strong>Ópera · Folk · Fútbol</strong></span></div><div><Icon name="location" /><span><small>{t.nearby}</small><strong>6 planes a menos de 5 km</strong></span></div><div><Icon name="star" /><span><small>{t.popular}</small><strong>Norma · 4,8</strong></span></div></section>;
   const catalogue = <section id="catalogue"><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => <button className={category === item ? "active" : ""} data-cat={categoryKeys[item]} onClick={() => setCategory(item)} key={item}>{item}</button>)}</div><button className="filter-control" onClick={goFilters}><Icon name="filter" />{t.filters}</button></div>{filtered.length ? <div className="event-grid">{filtered.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div> : <p className="city-empty">{query ? labels.noSearchResults : t.noCityEvents}</p>}</section>;
   const isSearching = query.length > 0;

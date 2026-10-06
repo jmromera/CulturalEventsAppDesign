@@ -62,6 +62,8 @@
       "cityScope": "Agenda cultural de",
       "viewEvents": "Ver eventos",
       "searchResults": "Resultados",
+      "previousEvent": "Evento anterior",
+      "nextEvent": "Evento siguiente",
       "noSearchResults": "No hay eventos que coincidan con la búsqueda."
     },
     "en": {
@@ -81,6 +83,8 @@
       "cityScope": "Cultural events in",
       "viewEvents": "View events",
       "searchResults": "Results",
+      "previousEvent": "Previous event",
+      "nextEvent": "Next event",
       "noSearchResults": "No events match your search."
     },
     "fr": {
@@ -100,6 +104,8 @@
       "cityScope": "Agenda culturel à",
       "viewEvents": "Voir les événements",
       "searchResults": "Résultats",
+      "previousEvent": "Événement précédent",
+      "nextEvent": "Événement suivant",
       "noSearchResults": "Aucun événement ne correspond à votre recherche."
     }
   },

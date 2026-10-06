@@ -165,3 +165,5 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
 .detail-hero[data-cat] .detail-intro-facts .icon{color:#93c5fd}
 .hero-copy p{color:#f1f5f9}
 .hero-copy>span{color:#fff}
+.recommendation-carousel-controls{display:none}
+@media(max-width:650px){.recommendation-carousel-controls{display:flex;align-items:center;justify-content:space-between;margin:-12px 0 14px;color:var(--muted);font-size:12px;font-weight:700}.recommendation-carousel-controls>div{display:flex;gap:8px}.recommendation-carousel-controls button{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--forest)}.recommendation-carousel-controls button:disabled{opacity:.4;cursor:default}.recommendation-carousel-controls .icon{width:17px;height:17px}.recommendation-carousel-controls button:last-child .icon{margin-left:1px}}
