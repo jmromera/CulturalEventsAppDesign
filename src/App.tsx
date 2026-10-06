@@ -11,9 +11,9 @@ type Language = "es" | "en" | "fr";
 type IconName = "arrow" | "bookmark" | "calendar" | "check" | "chevron" | "copy" | "download" | "filter" | "heart" | "home" | "location" | "profile" | "search" | "share" | "spark" | "star" | "ticket" | "time" | "trending";
 
 const interfaceText = {
-  es: { events: "Eventos", venues: "Recintos", favourites: "Favoritos", guest: "Invitado", venueHeading: "Recintos en", venueIntro: "Explora recintos y espacios culturales de la ciudad.", eventCount: "eventos", availableEvents: "eventos disponibles", cityScope: "Agenda cultural de", viewEvents: "Ver eventos", searchResults: "Resultados", noSearchResults: "No hay eventos que coincidan con la búsqueda." },
-  en: { events: "Events", venues: "Venues", favourites: "Favourites", guest: "Guest", venueHeading: "Venues in", venueIntro: "Explore the city's cultural spaces and venues.", eventCount: "events", availableEvents: "events available", cityScope: "Cultural events in", viewEvents: "View events", searchResults: "Results", noSearchResults: "No events match your search." },
-  fr: { events: "Événements", venues: "Lieux", favourites: "Favoris", guest: "Invité", venueHeading: "Lieux à", venueIntro: "Découvrez les lieux culturels de la ville.", eventCount: "événements", availableEvents: "événements disponibles", cityScope: "Agenda culturel à", viewEvents: "Voir les événements", searchResults: "Résultats", noSearchResults: "Aucun événement ne correspond à votre recherche." },
+  es: { events: "Eventos", venues: "Recintos", favourites: "Favoritos", guest: "Invitado", venueHeading: "Recintos en", venueIntro: "Explora recintos y espacios culturales de la ciudad.", eventCount: "eventos", availableEvents: "eventos disponibles", comingSoon: "Próximamente", cityPlaceholder: "Busca cualquier ciudad", cityEmptyTitle: "No hemos encontrado eventos para {city} en este momento.", cityEmptyText: "Estamos ampliando continuamente nuestro catálogo de eventos y experiencias. Vuelve a consultar próximamente o explora los eventos disponibles en otras ciudades.", citySuggestions: "Explora otras ciudades", cityScope: "Agenda cultural de", viewEvents: "Ver eventos", searchResults: "Resultados", noSearchResults: "No hay eventos que coincidan con la búsqueda." },
+  en: { events: "Events", venues: "Venues", favourites: "Favourites", guest: "Guest", venueHeading: "Venues in", venueIntro: "Explore the city's cultural spaces and venues.", eventCount: "events", availableEvents: "events available", comingSoon: "Coming soon", cityPlaceholder: "Search any city", cityEmptyTitle: "We haven't found events for {city} right now.", cityEmptyText: "We are continuously expanding our catalogue of events and experiences. Check back soon or explore the events available in other cities.", citySuggestions: "Explore other cities", cityScope: "Cultural events in", viewEvents: "View events", searchResults: "Results", noSearchResults: "No events match your search." },
+  fr: { events: "Événements", venues: "Lieux", favourites: "Favoris", guest: "Invité", venueHeading: "Lieux à", venueIntro: "Découvrez les lieux culturels de la ville.", eventCount: "événements", availableEvents: "événements disponibles", comingSoon: "Bientôt disponible", cityPlaceholder: "Recherchez n'importe quelle ville", cityEmptyTitle: "Nous n'avons trouvé aucun événement pour {city} pour le moment.", cityEmptyText: "Nous élargissons continuellement notre catalogue d'événements et d'expériences. Revenez bientôt ou découvrez les événements disponibles dans d'autres villes.", citySuggestions: "Découvrez d'autres villes", cityScope: "Agenda culturel à", viewEvents: "Voir les événements", searchResults: "Résultats", noSearchResults: "Aucun événement ne correspond à votre recherche." },
 } satisfies Record<Language, Record<string, string>>;
 
 const icons: Record<IconName, ReactNode> = {
@@ -86,7 +86,7 @@ function CityPicker({ selectedCity, setSelectedCity, labels, t }: { selectedCity
     </button>
     <div id="hero-city-options" className="hero-city-menu" role="group" aria-label={t.city} hidden={!isOpen}>
       {cities.map((city) => <button key={city} type="button" className="hero-city-option" aria-pressed={city === selectedCity} onClick={() => chooseCity(city)}>
-        <BrandMark className="city-option-mark" /><span className="city-option-copy"><strong>{city}</strong><small>{cityEventCounts[city]} {labels.availableEvents}</small></span>{city === selectedCity && <Icon name="check" />}
+        <BrandMark className="city-option-mark" /><span className="city-option-copy"><strong>{city}</strong><small className={cityEventCounts[city] ? undefined : "city-option-soon"}>{cityEventCounts[city] ? `${cityEventCounts[city]} ${labels.availableEvents}` : labels.comingSoon}</small></span>{city === selectedCity && <Icon name="check" />}
       </button>)}
     </div>
   </div>;
@@ -266,11 +266,22 @@ function Home({ selectedCity, setSelectedCity, saved, toggleSaved, openEvent, go
   </main>;
 }
 
-function Filters({ selectedCity, back, t }: { selectedCity: City; back: () => void; t: typeof copy.es }) {
+const normalizeCity = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
+const extraCitySuggestions = ["Cuenca", "Albacete", "Toledo", "Segovia", "Salamanca"];
+
+function Filters({ selectedCity, setSelectedCity, back, language, t }: { selectedCity: City; setSelectedCity: (city: City) => void; back: () => void; language: Language; t: typeof copy.es }) {
+  const labels = interfaceText[language];
   const [selected, setSelected] = useState(["Música", "Ópera"]);
-  const cityResultCount = cityEventCounts[selectedCity];
+  const [cityInput, setCityInput] = useState<string>(selectedCity);
+  const typedCity = cityInput.trim();
+  const matchedCity = cities.find((city) => normalizeCity(city) === normalizeCity(typedCity));
+  const hasEvents = !typedCity || (matchedCity !== undefined && cityEventCounts[matchedCity] > 0);
+  const cityResultCount = matchedCity ? cityEventCounts[matchedCity] : 0;
+  const suggestions = cities.filter((city) => city !== matchedCity && cityEventCounts[city] > 0);
+  const pickCity = (city: City) => { setCityInput(city); setSelectedCity(city); };
+  const showResults = () => { if (matchedCity && matchedCity !== selectedCity) setSelectedCity(matchedCity); back(); };
   const toggle = (value: string) => setSelected((current) => current.includes(value) ? current.filter((item) => item !== value) : [...current, value]);
-  return <main className="subpage"><div className="subpage-top"><button onClick={back}><Icon name="arrow" />{t.back}</button><button onClick={() => setSelected([])}>{t.clear}</button></div><div className="filter-shell"><span className="kicker">{t.search}</span><h1>{t.filters}</h1><section><h2>{t.city}</h2><p className="filter-city-current"><BrandMark />{selectedCity}</p></section><section><h2>{t.categories}</h2><div className="option-grid">{eventCategories.map((item) => <button className={selected.includes(item) ? "active" : ""} onClick={() => toggle(item)} key={item}>{item}{selected.includes(item) && <Icon name="check" />}</button>)}</div></section><section><h2>{t.when}</h2><div className="option-grid dates">{["Hoy", "Mañana", t.thisWeek, "Elegir fecha"].map((item) => <button key={item}>{item}</button>)}</div></section><Button onClick={back}>{t.results} · {cityResultCount}</Button></div></main>;
+  return <main className="subpage"><div className="subpage-top"><button onClick={back}><Icon name="arrow" />{t.back}</button><button onClick={() => setSelected([])}>{t.clear}</button></div><div className="filter-shell"><span className="kicker">{t.search}</span><h1>{t.filters}</h1><section><h2>{t.city}</h2><label className="filter-city-search"><BrandMark /><input type="text" list="filter-city-list" value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder={labels.cityPlaceholder} aria-label={t.city} autoComplete="off" /></label><datalist id="filter-city-list">{[...cities, ...extraCitySuggestions].map((city) => <option key={city} value={city} />)}</datalist></section>{!hasEvents && <section className="city-empty-state" role="status"><h2>{labels.cityEmptyTitle.replace("{city}", typedCity)}</h2><p>{labels.cityEmptyText}</p><h3>{labels.citySuggestions}</h3><div className="option-grid">{suggestions.map((city) => <button key={city} type="button" onClick={() => pickCity(city)}>{city}<small>{cityEventCounts[city]} {labels.availableEvents}</small></button>)}</div></section>}<section><h2>{t.categories}</h2><div className="option-grid">{eventCategories.map((item) => <button className={selected.includes(item) ? "active" : ""} onClick={() => toggle(item)} key={item}>{item}{selected.includes(item) && <Icon name="check" />}</button>)}</div></section><section><h2>{t.when}</h2><div className="option-grid dates">{["Hoy", "Mañana", t.thisWeek, "Elegir fecha"].map((item) => <button key={item}>{item}</button>)}</div></section>{hasEvents && <Button onClick={showResults}>{t.results}{typedCity ? ` · ${cityResultCount}` : ""}</Button>}</div></main>;
 }
 
 function VenuesPage({ selectedCity, language, openVenue, t }: { selectedCity: City; language: Language; openVenue: (id: string) => void; t: typeof copy.es }) {
@@ -428,7 +439,7 @@ export default function App() {
   return <div className="app-shell"><Nav page={page} navigate={(path) => path === "/" ? goToEvents() : navigateWithCity(path)} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
-      <Route path="/search" element={showFilters ? <Filters selectedCity={selectedCity} back={goBack} t={t} /> : homePage} />
+      <Route path="/search" element={showFilters ? <Filters selectedCity={selectedCity} setSelectedCity={setSelectedCity} back={goBack} language={language} t={t} /> : homePage} />
       <Route path="/favorites" element={<Saved saved={saved} lists={lists} createList={createList} toggleSaved={toggleSaved} openEvent={openEvent} explore={goToEvents} title={interfaceText[language].favourites} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} openVenue={openVenue} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute openEvent={openEvent} goBack={goBack} language={language} t={t} />} />
