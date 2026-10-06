@@ -1,0 +1,8 @@
+{
+  "Madrid": { "latitude": 40.4168, "longitude": -3.7038, "radiusKm": 80 },
+  "Barcelona": { "latitude": 41.3874, "longitude": 2.1686, "radiusKm": 75 },
+  "Valencia": { "latitude": 39.4699, "longitude": -0.3763, "radiusKm": 70 },
+  "Sevilla": { "latitude": 37.3891, "longitude": -5.9845, "radiusKm": 70 },
+  "Bilbao": { "latitude": 43.2630, "longitude": -2.9350, "radiusKm": 65 },
+  "Albacete": { "latitude": 38.9942, "longitude": -1.8585, "radiusKm": 65 }
+}

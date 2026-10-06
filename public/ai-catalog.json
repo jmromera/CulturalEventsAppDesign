@@ -1,0 +1,73 @@
+{
+  "version": "1.0",
+  "site": {
+    "name": "Plan Cerca",
+    "url": "https://plancerca.com/",
+    "description": "Descubre eventos culturales, deportivos y de ocio en España.",
+    "language": "es",
+    "availableLanguages": ["es", "en", "fr"]
+  },
+  "resources": [
+    {
+      "id": "home",
+      "type": "page",
+      "name": "Inicio",
+      "url": "https://plancerca.com/",
+      "format": "text/html"
+    },
+    {
+      "id": "events-by-city",
+      "type": "collection-template",
+      "name": "Eventos por ciudad",
+      "url": "https://plancerca.com/?city={city}",
+      "format": "text/html",
+      "itemType": "Event",
+      "parameters": {
+        "city": ["Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao", "Albacete"]
+      }
+    },
+    {
+      "id": "event-detail",
+      "type": "page-template",
+      "name": "Detalle de evento",
+      "url": "https://plancerca.com/event/{id}",
+      "format": "text/html",
+      "itemType": "Event",
+      "structuredData": "Schema.org/Event JSON-LD"
+    },
+    {
+      "id": "venues",
+      "type": "collection",
+      "name": "Directorio de recintos",
+      "url": "https://plancerca.com/venues",
+      "format": "text/html",
+      "itemType": "Place"
+    },
+    {
+      "id": "venue-detail",
+      "type": "page-template",
+      "name": "Detalle de recinto",
+      "url": "https://plancerca.com/venues/{id}",
+      "format": "text/html",
+      "itemType": "Place"
+    },
+    {
+      "id": "search",
+      "type": "page",
+      "name": "Búsqueda y filtros",
+      "url": "https://plancerca.com/search",
+      "format": "text/html"
+    },
+    {
+      "id": "llms-txt",
+      "type": "agent-guidance",
+      "name": "Instrucciones para modelos de lenguaje",
+      "url": "https://plancerca.com/llms.txt",
+      "format": "text/plain"
+    }
+  ],
+  "agentGuidance": [
+    "Event details link to the event organizer or ticket provider.",
+    "Verify current availability, dates, and prices with the linked official provider before presenting them as current."
+  ]
+}

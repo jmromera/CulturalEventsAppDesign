@@ -1,23 +1,8 @@
 {
-  "artistCopy": {
-    "es": {
-      "aboutArtist": "Sobre el artista",
-      "website": "Web oficial",
-      "youtube": "YouTube",
-      "spotify": "Spotify"
-    },
-    "en": {
-      "aboutArtist": "About the artist",
-      "website": "Official website",
-      "youtube": "YouTube",
-      "spotify": "Spotify"
-    },
-    "fr": {
-      "aboutArtist": "À propos de l’artiste",
-      "website": "Site officiel",
-      "youtube": "YouTube",
-      "spotify": "Spotify"
-    }
+  "entityKindCopy": {
+    "es": { "artist": "Artista", "musical": "Musical", "play": "Obra teatral", "show": "Espectáculo" },
+    "en": { "artist": "Artist", "musical": "Musical", "play": "Play", "show": "Show" },
+    "fr": { "artist": "Artiste", "musical": "Comédie musicale", "play": "Pièce de théâtre", "show": "Spectacle" }
   },
   "venueLinkCopy": {
     "es": {
@@ -156,6 +141,15 @@
       "venueEvents": "Próximos eventos en este recinto",
       "venueEmpty": "No hay otros eventos confirmados en este recinto por ahora.",
       "related": "También te puede gustar",
+      "oneRelatedEvent": "{count} otra fecha relacionada",
+      "manyRelatedEvents": "{count} otras fechas relacionadas",
+      "viewEntity": "Ver ficha completa",
+      "followArtist": "Seguir artista",
+      "followingArtist": "Siguiendo",
+      "notifyArtist": "Avisarme de nuevos eventos",
+      "notificationsOn": "Preferencia guardada",
+      "externalLinks": "Enlaces oficiales",
+      "upcomingEvents": "Próximos eventos",
       "back": "Volver",
       "createList": "Crear nueva lista",
       "yourLists": "Tus listas",
@@ -167,6 +161,7 @@
       "thisWeek": "Esta semana",
       "confirmed": "Fecha confirmada",
       "pending": "Calendario pendiente",
+      "eventEnded": "Temporada finalizada",
       "external": "La compra se completa de forma segura en la web del proveedor oficial.",
       "listPrompt": "Nombre de la nueva lista",
       "favourites": "Favoritos",
@@ -210,6 +205,15 @@
       "venueEvents": "Upcoming events at this venue",
       "venueEmpty": "There are no other confirmed events at this venue right now.",
       "related": "You may also like",
+      "oneRelatedEvent": "{count} other related date",
+      "manyRelatedEvents": "{count} other related dates",
+      "viewEntity": "View full profile",
+      "followArtist": "Follow artist",
+      "followingArtist": "Following",
+      "notifyArtist": "Notify me about new events",
+      "notificationsOn": "Preference saved",
+      "externalLinks": "Official links",
+      "upcomingEvents": "Upcoming events",
       "back": "Back",
       "createList": "Create new list",
       "yourLists": "Your lists",
@@ -221,6 +225,7 @@
       "thisWeek": "This week",
       "confirmed": "Confirmed date",
       "pending": "Schedule pending",
+      "eventEnded": "Season ended",
       "external": "Your purchase is completed securely on the official provider’s website.",
       "listPrompt": "New list name",
       "favourites": "Favourites",
@@ -264,6 +269,15 @@
       "venueEvents": "Prochains événements dans ce lieu",
       "venueEmpty": "Aucun autre événement confirmé dans ce lieu pour le moment.",
       "related": "Vous aimerez aussi",
+      "oneRelatedEvent": "{count} autre date associée",
+      "manyRelatedEvents": "{count} autres dates associées",
+      "viewEntity": "Voir le profil complet",
+      "followArtist": "Suivre l’artiste",
+      "followingArtist": "Abonné(e)",
+      "notifyArtist": "M’avertir des nouveaux événements",
+      "notificationsOn": "Préférence enregistrée",
+      "externalLinks": "Liens officiels",
+      "upcomingEvents": "Prochains événements",
       "back": "Retour",
       "createList": "Créer une liste",
       "yourLists": "Vos listes",
@@ -275,6 +289,7 @@
       "thisWeek": "Cette semaine",
       "confirmed": "Date confirmée",
       "pending": "Calendrier à confirmer",
+      "eventEnded": "Saison terminée",
       "external": "L’achat est finalisé en toute sécurité sur le site officiel.",
       "listPrompt": "Nom de la nouvelle liste",
       "favourites": "Favoris",

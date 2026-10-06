@@ -9,3 +9,11 @@ export const events = eventData as EventItem[];
 export const cityEventCounts: Record<City, number> = Object.fromEntries(
   cities.map((city) => [city, events.filter((event) => venueFor(event.venueId).city === city).length]),
 ) as Record<City, number>;
+
+export function relatedEventsByEntity(entityId: string, excludedEventId?: number): EventItem[] {
+  return events
+    .filter((event) => event.relatedEntityId === entityId
+      && event.id !== excludedEventId
+      && event.confirmed)
+    .sort((a, b) => (a.startDate ?? "").localeCompare(b.startDate ?? ""));
+}

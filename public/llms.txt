@@ -1,0 +1,26 @@
+# Plan Cerca
+
+> Plataforma para descubrir eventos culturales, deportivos y de ocio en seis ciudades de España.
+
+Plan Cerca permite explorar eventos, consultar fichas de eventos y recintos, buscar actividades y guardar favoritos. Las entradas y la disponibilidad se confirman en los sitios oficiales enlazados desde cada ficha.
+
+## Páginas principales
+
+- [Inicio](https://plancerca.com/): portada y eventos recomendados.
+- [Agenda de Madrid](https://plancerca.com/?city=Madrid): eventos de Madrid.
+- [Agenda de Barcelona](https://plancerca.com/?city=Barcelona): eventos de Barcelona.
+- [Agenda de Valencia](https://plancerca.com/?city=Valencia): eventos de Valencia.
+- [Agenda de Sevilla](https://plancerca.com/?city=Sevilla): eventos de Sevilla.
+- [Agenda de Bilbao](https://plancerca.com/?city=Bilbao): eventos de Bilbao.
+- [Agenda de Albacete](https://plancerca.com/?city=Albacete): eventos de Albacete.
+- [Búsqueda y filtros](https://plancerca.com/search): búsqueda de eventos por ciudad y categoría.
+- [Recintos](https://plancerca.com/venues): directorio de recintos.
+- [Detalle de evento](https://plancerca.com/event/{id}): ficha con fecha, ubicación y enlace de entradas.
+- [Detalle de recinto](https://plancerca.com/venues/{id}): ficha de recinto y próximos eventos.
+- [Catálogo para agentes](https://plancerca.com/ai-catalog.json): índice JSON de páginas y colecciones.
+
+## Uso de la información
+
+- Consulta la ficha y el proveedor oficial antes de afirmar que una entrada está disponible o que un precio sigue vigente.
+- Los horarios y calendarios pueden cambiar; la información del organizador es la fuente definitiva.
+- La interfaz está disponible en español, inglés y francés.

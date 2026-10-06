@@ -560,4 +560,56 @@
     "id": "albacete-teatro-de-la-paz",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20de%20La%20Paz%2C%20Plaza%20de%20la%20Paz%2C%20s%2Fn%2C%2002002%20Albacete"
   }
+,
+  {
+    "city": "Valencia",
+    "name": "Teatro Olympia",
+    "address": "Calle de San Vicente Mártir, 44, 46002 Valencia",
+    "websiteUrl": "https://www.teatro-olympia.com/",
+    "programmeUrl": "https://www.teatro-olympia.com/mamma-mia-el-musical",
+    "programmeLabel": { "es": "Información oficial", "en": "Official information", "fr": "Informations officielles" },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfMehofO2L8fwM3Qu_2Iowy1ruMhJu8ss7ZLdqer5fsA&s=10",
+    "kind": { "es": "Teatro", "en": "Theatre", "fr": "Théâtre" },
+    "description": {
+      "es": "Teatro histórico de Valencia con programación de artes escénicas y musicales.",
+      "en": "A historic Valencia theatre presenting performing arts and musicals.",
+      "fr": "Un théâtre historique de Valence proposant des spectacles et des comédies musicales."
+    },
+    "id": "valencia-teatro-olympia",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Olympia%2C%20Calle%20de%20San%20Vicente%20M%C3%A1rtir%2C%2044%2C%2046002%20Valencia"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Teatre Tívoli",
+    "address": "Carrer de Casp, 8, L'Eixample, 08010 Barcelona",
+    "websiteUrl": "https://mammamiaelmusical.es/barcelona/",
+    "programmeUrl": "https://tickets.oneboxtds.com/mamma-mia/events/49476?sessionView=CALENDAR",
+    "programmeLabel": { "es": "Entradas oficiales", "en": "Official tickets", "fr": "Billets officiels" },
+    "image": "https://www.carteleramusicales.es/storage/714/5G7w7Gigw3V69LwdSBr969Hd88OzMv-metaVGl2b2xpX3dlYi5qcGc%3D-.jpg",
+    "kind": { "es": "Teatro", "en": "Theatre", "fr": "Théâtre" },
+    "description": {
+      "es": "Teatro barcelonés de referencia para musicales y grandes producciones escénicas.",
+      "en": "A Barcelona theatre known for musicals and major stage productions.",
+      "fr": "Un théâtre barcelonais réputé pour les comédies musicales et les grandes productions."
+    },
+    "id": "barcelona-teatre-tivoli",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20T%C3%ADvoli%2C%20Carrer%20de%20Casp%2C%208%2C%2008010%20Barcelona"
+  },
+  {
+    "city": "Madrid",
+    "name": "Movistar Arena",
+    "address": "Av. de Felipe II, s/n, 28009 Madrid",
+    "websiteUrl": "https://www.movistararena.es/",
+    "programmeUrl": "https://www.movistararena.es/programacion",
+    "programmeLabel": { "es": "Programación oficial", "en": "Official programme", "fr": "Programme officiel" },
+    "image": "https://www.movistararena.es/assets/img/venue/movistar-arena/interior.webp",
+    "kind": { "es": "Recinto multiusos", "en": "Multi-purpose venue", "fr": "Salle polyvalente" },
+    "description": {
+      "es": "Recinto multiusos de Madrid para conciertos y grandes eventos.",
+      "en": "A Madrid multi-purpose venue for concerts and major events.",
+      "fr": "Une salle polyvalente à Madrid pour les concerts et grands événements."
+    },
+    "id": "madrid-movistar-arena",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Movistar%20Arena%2C%20Av.%20de%20Felipe%20II%2C%20s%2Fn%2C%2028009%20Madrid"
+  }
 ]
