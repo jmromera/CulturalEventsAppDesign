@@ -286,7 +286,7 @@ function Filters({ selectedCity, setSelectedCity, back, language, t }: { selecte
 
 function VenuesPage({ selectedCity, language, openVenue, t }: { selectedCity: City; language: Language; openVenue: (id: string) => void; t: typeof copy.es }) {
   const labels = interfaceText[language];
-  const cityVenues = venues.filter((venue) => venue.city === selectedCity);
+  const cityVenues = venues.filter((venue) => venue.city === selectedCity).sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)));
   return <main className="venue-directory"><div className="venue-directory-heading"><span className="kicker">{selectedCity}</span><h1>{labels.venueHeading} {selectedCity}</h1><p>{labels.venueIntro}</p></div>{cityVenues.length ? <div className="venue-directory-grid">{cityVenues.map((venue) => {
     const venueEvents = events.filter((event) => event.venueId === venue.id);
     return <article className="venue-directory-card" key={venue.id}><button className={`venue-directory-image ${venue.image ? "" : "venue-directory-image--placeholder"}`} onClick={() => openVenue(venue.id)} aria-label={venue.name}>{venue.image ? <img src={venue.image} alt={`Recinto: ${venue.name}`} /> : <BrandMark className="venue-placeholder-mark" />}</button><span className="venue-directory-kind"><Icon name="location" />{venue.kind[language]}</span><h2><button className="venue-name-link" onClick={() => openVenue(venue.id)}>{venue.name}</button></h2><p>{venue.description[language]}</p><address>{venue.address}</address><div className="venue-directory-footer"><span>{venueEvents.length} {labels.eventCount}</span><Button variant="secondary" onClick={() => openVenue(venue.id)}>{labels.viewEvents}<Icon name="chevron" /></Button></div></article>;
@@ -371,6 +371,31 @@ function EventRoute({ saved, toggleSaved, goBack, openEvent, openVenue, language
   return <Detail event={event} saved={saved.includes(event.id)} toggleSaved={() => toggleSaved(event.id)} back={goBack} openEvent={openEvent} openVenue={openVenue} language={language} t={t} />;
 }
 
+function SiteFooter() {
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!aboutOpen) return;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setAboutOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [aboutOpen]);
+  return <footer className="site-footer">
+    <div className="site-footer-inner">
+      <div><strong>Plan Cerca</strong><p>Descubre conciertos, teatro, exposiciones, deporte y eventos culturales cerca de ti.</p><p>Proyecto académico desarrollado para la asignatura de Interacción Persona-Ordenador (HCI).</p></div>
+      <div className="site-footer-meta"><button type="button" className="site-footer-link" onClick={() => setAboutOpen(true)}>Acerca de</button><small>© 2026 Plan Cerca</small></div>
+    </div>
+    {aboutOpen && <div className="about-backdrop" onClick={() => setAboutOpen(false)}><div className="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title" onClick={(e) => e.stopPropagation()}>
+      <h2 id="about-title">Acerca de Plan Cerca</h2>
+      <p>Plan Cerca es una aplicación web desarrollada como proyecto académico para la asignatura de Interacción Persona-Ordenador (HCI).</p>
+      <p>Su objetivo es facilitar el descubrimiento de eventos culturales, deportivos y de ocio mediante una experiencia de usuario sencilla, accesible y centrada en el usuario.</p>
+      <p>La aplicación ha sido desarrollada utilizando React, TypeScript, React Router y Vercel, aplicando principios de usabilidad, accesibilidad y diseño responsive.</p>
+      <button ref={closeRef} type="button" className="button button--primary" onClick={() => setAboutOpen(false)}>Cerrar</button>
+    </div></div>}
+  </footer>;
+}
+
 export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -446,5 +471,6 @@ export default function App() {
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} openEvent={openEvent} openVenue={openVenue} language={language} t={t} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    <SiteFooter />
   </div></div>;
 }
