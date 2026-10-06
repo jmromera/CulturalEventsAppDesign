@@ -11,7 +11,7 @@ type PreferredCityContextValue = {
   detectedCity: City | null;
   status: CityResolutionStatus;
   onboardingOpen: boolean;
-  selectCity: (city: City) => void;
+  selectCity: (city: City, destinationPath?: string) => void;
   dismissOnboarding: () => void;
 };
 
@@ -91,15 +91,23 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
   });
   const [onboardingOpen, setOnboardingOpen] = useState(false);
   const initialized = useRef(false);
+  const pendingDestinationPath = useRef<string | null>(null);
 
-  const syncCityInUrl = useCallback((city: City, replace = false) => {
+  const syncCityInUrl = useCallback((city: City, replace = false, destinationPath = location.pathname) => {
     const params = new URLSearchParams(location.search);
-    if (params.get("city") === city) return;
+    if (params.get("city") === city && destinationPath === location.pathname) return;
     params.set("city", city);
-    navigate({ pathname: location.pathname, search: `?${params.toString()}` }, { replace });
+    navigate({ pathname: destinationPath, search: `?${params.toString()}` }, { replace });
   }, [location.pathname, location.search, navigate]);
 
-  const selectCity = useCallback((city: City) => {
+  const removeCityFromUrl = useCallback(() => {
+    const params = new URLSearchParams(location.search);
+    if (!params.has("city")) return;
+    params.delete("city");
+    navigate({ pathname: location.pathname, search: params.size ? `?${params.toString()}` : "" }, { replace: true });
+  }, [location.pathname, location.search, navigate]);
+
+  const selectCity = useCallback((city: City, destinationPath?: string) => {
     setPreferredCity(city);
     setSelectedCity(city);
     setDetectedCity(null);
@@ -108,7 +116,8 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
     writeStorage(PREFERRED_CITY_KEY, city);
     writeStorage(GEOLOCATION_STATUS_KEY, "city-selected");
     try { window.localStorage.removeItem(DETECTED_CITY_KEY); } catch { /* Optional cached suggestion. */ }
-    syncCityInUrl(city);
+    if (destinationPath) pendingDestinationPath.current = destinationPath;
+    syncCityInUrl(city, false, destinationPath);
   }, [syncCityInUrl]);
 
   const dismissOnboarding = useCallback(() => {
@@ -119,8 +128,19 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const routeCityValue = new URLSearchParams(location.search).get("city");
     const routeCity = routeCityValue && (cities as string[]).includes(routeCityValue) ? routeCityValue as City : null;
+    const isEntityRoute = location.pathname.startsWith("/entity/") || location.pathname.startsWith("/artist/");
+
+    if (isEntityRoute && routeCityValue) removeCityFromUrl();
 
     if (initialized.current) {
+      if (pendingDestinationPath.current) {
+        if (location.pathname === pendingDestinationPath.current && routeCity === preferredCity) {
+          pendingDestinationPath.current = null;
+        } else {
+          return;
+        }
+      }
+      if (isEntityRoute) return;
       if (preferredCity && routeCity !== preferredCity) syncCityInUrl(preferredCity, true);
       return;
     }
@@ -131,7 +151,7 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
       setPreferredCity(savedCity);
       setSelectedCity(savedCity);
       setStatus("city-selected");
-      if (routeCity !== savedCity) syncCityInUrl(savedCity, true);
+      if (!isEntityRoute && routeCity !== savedCity) syncCityInUrl(savedCity, true);
       return;
     }
 
@@ -180,7 +200,7 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
       },
       { enableHighAccuracy: false, maximumAge: 300_000, timeout: 8_000 },
     );
-  }, [location.search, preferredCity, selectCity, syncCityInUrl]);
+  }, [location.pathname, location.search, preferredCity, removeCityFromUrl, selectCity, syncCityInUrl]);
 
   const value = useMemo(() => ({ selectedCity, preferredCity, detectedCity, status, onboardingOpen, selectCity, dismissOnboarding }), [selectedCity, preferredCity, detectedCity, status, onboardingOpen, selectCity, dismissOnboarding]);
   return <PreferredCityContext.Provider value={value}>{children}</PreferredCityContext.Provider>;

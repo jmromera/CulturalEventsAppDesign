@@ -32,7 +32,9 @@ export default function CitySelector({ language }: { language: Language }) {
   }, [isOpen]);
 
   const chooseCity = (city: typeof selectedCity) => {
-    selectCity(city);
+    const pathname = window.location.pathname;
+    const destinationPath = pathname.startsWith("/artist/") || pathname.startsWith("/entity/") || pathname.startsWith("/event/") ? "/" : undefined;
+    selectCity(city, destinationPath);
     setIsOpen(false);
     summaryRef.current?.focus();
   };
