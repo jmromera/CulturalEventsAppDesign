@@ -192,3 +192,4 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
 	.detail-hero[data-cat] .detail-social .icon{width:15px;height:15px}
 	.detail-hero[data-cat] .detail-lead{margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
 }
+.new-list-input{width:100%;min-height:48px;padding:0 14px;margin:6px 0 18px;border:1.5px solid var(--line);border-radius:10px;background:var(--sky);color:var(--ink);font-size:16px;font-weight:600}.new-list-input:focus{outline:none;border-color:var(--forest);background:#fff;box-shadow:0 0 0 4px rgba(29,78,216,.15)}.new-list-actions{display:flex;gap:10px;justify-content:flex-end}.new-list-actions .button:disabled{opacity:.5;cursor:not-allowed}

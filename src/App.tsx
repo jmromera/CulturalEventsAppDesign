@@ -498,9 +498,21 @@ function Info({ icon, label, value }: { icon: IconName; label: string; value: st
   return <div className="info-item"><span><Icon name={icon} /></span><div><small>{label}</small><strong>{value}</strong></div></div>;
 }
 
-function Saved({ saved, lists, createList, toggleSaved, openEvent, explore, title, t }: { saved: number[]; lists: string[]; createList: () => void; toggleSaved: (id: number) => void; openEvent: (id: number) => void; explore: () => void; title: string; t: typeof copy.es }) {
-  const savedEvents = events.filter((event) => saved.includes(event.id));
-  return <main className="subpage saved-page"><span className="kicker">{t.yourLists}</span><div className="saved-heading"><div><h1>{title}</h1><p>{t.mail}</p></div><Button onClick={createList}>+ {t.createList}</Button></div><div className="list-tabs">{lists.map((list, index) => <button className={index === 0 ? "active" : ""} key={list}>{list}<span>{index === 0 ? saved.length : 0}</span></button>)}</div>{savedEvents.length ? <div className="event-grid">{savedEvents.map((event) => <EventCard key={event.id} event={event} saved onSave={() => toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div> : <div className="empty"><Icon name="heart" /><h2>{title}</h2><Button onClick={explore}>{t.discover}</Button></div>}</main>;
+function Saved({ saved, friendsSaved, lists, createList, toggleSaved, openEvent, explore, title, t }: { saved: number[]; friendsSaved: number[]; lists: string[]; createList: (name: string) => void; toggleSaved: (id: number) => void; openEvent: (id: number) => void; explore: () => void; title: string; t: typeof copy.es }) {
+  const [activeList, setActiveList] = useState(0);
+  const [creating, setCreating] = useState(false);
+  const [newListName, setNewListName] = useState("");
+  const closeCreate = () => { setCreating(false); setNewListName(""); };
+  const submitCreate = () => {
+    const name = newListName.trim();
+    if (!name) return;
+    createList(name);
+    setActiveList(lists.length);
+    closeCreate();
+  };
+  const listIds = (index: number) => index === 0 ? saved : index === 1 ? friendsSaved : [];
+  const savedEvents = events.filter((event) => listIds(activeList).includes(event.id));
+  return <main className="subpage saved-page"><span className="kicker">{t.yourLists}</span><div className="saved-heading"><div><h1>{title}</h1><p>{t.mail}</p></div><Button onClick={() => setCreating(true)}>+ {t.createList}</Button></div><div className="list-tabs">{lists.map((list, index) => <button className={index === activeList ? "active" : ""} key={list} onClick={() => setActiveList(index)}>{list}<span>{listIds(index).length}</span></button>)}</div>{savedEvents.length ? <div className="event-grid">{savedEvents.map((event) => <EventCard key={event.id} event={event} saved={activeList === 0} onSave={() => activeList === 0 && toggleSaved(event.id)} onOpen={() => openEvent(event.id)} t={t} />)}</div> : <div className="empty"><Icon name="heart" /><h2>{title}</h2><Button onClick={explore}>{t.discover}</Button></div>}{creating && <div className="city-onboarding-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCreate(); }}><form className="city-onboarding-dialog new-list-dialog" role="dialog" aria-modal="true" aria-labelledby="new-list-title" onSubmit={(event) => { event.preventDefault(); submitCreate(); }} onKeyDown={(event) => { if (event.key === "Escape") closeCreate(); }}><span className="kicker">{t.yourLists}</span><h2 id="new-list-title">{t.createList}</h2><input className="new-list-input" autoFocus maxLength={40} value={newListName} onChange={(event) => setNewListName(event.target.value)} placeholder={t.listPrompt} aria-label={t.listPrompt} /><div className="new-list-actions"><button type="button" className="button button--secondary" onClick={closeCreate}>{t.cancel}</button><button type="submit" className="button button--primary" disabled={!newListName.trim()}>{t.createList}</button></div></form></div>}</main>;
 }
 
 function EventRoute({ saved, toggleSaved, goBack, openEvent, openVenue, language, t }: { saved: number[]; toggleSaved: (id: number) => void; goBack: () => void; openEvent: (id: number) => void; openVenue: (id: string) => void; language: Language; t: typeof copy.es }) {
@@ -554,7 +566,8 @@ export default function App() {
   const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : "home";
   const [language, setLanguage] = useState<Language>("es");
   const [searchQuery, setSearchQuery] = useState(() => new URLSearchParams(window.location.search).get("q") ?? "");
-  const [saved, setSaved] = useState([1, 8]);
+  const [saved, setSaved] = useState([95]);
+  const friendsSaved = [108];
   const [lists, setLists] = useState(["Favoritos", "Con amigos"]);
   const t = copy[language];
   const event = useMemo(() => events.find((item) => pathname === `/event/${item.id}`), [pathname]);
@@ -600,12 +613,12 @@ export default function App() {
   const homePage = <Home selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} openEvent={openEvent} goFilters={() => navigateWithCity("/search?filters=1")} searchQuery={searchQuery} language={language} t={t} />;
   const searchParams = new URLSearchParams(location.search);
   const showFilters = searchParams.has("filters") || !searchParams.has("q");
-  const createList = () => { const name = window.prompt(t.listPrompt); if (name?.trim()) setLists((current) => [...current, name.trim()]); };
+  const createList = (name: string) => setLists((current) => [...current, name]);
   return <div className="app-shell"><CityOnboardingDialog /><Nav page={page} navigate={(path) => path === "/" ? goToEvents() : navigateWithCity(path)} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={showFilters ? <Filters selectedCity={selectedCity} setSelectedCity={setSelectedCity} back={goBack} language={language} t={t} /> : homePage} />
-      <Route path="/favorites" element={<Saved saved={saved} lists={lists} createList={createList} toggleSaved={toggleSaved} openEvent={openEvent} explore={goToEvents} title={interfaceText[language].favourites} t={t} />} />
+      <Route path="/favorites" element={<Saved saved={saved} friendsSaved={friendsSaved} lists={lists} createList={createList} toggleSaved={toggleSaved} openEvent={openEvent} explore={goToEvents} title={interfaceText[language].favourites} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} openVenue={openVenue} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute openEvent={openEvent} goBack={goBack} language={language} t={t} />} />
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} openEvent={openEvent} openVenue={openVenue} language={language} t={t} />} />

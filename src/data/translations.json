@@ -170,6 +170,7 @@
       "eventEnded": "Temporada finalizada",
       "external": "La compra se completa de forma segura en la web del proveedor oficial.",
       "listPrompt": "Nombre de la nueva lista",
+      "cancel": "Cancelar",
       "favourites": "Favoritos",
       "city": "Ciudad",
       "noCityEvents": "Todavía no hay eventos disponibles en esta ciudad."
@@ -234,6 +235,7 @@
       "eventEnded": "Season ended",
       "external": "Your purchase is completed securely on the official provider’s website.",
       "listPrompt": "New list name",
+      "cancel": "Cancel",
       "favourites": "Favourites",
       "city": "City",
       "noCityEvents": "There are no events available in this city yet."
@@ -298,6 +300,7 @@
       "eventEnded": "Saison terminée",
       "external": "L’achat est finalisé en toute sécurité sur le site officiel.",
       "listPrompt": "Nom de la nouvelle liste",
+      "cancel": "Annuler",
       "favourites": "Favoris",
       "city": "Ville",
       "noCityEvents": "Aucun événement n’est encore disponible dans cette ville."

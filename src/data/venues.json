@@ -537,6 +537,27 @@
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Roig%20Arena%2C%20C%2F%20Bomber%20Ram%C3%B3n%20Duart%2C%2012%2C%20Quatre%20Carreres%2C%2046013%20Valencia"
   },
   {
+    "city": "Valencia",
+    "name": "Estadio de Mestalla",
+    "address": "Av. de Suècia, s/n, 46010 Valencia",
+    "websiteUrl": "https://www.valenciacf.com/",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2iog96TCJdn1JW2h0HXGEYY-ynrmj_8wcw4oKymsK0A&s=10",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Valencia CF, que acoge sus partidos como local.",
+      "en": "Valencia CF's stadium, home to the club's home fixtures.",
+      "fr": "Le stade du Valencia CF, qui accueille ses matchs à domicile."
+    },
+    "id": "valencia-estadio-de-mestalla",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20de%20Mestalla%2C%20Av.%20de%20Su%C3%A8cia%2C%2046010%20Valencia"
+  },
+  {
     "city": "Sevilla",
     "name": "Teatro de la Maestranza",
     "address": "Paseo de Cristóbal Colón, 22, 41001 Sevilla",
@@ -713,6 +734,69 @@
     },
     "id": "sevilla-estadio-la-cartuja-de-sevilla",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20La%20Cartuja%20de%20Sevilla%2C%20Isla%20de%20la%20Cartuja%2C%20Sector%20Norte%2C%2041092%20Sevilla"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Estadio Benito Villamarín",
+    "address": "Av. de Heliópolis, s/n, 41012 Sevilla",
+    "websiteUrl": "https://www.realbetisbalompie.es/",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmq44w2S6xKR3zi8SfyFOIoj5u6rD0SVNCFxFjoejXZQ&s=10",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Real Betis, que acoge sus partidos como local.",
+      "en": "Real Betis's stadium, home to the club's home fixtures.",
+      "fr": "Le stade du Real Betis, qui accueille ses matchs à domicile."
+    },
+    "id": "sevilla-estadio-benito-villamarin",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Benito%20Villamar%C3%ADn%2C%20Av.%20de%20Heli%C3%B3polis%2C%2041012%20Sevilla"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Estadio Ramón Sánchez-Pizjuán",
+    "address": "C. Sevilla Fútbol Club, s/n, 41005 Sevilla",
+    "websiteUrl": "https://www.sevillafc.es/",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGipdkvVWkNPc7RpCIRauVkSqDYvUb-VjLBbTACvEPJg&s=10",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Sevilla FC, que acoge sus partidos como local.",
+      "en": "Sevilla FC's stadium, home to the club's home fixtures.",
+      "fr": "Le stade du Sevilla FC, qui accueille ses matchs à domicile."
+    },
+    "id": "sevilla-estadio-ramon-sanchez-pizjuan",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Ram%C3%B3n%20S%C3%A1nchez-Pizju%C3%A1n%2C%20Sevilla"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Sala Pandora",
+    "address": "C/ Gramil, 2, Sevilla",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX36mbixoJ5SZSx6zFpy5xrQK1Ic65bJ71dKC9Q5TxKg&s=10",
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Concert venue",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Una sala sevillana para conciertos en directo.",
+      "en": "A Seville venue for live concerts.",
+      "fr": "Une salle sévillane pour les concerts en direct."
+    },
+    "id": "sevilla-sala-pandora",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20Pandora%2C%20C%2F%20Gramil%2C%202%2C%20Sevilla"
   },
   {
     "city": "Sevilla",
