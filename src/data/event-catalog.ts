@@ -7,12 +7,17 @@ export const cityImages = cityImageData as Record<City, string>;
 const today = new Date();
 const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
+const hasEnded = (event: EventItem) => {
+  const lastDate = event.endDate ?? event.startDate;
+  return Boolean(lastDate && lastDate < todayKey);
+};
+
+// Ya terminados: fuera del catálogo, pero su ficha debe poder avisar de que el evento ha pasado.
+export const endedEvents = (eventData as EventItem[]).filter(hasEnded);
+
 // Sin fecha de inicio, al final; los que ya terminaron se excluyen.
 export const events = (eventData as EventItem[])
-  .filter((event) => {
-    const lastDate = event.endDate ?? event.startDate;
-    return !lastDate || lastDate >= todayKey;
-  })
+  .filter((event) => !hasEnded(event))
   .sort((a, b) => (a.startDate ?? "9999-12-31").localeCompare(b.startDate ?? "9999-12-31"));
 
 export const cityEventCounts: Record<City, number> = Object.fromEntries(

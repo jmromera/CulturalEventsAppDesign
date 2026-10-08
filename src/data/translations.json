@@ -173,7 +173,13 @@
       "cancel": "Cancelar",
       "favourites": "Favoritos",
       "city": "Ciudad",
-      "noCityEvents": "Todavía no hay eventos disponibles en esta ciudad."
+      "noCityEvents": "Todavía no hay eventos disponibles en esta ciudad.",
+      "notFoundTitle": "Página no encontrada",
+      "notFoundText": "La página que buscas no existe o ha cambiado de dirección.",
+      "goHome": "Ir a la página de inicio",
+      "eventPastTitle": "Este evento ya ha pasado",
+      "eventPastText": "{title} ya se ha celebrado y no admite nuevas entradas.",
+      "similarEvents": "Eventos similares"
     },
     "en": {
       "discover": "Discover",
@@ -238,7 +244,13 @@
       "cancel": "Cancel",
       "favourites": "Favourites",
       "city": "City",
-      "noCityEvents": "There are no events available in this city yet."
+      "noCityEvents": "There are no events available in this city yet.",
+      "notFoundTitle": "Page not found",
+      "notFoundText": "The page you are looking for does not exist or has moved.",
+      "goHome": "Go to the home page",
+      "eventPastTitle": "This event has already taken place",
+      "eventPastText": "{title} has already taken place and tickets are no longer available.",
+      "similarEvents": "Similar events"
     },
     "fr": {
       "discover": "Découvrir",
@@ -303,7 +315,13 @@
       "cancel": "Annuler",
       "favourites": "Favoris",
       "city": "Ville",
-      "noCityEvents": "Aucun événement n’est encore disponible dans cette ville."
+      "noCityEvents": "Aucun événement n’est encore disponible dans cette ville.",
+      "notFoundTitle": "Page introuvable",
+      "notFoundText": "La page que vous cherchez n’existe pas ou a changé d’adresse.",
+      "goHome": "Aller à la page d’accueil",
+      "eventPastTitle": "Cet événement est déjà passé",
+      "eventPastText": "{title} a déjà eu lieu et les billets ne sont plus disponibles.",
+      "similarEvents": "Événements similaires"
     }
   }
 }

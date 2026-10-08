@@ -1,16 +1,17 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { Link, Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
-import { relatedEntities } from "./data/entities";
-import { cityEventCounts, cityImages, events, relatedEventsByEntity } from "./data/event-catalog";
+import { Link, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
+import { entityFor, relatedEntities } from "./data/entities";
+import { cityEventCounts, cityImages, endedEvents, events, relatedEventsByEntity } from "./data/event-catalog";
 import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } from "./data/artist-preferences";
 import { entityKindCopy, copy, eventActionCopy, interfaceText, venueLinkCopy } from "./data/translations";
 import { venueFor, venues } from "./data/venue-catalog";
 import CityOnboardingDialog from "./components/CityOnboardingDialog";
 import CitySelector from "./components/CitySelector";
+import StatusPage from "./components/StatusPage";
 import { usePreferredCity } from "./context/PreferredCityContext";
 import { cities, eventCategories, type City, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
 
-type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity";
+type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "not-found";
 type Language = "es" | "en" | "fr";
 type IconName = "arrow" | "bell" | "bookmark" | "calendar" | "check" | "chevron" | "copy" | "download" | "filter" | "globe" | "heart" | "home" | "instagram" | "location" | "play" | "profile" | "search" | "share" | "spark" | "spotify" | "star" | "ticket" | "time" | "trending";
 
@@ -144,10 +145,24 @@ function ArtistActions({ entity, language }: { entity: RelatedEntity; language: 
   </div>;
 }
 
+function NotFound({ t }: { t: typeof copy.es }) {
+  return <StatusPage kicker="404" title={t.notFoundTitle} text={t.notFoundText} homeLabel={t.goHome} />;
+}
+
+function EndedEvent({ event, t }: { event: EventItem; t: typeof copy.es }) {
+  const city = venueFor(event.venueId).city;
+  const sameCategory = events.filter((item) => item.category === event.category);
+  const sameCity = sameCategory.filter((item) => venueFor(item.venueId).city === city);
+  const similar = (sameCity.length ? sameCity : sameCategory).slice(0, 3);
+  return <StatusPage kicker={`${event.category} · ${event.date}`} title={t.eventPastTitle} text={t.eventPastText.replace("{title}", event.title)} homeLabel={t.goHome}>
+    {similar.length > 0 && <section className="artist-events-section"><div className="artist-events-heading"><h2>{t.similarEvents}</h2></div><div className="artist-events-grid">{similar.map((item) => <RelatedEventCard key={item.id} event={item} />)}</div></section>}
+  </StatusPage>;
+}
+
 function EntityRoute({ back, language, t }: { back: () => void; language: Language; t: typeof copy.es }) {
   const { slug } = useParams();
-  const entity = slug ? relatedEntities[slug] : undefined;
-  if (!entity) return <Navigate to="/" replace />;
+  const entity = entityFor(slug);
+  if (!entity) return <NotFound t={t} />;
   const entityEvents = relatedEventsByEntity(entity.id);
   return <main className="subpage artist-page">
     <div className="subpage-top"><button type="button" onClick={back}><Icon name="arrow" />{t.back}</button></div>
@@ -422,7 +437,7 @@ function upcomingEventsAtVenue(venueId: string, excludedEventId?: number): Event
 function VenueRoute({ openEvent, goBack, language, t }: { openEvent: (id: number) => void; goBack: () => void; language: Language; t: typeof copy.es }) {
   const { id } = useParams();
   const venue = venues.find((item) => item.id === id);
-  if (!venue) return <Navigate to="/venues" replace />;
+  if (!venue) return <NotFound t={t} />;
   const upcoming = upcomingEventsAtVenue(venue.id).slice(0, 6);
   return <main className="detail-page venue-detail-page"><div className="detail-top"><button onClick={goBack}><Icon name="arrow" />{t.back}</button></div><section className={`detail-hero venue-detail-hero ${venue.image ? "" : "venue-detail-hero--placeholder"}`} data-cat={venueCategoryKey(venue.kind.es)}><div className="detail-intro venue-detail-copy"><span className="category">{venue.city} · {venue.kind[language]}</span><h1>{venue.name}</h1><p className="detail-lead">{venue.description[language]}</p><div className="detail-intro-facts venue-detail-address"><span><Icon name="location" />{venue.address}</span><a href={venue.mapsUrl} target="_blank" rel="noreferrer"><Icon name="location" />{t.map}<Icon name="chevron" /></a></div></div><div className="detail-gallery venue-detail-gallery">{venue.image ? <img className="gallery-main" src={venue.image} alt={`Recinto: ${venue.name}`} /> : <div className="venue-detail-placeholder" aria-hidden="true"><BrandMark className="venue-detail-placeholder-mark" /></div>}</div></section><section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} />{upcoming.length ? <div className="venue-event-grid">{upcoming.map((event) => <EventCard key={event.id} event={event} saved={false} onSave={() => {}} onOpen={() => openEvent(event.id)} t={t} />)}</div> : <p className="venue-empty">{t.venueEmpty}</p>}</div></section></main>;
 }
@@ -518,7 +533,10 @@ function Saved({ saved, friendsSaved, lists, createList, toggleSaved, openEvent,
 function EventRoute({ saved, toggleSaved, goBack, openEvent, openVenue, language, t }: { saved: number[]; toggleSaved: (id: number) => void; goBack: () => void; openEvent: (id: number) => void; openVenue: (id: string) => void; language: Language; t: typeof copy.es }) {
   const { id } = useParams();
   const event = events.find((item) => item.id === Number(id));
-  if (!event) return <Navigate to="/" replace />;
+  if (!event) {
+    const endedEvent = endedEvents.find((item) => item.id === Number(id));
+    return endedEvent ? <EndedEvent event={endedEvent} t={t} /> : <NotFound t={t} />;
+  }
   return <Detail event={event} saved={saved.includes(event.id)} toggleSaved={() => toggleSaved(event.id)} back={goBack} openEvent={openEvent} openVenue={openVenue} language={language} t={t} />;
 }
 
@@ -561,20 +579,20 @@ export default function App() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-  const pathname = location.pathname;
+  const pathname = location.pathname.toLowerCase().replace(/(.)\/+$/, "$1");
   const isEntityPath = pathname.startsWith("/entity/") || pathname.startsWith("/artist/");
-  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : "home";
+  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : "not-found";
   const [language, setLanguage] = useState<Language>("es");
   const [searchQuery, setSearchQuery] = useState(() => new URLSearchParams(window.location.search).get("q") ?? "");
   const [saved, setSaved] = useState([95]);
   const friendsSaved = [108];
   const [lists, setLists] = useState(["Favoritos", "Con amigos"]);
   const t = copy[language];
-  const event = useMemo(() => events.find((item) => pathname === `/event/${item.id}`), [pathname]);
+  const event = useMemo(() => [...events, ...endedEvents].find((item) => pathname === `/event/${item.id}`), [pathname]);
   const activeVenue = useMemo(() => venues.find((item) => pathname === `/venues/${item.id}`), [pathname]);
   const activeEntity = useMemo(() => {
     const prefix = pathname.startsWith("/entity/") ? "/entity/" : "/artist/";
-    return isEntityPath ? relatedEntities[pathname.slice(prefix.length)] : undefined;
+    return isEntityPath ? entityFor(pathname.slice(prefix.length)) : undefined;
   }, [isEntityPath, pathname]);
   useEffect(() => {
     if (page === "home") document.title = `Plan Cerca · ${selectedCity}`;
@@ -583,8 +601,9 @@ export default function App() {
     else if (page === "entity" && activeEntity) document.title = `${activeEntity.name} · Plan Cerca`;
     else if (page === "venues") document.title = `${interfaceText[language].venues} · ${selectedCity} · Plan Cerca`;
     else if (page === "favorites") document.title = `${interfaceText[language].favourites} · Plan Cerca`;
-    else document.title = `${t.search} · Plan Cerca`;
-  }, [activeEntity, activeVenue, event, language, page, selectedCity, t.search]);
+    else if (page === "search") document.title = `${t.search} · Plan Cerca`;
+    else document.title = `${t.notFoundTitle} · Plan Cerca`;
+  }, [activeEntity, activeVenue, event, language, page, selectedCity, t.notFoundTitle, t.search]);
   useEffect(() => {
     setSearchQuery(new URLSearchParams(location.search).get("q") ?? "");
   }, [location.pathname, location.search]);
@@ -624,7 +643,7 @@ export default function App() {
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} openEvent={openEvent} openVenue={openVenue} language={language} t={t} />} />
       <Route path="/entity/:slug" element={<EntityRoute back={goBack} language={language} t={t} />} />
       <Route path="/artist/:slug" element={<EntityRoute back={goBack} language={language} t={t} />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFound t={t} />} />
     </Routes>
     <SiteFooter />
   </div></div>;
