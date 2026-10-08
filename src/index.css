@@ -212,3 +212,176 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
 	.event-footer .button{min-height:44px}
 }
 .skip-link{position:fixed;top:8px;left:8px;z-index:200;transform:translateY(-150%);border-radius:6px;background:#111827;color:#fff;padding:8px 12px;font-weight:600;text-decoration:none}.skip-link:focus{transform:translateY(0)}main:focus{outline:none}
+
+/* ==========================================================================
+   Tema "Telón" (noche). Solo colores, fondos, bordes y sombras.
+   Todos los colores del tema se definen en el bloque :root de abajo (y los de
+   categoría justo después): para ajustar la paleta basta con cambiar estos valores.
+   ========================================================================== */
+:root{
+	color-scheme:dark;
+	/* Azul noche: cabecera, barra de acciones, hero y pie */
+	--chrome:#0f172a;
+	--chrome-end:#111827;
+	--chrome-field:rgba(255,255,255,.07);
+	--chrome-hover:rgba(255,255,255,.1);
+	/* Fondo general */
+	--canvas:#141b2d;
+	--canvas-raised:#182036;
+	/* Tarjetas y paneles: un punto más claros que el fondo */
+	--surface:#1c2540;
+	--surface-raised:#232e4f;
+	--surface-sunken:#161e35;
+	--line-surface:#313d60;
+	/* Texto y líneas */
+	--on-dark:#f1f5f9;
+	--on-dark-muted:#a8b3c7;
+	--line-dark:#2c3854;
+	/* Acento violeta: intenso para fondos de botón, claro para texto y enlaces */
+	--accent:#7c3aed;
+	--accent-hover:#6d28d9;
+	--on-accent:#fff;
+	--accent-text:#c4b5fd;
+	--accent-text-hover:#ddd6fe;
+	--accent-tint:rgba(167,139,250,.16);
+	/* Estados */
+	--positive:#6ee7b7;
+	--positive-tint:rgba(16,185,129,.14);
+	--pending:#fcd34d;
+	--pending-tint:rgba(245,158,11,.14);
+	--star:#fbbf24;
+	/* Sombras */
+	--shadow-card:0 8px 24px rgba(0,0,0,.28);
+	--shadow-pop:0 18px 44px rgba(0,0,0,.5);
+
+	/* Variables del diseño anterior, apuntando a los tonos del tema */
+	--paper:var(--canvas);
+	--ink:var(--on-dark);
+	--muted:var(--on-dark-muted);
+	--line:var(--line-dark);
+	--forest:var(--accent-text);
+	--forest-2:var(--chrome);
+	--terracotta:var(--accent-text);
+	--terracotta-dark:var(--accent-text);
+	--action-hover:var(--accent-text-hover);
+	--sky:var(--accent-tint);
+	--sage:var(--accent-tint);
+	--peach:var(--accent-tint);
+	--gold:var(--star);
+	--success:#34d399;
+	--success-strong:var(--positive);
+	--shadow:var(--shadow-pop);
+}
+
+/* Un color por categoría: --cat para fondos con texto blanco, --cat-light para texto sobre oscuro.
+   Música es azul (no violeta) para no confundirse con el acento. */
+[data-cat]{--cat:var(--accent);--cat-light:var(--accent-text)}
+[data-cat="music"]{--cat:#2563eb;--cat-light:#93c5fd}
+[data-cat="opera"]{--cat:#9f1239;--cat-light:#fda4af}
+[data-cat="theatre"]{--cat:#b91c1c;--cat-light:#fca5a5}
+[data-cat="dance"]{--cat:#a21caf;--cat-light:#f0abfc}
+[data-cat="exhibitions"]{--cat:#0369a1;--cat-light:#7dd3fc}
+[data-cat="museums"]{--cat:#0f766e;--cat-light:#5eead4}
+[data-cat="sports"]{--cat:#15803d;--cat-light:#86efac}
+.event-card[data-cat] .event-body{border-top-color:var(--cat-light)}
+.tag-row span.tag-category,.detail-hero[data-cat] .category{background:color-mix(in srgb,var(--cat) 32%,var(--surface));color:var(--cat-light);border-color:transparent}
+.venue-directory-kind[data-cat]{color:var(--cat-light)}
+.category-tabs button[data-cat]::before{background:var(--cat-light)}
+.category-tabs button[data-cat]:hover{border-color:var(--cat-light);color:var(--cat-light)}
+.category-tabs button[data-cat].active:hover{color:#fff}
+
+html{background:var(--canvas)}
+
+/* Tarjetas y paneles */
+.event-card,.purchase-card,.venue-info-card,.venue-directory-card,.map-card,.info-item,.artist-event-card,.artist-profile-main,.empty,.city-empty-state,.status-page-card,.category-tabs button,.filter-control,.option-grid button,.list-tabs button,.mobile-carousel-controls button,.artist-action,.artist-actions-links a{background:var(--surface);border-color:var(--line-surface)}
+.event-card,.purchase-card,.venue-info-card,.venue-directory-card,.map-card,.info-item,.artist-event-card,.artist-profile-main,.empty,.city-empty-state,.status-page-card{border-width:1px;border-style:solid}
+.venue-directory-card,.venue-info-card,.purchase-card,.event-card,.map-card,.artist-event-card,.empty,.status-page-card{box-shadow:var(--shadow-card)}
+.header-city-menu,.detail-calendar-menu,.city-onboarding-dialog,.about-modal{background:var(--surface-raised);border-color:var(--line-surface);box-shadow:var(--shadow-pop)}
+.filter-city-search,.new-list-input,.city-onboarding-manual select{background:var(--surface-sunken);border-color:var(--line-surface);color:var(--ink)}
+.new-list-input:focus{background:var(--surface-sunken);border-color:var(--accent-text);box-shadow:0 0 0 4px var(--accent-tint)}
+.event-image,.venue-directory-image,.venue-about-image,.venue-detail-hero>img,.artist-event-image,.artist-profile-main>img{background:var(--surface-sunken)}
+.info-item>span,.venue-directory-image--placeholder{background:var(--accent-tint)}
+.city-empty-state p{color:var(--muted)}
+
+/* Contenido de la tarjeta de evento */
+.event-facts{color:var(--muted)}
+.tag-row span,.tag-row>span{background:var(--surface-sunken);color:var(--muted);border:1px solid var(--line-surface)}
+.category,.rating{background:rgba(15,23,42,.84);color:var(--on-dark)}
+.rating .icon{color:var(--star)}
+.availability{background:var(--positive-tint);color:var(--positive)}
+.availability.pending{background:var(--pending-tint);color:var(--pending)}
+.availability.pending i{background:var(--pending)}
+.stock{color:var(--positive)}
+.save-button{background:transparent;border-color:var(--line-surface);color:var(--ink)}
+.save-button.active{background:var(--accent-tint);border-color:var(--accent-text);color:var(--accent-text)}
+.map-lines i{background:rgba(255,255,255,.2)}
+.map-lines span{background:var(--accent);color:var(--on-accent)}
+
+/* Cabecera, barra de acciones de la ficha y pie: una sola pieza en azul noche */
+.site-header{background:rgba(15,23,42,.96);border-bottom-color:var(--line)}
+.detail-top{background:var(--chrome);border-bottom-color:var(--line)}
+.site-footer{background:var(--chrome);border-top-color:var(--line)}
+.brand-mark{background:var(--accent);color:var(--on-accent)}
+.skip-link{background:var(--accent);color:var(--on-accent)}
+.global-search{background:var(--chrome-field);border-color:var(--line)}
+.global-search input{color:var(--ink)}
+.global-search input::placeholder{color:var(--muted)}
+.global-search:focus-within{border-color:var(--accent-text);box-shadow:0 0 0 3px var(--accent-tint)}
+.language-select{background:var(--chrome-field);border-color:var(--line)}
+.language-select select option{background:var(--surface-raised);color:var(--on-dark)}
+.header-city-trigger:hover,.header-city-picker[open]>.header-city-trigger,.header-city-option:hover,.header-city-option:focus-visible,.city-onboarding-link:hover,.city-onboarding-dismiss:hover{background:var(--chrome-hover)}
+.guest-profile>span{border-color:var(--line)}
+.detail-top>button:hover,.detail-top .detail-actions>.detail-action:hover,.detail-top .detail-calendar>summary:hover{background:var(--chrome-hover);border-color:var(--line);color:var(--ink)}
+.detail-top .detail-actions>.detail-action.active{border-color:var(--accent-text)}
+
+/* Botones y elementos activos */
+.button--primary,.global-search button,.category-tabs button.active:not([data-cat]),.option-grid button.active,.list-tabs button.active,.artist-action:first-child{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.button--primary:hover,.global-search button:hover,.artist-action:first-child:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--on-accent)}
+.button--secondary{background:transparent;border-color:var(--line-surface);color:var(--ink)}
+.button--secondary:hover,.detail-action:hover,.detail-calendar>summary:hover{background:var(--accent-tint);border-color:var(--accent-text);color:var(--accent-text)}
+.artist-action:first-child.active,.artist-action:nth-child(2).active,.artist-action:first-child.active:hover{background:var(--positive-tint);border-color:var(--positive);color:var(--positive)}
+.artist-profile-main:hover,.artist-event-card:hover{border-color:var(--accent-text)}
+.filter-control.active{border-color:var(--accent-text);color:var(--accent-text)}
+
+/* Ficha: el hero continúa el azul de la barra de acciones y la imagen ya no deja franjas grises */
+.detail-hero[data-cat]{background:linear-gradient(135deg,var(--chrome) 55%,color-mix(in srgb,var(--cat) 38%,var(--chrome-end)))}
+.detail-gallery{background:transparent}
+.detail-intro{background:transparent}
+.detail-hero[data-cat] .detail-intro-facts .icon{color:var(--accent-text)}
+.venue-detail-hero--placeholder,.venue-detail-placeholder{background:var(--chrome-field)}
+
+/* Bandas y franjas sobre el fondo general */
+.venue-upcoming{background:var(--canvas-raised)}
+.discovery-strip{background:var(--chrome);border:1px solid var(--line)}
+.discovery-strip>div>.icon{color:var(--accent-text)}
+
+/* Foco visible */
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,.artist-profile-main:focus-visible,.artist-event-card:focus-visible,.artist-action:focus-visible,.artist-actions-links a:focus-visible,.header-city-trigger:focus-visible,.site-footer-link:focus-visible{outline:3px solid var(--accent-text)}
+.filter-city-search:focus-within{outline-color:var(--accent-text)}
+
+/* Cabecera: el nombre de la ciudad se muestra siempre completo */
+.header-city-trigger{max-width:none;width:auto}
+.header-city-name{overflow:visible;text-overflow:clip}
+.language-code{display:none}
+@media(max-width:650px){
+	.site-header-inner{grid-template-columns:auto minmax(0,1fr) auto auto}
+	.header-city-picker{justify-self:end;max-width:none}
+	.header-city-trigger{max-width:none;width:auto}
+	/* Idioma compacto ("ES"): el selector sigue siendo el mismo, solo se sustituye el texto visible */
+	.site-header .language-select{width:54px}
+	.site-header .language-select select{color:transparent}
+	.language-code{display:block;position:absolute;left:9px;font-size:12px;font-weight:700;color:var(--ink);pointer-events:none}
+}
+/* En pantallas muy estrechas el icono de usuario cede el sitio a la ciudad */
+@media(max-width:374px){
+	.guest-profile{display:none}
+}
+
+/* Ajustes de tarjetas y ficha */
+.event-footer .button:hover,.event-footer .button:focus-visible,.venue-directory-footer .button:hover,.venue-directory-footer .button:focus-visible{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.purchase-card h2.purchase-provider{font-size:18px;line-height:1.3;letter-spacing:-.02em}
+/* La imagen de la ficha llena toda la altura del hero */
+.detail-gallery{align-self:stretch}
+.detail-gallery img{height:100%;object-fit:cover}
+/* Textos secundarios: mínimo 12 px también en escritorio */
+.category,.rating,.tag-row span,.event-facts,.event-footer small,.event-footer .button,.availability,.info-item small,.purchase-card>p,.purchase-card>small,.discovery-strip small,.hero-brand-label,.hero-city-copy small,.header-city-count,.header-city-option small,.site-footer-meta small,.kicker,.section-title>div>span,.section-title>button,.artist-event-body p,.artist-event-image .category,.venue-directory-kind,.detail-hero[data-cat] .detail-social{font-size:12px}
