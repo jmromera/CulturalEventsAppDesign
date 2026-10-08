@@ -87,7 +87,7 @@
   },
   "interfaceText": {
     "es": {
-      "events": "Eventos",
+      "clearSearch": "Borrar búsqueda", "viewAllEvents": "Ver todos los eventos", "events": "Eventos",
       "venues": "Recintos",
       "favourites": "Favoritos",
       "guest": "Invitado",
@@ -111,7 +111,7 @@
       "skipToContent": "Saltar al contenido"
     },
     "en": {
-      "events": "Events",
+      "clearSearch": "Clear search", "viewAllEvents": "View all events", "events": "Events",
       "venues": "Venues",
       "favourites": "Favourites",
       "guest": "Guest",
@@ -135,7 +135,7 @@
       "skipToContent": "Skip to content"
     },
     "fr": {
-      "events": "Événements",
+      "clearSearch": "Effacer la recherche", "viewAllEvents": "Voir tous les événements", "events": "Événements",
       "venues": "Lieux",
       "favourites": "Favoris",
       "guest": "Invité",
@@ -161,7 +161,7 @@
   },
   "copy": {
     "es": {
-      "discover": "Descubrir",
+      "seeAll": "Ver todos", "openInMaps": "Abrir en Google Maps", "favouritesEmptyTitle": "Aún no has guardado ningún evento", "favouritesEmptyText": "Pulsa el corazón de cualquier evento para tenerlo aquí a mano. Tus favoritos se guardan en este navegador.", "showMore": "Mostrar más eventos", "showingCount": "Mostrando {shown} de {total}", "discover": "Descubrir",
       "search": "Buscar",
       "saved": "Mis listas",
       "about": "Sobre el proyecto",
@@ -246,7 +246,7 @@
       "similarEvents": "Eventos similares"
     },
     "en": {
-      "discover": "Discover",
+      "seeAll": "See all", "openInMaps": "Open in Google Maps", "favouritesEmptyTitle": "You haven't saved any events yet", "favouritesEmptyText": "Tap the heart on any event to keep it here. Your favourites are stored in this browser.", "showMore": "Show more events", "showingCount": "Showing {shown} of {total}", "discover": "Discover",
       "search": "Search",
       "saved": "My lists",
       "about": "About",
@@ -331,7 +331,7 @@
       "similarEvents": "Similar events"
     },
     "fr": {
-      "discover": "Découvrir",
+      "seeAll": "Tout voir", "openInMaps": "Ouvrir dans Google Maps", "favouritesEmptyTitle": "Vous n'avez encore enregistré aucun événement", "favouritesEmptyText": "Touchez le cœur d'un événement pour le retrouver ici. Vos favoris sont enregistrés dans ce navigateur.", "showMore": "Afficher plus d'événements", "showingCount": "{shown} sur {total} affichés", "discover": "Découvrir",
       "search": "Rechercher",
       "saved": "Mes listes",
       "about": "À propos",

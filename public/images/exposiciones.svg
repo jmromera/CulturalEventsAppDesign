@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sala de exposiciones">
-  <rect width="1200" height="675" fill="#e6f4fb"/>
-  <rect y="505" width="1200" height="170" fill="#cfe6f3"/>
-  <rect y="499" width="1200" height="8" fill="#b5d5e8"/>
-  <g fill="#fff" stroke="#0369a1" stroke-width="10">
+  <rect width="1200" height="675" fill="#161e35"/>
+  <rect y="505" width="1200" height="170" fill="#1c2540"/>
+  <rect y="499" width="1200" height="8" fill="#313d60"/>
+  <g fill="#232e4f" stroke="#7dd3fc" stroke-width="10">
     <rect x="130" y="150" width="250" height="250" rx="4"/>
     <rect x="475" y="110" width="250" height="330" rx="4"/>
     <rect x="820" y="150" width="250" height="250" rx="4"/>
@@ -10,12 +10,12 @@
   <circle cx="255" cy="275" r="62" fill="#0369a1"/>
   <path d="M520 395 600 215l80 180Z" fill="#7dd3fc"/>
   <path d="M520 395 565 300l45 95Z" fill="#0369a1"/>
-  <g fill="#0369a1">
+  <g fill="#7dd3fc">
     <rect x="870" y="205" width="150" height="34" rx="4"/>
     <rect x="870" y="258" width="150" height="34" rx="4" opacity=".55"/>
     <rect x="870" y="311" width="150" height="34" rx="4" opacity=".28"/>
   </g>
-  <g fill="#075985">
+  <g fill="#313d60">
     <rect x="235" y="545" width="150" height="22" rx="6"/>
     <rect x="252" y="567" width="14" height="48"/>
     <rect x="354" y="567" width="14" height="48"/>
