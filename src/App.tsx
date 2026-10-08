@@ -163,7 +163,7 @@ function CardCarousel({ className, count, labels, children }: { className: strin
     const track = trackRef.current;
     if (!track || !track.children.length) return;
     const target = track.children[Math.max(0, Math.min(track.children.length - 1, closestCard(track) + direction))];
-    track.scrollBy({ left: target.getBoundingClientRect().left - track.getBoundingClientRect().left, behavior: "smooth" });
+    track.scrollBy({ left: target.getBoundingClientRect().left - track.getBoundingClientRect().left, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   };
   return <>{count > 1 && <div className="mobile-carousel-controls"><span aria-live="polite">{index + 1} / {count}</span><div><button type="button" aria-label={labels.previousEvent} title={labels.previousEvent} disabled={index === 0} onClick={() => move(-1)}><Icon name="arrow" /></button><button type="button" aria-label={labels.nextEvent} title={labels.nextEvent} disabled={index >= count - 1} onClick={() => move(1)}><Icon name="chevron" /></button></div></div>}<div className={className} ref={trackRef} onScroll={(event) => setIndex(closestCard(event.currentTarget))}>{children}</div></>;
 }
