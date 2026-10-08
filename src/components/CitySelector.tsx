@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+  import { useEffect, useRef, useState } from "react";
 import { cityEventCounts } from "../data/event-catalog";
 import { copy, interfaceText } from "../data/translations";
 import { usePreferredCity } from "../context/PreferredCityContext";
