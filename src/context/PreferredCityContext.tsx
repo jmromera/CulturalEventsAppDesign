@@ -52,14 +52,13 @@ function readStoredStatus(): CityResolutionStatus | null {
   return status === "geolocation-denied" || status === "city-not-found" || status === "location-detected" ? status : null;
 }
 
+// La ciudad de la URL (?city=) tiene prioridad sobre la guardada.
 function readInitialCity(): City {
-  const savedCity = readCity(PREFERRED_CITY_KEY);
-  if (savedCity) return savedCity;
   if (typeof window !== "undefined") {
     const routeCity = new URLSearchParams(window.location.search).get("city");
     if (routeCity && (cities as string[]).includes(routeCity)) return routeCity as City;
   }
-  return DEFAULT_CITY;
+  return readCity(PREFERRED_CITY_KEY) ?? DEFAULT_CITY;
 }
 
 function cityNearCoordinates(latitude: number, longitude: number): City | null {
@@ -92,6 +91,9 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
   const [onboardingOpen, setOnboardingOpen] = useState(false);
   const initialized = useRef(false);
   const pendingDestinationPath = useRef<string | null>(null);
+  // Refs y no estado: el efecto debe ver la última ciudad elegida aunque la URL aún no se haya actualizado.
+  const currentPreferredCity = useRef<City | null>(preferredCity);
+  const lastRouteCity = useRef<City | null>(null);
 
   const syncCityInUrl = useCallback((city: City, replace = false, destinationPath = location.pathname) => {
     const params = new URLSearchParams(location.search);
@@ -108,6 +110,7 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
   }, [location.pathname, location.search, navigate]);
 
   const selectCity = useCallback((city: City, destinationPath?: string) => {
+    currentPreferredCity.current = city;
     setPreferredCity(city);
     setSelectedCity(city);
     setDetectedCity(null);
@@ -129,34 +132,38 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
     const routeCityValue = new URLSearchParams(location.search).get("city");
     const routeCity = routeCityValue && (cities as string[]).includes(routeCityValue) ? routeCityValue as City : null;
     const isEntityRoute = location.pathname.startsWith("/entity/") || location.pathname.startsWith("/artist/");
+    const routeCityChanged = routeCity !== lastRouteCity.current;
+    lastRouteCity.current = routeCity;
 
     if (isEntityRoute && routeCityValue) removeCityFromUrl();
 
     if (initialized.current) {
       if (pendingDestinationPath.current) {
-        if (location.pathname === pendingDestinationPath.current && routeCity === preferredCity) {
+        if (location.pathname === pendingDestinationPath.current && routeCity === currentPreferredCity.current) {
           pendingDestinationPath.current = null;
         } else {
           return;
         }
       }
       if (isEntityRoute) return;
-      if (preferredCity && routeCity !== preferredCity) syncCityInUrl(preferredCity, true);
+      // Un ?city= nuevo en la URL (enlace compartido, atrás/adelante) manda sobre la ciudad guardada.
+      if (routeCity && routeCityChanged && routeCity !== currentPreferredCity.current) selectCity(routeCity);
+      else if (currentPreferredCity.current && routeCity !== currentPreferredCity.current) syncCityInUrl(currentPreferredCity.current, true);
       return;
     }
     initialized.current = true;
+
+    if (routeCity) {
+      selectCity(routeCity);
+      return;
+    }
 
     const savedCity = readCity(PREFERRED_CITY_KEY);
     if (savedCity) {
       setPreferredCity(savedCity);
       setSelectedCity(savedCity);
       setStatus("city-selected");
-      if (!isEntityRoute && routeCity !== savedCity) syncCityInUrl(savedCity, true);
-      return;
-    }
-
-    if (routeCity) {
-      selectCity(routeCity);
+      if (!isEntityRoute) syncCityInUrl(savedCity, true);
       return;
     }
 
