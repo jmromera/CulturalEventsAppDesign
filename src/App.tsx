@@ -7,53 +7,25 @@ import { entityKindCopy, copy, eventActionCopy, interfaceText, venueLinkCopy } f
 import { venueFor, venues } from "./data/venue-catalog";
 import CityOnboardingDialog from "./components/CityOnboardingDialog";
 import CitySelector from "./components/CitySelector";
+import Icon, { type IconName } from "./components/Icon";
 import StatusPage from "./components/StatusPage";
 import { usePreferredCity } from "./context/PreferredCityContext";
-import { cities, eventCategories, type City, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
+import { cities, eventCategories, type City, type EventCategory, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
 
 type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "not-found";
 type Language = "es" | "en" | "fr";
-type IconName = "arrow" | "bell" | "bookmark" | "calendar" | "check" | "chevron" | "copy" | "download" | "filter" | "globe" | "heart" | "home" | "instagram" | "location" | "play" | "profile" | "search" | "share" | "spark" | "spotify" | "star" | "ticket" | "time" | "trending";
-
-const icons: Record<IconName, ReactNode> = {
-  home: <><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10M9 20v-6h6v6" /></>,
-  search: <><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></>,
-  bell: <><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18s-3-2-3-9" /><path d="M10 21h4" /></>,
-  bookmark: <path d="M6 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18l-6-4-6 4Z" />,
-  profile: <><circle cx="12" cy="8" r="4" /><path d="M4 22a8 8 0 0 1 16 0" /></>,
-  location: <><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></>,
-  globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></>,
-  instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="18" cy="6" r=".8" fill="currentColor" /></>,
-  play: <><rect x="2.5" y="5" width="19" height="14" rx="4" /><path d="m10 9 5 3-5 3Z" /></>,
-  spotify: <><path d="M5 8c4-1 10 0 14 2" /><path d="M6 12c3-1 8 0 11 2" /><path d="M7 16c2-.5 5 0 7 1.5" /></>,
-  calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></>,
-  filter: <path d="M4 5h16M7 12h10M10 19h4" />, arrow: <path d="m15 18-6-6 6-6" />, chevron: <path d="m9 18 6-6-6-6" />,
-  heart: <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5a5.5 5.5 0 0 0 1-8.9Z" />,
-  spark: <path d="m12 2 1.4 5.6L19 9l-5.6 1.4L12 16l-1.4-5.6L5 9l5.6-1.4ZM19 16l.7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7Z" />,
-  share: <><circle cx="18" cy="5" r="2" /><circle cx="6" cy="12" r="2" /><circle cx="18" cy="19" r="2" /><path d="m8 11 8-5M8 13l8 5" /></>,
-  copy: <><rect x="8" y="8" width="13" height="13" rx="2" /><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" /></>,
-  download: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5M12 15V3" /></>,
-  ticket: <path d="M3 8a2 2 0 0 0 0 4v5h18v-5a2 2 0 0 0 0-4V3H3Z" />,
-  check: <path d="m5 12 4 4L19 6" />, star: <path d="m12 2 3 6 6.5.9-4.7 4.6 1.1 6.5-5.9-3-5.9 3 1.1-6.5L2.5 9 9 8Z" />,
-  time: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>, trending: <path d="m3 17 6-6 4 4 8-9M15 6h6v6" />,
-};
-
-function Icon({ name, filled = false }: { name: IconName; filled?: boolean }) {
-  return <svg className="icon" aria-hidden="true" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{icons[name]}</svg>;
-}
-
 function BrandMark({ className = "" }: { className?: string }) {
   return <span className={`brand-mark ${className}`} aria-hidden="true"><Icon name="location" /></span>;
 }
 
 function LanguageSelect({ value, onChange, light = false }: { value: Language; onChange: (language: Language) => void; light?: boolean }) {
-  return <label className={`language-select ${light ? "light" : ""}`}><span className="sr-only">Idioma</span><select value={value} onChange={(e) => onChange(e.target.value as Language)} aria-label="Seleccionar idioma"><option value="es">Español</option><option value="en">English</option><option value="fr">Français</option></select><Icon name="chevron" /></label>;
+  return <label className={`language-select ${light ? "light" : ""}`}><span className="sr-only">Idioma</span><select name="language" value={value} onChange={(e) => onChange(e.target.value as Language)} aria-label="Seleccionar idioma"><option value="es">Español</option><option value="en">English</option><option value="fr">Français</option></select><Icon name="chevron" /></label>;
 }
 
 const cityPath = (path: string, city: City) => `${path}${path.includes("?") ? "&" : "?"}city=${encodeURIComponent(city)}`;
 
 function Logo({ to }: { to: string }) {
-  return <Link className="logo" to={to} aria-label="Plan Cerca, inicio"><BrandMark className="logo-mark" /><span>Plan</span><span>Cerca</span></Link>;
+  return <Link className="logo" to={to} aria-label="Plan Cerca, inicio"><BrandMark className="logo-mark" /><span>Plan</span>{" "}<span>Cerca</span></Link>;
 }
 
 function Button({ children, onClick, variant = "primary" }: { children: ReactNode; onClick?: () => void; variant?: "primary" | "secondary" | "ghost" }) {
@@ -66,13 +38,13 @@ function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, o
   const item = (target: Page, path: string, icon: IconName, label: string) => <Link className={`primary-nav-item ${activePage === target ? "active" : ""}`} to={cityPath(path, city)} aria-current={activePage === target ? "page" : undefined} key={target}><Icon name={icon} /><span>{label}</span></Link>;
   return <header className={`site-header ${page === "detail" ? "site-header--event-detail" : ""}`}><div className="site-header-inner">
     <Logo to={cityPath("/", city)} />
-    <form className="global-search" role="search" onSubmit={(event) => { event.preventDefault(); onSearch(searchQuery); }}><Icon name="search" /><input value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder={t.searchPlaceholder} aria-label={t.searchPlaceholder} /><button type="submit" aria-label={labels.searchResults}><Icon name="search" /></button></form>
+    <form className="global-search" role="search" onSubmit={(event) => { event.preventDefault(); onSearch(searchQuery); }}><Icon name="search" /><input name="q" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder={t.searchPlaceholder} aria-label={t.searchPlaceholder} /><button type="submit" aria-label={labels.searchResults}><Icon name="search" /></button></form>
     <nav className="primary-nav" aria-label={labels.events}>{item("home", "/", "calendar", labels.events)}{item("venues", "/venues", "location", labels.venues)}{item("favorites", "/favorites", "heart", labels.favourites)}</nav>
     <div className="header-actions"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div><div className="guest-profile"><span><Icon name="profile" /></span><strong>{labels.guest}</strong></div></div>
   </div></header>;
 }
 
-const categoryKeys: Record<string, string> = { Música: "music", Ópera: "opera", Danza: "dance", Deportes: "sports", Teatro: "theatre", Museos: "museums", Arte: "art" };
+const categoryKeys: Record<string, string> = { Música: "music", Ópera: "opera", Danza: "dance", Deportes: "sports", Teatro: "theatre", Exposiciones: "exhibitions", Museos: "museums" };
 const venueCategoryKey = (kind: string) => /museo/i.test(kind) ? "museums" : /estadio|pabell|arena/i.test(kind) ? "sports" : /teatro/i.test(kind) ? "theatre" : /ópera/i.test(kind) ? "opera" : /concierto|música|auditorio/i.test(kind) ? "music" : undefined;
 
 function SaveButton({ active, onClick, t, compact = false }: { active: boolean; onClick: () => void; t: typeof copy.es; compact?: boolean }) {
@@ -84,10 +56,10 @@ function EventCard({ event, saved, onSave, t, featured = false }: { event: Event
   const venue = venueFor(event.venueId);
   const eventPath = cityPath(`/event/${event.id}`, venue.city);
   return <article className={`event-card ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
-    <Link className="event-image" to={eventPath} aria-label={`${t.details}: ${event.title}`}><img src={event.image} alt={`Imagen promocional de ${event.title}`} /><span className="category">{event.category}</span>{event.rating !== undefined && <span className="rating"><Icon name="star" filled />{event.rating.toFixed(1)}</span>}</Link>
+    <Link className="event-image" to={eventPath} aria-hidden="true" tabIndex={-1}><img src={event.image} alt="" width={640} height={360} loading="lazy" decoding="async" /><span className="category">{t.categoryNames[event.category]}</span>{event.rating !== undefined && <span className="rating"><Icon name="star" filled />{event.rating.toFixed(1)}</span>}</Link>
     <div className="event-body"><div className="event-title-row"><Link className="event-title" to={eventPath}>{event.title}</Link><SaveButton active={saved} onClick={onSave} t={t} compact /></div>
       <p className="event-description">{event.description}</p>
-      <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {event.distance}</span><span><Icon name="time" />{event.duration}</span></div>
+      <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name}</span><span><Icon name="time" />{event.duration}</span></div>
       <div className="tag-row">{event.tags.slice(0, 3).map((tag, index) => <span key={tag} className={index === 0 ? "tag-category" : undefined}>{tag}</span>)}</div>
       <div className="event-footer"><div><small>{event.organizer}</small><strong>{event.price}</strong></div><Link className="button button--secondary" to={eventPath}>{t.details}<Icon name="chevron" /></Link></div>
       <div className={`availability ${event.confirmed ? "" : "pending"}`}><i />{event.availability}{event.popularity ? ` · ${event.popularity} de popularidad` : ""}</div>
@@ -99,7 +71,7 @@ function RelatedEventCard({ event }: { event: EventItem }) {
   const venue = venueFor(event.venueId);
   const eventPath = `/event/${event.id}?city=${encodeURIComponent(venue.city)}`;
   return <Link className="artist-event-card" to={eventPath}>
-    <img className="artist-event-image" src={event.image} alt="" />
+    <img className="artist-event-image" src={event.image} alt="" width={320} height={200} loading="lazy" decoding="async" />
     <div className="artist-event-body">
       <h3 className="artist-event-title">{event.title}</h3>
       <p><Icon name="calendar" />{event.date}</p>
@@ -157,7 +129,7 @@ function EndedEvent({ event, t }: { event: EventItem; t: typeof copy.es }) {
   const sameCategory = events.filter((item) => item.category === event.category);
   const sameCity = sameCategory.filter((item) => venueFor(item.venueId).city === city);
   const similar = (sameCity.length ? sameCity : sameCategory).slice(0, 3);
-  return <StatusPage kicker={`${event.category} · ${event.date}`} title={t.eventPastTitle} text={t.eventPastText.replace("{title}", event.title)} homeLabel={t.goHome}>
+  return <StatusPage kicker={`${t.categoryNames[event.category]} · ${event.date}`} title={t.eventPastTitle} text={t.eventPastText.replace("{title}", event.title)} homeLabel={t.goHome}>
     {similar.length > 0 && <section className="artist-events-section"><div className="artist-events-heading"><h2>{t.similarEvents}</h2></div><div className="artist-events-grid">{similar.map((item) => <RelatedEventCard key={item.id} event={item} />)}</div></section>}
   </StatusPage>;
 }
@@ -167,15 +139,33 @@ function EntityRoute({ back, language, t }: { back: () => void; language: Langua
   const entity = entityFor(slug);
   if (!entity) return <NotFound t={t} />;
   const entityEvents = relatedEventsByEntity(entity.id);
-  return <main className="subpage artist-page">
+  return <main id="main-content" tabIndex={-1} className="subpage artist-page">
     <div className="subpage-top"><button type="button" onClick={back}><Icon name="arrow" />{t.back}</button></div>
-    <section className="artist-page-profile"><span className="kicker">{entityKindCopy[language][entity.kind]}</span><div className="artist-page-heading">{entity.image && <img src={entity.image} alt={entity.name} />}<div><h1>{entity.name}</h1><p>{entity.description}</p><ArtistActions key={entity.id} entity={entity} language={language} /></div></div></section>
+    <section className="artist-page-profile"><span className="kicker">{entityKindCopy[language][entity.kind]}</span><div className="artist-page-heading">{entity.image && <img src={entity.image} alt={entity.name} width={320} height={320} />}<div><h1>{entity.name}</h1><p>{entity.description}</p><ArtistActions key={entity.id} entity={entity} language={language} /></div></div></section>
     <RelatedEventsSection entity={entity} relatedEvents={entityEvents} title={entity.profileEventsTitle[language]} t={t} showCount={false} showProfileLink={false} />
   </main>;
 }
 
-function SectionTitle({ kicker, title, action, onAction }: { kicker: string; title: string; action?: string; onAction?: () => void }) {
-  return <div className="section-title"><div><span>{kicker}</span><h2>{title}</h2></div>{action && <button onClick={onAction}>{action}<Icon name="chevron" /></button>}</div>;
+function SectionTitle({ kicker, title, action, onAction, level = 2 }: { kicker: string; title: string; action?: string; onAction?: () => void; level?: 1 | 2 }) {
+  const Heading = level === 1 ? "h1" : "h2";
+  return <div className="section-title"><div><span>{kicker}</span><Heading>{title}</Heading></div>{action && <button onClick={onAction}>{action}<Icon name="chevron" /></button>}</div>;
+}
+
+// Rejilla de tarjetas que en móvil se desliza en horizontal, con contador y botones anterior/siguiente.
+function CardCarousel({ className, count, labels, children }: { className: string; count: number; labels: typeof interfaceText.es; children: ReactNode }) {
+  const [index, setIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const closestCard = (track: HTMLDivElement) => {
+    const left = track.getBoundingClientRect().left;
+    return Array.from(track.children).reduce((closest, card, current, cards) => Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[closest].getBoundingClientRect().left - left) ? current : closest, 0);
+  };
+  const move = (direction: -1 | 1) => {
+    const track = trackRef.current;
+    if (!track || !track.children.length) return;
+    const target = track.children[Math.max(0, Math.min(track.children.length - 1, closestCard(track) + direction))];
+    track.scrollBy({ left: target.getBoundingClientRect().left - track.getBoundingClientRect().left, behavior: "smooth" });
+  };
+  return <>{count > 1 && <div className="mobile-carousel-controls"><span aria-live="polite">{index + 1} / {count}</span><div><button type="button" aria-label={labels.previousEvent} title={labels.previousEvent} disabled={index === 0} onClick={() => move(-1)}><Icon name="arrow" /></button><button type="button" aria-label={labels.nextEvent} title={labels.nextEvent} disabled={index >= count - 1} onClick={() => move(1)}><Icon name="chevron" /></button></div></div>}<div className={className} ref={trackRef} onScroll={(event) => setIndex(closestCard(event.currentTarget))}>{children}</div></>;
 }
 
 function normalizeSearch(value: string) {
@@ -225,7 +215,9 @@ function calendarTimingFor(event: EventItem): CalendarTiming | null {
     const end = new Date(start.getTime() + durationMinutes * 60_000);
     return { start: formatCalendarTimestamp(start), end: formatCalendarTimestamp(end), allDay: false };
   }
-  const endDate = new Date(Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2] + 1));
+  // Día completo: en iCalendar el final es exclusivo, así que se suma un día al último (endDate si lo hay).
+  const lastParts = (event.endDate ?? event.startDate).split("-").map(Number);
+  const endDate = new Date(Date.UTC(lastParts[0], lastParts[1] - 1, lastParts[2] + 1));
   return { start: event.startDate.replace(/-/g, ""), end: formatCalendarDate(endDate), allDay: true };
 }
 
@@ -254,9 +246,10 @@ function eventStructuredData(event: EventItem, venue: Venue): Record<string, unk
     name: event.title,
     description: event.description,
     startDate,
+    ...(event.endDate && { endDate: event.endDate }),
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    image: [event.image],
+    image: [new URL(event.image, window.location.origin).href],
     url: eventUrl,
     location: {
       "@type": "Place",
@@ -377,16 +370,24 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setCategory,
   const labels = interfaceText[language];
   const dateRange = dateRangeFor(when);
   const activeFilterCount = categories.length + (dateRange ? 1 : 0);
-  const [featuredIndex, setFeaturedIndex] = useState(0);
-  const featuredRef = useRef<HTMLDivElement>(null);
   const cityEvents = events.filter((event) => venueFor(event.venueId).city === selectedCity);
   const query = normalizeSearch(searchQuery.trim());
-  const filtered = cityEvents.filter((event) => {
+  const matchesSearch = (event: EventItem) => {
     const venue = venueFor(event.venueId);
     const matchesCategory = !categories.length || categories.includes(event.category);
     const matchesQuery = !query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query);
     return matchesCategory && matchesQuery && eventInRange(event, dateRange);
-  });
+  };
+  const filtered = cityEvents.filter(matchesSearch);
+  const otherCityResults = query && !filtered.length
+    ? cities.filter((city) => city !== selectedCity).map((city) => [city, events.filter((event) => venueFor(event.venueId).city === city && matchesSearch(event)).length] as const).filter(([, count]) => count > 0)
+    : [];
+  const searchPathIn = (city: City) => {
+    const params = new URLSearchParams({ q: searchQuery.trim(), city });
+    if (categories.length) params.set("cat", categories.join(","));
+    if (when) params.set("when", when);
+    return `/search?${params.toString()}`;
+  };
   const recommendationCandidates = [...cityEvents.filter((event) => event.featured), ...cityEvents.filter((event) => !event.featured)];
   const seenRecommendationArtists = new Set<string>();
   const highlightedEvents = recommendationCandidates.filter((event) => {
@@ -397,29 +398,16 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setCategory,
     seenRecommendationArtists.add(artistKey);
     return true;
   }).slice(0, 3);
-  const updateFeaturedIndex = (container: HTMLDivElement) => {
-    const cards = Array.from(container.children);
-    if (!cards.length) return;
-    const left = container.getBoundingClientRect().left;
-    const index = cards.reduce((closest, card, current) => Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[closest].getBoundingClientRect().left - left) ? current : closest, 0);
-    setFeaturedIndex(index);
-  };
-  const moveFeatured = (direction: -1 | 1) => {
-    const container = featuredRef.current;
-    if (!container) return;
-    const cards = Array.from(container.children);
-    if (!cards.length) return;
-    const left = container.getBoundingClientRect().left;
-    const current = cards.reduce((closest, card, index) => Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[closest].getBoundingClientRect().left - left) ? index : closest, 0);
-    const target = cards[Math.max(0, Math.min(cards.length - 1, current + direction))];
-    container.scrollBy({ left: target.getBoundingClientRect().left - left, behavior: "smooth" });
-  };
-  const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.all} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} />{highlightedEvents.length > 1 && <div className="mobile-carousel-controls"><span aria-live="polite">{featuredIndex + 1} / {highlightedEvents.length}</span><div><button type="button" aria-label={labels.previousEvent} title={labels.previousEvent} disabled={featuredIndex === 0} onClick={() => moveFeatured(-1)}><Icon name="arrow" /></button><button type="button" aria-label={labels.nextEvent} title={labels.nextEvent} disabled={featuredIndex >= highlightedEvents.length - 1} onClick={() => moveFeatured(1)}><Icon name="chevron" /></button></div></div>}<div className="featured-grid" ref={featuredRef} onScroll={(event) => updateFeaturedIndex(event.currentTarget)}>{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</div></section>;
-  const discovery = <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("Madrid", selectedCity)}</small><strong>Ópera · Folk · Fútbol</strong></span></div><div><Icon name="location" /><span><small>{t.nearby}</small><strong>6 planes a menos de 5 km</strong></span></div><div><Icon name="star" /><span><small>{t.popular}</small><strong>Norma · 4,8</strong></span></div></section>;
-  const catalogue = <section id="catalogue"><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => setCategory(item === "Todos" ? null : item)} key={item}>{item}</button>; })}</div><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters}><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div>{filtered.length ? <div className="event-grid">{filtered.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</div> : <p className="city-empty">{query || activeFilterCount ? labels.noSearchResults : t.noCityEvents}</p>}</section>;
+  const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.all} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><CardCarousel className="featured-grid" count={highlightedEvents.length} labels={labels}>{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</CardCarousel></section>;
+  const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => event.category === item).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  const weekRange = dateRangeFor("week");
+  const weekCount = cityEvents.filter((event) => eventInRange(event, weekRange)).length;
+  const topRated = cityEvents.reduce<EventItem | undefined>((best, event) => event.rating !== undefined && (best?.rating === undefined || event.rating > best.rating) ? event : best, undefined);
+  const discovery = topCategories.length > 0 && <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("Madrid", selectedCity)}</small><strong>{topCategories.map(([item]) => t.categoryNames[item]).join(" · ")}</strong></span></div>{weekCount > 0 && <div><Icon name="calendar" /><span><small>{t.thisWeek}</small><strong>{weekCount} {labels.eventCount}</strong></span></div>}{topRated && <div><Icon name="star" /><span><small>{t.topRated}</small><strong>{topRated.title.split(/\s+[—–-]\s+/)[0]} · {topRated.rating?.toFixed(1)}</strong></span></div>}</section>;
+  const catalogue = <section id="catalogue"><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => setCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters}><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div>{filtered.length ? <div className="event-grid">{filtered.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</div> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : <p className="city-empty">{query || activeFilterCount ? labels.noSearchResults : t.noCityEvents}</p>}</section>;
   const isSearching = query.length > 0;
-  return <main>
-    {!isSearching && <section className="hero"><img src={cityImages[selectedCity]} alt={selectedCity} /><div className="hero-shade" /><div className="hero-copy"><div className="hero-meta"><span className="hero-brand-label"><Icon name="spark" />PLAN CERCA</span><div className="hero-city-group"><span className="hero-city-copy"><strong className="hero-city-name">{selectedCity}</strong><small className="hero-city-count">{cityEventCounts[selectedCity]} {labels.availableEvents}</small></span></div></div><h1>{t.hero}</h1><p>{t.heroText}</p></div></section>}
+  return <main id="main-content" tabIndex={-1}>
+    {!isSearching && <section className="hero"><img src={cityImages[selectedCity]} alt={selectedCity} width={1600} height={900} fetchPriority="high" /><div className="hero-shade" /><div className="hero-copy"><div className="hero-meta"><span className="hero-brand-label"><Icon name="spark" />PLAN CERCA</span><div className="hero-city-group"><span className="hero-city-copy"><strong className="hero-city-name">{selectedCity}</strong><small className="hero-city-count">{cityEventCounts[selectedCity]} {labels.availableEvents}</small></span></div></div><h1>{t.hero}</h1><p>{t.heroText}</p></div></section>}
     <div className="home-content">
       {isSearching ? <>{catalogue}{recommendations}{discovery}</> : <>{recommendations}{discovery}{catalogue}</>}
     </div>
@@ -445,15 +433,15 @@ function Filters({ selectedCity, setSelectedCity, initialCategories, initialWhen
   const toggle = (value: string) => setSelected((current) => current.includes(value) ? current.filter((item) => item !== value) : [...current, value]);
   const whenLabels: Record<(typeof whenOptions)[number], string> = { today: "Hoy", tomorrow: "Mañana", week: t.thisWeek };
   const customDate = when !== null && !(whenOptions as readonly string[]).includes(when);
-  return <main className="subpage"><div className="subpage-top"><button onClick={back}><Icon name="arrow" />{t.back}</button><button onClick={() => { setSelected([]); setWhen(null); }}>{t.clear}</button></div><div className="filter-shell"><span className="kicker">{t.search}</span><h1>{t.filters}</h1><section><h2>{t.city}</h2><label className="filter-city-search"><BrandMark /><input type="text" list="filter-city-list" value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder={labels.cityPlaceholder} aria-label={t.city} autoComplete="off" /></label><datalist id="filter-city-list">{[...new Set([...cities, ...extraCitySuggestions])].map((city) => <option key={city} value={city} />)}</datalist></section>{!hasEvents && <section className="city-empty-state" role="status"><h2>{labels.cityEmptyTitle.replace("{city}", typedCity)}</h2><p>{labels.cityEmptyText}</p><h3>{labels.citySuggestions}</h3><div className="option-grid">{suggestions.map((city) => <button key={city} type="button" onClick={() => pickCity(city)}>{city}<small>{cityEventCounts[city]} {labels.availableEvents}</small></button>)}</div></section>}<section><h2>{t.categories}</h2><div className="option-grid">{eventCategories.map((item) => <button className={selected.includes(item) ? "active" : ""} aria-pressed={selected.includes(item)} onClick={() => toggle(item)} key={item}>{item}{selected.includes(item) && <Icon name="check" />}</button>)}</div></section><section><h2>{t.when}</h2><div className="option-grid dates">{whenOptions.map((item) => <button className={when === item ? "active" : ""} aria-pressed={when === item} onClick={() => setWhen(when === item ? null : item)} key={item}>{whenLabels[item]}</button>)}<button className={customDate ? "active" : ""} aria-pressed={customDate} onClick={() => setWhen(customDate ? null : localDateKey(new Date()))}>Elegir fecha</button></div>{customDate && <input className="new-list-input filter-date-input" type="date" value={when ?? ""} min={localDateKey(new Date())} onChange={(e) => setWhen(e.target.value || null)} aria-label="Elegir fecha" />}</section>{hasEvents && <Button onClick={() => onApply(resultCity, selected, when)}>{t.results} · {resultCount}</Button>}</div></main>;
+  return <main id="main-content" tabIndex={-1} className="subpage"><div className="subpage-top"><button onClick={back}><Icon name="arrow" />{t.back}</button><button onClick={() => { setSelected([]); setWhen(null); }}>{t.clear}</button></div><div className="filter-shell"><span className="kicker">{t.search}</span><h1>{t.filters}</h1><section><h2>{t.city}</h2><label className="filter-city-search"><BrandMark /><input type="text" name="city" list="filter-city-list" value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder={labels.cityPlaceholder} aria-label={t.city} autoComplete="off" /></label><datalist id="filter-city-list">{[...new Set([...cities, ...extraCitySuggestions])].map((city) => <option key={city} value={city} />)}</datalist></section>{!hasEvents && <section className="city-empty-state" role="status"><h2>{labels.cityEmptyTitle.replace("{city}", typedCity)}</h2><p>{labels.cityEmptyText}</p><h3>{labels.citySuggestions}</h3><div className="option-grid">{suggestions.map((city) => <button key={city} type="button" onClick={() => pickCity(city)}>{city}<small>{cityEventCounts[city]} {labels.availableEvents}</small></button>)}</div></section>}<section><h2>{t.categories}</h2><div className="option-grid">{eventCategories.map((item) => <button className={selected.includes(item) ? "active" : ""} aria-pressed={selected.includes(item)} onClick={() => toggle(item)} key={item}>{t.categoryNames[item]}{selected.includes(item) && <Icon name="check" />}</button>)}</div></section><section><h2>{t.when}</h2><div className="option-grid dates">{whenOptions.map((item) => <button className={when === item ? "active" : ""} aria-pressed={when === item} onClick={() => setWhen(when === item ? null : item)} key={item}>{whenLabels[item]}</button>)}<button className={customDate ? "active" : ""} aria-pressed={customDate} onClick={() => setWhen(customDate ? null : localDateKey(new Date()))}>Elegir fecha</button></div>{customDate && <input className="new-list-input filter-date-input" type="date" name="when" value={when ?? ""} min={localDateKey(new Date())} onChange={(e) => setWhen(e.target.value || null)} aria-label="Elegir fecha" />}</section>{hasEvents && <Button onClick={() => onApply(resultCity, selected, when)}>{t.results} · {resultCount}</Button>}</div></main>;
 }
 
 function VenuesPage({ selectedCity, language, t }: { selectedCity: City; language: Language; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const cityVenues = venues.filter((venue) => venue.city === selectedCity).sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)));
-  return <main className="venue-directory"><div className="venue-directory-heading"><span className="kicker">{selectedCity}</span><h1>{labels.venueHeading} {selectedCity}</h1><p>{labels.venueIntro}</p></div>{cityVenues.length ? <div className="venue-directory-grid">{cityVenues.map((venue) => {
+  return <main id="main-content" tabIndex={-1} className="venue-directory"><div className="venue-directory-heading"><span className="kicker">{selectedCity}</span><h1>{labels.venueHeading} {selectedCity}</h1><p>{labels.venueIntro}</p></div>{cityVenues.length ? <div className="venue-directory-grid">{cityVenues.map((venue) => {
     const venueEvents = events.filter((event) => event.venueId === venue.id);
-    return <article className="venue-directory-card" key={venue.id}><Link className={`venue-directory-image ${venue.image ? "" : "venue-directory-image--placeholder"}`} to={cityPath(`/venues/${venue.id}`, venue.city)} aria-label={venue.name}>{venue.image ? <img src={venue.image} alt={`Recinto: ${venue.name}`} /> : <BrandMark className="venue-placeholder-mark" />}</Link><span className="venue-directory-kind" data-cat={venueCategoryKey(venue.kind.es)}><Icon name="location" />{venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p><address>{venue.address}</address><div className="venue-directory-footer"><span>{venueEvents.length} {labels.eventCount}</span><Link className="button button--secondary" to={cityPath(`/venues/${venue.id}`, venue.city)}>{labels.viewEvents}<Icon name="chevron" /></Link></div></article>;
+    return <article className="venue-directory-card" key={venue.id}><Link className={`venue-directory-image ${venue.image ? "" : "venue-directory-image--placeholder"}`} to={cityPath(`/venues/${venue.id}`, venue.city)} aria-label={venue.name}>{venue.image ? <img src={venue.image} alt={`Recinto: ${venue.name}`} width={640} height={360} loading="lazy" decoding="async" /> : <BrandMark className="venue-placeholder-mark" />}</Link><span className="venue-directory-kind" data-cat={venueCategoryKey(venue.kind.es)}><Icon name="location" />{venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p><address>{venue.address}</address><div className="venue-directory-footer"><span>{venueEvents.length} {labels.eventCount}</span><Link className="button button--secondary" to={cityPath(`/venues/${venue.id}`, venue.city)}>{labels.viewEvents}<Icon name="chevron" /></Link></div></article>;
   })}</div> : <p className="city-empty">{t.noCityEvents}</p>}</main>;
 }
 
@@ -470,7 +458,7 @@ function VenueRoute({ goBack, language, t }: { goBack: () => void; language: Lan
   const venue = venues.find((item) => item.id === id);
   if (!venue) return <NotFound t={t} />;
   const upcoming = upcomingEventsAtVenue(venue.id).slice(0, 6);
-  return <main className="detail-page venue-detail-page"><div className="detail-top"><button onClick={goBack}><Icon name="arrow" />{t.back}</button></div><section className={`detail-hero venue-detail-hero ${venue.image ? "" : "venue-detail-hero--placeholder"}`} data-cat={venueCategoryKey(venue.kind.es)}><div className="detail-intro venue-detail-copy"><span className="category">{venue.city} · {venue.kind[language]}</span><h1>{venue.name}</h1><p className="detail-lead">{venue.description[language]}</p><div className="detail-intro-facts venue-detail-address"><span><Icon name="location" />{venue.address}</span><a href={venue.mapsUrl} target="_blank" rel="noreferrer"><Icon name="location" />{t.map}<Icon name="chevron" /></a></div></div><div className="detail-gallery venue-detail-gallery">{venue.image ? <img className="gallery-main" src={venue.image} alt={`Recinto: ${venue.name}`} /> : <div className="venue-detail-placeholder" aria-hidden="true"><BrandMark className="venue-detail-placeholder-mark" /></div>}</div></section><section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} />{upcoming.length ? <div className="venue-event-grid">{upcoming.map((event) => <EventCard key={event.id} event={event} saved={false} onSave={() => {}} t={t} />)}</div> : <p className="venue-empty">{t.venueEmpty}</p>}</div></section></main>;
+  return <main id="main-content" tabIndex={-1} className="detail-page venue-detail-page"><div className="detail-top"><button onClick={goBack}><Icon name="arrow" />{t.back}</button></div><section className={`detail-hero venue-detail-hero ${venue.image ? "" : "venue-detail-hero--placeholder"}`} data-cat={venueCategoryKey(venue.kind.es)}><div className="detail-intro venue-detail-copy"><span className="category">{venue.city} · {venue.kind[language]}</span><h1>{venue.name}</h1><p className="detail-lead">{venue.description[language]}</p><div className="detail-intro-facts venue-detail-address"><span><Icon name="location" />{venue.address}</span><a href={venue.mapsUrl} target="_blank" rel="noreferrer"><Icon name="location" />{t.map}<Icon name="chevron" /></a></div></div><div className="detail-gallery venue-detail-gallery">{venue.image ? <img className="gallery-main" src={venue.image} alt={`Recinto: ${venue.name}`} width={1200} height={675} fetchPriority="high" /> : <div className="venue-detail-placeholder" aria-hidden="true"><BrandMark className="venue-detail-placeholder-mark" /></div>}</div></section><section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} />{upcoming.length ? <div className="venue-event-grid">{upcoming.map((event) => <EventCard key={event.id} event={event} saved={false} onSave={() => {}} t={t} />)}</div> : <p className="venue-empty">{t.venueEmpty}</p>}</div></section></main>;
 }
 
 function Detail({ event, saved, toggleSaved, back, language, t }: { event: EventItem; saved: boolean; toggleSaved: () => void; back: () => void; language: Language; t: typeof copy.es }) {
@@ -479,32 +467,13 @@ function Detail({ event, saved, toggleSaved, back, language, t }: { event: Event
   const ended = eventHasEnded(event);
   const actionLabels = eventActionCopy[language];
   const [copyConfirmed, setCopyConfirmed] = useState(false);
-  const [relatedIndex, setRelatedIndex] = useState(0);
-  const relatedRef = useRef<HTMLDivElement>(null);
   const calendarTiming = calendarTimingFor(event);
   const calendarUrl = calendarTiming ? googleCalendarUrl(event, venue, calendarTiming) : null;
   const entity = event.relatedEntityId ? relatedEntities[event.relatedEntityId] : undefined;
   const entityEvents = event.relatedEntityId ? relatedEventsByEntity(event.relatedEntityId, event.id) : [];
   const venueLinkLabels = venueLinkCopy[language];
   const venueEvents = upcomingEventsAtVenue(event.venueId, event.id).slice(0, 6);
-  const related = events.filter((item) => item.category === event.category && item.id !== event.id).slice(0, 3);
-  const updateRelatedIndex = (container: HTMLDivElement) => {
-    const cards = Array.from(container.children);
-    if (!cards.length) return;
-    const left = container.getBoundingClientRect().left;
-    const index = cards.reduce((closest, card, current) => Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[closest].getBoundingClientRect().left - left) ? current : closest, 0);
-    setRelatedIndex(index);
-  };
-  const moveRelated = (direction: -1 | 1) => {
-    const container = relatedRef.current;
-    if (!container) return;
-    const cards = Array.from(container.children);
-    if (!cards.length) return;
-    const left = container.getBoundingClientRect().left;
-    const current = cards.reduce((closest, card, index) => Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[closest].getBoundingClientRect().left - left) ? index : closest, 0);
-    const target = cards[Math.max(0, Math.min(cards.length - 1, current + direction))];
-    container.scrollBy({ left: target.getBoundingClientRect().left - left, behavior: "smooth" });
-  };
+  const related = events.filter((item) => item.category === event.category && item.id !== event.id && venueFor(item.venueId).city === venue.city).slice(0, 3);
   const copyEventLink = async () => {
     try {
       await copyTextToClipboard(window.location.href);
@@ -525,18 +494,18 @@ function Detail({ event, saved, toggleSaved, back, language, t }: { event: Event
     }
     await copyEventLink();
   };
-  return <main className="detail-page">{structuredEvent && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredEvent).replace(/</g, "\\u003c") }} />}<div className="detail-top detail-top--event"><button onClick={back}><Icon name="arrow" /><span>{t.back}</span></button><div className="detail-actions"><DetailActionButton icon="share" label={actionLabels.share} onClick={() => { void shareEvent(); }} /><DetailActionButton icon={saved ? "heart" : "bookmark"} label={saved ? t.savedLabel : t.save} onClick={toggleSaved} active={saved} /><DetailActionButton icon={copyConfirmed ? "check" : "copy"} label={copyConfirmed ? actionLabels.copied : actionLabels.copyLink} onClick={() => { void copyEventLink(); }} /><CalendarAction labels={actionLabels} url={calendarUrl} onDownload={() => { if (calendarTiming) downloadEventCalendar(event, venue, calendarTiming); }} /></div></div>
-    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><img className="gallery-main" src={event.image} alt={`Imagen principal de ${event.title}`} /></div><div className="detail-intro"><span className="category">{event.category}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span><span><Icon name="time" />{event.duration}</span></div><div className="detail-social">{event.rating !== undefined && <span><Icon name="star" filled />{event.rating.toFixed(1)}{event.popularity ? ` · ${event.popularity}` : ""}</span>}<span>{event.tags.join(" · ")}</span></div><p className="detail-lead">{event.description}</p></div></section>
+  return <main id="main-content" tabIndex={-1} className="detail-page">{structuredEvent && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredEvent).replace(/</g, "\\u003c") }} />}<div className="detail-top detail-top--event"><button onClick={back}><Icon name="arrow" /><span>{t.back}</span></button><div className="detail-actions"><DetailActionButton icon="share" label={actionLabels.share} onClick={() => { void shareEvent(); }} /><DetailActionButton icon={saved ? "heart" : "bookmark"} label={saved ? t.savedLabel : t.save} onClick={toggleSaved} active={saved} /><DetailActionButton icon={copyConfirmed ? "check" : "copy"} label={copyConfirmed ? actionLabels.copied : actionLabels.copyLink} onClick={() => { void copyEventLink(); }} /><CalendarAction labels={actionLabels} url={calendarUrl} onDownload={() => { if (calendarTiming) downloadEventCalendar(event, venue, calendarTiming); }} /></div></div>
+    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><img className="gallery-main" src={event.image} alt={`Imagen principal de ${event.title}`} width={1200} height={675} fetchPriority="high" /></div><div className="detail-intro"><span className="category">{t.categoryNames[event.category]}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span><span><Icon name="time" />{event.duration}</span></div><div className="detail-social">{event.rating !== undefined && <span><Icon name="star" filled />{event.rating.toFixed(1)}{event.popularity ? ` · ${event.popularity}` : ""}</span>}<span>{event.tags.join(" · ")}</span></div><p className="detail-lead">{event.description}</p></div></section>
     <div className="detail-content"><div className="detail-main">
-      <section><h2>{t.description}</h2><p>{event.fullDescription}</p><p>{event.description}</p></section>
-      {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}>{entity.image && <img src={entity.image} alt="" />}<div className="artist-profile-copy"><h3>{entity.name}<span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></h3><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}
+      <section><h2>{t.description}</h2><p>{event.fullDescription}</p></section>
+      {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}>{entity.image && <img src={entity.image} alt="" width={124} height={124} loading="lazy" decoding="async" />}<div className="artist-profile-copy"><h3>{entity.name}<span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></h3><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}
       <section><h2>{t.practical}</h2><div className="info-grid"><Info icon="calendar" label={t.date} value={`${event.date} · ${event.time}`} /><Info icon="time" label={t.duration} value={event.duration} /><Info icon="location" label={t.location} value={venue.address} /><Info icon="profile" label={t.organizer} value={event.organizer} /></div></section>
       <section><h2>{t.map}</h2><div className="map-card"><div className="map-lines" aria-hidden="true"><i /><i /><i /><i /><span><Icon name="location" /></span></div><div><strong>{venue.name}</strong><p>{venue.address} · {venue.city}</p><a href={venue.mapsUrl} target="_blank" rel="noreferrer">{t.map}<Icon name="chevron" /></a></div></div></section>
     </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className="stock"><i />{event.availability}</div>{ended ? <><h2>{t.eventEnded}</h2><p>{t.eventEnded}</p></> : <><h2>{event.price}</h2><p>{event.confirmed ? t.confirmed : t.pending}</p><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small></>}<SaveButton active={saved} onClick={toggleSaved} t={t} /></aside></div>
-    <section className="venue-overview"><div className={`venue-info-card ${venue.image ? "" : "venue-info-card--text-only"}`}>{venue.image && <img className="venue-about-image" src={venue.image} alt={`Recinto: ${venue.name}`} />}<div className="venue-about-copy"><span className="kicker">{t.venueAbout}</span><span className="venue-kind"><BrandMark className="venue-kind-mark" />{venue.city} · {venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p>{(venue.websiteUrl || venue.programmeUrl) && <div className="venue-info-footer">{venue.websiteUrl && <a href={venue.websiteUrl} target="_blank" rel="noreferrer">{venueLinkLabels.website}<Icon name="chevron" /></a>}{venue.programmeUrl && venue.programmeLabel && <a href={venue.programmeUrl} target="_blank" rel="noreferrer">{venue.programmeLabel[language]}<Icon name="chevron" /></a>}</div>}</div></div></section>
+    <section className="venue-overview"><div className={`venue-info-card ${venue.image ? "" : "venue-info-card--text-only"}`}>{venue.image && <img className="venue-about-image" src={venue.image} alt={`Recinto: ${venue.name}`} width={640} height={360} loading="lazy" decoding="async" />}<div className="venue-about-copy"><span className="kicker">{t.venueAbout}</span><span className="venue-kind"><BrandMark className="venue-kind-mark" />{venue.city} · {venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p>{(venue.websiteUrl || venue.programmeUrl) && <div className="venue-info-footer">{venue.websiteUrl && <a href={venue.websiteUrl} target="_blank" rel="noreferrer">{venueLinkLabels.website}<Icon name="chevron" /></a>}{venue.programmeUrl && venue.programmeLabel && <a href={venue.programmeUrl} target="_blank" rel="noreferrer">{venue.programmeLabel[language]}<Icon name="chevron" /></a>}</div>}</div></div></section>
     {entity && <RelatedEventsSection entity={entity} relatedEvents={entityEvents} title={entity.relatedEventsTitle[language]} t={t} />}
     <section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} />{venueEvents.length > 0 ? <div className="venue-event-grid">{venueEvents.map((item) => <EventCard key={item.id} event={item} saved={false} onSave={() => {}} t={t} />)}</div> : <p className="venue-empty">{t.venueEmpty}</p>}</div></section>
-    {related.length > 0 && <section className="related"><SectionTitle kicker={event.category} title={t.related} />{related.length > 1 && <div className="mobile-carousel-controls"><span aria-live="polite">{relatedIndex + 1} / {related.length}</span><div><button type="button" aria-label={interfaceText[language].previousEvent} title={interfaceText[language].previousEvent} disabled={relatedIndex === 0} onClick={() => moveRelated(-1)}><Icon name="arrow" /></button><button type="button" aria-label={interfaceText[language].nextEvent} title={interfaceText[language].nextEvent} disabled={relatedIndex >= related.length - 1} onClick={() => moveRelated(1)}><Icon name="chevron" /></button></div></div>}<div className="related-grid" ref={relatedRef} onScroll={(event) => updateRelatedIndex(event.currentTarget)}>{related.map((item) => <EventCard key={item.id} event={item} saved={false} onSave={() => {}} t={t} />)}</div></section>}
+    {related.length > 0 && <section className="related"><SectionTitle kicker={t.categoryNames[event.category]} title={t.related} /><CardCarousel className="related-grid" count={related.length} labels={interfaceText[language]}>{related.map((item) => <EventCard key={item.id} event={item} saved={false} onSave={() => {}} t={t} />)}</CardCarousel></section>}
   </main>;
 }
 
@@ -544,7 +513,7 @@ function Info({ icon, label, value }: { icon: IconName; label: string; value: st
   return <div className="info-item"><span><Icon name={icon} /></span><div><small>{label}</small><strong>{value}</strong></div></div>;
 }
 
-function Saved({ saved, friendsSaved, lists, createList, toggleSaved, explore, title, t }: { saved: number[]; friendsSaved: number[]; lists: string[]; createList: (name: string) => void; toggleSaved: (id: number) => void; explore: () => void; title: string; t: typeof copy.es }) {
+function Saved({ saved, lists, createList, toggleSaved, explore, title, t }: { saved: number[]; lists: string[]; createList: (name: string) => void; toggleSaved: (id: number) => void; explore: () => void; title: string; t: typeof copy.es }) {
   const [activeList, setActiveList] = useState(0);
   const [creating, setCreating] = useState(false);
   const [newListName, setNewListName] = useState("");
@@ -556,9 +525,9 @@ function Saved({ saved, friendsSaved, lists, createList, toggleSaved, explore, t
     setActiveList(lists.length);
     closeCreate();
   };
-  const listIds = (index: number) => index === 0 ? saved : index === 1 ? friendsSaved : [];
+  const listIds = (index: number) => index === 0 ? saved : [];
   const savedEvents = events.filter((event) => listIds(activeList).includes(event.id));
-  return <main className="subpage saved-page"><span className="kicker">{t.yourLists}</span><div className="saved-heading"><div><h1>{title}</h1><p>{t.mail}</p></div><Button onClick={() => setCreating(true)}>+ {t.createList}</Button></div><div className="list-tabs">{lists.map((list, index) => <button className={index === activeList ? "active" : ""} key={list} onClick={() => setActiveList(index)}>{list}<span>{listIds(index).length}</span></button>)}</div>{savedEvents.length ? <div className="event-grid">{savedEvents.map((event) => <EventCard key={event.id} event={event} saved={activeList === 0} onSave={() => activeList === 0 && toggleSaved(event.id)} t={t} />)}</div> : <div className="empty"><Icon name="heart" /><h2>{title}</h2><Button onClick={explore}>{t.discover}</Button></div>}{creating && <div className="city-onboarding-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCreate(); }}><form className="city-onboarding-dialog new-list-dialog" role="dialog" aria-modal="true" aria-labelledby="new-list-title" onSubmit={(event) => { event.preventDefault(); submitCreate(); }} onKeyDown={(event) => { if (event.key === "Escape") closeCreate(); }}><span className="kicker">{t.yourLists}</span><h2 id="new-list-title">{t.createList}</h2><input className="new-list-input" autoFocus maxLength={40} value={newListName} onChange={(event) => setNewListName(event.target.value)} placeholder={t.listPrompt} aria-label={t.listPrompt} /><div className="new-list-actions"><button type="button" className="button button--secondary" onClick={closeCreate}>{t.cancel}</button><button type="submit" className="button button--primary" disabled={!newListName.trim()}>{t.createList}</button></div></form></div>}</main>;
+  return <main id="main-content" tabIndex={-1} className="subpage saved-page"><span className="kicker">{t.yourLists}</span><div className="saved-heading"><div><h1>{title}</h1><p>{t.mail}</p></div><Button onClick={() => setCreating(true)}>+ {t.createList}</Button></div><div className="list-tabs">{lists.map((list, index) => <button className={index === activeList ? "active" : ""} aria-pressed={index === activeList} key={list} onClick={() => setActiveList(index)}>{list}<span>{listIds(index).length}</span></button>)}</div>{savedEvents.length ? <div className="event-grid">{savedEvents.map((event) => <EventCard key={event.id} event={event} saved={activeList === 0} onSave={() => activeList === 0 && toggleSaved(event.id)} t={t} />)}</div> : <div className="empty"><Icon name="heart" /><h2>{title}</h2><Button onClick={explore}>{t.discover}</Button></div>}{creating && <div className="city-onboarding-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCreate(); }}><form className="city-onboarding-dialog new-list-dialog" role="dialog" aria-modal="true" aria-labelledby="new-list-title" onSubmit={(event) => { event.preventDefault(); submitCreate(); }} onKeyDown={(event) => { if (event.key === "Escape") closeCreate(); }}><span className="kicker">{t.yourLists}</span><h2 id="new-list-title">{t.createList}</h2><input className="new-list-input" name="list-name" autoFocus maxLength={40} value={newListName} onChange={(event) => setNewListName(event.target.value)} placeholder={t.listPrompt} aria-label={t.listPrompt} /><div className="new-list-actions"><button type="button" className="button button--secondary" onClick={closeCreate}>{t.cancel}</button><button type="submit" className="button button--primary" disabled={!newListName.trim()}>{t.createList}</button></div></form></div>}</main>;
 }
 
 function EventRoute({ saved, toggleSaved, goBack, language, t }: { saved: number[]; toggleSaved: (id: number) => void; goBack: () => void; language: Language; t: typeof copy.es }) {
@@ -574,19 +543,33 @@ function EventRoute({ saved, toggleSaved, goBack, language, t }: { saved: number
 function SiteFooter() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!aboutOpen) return;
+    const trigger = triggerRef.current;
     closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setAboutOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setAboutOpen(false); return; }
+      if (e.key !== "Tab") return;
+      // Tab recorre solo los controles del modal mientras está abierto.
+      const controls = [...(modalRef.current?.querySelectorAll<HTMLElement>("button, a[href]") ?? [])];
+      if (!controls.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      const inside = modalRef.current?.contains(document.activeElement);
+      if (!inside || (e.shiftKey && document.activeElement === first)) { e.preventDefault(); (inside ? last : first).focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => { window.removeEventListener("keydown", onKey); trigger?.focus(); };
   }, [aboutOpen]);
   return <footer className="site-footer">
     <div className="site-footer-inner">
       <div><strong>Plan Cerca</strong><p>Descubre conciertos, teatro, exposiciones, deporte y eventos culturales cerca de ti.</p><p>Proyecto académico desarrollado para la asignatura de Interacción Persona-Ordenador (HCI).</p></div>
-      <div className="site-footer-meta"><button type="button" className="site-footer-link" onClick={() => setAboutOpen(true)}>Acerca de</button><small>© 2026 Plan Cerca</small></div>
+      <div className="site-footer-meta"><button ref={triggerRef} type="button" className="site-footer-link" onClick={() => setAboutOpen(true)}>Acerca de</button><small>© 2026 Plan Cerca</small></div>
     </div>
-    {aboutOpen && <div className="about-backdrop" onClick={() => setAboutOpen(false)}><div className="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title" onClick={(e) => e.stopPropagation()}>
+    {aboutOpen && <div className="about-backdrop" onClick={() => setAboutOpen(false)}><div ref={modalRef} className="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title" onClick={(e) => e.stopPropagation()}>
       <h2 id="about-title">Acerca de Plan Cerca</h2>
       <p>Plan Cerca es una aplicación web desarrollada como proyecto académico para la asignatura de Interacción Persona-Ordenador (HCI).</p>
       <p>Su objetivo es facilitar el descubrimiento de eventos culturales, deportivos y de ocio mediante una experiencia de usuario sencilla, accesible y centrada en el usuario.</p>
@@ -597,6 +580,13 @@ function SiteFooter() {
 }
 
 const scrollPositions = new Map<string, number>();
+
+// Lleva el foco al contenido principal: lo usan el enlace de salto y cada cambio de página.
+function focusMain(scrollIntoView: boolean) {
+  const main = document.querySelector<HTMLElement>("main");
+  if (!main) return;
+  main.focus({ preventScroll: !scrollIntoView });
+}
 
 export default function App() {
   const location = useLocation();
@@ -625,12 +615,17 @@ export default function App() {
   }, [location.key, navigationType]);
   const pathname = location.pathname.toLowerCase().replace(/(.)\/+$/, "$1");
   const isEntityPath = pathname.startsWith("/entity/") || pathname.startsWith("/artist/");
+  const focusedPath = useRef(pathname);
+  useEffect(() => {
+    if (focusedPath.current === pathname) return;
+    focusedPath.current = pathname;
+    focusMain(false);
+  }, [pathname]);
   const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : "not-found";
   const [language, setLanguage] = useState<Language>("es");
   const [searchQuery, setSearchQuery] = useState(() => new URLSearchParams(window.location.search).get("q") ?? "");
-  const [saved, setSaved] = useState([95]);
-  const friendsSaved = [108];
-  const [lists, setLists] = useState(["Favoritos", "Con amigos"]);
+  const [saved, setSaved] = useState<number[]>([]);
+  const [lists, setLists] = useState(["Favoritos"]);
   const t = copy[language];
   const event = useMemo(() => [...events, ...endedEvents].find((item) => pathname === `/event/${item.id}`), [pathname]);
   const activeVenue = useMemo(() => venues.find((item) => pathname === `/venues/${item.id}`), [pathname]);
@@ -662,7 +657,9 @@ export default function App() {
   const submitSearch = (query: string) => {
     const trimmed = query.trim();
     setSearchQuery(trimmed);
-    navigateWithCity(trimmed ? `/search?q=${encodeURIComponent(trimmed)}` : "/search");
+    // Vacía: no hay nada que buscar; si se estaba en resultados, se vuelve al listado.
+    if (!trimmed) { if (page === "search") navigateWithCity("/"); return; }
+    navigateWithCity(`/search?q=${encodeURIComponent(trimmed)}`);
   };
   const goToEvents = () => { setSearchQuery(""); navigateWithCity("/"); };
    const toggleSaved = (id: number) => setSaved((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
@@ -695,14 +692,14 @@ export default function App() {
     else params.delete("when");
     navigate({ pathname: params.has("q") ? "/search" : "/", search: `?${params.toString()}` });
   };
-  const homePage = <Home selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setCategory={setCategory} goFilters={goFilters} searchQuery={searchQuery} language={language} t={t} />;
+  const homePage = <Home selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setCategory={setCategory} goFilters={goFilters} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
   const showFilters = searchParams.has("filters") || !searchParams.has("q");
   const createList = (name: string) => setLists((current) => [...current, name]);
-  return <div className="app-shell"><CityOnboardingDialog /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
+  return <div className="app-shell"><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={showFilters ? <Filters selectedCity={selectedCity} setSelectedCity={setSelectedCity} initialCategories={activeCategories} initialWhen={activeWhen} onApply={applyFilters} back={goBack} language={language} t={t} /> : homePage} />
-      <Route path="/favorites" element={<Saved saved={saved} friendsSaved={friendsSaved} lists={lists} createList={createList} toggleSaved={toggleSaved} explore={goToEvents} title={interfaceText[language].favourites} t={t} />} />
+      <Route path="/favorites" element={<Saved saved={saved} lists={lists} createList={createList} toggleSaved={toggleSaved} explore={goToEvents} title={interfaceText[language].favourites} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute goBack={goBack} language={language} t={t} />} />
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />

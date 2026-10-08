@@ -3,6 +3,7 @@ import { cityEventCounts } from "../data/event-catalog";
 import { copy, interfaceText } from "../data/translations";
 import { usePreferredCity } from "../context/PreferredCityContext";
 import { cities } from "../types/Event";
+import Icon from "./Icon";
 
 type Language = "es" | "en" | "fr";
 
@@ -40,10 +41,10 @@ export default function CitySelector({ language }: { language: Language }) {
   };
 
   return <details ref={detailsRef} className="header-city-picker" open={isOpen} onToggle={(event) => setIsOpen(event.currentTarget.open)}>
-    <summary ref={summaryRef} className="header-city-trigger" aria-label={`${selectedCity}, ${cityEventCounts[selectedCity]} ${labels.availableEvents}`} aria-controls="header-city-options" aria-expanded={isOpen}>
-      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
-      <span className="header-city-name">{selectedCity}</span>
-      <span className="header-city-count">{cityEventCounts[selectedCity]}</span>
+    <summary ref={summaryRef} className="header-city-trigger" aria-controls="header-city-options" aria-expanded={isOpen}>
+      <Icon name="location" />
+      <span className="header-city-name">{selectedCity}</span>{" "}
+      <span className="header-city-count">{cityEventCounts[selectedCity]}<span className="sr-only"> {labels.availableEvents}</span></span>
       <svg className="header-city-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m7 10 5 5 5-5" /></svg>
     </summary>
     <div id="header-city-options" className="header-city-menu" role="group" aria-label={copy[language].city}>

@@ -44,6 +44,47 @@
       "calendarUnavailable": "Date à confirmer"
     }
   },
+  "onboardingCopy": {
+    "es": {
+      "title": "¿Qué ciudad quieres explorar?",
+      "idle": "Elige una ciudad para ver sus eventos o usa tu ubicación para encontrar la más cercana.",
+      "failed": "No pudimos detectar tu ubicación. Elige tu ciudad.",
+      "notFound": "No encontramos una ciudad cercana con eventos. Elige una para continuar.",
+      "detected": "Hemos detectado que podrías estar cerca de {city}.",
+      "viewEvents": "Ver eventos de {city}",
+      "otherCity": "Elegir otra ciudad",
+      "cityLabel": "Ciudad",
+      "useLocation": "Usar mi ubicación",
+      "locating": "Buscando tu ubicación…",
+      "notNow": "Ahora no"
+    },
+    "en": {
+      "title": "Which city do you want to explore?",
+      "idle": "Choose a city to see its events, or use your location to find the nearest one.",
+      "failed": "We couldn’t detect your location. Choose your city.",
+      "notFound": "We couldn’t find a nearby city with events. Choose one to continue.",
+      "detected": "It looks like you might be near {city}.",
+      "viewEvents": "See events in {city}",
+      "otherCity": "Choose another city",
+      "cityLabel": "City",
+      "useLocation": "Use my location",
+      "locating": "Finding your location…",
+      "notNow": "Not now"
+    },
+    "fr": {
+      "title": "Quelle ville souhaitez-vous explorer ?",
+      "idle": "Choisissez une ville pour voir ses événements ou utilisez votre position pour trouver la plus proche.",
+      "failed": "Nous n’avons pas pu détecter votre position. Choisissez votre ville.",
+      "notFound": "Nous n’avons trouvé aucune ville proche avec des événements. Choisissez-en une pour continuer.",
+      "detected": "Vous semblez être près de {city}.",
+      "viewEvents": "Voir les événements à {city}",
+      "otherCity": "Choisir une autre ville",
+      "cityLabel": "Ville",
+      "useLocation": "Utiliser ma position",
+      "locating": "Recherche de votre position…",
+      "notNow": "Plus tard"
+    }
+  },
   "interfaceText": {
     "es": {
       "events": "Eventos",
@@ -64,7 +105,10 @@
       "searchResults": "Resultados",
       "previousEvent": "Evento anterior",
       "nextEvent": "Evento siguiente",
-      "noSearchResults": "No hay eventos que coincidan con la búsqueda."
+      "noSearchResults": "No hay eventos que coincidan con la búsqueda.",
+      "searchOtherCitiesTitle": "No hay resultados para «{query}» en {city}",
+      "searchOtherCitiesText": "Sí hay eventos que coinciden en otras ciudades:",
+      "skipToContent": "Saltar al contenido"
     },
     "en": {
       "events": "Events",
@@ -85,7 +129,10 @@
       "searchResults": "Results",
       "previousEvent": "Previous event",
       "nextEvent": "Next event",
-      "noSearchResults": "No events match your search."
+      "noSearchResults": "No events match your search.",
+      "searchOtherCitiesTitle": "No results for “{query}” in {city}",
+      "searchOtherCitiesText": "There are matching events in other cities:",
+      "skipToContent": "Skip to content"
     },
     "fr": {
       "events": "Événements",
@@ -106,7 +153,10 @@
       "searchResults": "Résultats",
       "previousEvent": "Événement précédent",
       "nextEvent": "Événement suivant",
-      "noSearchResults": "Aucun événement ne correspond à votre recherche."
+      "noSearchResults": "Aucun événement ne correspond à votre recherche.",
+      "searchOtherCitiesTitle": "Aucun résultat pour « {query} » à {city}",
+      "searchOtherCitiesText": "Des événements correspondent dans d’autres villes :",
+      "skipToContent": "Aller au contenu"
     }
   },
   "copy": {
@@ -125,6 +175,7 @@
       "trending": "Tendencias en Madrid",
       "nearby": "Próximos cerca de ti",
       "popular": "Popular esta semana",
+      "topRated": "Mejor valorado",
       "filters": "Filtros",
       "save": "Guardar",
       "savedLabel": "Guardado",
@@ -173,6 +224,16 @@
       "cancel": "Cancelar",
       "favourites": "Favoritos",
       "city": "Ciudad",
+      "allCategories": "Todos",
+      "categoryNames": {
+        "Música": "Música",
+        "Ópera": "Ópera",
+        "Danza": "Danza",
+        "Deportes": "Deportes",
+        "Teatro": "Teatro",
+        "Exposiciones": "Exposiciones",
+        "Museos": "Museos"
+      },
       "noCityEvents": "Todavía no hay eventos disponibles en esta ciudad.",
       "notFoundTitle": "Página no encontrada",
       "notFoundText": "La página que buscas no existe o ha cambiado de dirección.",
@@ -196,6 +257,7 @@
       "trending": "Trending in Madrid",
       "nearby": "Coming up near you",
       "popular": "Popular this week",
+      "topRated": "Top rated",
       "filters": "Filters",
       "save": "Save",
       "savedLabel": "Saved",
@@ -244,6 +306,16 @@
       "cancel": "Cancel",
       "favourites": "Favourites",
       "city": "City",
+      "allCategories": "All",
+      "categoryNames": {
+        "Música": "Music",
+        "Ópera": "Opera",
+        "Danza": "Dance",
+        "Deportes": "Sports",
+        "Teatro": "Theatre",
+        "Exposiciones": "Exhibitions",
+        "Museos": "Museums"
+      },
       "noCityEvents": "There are no events available in this city yet.",
       "notFoundTitle": "Page not found",
       "notFoundText": "The page you are looking for does not exist or has moved.",
@@ -267,6 +339,7 @@
       "trending": "Tendances à Madrid",
       "nearby": "Bientôt près de vous",
       "popular": "Populaire cette semaine",
+      "topRated": "Le mieux noté",
       "filters": "Filtres",
       "save": "Enregistrer",
       "savedLabel": "Enregistré",
@@ -315,6 +388,16 @@
       "cancel": "Annuler",
       "favourites": "Favoris",
       "city": "Ville",
+      "allCategories": "Tous",
+      "categoryNames": {
+        "Música": "Musique",
+        "Ópera": "Opéra",
+        "Danza": "Danse",
+        "Deportes": "Sport",
+        "Teatro": "Théâtre",
+        "Exposiciones": "Expositions",
+        "Museos": "Musées"
+      },
       "noCityEvents": "Aucun événement n’est encore disponible dans cette ville.",
       "notFoundTitle": "Page introuvable",
       "notFoundText": "La page que vous cherchez n’existe pas ou a changé d’adresse.",

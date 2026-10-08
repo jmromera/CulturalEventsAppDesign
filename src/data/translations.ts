@@ -5,3 +5,4 @@ export const venueLinkCopy = translations.venueLinkCopy;
 export const eventActionCopy = translations.eventActionCopy;
 export const interfaceText = translations.interfaceText;
 export const copy = translations.copy;
+export const onboardingCopy = translations.onboardingCopy;

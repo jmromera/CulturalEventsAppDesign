@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 export default function StatusPage({ kicker, title, text, homeLabel, children }: { kicker: string; title: string; text: string; homeLabel: string; children?: ReactNode }) {
-  return <main className="status-page">
+  return <main id="main-content" tabIndex={-1} className="status-page">
     <div className="status-page-card">
       <span className="kicker">{kicker}</span>
       <h1>{title}</h1>

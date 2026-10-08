@@ -831,5 +831,80 @@
     },
     "id": "sevilla-sala-custom",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20Custom%2C%20Sevilla"
+  },
+  {
+    "city": "Madrid",
+    "name": "Museo Reina Sofía",
+    "address": "Calle Santa Isabel, 52, 28012 Madrid",
+    "websiteUrl": "https://www.museoreinasofia.es/",
+    "programmeUrl": "https://www.museoreinasofia.es/exposiciones",
+    "programmeLabel": {
+      "es": "Exposiciones",
+      "en": "Exhibitions",
+      "fr": "Expositions"
+    },
+    "image": null,
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "Un museo madrileño dedicado al arte moderno y contemporáneo, con sede en los edificios Sabatini y Nouvel.",
+      "en": "A Madrid museum devoted to modern and contemporary art, housed in the Sabatini and Nouvel buildings.",
+      "fr": "Un musée madrilène consacré à l’art moderne et contemporain, installé dans les bâtiments Sabatini et Nouvel."
+    },
+    "id": "madrid-museo-reina-sofia",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Museo%20Reina%20Sof%C3%ADa%2C%20Calle%20Santa%20Isabel%2C%2052%2C%2028012%20Madrid"
+  },
+  {
+    "city": "Valencia",
+    "name": "IVAM",
+    "address": "Carrer de Guillem de Castro, 118, 46003 València",
+    "websiteUrl": "https://ivam.es/es/",
+    "programmeUrl": "https://ivam.es/es/exposiciones/",
+    "programmeLabel": {
+      "es": "Exposiciones",
+      "en": "Exhibitions",
+      "fr": "Expositions"
+    },
+    "image": null,
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "El Institut Valencià d’Art Modern, un museo valenciano de arte moderno y contemporáneo.",
+      "en": "The Institut Valencià d’Art Modern, a Valencia museum of modern and contemporary art.",
+      "fr": "L’Institut Valencià d’Art Modern, un musée valencien d’art moderne et contemporain."
+    },
+    "id": "valencia-ivam",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=IVAM%2C%20Carrer%20de%20Guillem%20de%20Castro%2C%20118%2C%2046003%20Val%C3%A8ncia"
+  },
+  {
+    "city": "Sevilla",
+    "name": "CAAC",
+    "address": "Cartuja de Santa María de las Cuevas, C. Américo Vespucio, 2, 41092 Sevilla",
+    "websiteUrl": "https://www.caac.es/",
+    "programmeUrl": "https://www.caac.es/programa/exposiciones/",
+    "programmeLabel": {
+      "es": "Exposiciones",
+      "en": "Exhibitions",
+      "fr": "Expositions"
+    },
+    "image": null,
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "El Centro Andaluz de Arte Contemporáneo, con sede en el monasterio de la Cartuja de Sevilla.",
+      "en": "The Centro Andaluz de Arte Contemporáneo, housed in Seville’s Cartuja monastery.",
+      "fr": "Le Centro Andaluz de Arte Contemporáneo, installé dans le monastère de la Cartuja de Séville."
+    },
+    "id": "sevilla-caac",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=CAAC%2C%20C.%20Am%C3%A9rico%20Vespucio%2C%202%2C%2041092%20Sevilla"
   }
 ]

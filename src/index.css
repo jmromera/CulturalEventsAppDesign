@@ -137,8 +137,8 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
 [data-cat="opera"]{--cat:#9f1239;--cat-soft:#fff0f3}
 [data-cat="theatre"]{--cat:#b91c1c;--cat-soft:#fef0f0}
 [data-cat="dance"]{--cat:#a21caf;--cat-soft:#fdf0ff}
+[data-cat="exhibitions"]{--cat:#0369a1;--cat-soft:#e6f4fb}
 [data-cat="museums"]{--cat:#0f766e;--cat-soft:#e9faf7}
-[data-cat="art"]{--cat:#b45309;--cat-soft:#fff6e5}
 [data-cat="sports"]{--cat:#15803d;--cat-soft:#ecfaf0}
 .event-card[data-cat] .event-body{border-top:3px solid var(--cat)}
 .event-card[data-cat]:hover{border-color:color-mix(in srgb,var(--cat) 45%,var(--line));box-shadow:0 14px 38px color-mix(in srgb,var(--cat) 14%,transparent)}
@@ -196,3 +196,19 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
 .new-list-input{width:100%;min-height:48px;padding:0 14px;margin:6px 0 18px;border:1.5px solid var(--line);border-radius:10px;background:var(--sky);color:var(--ink);font-size:16px;font-weight:600}.new-list-input:focus{outline:none;border-color:var(--forest);background:#fff;box-shadow:0 0 0 4px rgba(29,78,216,.15)}.new-list-actions{display:flex;gap:10px;justify-content:flex-end}.new-list-actions .button:disabled{opacity:.5;cursor:not-allowed}
 .status-page{min-height:60vh;padding:56px 20px 72px}.status-page-card{max-width:560px;margin:0 auto;padding:40px 28px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow);text-align:center}.status-page-card h1{font-size:clamp(28px,5vw,40px);line-height:1.1}.status-page-card p{margin:14px 0 26px;color:var(--muted);font-size:16px;line-height:1.5}.status-page .artist-events-section{margin-top:28px}
 :where(a.logo,a.primary-nav-item,a.event-image,a.event-title,a.venue-directory-image,a.venue-name-link){display:inline-block;text-align:center}:where(a.button){text-align:center}.filter-control.active{border-color:var(--forest);color:var(--forest)}.filter-date-input{margin:12px 0 0;max-width:280px}
+.section-title h1{font-size:clamp(28px,3vw,40px);margin-top:6px}.discovery-strip{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}.search-other-cities{display:flex;flex-wrap:wrap;gap:9px}.city-onboarding-manual .button:disabled{opacity:.6;cursor:progress}
+@media(max-width:650px){
+	.site-header-inner{grid-template-columns:auto minmax(0,1fr) auto auto}
+	.site-header .logo{font-size:18px}
+	.site-header .logo .logo-mark{width:24px;height:24px;margin-right:6px}
+	.header-city-picker{justify-self:end;max-width:100%}
+	.header-city-trigger{width:auto;max-width:100%}
+	.header-city-count{display:none}
+	.hero{height:300px}
+	.hero-copy{bottom:22px}
+	.hero-copy h1{font-size:32px;margin:10px 0}
+	.section-title h1{font-size:29px}
+	.category,.rating,.tag-row span,.event-facts,.event-footer small,.event-footer .button,.availability,.info-item small,.purchase-card>p,.purchase-card>small,.discovery-strip small,.hero-brand-label,.hero-city-copy small,.header-city-option small,.site-footer-meta small,.kicker,.section-title>div>span,.section-title>button,.artist-event-body p,.artist-event-image .category,.venue-directory-kind,.detail-hero[data-cat] .detail-social{font-size:12px}
+	.event-footer .button{min-height:44px}
+}
+.skip-link{position:fixed;top:8px;left:8px;z-index:200;transform:translateY(-150%);border-radius:6px;background:#111827;color:#fff;padding:8px 12px;font-weight:600;text-decoration:none}.skip-link:focus{transform:translateY(0)}main:focus{outline:none}
