@@ -1,5 +1,6 @@
 import translations from "./translations.json";
 
+export const errorCopy = translations.errorCopy;
 export const entityKindCopy = translations.entityKindCopy;
 export const venueLinkCopy = translations.venueLinkCopy;
 export const eventActionCopy = translations.eventActionCopy;

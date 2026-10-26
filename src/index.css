@@ -567,3 +567,7 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .detail-cta-price{color:var(--ink);font:700 26px/1.1 "Manrope",sans-serif;letter-spacing:-.02em}
 /* Por debajo de 900 px la tarjeta de compra ya queda justo bajo el hero: el botón duplicado sobra */
 @media(max-width:900px){.detail-cta{display:none}}
+
+/* Favoritos con recuento y página de artista con "Próximos eventos" alineado con el perfil */
+.saved-count{margin:10px 0 0;color:var(--muted);font-size:16px}
+.artist-page .artist-events-section{max-width:none;padding-left:0;padding-right:0}

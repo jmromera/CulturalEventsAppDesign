@@ -1,4 +1,9 @@
 {
+  "errorCopy": {
+    "es": { "title": "Algo ha salido mal", "text": "No hemos podido mostrar esta página. Puedes volver al inicio e intentarlo de nuevo.", "home": "Ir a la página de inicio" },
+    "en": { "title": "Something went wrong", "text": "We couldn't show this page. You can go back to the home page and try again.", "home": "Go to the home page" },
+    "fr": { "title": "Un problème est survenu", "text": "Nous n'avons pas pu afficher cette page. Vous pouvez revenir à l'accueil et réessayer.", "home": "Aller à la page d'accueil" }
+  },
   "entityKindCopy": {
     "es": { "artist": "Artista", "musical": "Musical", "play": "Obra teatral", "show": "Espectáculo" },
     "en": { "artist": "Artist", "musical": "Musical", "play": "Play", "show": "Show" },
