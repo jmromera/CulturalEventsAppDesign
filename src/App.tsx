@@ -3,6 +3,7 @@ import { Link, Route, Routes, useLocation, useNavigate, useNavigationType, usePa
 import { entityFor, relatedEntities } from "./data/entities";
 import { cityEventCounts, cityImages, endedEvents, events, relatedEventsByEntity } from "./data/event-catalog";
 import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } from "./data/artist-preferences";
+import { LANGUAGE_KEY, readLanguage, type Language } from "./data/language";
 import { entityKindCopy, copy, eventActionCopy, interfaceText, venueLinkCopy } from "./data/translations";
 import { venueFor, venues } from "./data/venue-catalog";
 import CityOnboardingDialog from "./components/CityOnboardingDialog";
@@ -14,7 +15,6 @@ import { usePreferredCity } from "./context/PreferredCityContext";
 import { cities, eventCategories, type City, type EventCategory, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
 
 type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "not-found";
-type Language = "es" | "en" | "fr";
 function BrandMark({ className = "" }: { className?: string }) {
   return <span className={`brand-mark ${className}`} aria-hidden="true"><Icon name="location" /></span>;
 }
@@ -549,9 +549,10 @@ function Info({ icon, label, value }: { icon: IconName; label: string; value: st
   return <div className="info-item"><span><Icon name={icon} /></span><div><small>{label}</small><strong>{value}</strong></div></div>;
 }
 
-function Saved({ saved, toggleSaved, explore, title, t }: { saved: number[]; toggleSaved: (id: number) => void; explore: () => void; title: string; t: typeof copy.es }) {
-  const savedEvents = events.filter((event) => saved.includes(event.id));
-  return <main id="main-content" tabIndex={-1} className="subpage saved-page"><div className="saved-heading"><h1>{title}</h1></div>{savedEvents.length ? <div className="event-grid">{savedEvents.map((event) => <EventCard key={event.id} event={event} saved onSave={() => toggleSaved(event.id)} t={t} />)}</div> : <div className="empty"><Icon name="heart" /><h2>{t.favouritesEmptyTitle}</h2><p>{t.favouritesEmptyText}</p><Button onClick={explore}>{t.discover}</Button></div>}</main>;
+function Saved({ saved, toggleSaved, explore, title, language, t }: { saved: number[]; toggleSaved: (id: number) => void; explore: () => void; title: string; language: Language; t: typeof copy.es }) {
+  // Por fecha: lo más próximo primero, que es lo que se necesita para planificar.
+  const savedEvents = events.filter((event) => saved.includes(event.id)).sort((a, b) => (a.startDate ?? "9999").localeCompare(b.startDate ?? "9999"));
+  return <main id="main-content" tabIndex={-1} className="subpage saved-page"><div className="saved-heading"><div><h1>{title}</h1>{savedEvents.length > 0 && <p className="saved-count">{eventCountLabel(savedEvents.length, interfaceText[language])}</p>}</div></div>{savedEvents.length ? <div className="event-grid">{savedEvents.map((event) => <EventCard key={event.id} event={event} saved onSave={() => toggleSaved(event.id)} t={t} />)}</div> : <div className="empty"><Icon name="heart" /><h2>{t.favouritesEmptyTitle}</h2><p>{t.favouritesEmptyText}</p><Button onClick={explore}>{t.discover}</Button></div>}</main>;
 }
 
 function EventRoute({ saved, toggleSaved, goBack, language, t }: { saved: number[]; toggleSaved: (id: number) => void; goBack: () => void; language: Language; t: typeof copy.es }) {
@@ -615,18 +616,6 @@ function readSavedEvents(): number[] {
     return Array.isArray(stored) ? stored.filter((id): id is number => typeof id === "number") : [];
   } catch {
     return [];
-  }
-}
-
-const LANGUAGE_KEY = "plan-cerca.language";
-
-// Idioma elegido en este navegador; sin elección guardada se usa el español.
-function readLanguage(): Language {
-  try {
-    const stored = window.localStorage.getItem(LANGUAGE_KEY);
-    return stored === "en" || stored === "fr" ? stored : "es";
-  } catch {
-    return "es";
   }
 }
 
@@ -768,7 +757,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={showFilters ? <Filters selectedCity={selectedCity} initialCategories={activeCategories} initialWhen={activeWhen} onApply={applyFilters} back={goBack} language={language} t={t} /> : homePage} />
-      <Route path="/favorites" element={<Saved saved={saved} toggleSaved={toggleSaved} explore={goToEvents} title={interfaceText[language].favourites} t={t} />} />
+      <Route path="/favorites" element={<Saved saved={saved} toggleSaved={toggleSaved} explore={goToEvents} title={interfaceText[language].favourites} language={language} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />
