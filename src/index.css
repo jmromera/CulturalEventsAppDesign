@@ -526,3 +526,37 @@ h1,h2{font-weight:500}
 	.site-footer-link{min-height:44px;display:inline-flex;align-items:center}
 	.site-header:not(.site-header--event-detail){top:-113px}
 }
+
+/* ==========================================================================
+   Pulido de UI: hero con atajos de fecha, titulares con aire y tarjetas más compactas.
+   ========================================================================== */
+h1,h2{letter-spacing:-.02em;word-spacing:.08em}
+#catalogue{scroll-margin-top:96px}
+
+/* Hero: la ciudad y su oferta primero, y atajos de fecha que ya filtran el catálogo */
+.hero-meta{margin-bottom:14px}
+.hero-city-group{width:auto}
+.hero-city-copy{display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px}
+.hero-city-name{font-size:22px;font-weight:700;letter-spacing:-.01em}
+.hero-city-count{padding:0;color:var(--accent-text);font-size:15px;font-weight:600}
+.hero-quick{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-chip{min-height:44px;padding:0 8px 0 18px;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(15,23,42,.55);color:#fff;font-size:14px;font-weight:600;backdrop-filter:blur(8px);transition:background-color .18s ease,border-color .18s ease,color .18s ease}
+.hero-chip>span{min-width:28px;height:28px;padding:0 8px;display:inline-grid;place-items:center;border-radius:999px;background:rgba(255,255,255,.16);font-size:13px;font-weight:700}
+.hero-chip:hover:not(:disabled){border-color:rgba(255,255,255,.7);background:rgba(15,23,42,.8)}
+.hero-chip.active{border-color:var(--accent-text);background:var(--accent);color:var(--on-accent)}
+.hero-chip.active>span{background:rgba(255,255,255,.28)}
+.hero-chip:focus-visible{outline:3px solid var(--accent-text);outline-offset:3px}
+.hero-chip:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:650px){
+	.hero{height:320px}
+	.hero-copy p{display:none}
+	.hero-quick{gap:8px;margin-top:14px}
+	.hero-chip{padding:0 6px 0 14px;font-size:13px}
+}
+
+/* Tarjeta: descripción y título acotados para que la cuadrícula tenga ritmo; el precio real destaca sobre "Consultar…" */
+.event-title,.event-description{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical}
+.event-title{-webkit-line-clamp:2}
+.event-description{-webkit-line-clamp:2}
+.event-footer strong.price--none{color:var(--muted);font-size:14px;font-weight:600}
+.event-card:focus-within{border-color:var(--accent-text)}
