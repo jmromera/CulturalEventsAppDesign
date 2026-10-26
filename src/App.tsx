@@ -262,7 +262,7 @@ function eventStructuredData(event: EventItem, venue: Venue): Record<string, unk
     ...(event.endDate && { endDate: event.endDate }),
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    image: [new URL(event.image, window.location.origin).href],
+    ...(event.image && { image: [new URL(event.image, window.location.origin).href] }),
     url: eventUrl,
     location: {
       "@type": "Place",

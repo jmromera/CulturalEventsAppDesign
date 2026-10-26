@@ -906,5 +906,30 @@
     },
     "id": "sevilla-caac",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=CAAC%2C%20C.%20Am%C3%A9rico%20Vespucio%2C%202%2C%2041092%20Sevilla"
+  },
+  {
+    "city": "Albacete",
+    "name": "Sala ClanDestino",
+    "address": "Avenida España, 47, 02002 Albacete",
+    "websiteUrl": "https://www.salaclandestino.com/",
+    "programmeUrl": "https://www.salaclandestino.com/web/?menu=36&pagina=eventos&siteID=salaclandestino",
+    "programmeLabel": {
+      "es": "Programa oficial",
+      "en": "Official programme",
+      "fr": "Programme officiel"
+    },
+    "image": null,
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Live music venue",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Una sala albaceteña para conciertos y programación musical en directo.",
+      "en": "An Albacete venue for concerts and live music programming.",
+      "fr": "Une salle d’Albacete dédiée aux concerts et à la musique live."
+    },
+    "id": "albacete-sala-clandestino",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20ClanDestino%2C%20Avenida%20Espa%C3%B1a%2C%2047%2C%2002002%20Albacete"
   }
 ]
