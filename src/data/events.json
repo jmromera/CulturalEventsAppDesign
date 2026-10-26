@@ -5739,5 +5739,49 @@
     "description": "Los británicos Editors, una de las bandas más influyentes del indie rock europeo: entradas agotadas.",
     "fullDescription": "El grupo británico Editors recala en la Sala Auditorio del Roig Arena el sábado 30 de enero de 2027 a las 20:00. Desde su álbum debut «The Back Room» (2005) se situó como una de las promesas del indie rock británico y se ha consolidado como uno de los grupos más influyentes del panorama alternativo europeo. La web del recinto indica que las entradas están agotadas.",
     "confirmed": true
+  },
+  {
+    "id": 244,
+    "category": "Música",
+    "title": "Albert Pla — No quiero hablar de mí, pero yo",
+    "date": "Viernes, 29 de enero de 2027",
+    "startDate": "2027-01-29",
+    "time": "21:00",
+    "venueId": "valencia-roig-arena",
+    "image": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fa17e7599-5c30-4736-a937-252f99693444?alt=media&optimize=high&quality=70",
+    "ticketUrl": "https://www.roigarena.com/es/event/albert-pla-20270129/",
+    "duration": "Por confirmar",
+    "price": "Consultar precio oficial",
+    "availability": "Entradas disponibles",
+    "organizer": "Roig Arena",
+    "tags": [
+      "Música",
+      "2027"
+    ],
+    "description": "Albert Pla presenta con su banda The Surprise Band los temas de su nuevo álbum «No quiero hablar de mí, pero yo».",
+    "fullDescription": "Albert Pla presenta junto a su banda The Surprise Band los temas de su nuevo álbum «No quiero hablar de mí, pero yo». La importante apuesta audiovisual del concierto, en la que el propio artista ha participado, amplía sobre el escenario el universo creativo del disco. Viernes 29 de enero a las 21:00 en la Sala Auditorio del Roig Arena. Las entradas se venden a través de la web oficial del Roig Arena.",
+    "confirmed": true
+  },
+  {
+    "id": 245,
+    "category": "Música",
+    "title": "Kabrönes",
+    "date": "Domingo, 31 de enero de 2027",
+    "startDate": "2027-01-31",
+    "time": "20:00",
+    "venueId": "valencia-roig-arena",
+    "image": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F7115ba1f-c2bc-4cec-9daa-3fa6754b16dd?alt=media&optimize=high&quality=70",
+    "ticketUrl": "https://www.roigarena.com/es/event/kabrones-en-valencia-20270131/",
+    "duration": "Por confirmar",
+    "price": "Consultar precio oficial",
+    "availability": "Entradas disponibles",
+    "organizer": "Roig Arena",
+    "tags": [
+      "Música",
+      "2027"
+    ],
+    "description": "Kabrönes actúa en el Roig Arena dentro de su gira por ciudades españolas de 2026 y 2027.",
+    "fullDescription": "La banda Kabrönes actúa en la Sala Auditorio del Roig Arena el domingo 31 de enero a las 20:00, dentro de la gira que llevará a cabo por diferentes ciudades españolas entre 2026 y 2027. Las entradas se venden a través de la web oficial del Roig Arena.",
+    "confirmed": true
   }
 ]
