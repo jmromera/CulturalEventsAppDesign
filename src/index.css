@@ -559,3 +559,11 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .event-description{-webkit-line-clamp:2}
 .event-footer strong.price--none{color:var(--muted);font-size:14px;font-weight:600}
 .event-card:focus-within{border-color:var(--accent-text)}
+
+/* Ficha: la valoración respira bajo los datos y la compra aparece ya en el primer pantallazo */
+.detail-intro-facts+.detail-social{margin-top:18px}
+.detail-intro .detail-lead{margin:22px 0 24px}
+.detail-cta{display:flex;align-items:center;flex-wrap:wrap;gap:12px 22px}
+.detail-cta-price{color:var(--ink);font:700 26px/1.1 "Manrope",sans-serif;letter-spacing:-.02em}
+/* Por debajo de 900 px la tarjeta de compra ya queda justo bajo el hero: el botón duplicado sobra */
+@media(max-width:900px){.detail-cta{display:none}}
