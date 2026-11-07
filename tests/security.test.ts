@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { serializeJsonLd } from "../src/lib/json-ld";
+import { DECLARED_THIRD_PARTY_HOSTS } from "../src/legal/third-parties";
 
 const root = path.resolve(__dirname, "..");
 const read = (file: string) => readFileSync(path.join(root, file), "utf8");
@@ -59,7 +60,12 @@ describe("security headers (vercel.json)", () => {
     expect(csp).toContain("script-src 'self';");
     expect(csp).toContain("frame-ancestors 'none'");
     expect(csp).toContain("object-src 'none'");
-    expect(csp).not.toMatch(/'unsafe-eval'|script-src[^;]*'unsafe-inline'|https?:\/\//);
+    expect(csp).not.toMatch(/'unsafe-eval'|script-src[^;]*'unsafe-inline'/);
+    // The only remote origin allowed is the declared map tile server, and only for images.
+    const remote = [...csp.matchAll(/https:\/\/([a-z0-9.-]+)/g)].map((match) => match[1]);
+    expect(remote.every((host) => DECLARED_THIRD_PARTY_HOSTS.includes(host))).toBe(true);
+    expect(csp).toMatch(/img-src[^;]*https:\/\/tile\.openstreetmap\.org/);
+    expect(csp).not.toMatch(/(script|connect|font|style|frame)-src[^;]*https:/);
   });
 
   it("forces HTTPS for two years and blocks sniffing", () => {

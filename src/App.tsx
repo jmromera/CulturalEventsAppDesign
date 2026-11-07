@@ -13,6 +13,9 @@ import { venueFor, venues } from "./data/venue-catalog";
 import CityOnboardingDialog from "./components/CityOnboardingDialog";
 import CitySelector from "./components/CitySelector";
 import NearMePanel from "./components/NearMePanel";
+import MapView, { mapCopy } from "./components/MapView";
+import type { MapPoint } from "./components/EventMap";
+import cityCoordinates from "./data/city-coordinates.json";
 import { NearMeProvider, useNearMe } from "./context/NearMeContext";
 import { distanceKm, formatDistance } from "./lib/geo";
 import FallbackImage from "./components/FallbackImage";
@@ -178,6 +181,24 @@ function EntityRoute({ back, language, t }: { back: () => void; language: Langua
     <RelatedEventsSection entity={entity} relatedEvents={entityEvents} title={entity.profileEventsTitle[language]} t={t} showCount={false} showProfileLink={false} />
   </main>;
 }
+
+/** Map markers for a list of events: one per venue with coordinates, listing its events. */
+function mapPointsFor(list: EventItem[]): MapPoint[] {
+  const byVenue = new Map<string, MapPoint>();
+  for (const event of list) {
+    const venue = venueFor(event.venueId);
+    if (venue.lat == null || venue.lng == null) continue;
+    const point = byVenue.get(venue.id) ?? { id: venue.id, lat: venue.lat, lng: venue.lng, title: venue.name, items: [] };
+    point.items.push({ label: event.title, detail: event.date, href: cityPath(`/event/${event.id}`, venue.city) });
+    byVenue.set(venue.id, point);
+  }
+  return [...byVenue.values()];
+}
+
+const cityCenter = (city: City) => {
+  const coords = (cityCoordinates as Record<string, { latitude: number; longitude: number }>)[city];
+  return { lat: coords.latitude, lng: coords.longitude };
+};
 
 function SectionTitle({ kicker, title, action, onAction, level = 2 }: { kicker: string; title: string; action?: string; onAction?: () => void; level?: 1 | 2 }) {
   const Heading = level === 1 ? "h1" : "h2";
@@ -417,6 +438,9 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
     return matchesCategory && matchesQuery && eventInRange(event, dateRange);
   };
   const nearMe = useNearMe();
+  // List or map. Kept in memory (not in the URL) so a shared link never opens the map without a click.
+  const [view, setView] = useState<"list" | "map">("list");
+  const mapText = mapCopy[language];
   // With "near me" on: distance from the visitor to each venue, optional radius and nearest first.
   const distanceTo = (event: EventItem) => {
     const venue = venueFor(event.venueId);
@@ -452,7 +476,7 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
   const weekRange = dateRangeFor("week");
   const weekCount = cityEvents.filter((event) => eventInRange(event, weekRange)).length;
   const discovery = topCategories.length > 0 && <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("{city}", selectedCity)}</small><strong>{topCategories.map(([item]) => t.categoryNames[item]).join(" · ")}</strong></span></div>{weekCount > 0 && <div><Icon name="calendar" /><span><small>{t.thisWeek}</small><strong>{eventCountLabel(weekCount, labels)}</strong></span></div>}</section>;
-  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><div className="catalogue-actions"><NearMePanel language={language} /><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters}><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div></div>{filtered.length ? <><div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} distance={distanceLabel(event)} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : nearMe.position && nearMe.radiusKm !== null && matched.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={() => nearMe.setRadiusKm(null)}>{labels.viewAllEvents}</Button></div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
+  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><div className="catalogue-actions"><div className="view-toggle" role="group" aria-label={mapText.view}>{(["list", "map"] as const).map((option) => <button key={option} type="button" aria-pressed={view === option} className={view === option ? "active" : ""} onClick={() => setView(option)}><Icon name={option === "list" ? "calendar" : "location"} />{option === "list" ? mapText.list : mapText.map}</button>)}</div><NearMePanel language={language} /><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters}><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div></div>{filtered.length ? <>{view === "map" && <MapView points={mapPointsFor(filtered)} language={language} center={nearMe.position ?? cityCenter(selectedCity)} />}<div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} distance={distanceLabel(event)} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : nearMe.position && nearMe.radiusKm !== null && matched.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={() => nearMe.setRadiusKm(null)}>{labels.viewAllEvents}</Button></div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
   const isSearching = query.length > 0;
   // Atajos de fecha del hero: cada uno muestra cuántos eventos hay y se desactiva si no hay ninguno.
   const whenNames: Record<(typeof whenOptions)[number], string> = { today: labels.whenToday, tomorrow: labels.whenTomorrow, week: t.thisWeek, month: labels.whenMonth };
@@ -527,6 +551,7 @@ function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: 
   const soldOut = isSoldOut(event);
   const actionLabels = eventActionCopy[language];
   const [copyConfirmed, setCopyConfirmed] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const calendarTiming = calendarTimingFor(event);
   const calendarUrl = calendarTiming ? googleCalendarUrl(event, venue, calendarTiming) : null;
   const entity = event.relatedEntityId ? relatedEntities[event.relatedEntityId] : undefined;
@@ -559,7 +584,7 @@ function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: 
     <div className="detail-content"><div className="detail-main">
       <section><h2>{t.description}</h2><p>{event.fullDescription}</p></section>
       {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}><FallbackImage src={entity.image} alt="" icon="profile" width={124} height={124} /><div className="artist-profile-copy"><div className="artist-profile-head"><h3>{entity.name}</h3><span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></div><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}
-      <section><h2>{t.practical}</h2><div className="info-grid"><div className="info-item info-item--location"><span><Icon name="location" /></span><div><small>{t.location}</small><strong>{venue.name}</strong><p>{venue.address}</p>{venue.mapsUrl && <a href={venue.mapsUrl} target="_blank" rel="noreferrer">{t.openInMaps}<Icon name="chevron" /></a>}</div></div><Info icon="profile" label={t.organizer} value={event.organizer} /></div></section>
+      <section><h2>{t.practical}</h2><div className="info-grid"><div className="info-item info-item--location"><span><Icon name="location" /></span><div><small>{t.location}</small><strong>{venue.name}</strong><p>{venue.address}</p>{venue.mapsUrl && <a href={venue.mapsUrl} target="_blank" rel="noreferrer">{t.openInMaps}<Icon name="chevron" /></a>}<button type="button" className="map-toggle" aria-expanded={showMap} onClick={() => setShowMap((value) => !value)}><Icon name="location" />{showMap ? mapCopy[language].hideMap : mapCopy[language].showOnMap}</button></div></div><Info icon="profile" label={t.organizer} value={event.organizer} /></div>{showMap && venue.lat != null && venue.lng != null && <MapView detail points={mapPointsFor([event])} language={language} center={{ lat: venue.lat, lng: venue.lng }} zoom={15} />}</section>
     </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className={`stock ${soldOut ? "stock--soldout" : ""}`}><i />{event.availability}</div>{ended ? <p className="purchase-provider">{t.eventEnded}</p> : soldOut ? null : <>{/\d/.test(event.price) ? <p className="purchase-price">{event.price}</p> : <p className="purchase-provider">{t.ticketsAt.replace("{provider}", event.organizer)}</p>}<p>{event.confirmed ? (event.time === "Por confirmar" ? t.confirmedTimePending : t.confirmed) : t.pending}</p><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small></>}<SaveButton active={saved} onClick={toggleSaved} t={t} /></aside></div>
     <section className="venue-overview"><div className={`venue-info-card ${venue.image ? "" : "venue-info-card--text-only"}`}>{venue.image && <FallbackImage className="venue-about-image" src={venue.image} alt={venueAlt(venue.name, language)} icon="location" category={venueCategoryKey(venue.kind.es)} width={640} height={360} />}<div className="venue-about-copy"><span className="kicker">{t.venueAbout}</span><span className="venue-kind"><BrandMark className="venue-kind-mark" />{venue.city} · {venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p>{(venue.websiteUrl || venue.programmeUrl) && <div className="venue-info-footer">{venue.websiteUrl && <a href={venue.websiteUrl} target="_blank" rel="noreferrer">{venueLinkLabels.website}<Icon name="chevron" /></a>}{venue.programmeUrl && venue.programmeLabel && <a href={venue.programmeUrl} target="_blank" rel="noreferrer">{venue.programmeLabel[language]}<Icon name="chevron" /></a>}</div>}</div></div></section>
     {entity && <RelatedEventsSection entity={entity} relatedEvents={entityEvents} title={entity.relatedEventsTitle[language]} t={t} />}

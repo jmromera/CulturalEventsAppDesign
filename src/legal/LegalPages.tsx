@@ -55,6 +55,7 @@ export function LegalNoticePage({ language }: { language: Language }) {
 
 export function PrivacyPolicyPage({ language }: { language: Language }) {
   const vercel = d.proveedores[0];
+  const osm = d.proveedores.find((provider) => provider.nombre.startsWith("OpenStreetMap"));
   return <LegalLayout title="Política de privacidad" language={language}>
     <section className="legal-summary" aria-labelledby="privacy-summary">
       <h2 id="privacy-summary">Resumen en 5 puntos</h2>
@@ -62,7 +63,7 @@ export function PrivacyPolicyPage({ language }: { language: Language }) {
         <li><strong>No tenemos cuentas ni formularios.</strong> No te pedimos nombre, email ni teléfono, así que no sabemos quién eres.</li>
         <li><strong>Lo que eliges se queda en tu navegador.</strong> Favoritos, idioma y ciudad se guardan solo en tu dispositivo. Puedes descargarlos o borrarlos en <Link to={LEGAL_PATHS.yourData}>Tus datos</Link>.</li>
         <li><strong>Tu ubicación no sale de tu dispositivo.</strong> Solo se usa si la pides: para elegir la ciudad más cercana o, en «Cerca de mí», para ordenar los eventos por distancia. No la enviamos ni la guardamos: como mucho recordamos el nombre de la ciudad, y la posición para ordenar se olvida al cerrar la página.</li>
-        <li><strong>Sin cookies, analítica ni publicidad.</strong> Las fuentes y las imágenes se sirven desde nuestro propio dominio. El único tercero que recibe tu IP es nuestro proveedor de alojamiento, {vercel.nombre}, para poder mostrarte la web.</li>
+        <li><strong>Sin cookies, analítica ni publicidad.</strong> Las fuentes y las imágenes se sirven desde nuestro propio dominio. El único tercero que recibe tu IP es nuestro proveedor de alojamiento, {vercel.nombre}, para poder mostrarte la web, y, solo si abres el mapa, OpenStreetMap, que sirve sus imágenes.</li>
         <li><strong>Tus derechos.</strong> Escríbenos a <Mail to={d.titular.email} /> para cualquier consulta. Si no quedas satisfecho, puedes reclamar ante la {d.autoridadControl.nombre}.</li>
       </ol>
     </section>
@@ -100,6 +101,14 @@ export function PrivacyPolicyPage({ language }: { language: Language }) {
             <td>Ninguno: el cálculo se hace en tu dispositivo</td>
             <td>No</td>
           </tr>
+          {osm && <tr>
+            <th scope="row">{osm.datos} (solo si abres el mapa)</th>
+            <td>Mostrarte el mapa de los recintos</td>
+            <td>Prestar la función que pides al pulsar «Mapa» (art. 6.1.f RGPD)</td>
+            <td>Según la política de privacidad de {osm.nombre}</td>
+            <td>{osm.nombre}, como tercero que sirve las imágenes del mapa</td>
+            <td>{osm.transferenciaFueraUE ? `Sí: ${osm.region}. Garantía: ${osm.garantiaTransferencia}` : "No"}</td>
+          </tr>}
           <tr>
             <th scope="row">Lo que nos escribas por correo (por ejemplo, para avisar de un error o ejercer tus derechos)</th>
             <td>Responderte</td>
@@ -115,7 +124,7 @@ export function PrivacyPolicyPage({ language }: { language: Language }) {
     <h2>Lo que no hacemos</h2>
     <ul>
       <li>No usamos cookies, analítica, píxeles de seguimiento ni publicidad. Detalle en la <Link to={LEGAL_PATHS.cookies}>política de cookies</Link>.</li>
-      <li>No cargamos nada de otros dominios: fuentes, imágenes y código se sirven desde {d.sitio.dominio}.</li>
+      <li>No cargamos nada de otros dominios: fuentes, imágenes y código se sirven desde {d.sitio.dominio}. La única excepción es el mapa: solo si pulsas «Mapa» o «Ver en el mapa», tu navegador pide sus imágenes a OpenStreetMap.</li>
       <li>No vendemos ni cedemos datos, ni tomamos decisiones automatizadas sobre ti.</li>
       <li>No pedimos la edad porque no recogemos datos que la requieran.</li>
     </ul>

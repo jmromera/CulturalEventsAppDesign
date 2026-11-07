@@ -141,3 +141,33 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 - **Barrio o distrito:** no hay datos de barrio; el radio de distancia lo sustituye, como se acordó.
 - **Pruebas:** `tests/near-me.test.tsx` comprueba cinco cosas: que no se pide la ubicación antes de aceptar, el orden por distancia, el radio, que no se guarda ni se envía nada, y el permiso denegado.
 - **Problema encontrado:** en móvil, una regla existente reducía los botones de la barra a un icono de 44 px (`font-size:0`), y «Cerca de mí» se veía como una caja vacía. Se le devolvió la etiqueta solo a ese botón.
+
+### Iteración P1.2 · Mapa (Leaflet + OpenStreetMap) cargado solo a petición
+
+- **Qué:**
+  - Selector «Lista / Mapa» en el catálogo, con un marcador por recinto que lleva el número de eventos y un globo con sus eventos enlazados.
+  - En el detalle, «Ver en el mapa» abre un mini mapa del recinto, además del enlace a Google Maps.
+  - El mapa respeta los filtros activos y «Cerca de mí»: se centra en la persona si compartió su ubicación.
+- **Por qué Leaflet:**
+  - Es la librería de mapas más ligera: 44 KB comprimida, en un fragmento aparte que **solo se descarga al pulsar «Mapa»**.
+  - No necesita clave de API ni tiene cuotas, así que nada puede caducar antes del 31/01.
+  - Los marcadores son HTML, sin imágenes extra, y se manejan con teclado.
+- **Privacidad:**
+  - Las teselas vienen de `tile.openstreetmap.org` y solo se piden tras pulsar.
+  - Un aviso junto al mapa lo explica, la política de privacidad lo declara (nueva fila en la tabla y OpenStreetMap Foundation en `datos-legales.json`) y la CSP solo abre `img-src` a ese dominio.
+  - El modo mapa no se guarda en la URL, para que un enlace compartido nunca lo abra sin clic.
+  - `pnpm check:terceros` falla si alguna página contacta OpenStreetMap sin pulsar «Mapa».
+- **Accesibilidad:**
+  - **Alternativa equivalente:** la lista sigue debajo del mapa con los mismos filtros (WCAG 1.1.1 y 2.1.1).
+  - **Marcadores:** son focusables, tienen `role="button"` y un nombre como «Roig Arena: 50 eventos».
+  - **Globos:**
+    - Enter abre el globo y lleva el foco a su primer evento.
+    - Esc lo cierra y devuelve el foco al marcador (2.4.3, orden del foco).
+    - Los enlaces del globo miden 44 px de alto.
+  - **Selector:** «Lista / Mapa» usa `aria-pressed` y «Ver en el mapa» usa `aria-expanded`.
+- **Problemas encontrados:**
+  - Tras abrir un globo con Enter, el Tab saltaba al marcador siguiente en vez de entrar en el globo; se movió el foco al abrir y al cerrar.
+  - El número del marcador salía girado 45° con la forma de chincheta; se contrarrotó.
+- **Pruebas:**
+  - `tests/map.test.tsx`: el mapa no se carga hasta pulsar, un marcador por recinto, la lista sigue disponible y el mini mapa del detalle se abre y se cierra.
+  - En navegador real: 83 comprobaciones de axe con el mapa abierto, recorrido con teclado (marcador → globo → ficha) y teselas cargadas con estado 200.

@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-07T22:00:57.213Z",
+  "date": "2026-11-07T22:11:05.997Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -121,6 +121,14 @@
       "violations": []
     },
     {
+      "page": "mapa-abierto · movil",
+      "violations": []
+    },
+    {
+      "page": "mapa-detalle · movil",
+      "violations": []
+    },
+    {
       "page": "inicio · escritorio",
       "violations": []
     },
@@ -230,6 +238,14 @@
     },
     {
       "page": "cerca-de-mi · escritorio",
+      "violations": []
+    },
+    {
+      "page": "mapa-abierto · escritorio",
+      "violations": []
+    },
+    {
+      "page": "mapa-detalle · escritorio",
       "violations": []
     },
     {
