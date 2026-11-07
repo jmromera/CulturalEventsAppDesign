@@ -87,3 +87,33 @@ Registro de cada iteración: qué cambió, por qué (principio de usabilidad o c
 4. **Huecos.** Si faltan conciertos, se completa con un musical, teatro, ópera o danza antes que con deporte. Las exposiciones solo entran como último recurso y nunca encabezan.
 
 Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exposiciones») y la variedad ayuda a descubrir planes nuevos. Que no se repita el recinto obliga a mostrar escenarios distintos de la ciudad. `tests/catalog-dates.test.ts` comprueba las cuatro reglas en las 6 ciudades simulando el 20/12/2026, el 01/01/2027 y el 31/01/2027. También comprueba que cada ciudad tiene eventos futuros y que «Próximos 30 días» nunca está vacío.
+
+### Iteración 7 · Cobertura hasta marzo y despliegue
+
+- **Qué:**
+  - 19 eventos más para febrero y marzo: temporada del Teatro de la Maestranza, FIBES, ABAO en el Euskalduna, Sala BBK y Palau de la Música Catalana.
+  - Dos recintos nuevos: Auditorio FIBES y Sala BBK.
+  - Instrucciones de publicación y mantenimiento en el README.
+- **Cobertura** (eventos activos por semana · 🎵 conciertos · ⚽ deporte):
+
+| Semana | Madrid | Barcelona | Valencia | Sevilla | Bilbao | Albacete |
+|---|---:|---:|---:|---:|---:|---:|
+| 20/12–20/12 | 2 (0 🎵 · 1 ⚽) | 4 (0 🎵 · 0 ⚽) | 3 (0 🎵 · 2 ⚽) | 3 (1 🎵 · 1 ⚽) | 2 (0 🎵 · 1 ⚽) | 4 (1 🎵 · 1 ⚽) |
+| 21/12–27/12 | 3 (2 🎵 · 0 ⚽) | 5 (1 🎵 · 1 ⚽) | 5 (2 🎵 · 0 ⚽) | 4 (2 🎵 · 0 ⚽) | 5 (4 🎵 · 0 ⚽) | 4 (2 🎵 · 0 ⚽) |
+| 28/12–03/01 | 5 (2 🎵 · 2 ⚽) | 4 (0 🎵 · 1 ⚽) | 8 (6 🎵 · 0 ⚽) | 4 (1 🎵 · 1 ⚽) | 3 (2 🎵 · 0 ⚽) | 1 (0 🎵 · 0 ⚽) |
+| 04/01–10/01 | 7 (3 🎵 · 2 ⚽) | 5 (1 🎵 · 1 ⚽) | 9 (4 🎵 · 4 ⚽) | 3 (0 🎵 · 1 ⚽) | 6 (4 🎵 · 1 ⚽) | 3 (1 🎵 · 1 ⚽) |
+| 11/01–17/01 | 7 (3 🎵 · 2 ⚽) | 7 (1 🎵 · 3 ⚽) | 7 (5 🎵 · 1 ⚽) | 4 (1 🎵 · 1 ⚽) | 5 (4 🎵 · 0 ⚽) | 5 (2 🎵 · 0 ⚽) |
+| 18/01–24/01 | 9 (5 🎵 · 2 ⚽) | 5 (3 🎵 · 0 ⚽) | 10 (7 🎵 · 2 ⚽) | 4 (2 🎵 · 1 ⚽) | 5 (2 🎵 · 1 ⚽) | 5 (2 🎵 · 1 ⚽) |
+| 25/01–31/01 | 10 (5 🎵 · 4 ⚽) | 6 (2 🎵 · 2 ⚽) | 5 (4 🎵 · 0 ⚽) | 5 (0 🎵 · 2 ⚽) | 3 (1 🎵 · 0 ⚽) | 5 (3 🎵 · 0 ⚽) |
+| 01/02–07/02 | 3 (1 🎵 · 1 ⚽) | 2 (0 🎵 · 0 ⚽) | 5 (3 🎵 · 1 ⚽) | 4 (1 🎵 · 1 ⚽) | 5 (2 🎵 · 1 ⚽) | 3 (0 🎵 · 1 ⚽) |
+| 08/02–14/02 | 4 (1 🎵 · 1 ⚽) | 2 (0 🎵 · 0 ⚽) | 3 (1 🎵 · 1 ⚽) | 4 (2 🎵 · 1 ⚽) | 3 (2 🎵 · 0 ⚽) | 4 (0 🎵 · 1 ⚽) |
+| 15/02–21/02 | 7 (3 🎵 · 2 ⚽) | 4 (1 🎵 · 1 ⚽) | 1 (0 🎵 · 0 ⚽) | 4 (2 🎵 · 1 ⚽) | 4 (1 🎵 · 1 ⚽) | 3 (1 🎵 · 0 ⚽) |
+| 22/02–28/02 | 5 (2 🎵 · 1 ⚽) | 2 (0 🎵 · 0 ⚽) | 1 (0 🎵 · 0 ⚽) | 4 (2 🎵 · 1 ⚽) | 2 (0 🎵 · 1 ⚽) | 2 (0 🎵 · 1 ⚽) |
+| 01/03–07/03 | 5 (1 🎵 · 2 ⚽) | 4 (0 🎵 · 2 ⚽) | 2 (0 🎵 · 1 ⚽) | 4 (2 🎵 · 1 ⚽) | 2 (1 🎵 · 0 ⚽) | 4 (1 🎵 · 0 ⚽) |
+| 08/03–14/03 | 6 (1 🎵 · 3 ⚽) | 4 (1 🎵 · 1 ⚽) | 4 (3 🎵 · 0 ⚽) | 1 (0 🎵 · 1 ⚽) | 3 (2 🎵 · 1 ⚽) | 2 (0 🎵 · 1 ⚽) |
+| 15/03–21/03 | 3 (0 🎵 · 3 ⚽) | 2 (0 🎵 · 0 ⚽) | 2 (0 🎵 · 1 ⚽) | 3 (2 🎵 · 1 ⚽) | **0** | 1 (0 🎵 · 0 ⚽) |
+| 22/03–28/03 | 1 (1 🎵 · 0 ⚽) | 3 (1 🎵 · 0 ⚽) | 2 (1 🎵 · 0 ⚽) | **0** | **0** | 2 (0 🎵 · 1 ⚽) |
+| 29/03–31/03 | **0** | 2 (0 🎵 · 0 ⚽) | 1 (0 🎵 · 0 ⚽) | 2 (2 🎵 · 0 ⚽) | **0** | 1 (0 🎵 · 0 ⚽) |
+
+- **Lectura:** en el periodo de evaluación (20/12–31/01) todas las ciudades tienen eventos todas las semanas. La única semana floja es la de Navidad en Albacete (28/12–3/1), cubierta con la colección permanente del Museo de la Cuchillería.
+- **Pendiente:** quedan a 0 Bilbao desde el 15/03, Sevilla del 22 al 28/03 y Madrid del 29 al 31/03. Coinciden con el parón de selecciones y con programación que los recintos aún no han publicado. Se recomienda repetir la búsqueda a mediados de enero y ampliar con `scripts/add-events-2027.py`.

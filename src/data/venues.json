@@ -1589,5 +1589,64 @@
       "source": "https://commons.wikimedia.org/wiki/File:Museo_de_la_Cuchiller%C3%ADa,_Albacete,_Espa%C3%B1a,_2022-07-12,_DD_14.jpg"
     },
     "capacitySource": null
+  },
+  {
+    "id": "sevilla-fibes",
+    "city": "Sevilla",
+    "name": "Auditorio FIBES",
+    "address": "Calle Doctor Miguel Ríos Sarmiento, 41020 Sevilla",
+    "websiteUrl": "https://www.fibes.es",
+    "kind": {
+      "es": "Auditorio",
+      "en": "Auditorium",
+      "fr": "Auditorium"
+    },
+    "description": {
+      "es": "Auditorio del Palacio de Exposiciones y Congresos de Sevilla, escenario de grandes giras.",
+      "en": "Auditorium of Seville's exhibition and convention centre, a stop for major tours.",
+      "fr": "Auditorium du palais des expositions et des congrès de Séville, étape des grandes tournées."
+    },
+    "lat": 37.40347,
+    "lng": -5.93311,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null,
+    "image": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auditorio%20FIBES%2C%20Calle%20Doctor%20Miguel%20R%C3%ADos%20Sarmiento%2C%2041020%20Sevilla"
+  },
+  {
+    "id": "bilbao-sala-bbk",
+    "city": "Bilbao",
+    "name": "Sala BBK",
+    "address": "Gran Vía de Don Diego López de Haro, 19, 48001 Bilbao",
+    "websiteUrl": "https://www.salabbk.eus",
+    "kind": {
+      "es": "Centro cultural",
+      "en": "Arts centre",
+      "fr": "Centre culturel"
+    },
+    "description": {
+      "es": "Centro cultural de la Gran Vía de Bilbao con auditorio para conciertos y espectáculos.",
+      "en": "Arts centre on Bilbao's Gran Vía with an auditorium for concerts and shows.",
+      "fr": "Centre culturel de la Gran Vía de Bilbao avec un auditorium pour concerts et spectacles."
+    },
+    "image": "/images/venues/bilbao-sala-bbk.webp",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20BBK%2C%20Gran%20V%C3%ADa%20de%20Don%20Diego%20L%C3%B3pez%20de%20Haro%2C%2019%2C%2048001%20Bilbao",
+    "lat": 43.26204,
+    "lng": -2.93151,
+    "capacity": null,
+    "wikidata": "Q23833370",
+    "imageCredit": {
+      "author": "Alex Lillo from Madrid, Spain",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Bilbao_Vizcaya_Kutxa.jpg"
+    },
+    "capacitySource": null
   }
 ]

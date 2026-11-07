@@ -186,6 +186,28 @@ SHOWS = [
     ("bilbao-kafe-antzokia", "Ginebras", "2027-02-20", None, "21:00", "Música", f"{CC}/bilbao-bizkaia/conciertos/119662-ginebras", ["Indie"]),
     ("bilbao-kafe-antzokia", "Depedro", "2027-03-12", "2027-03-13", "21:30", "Música", f"{CC}/bilbao-bizkaia/conciertos/117218-depedro/1804883400", ["Pop"]),
     ("bilbao-kafe-antzokia", "Elliott Murphy", "2027-03-14", None, "21:00", "Música", f"{CC}/bilbao-bizkaia/conciertos/127820-elliott-murphy", ["Rock"]),
+    # Sevilla · Teatro de la Maestranza season and FIBES (escenaensevilla.es)
+    ("sevilla-teatro-de-la-maestranza", "L'Orfeo", "2027-02-04", "2027-02-07", "Varias funciones", "Ópera", "https://www.escenaensevilla.es/conciertos/21697-l-orfeo/1801767600", ["Monteverdi", "Barroco"]),
+    ("sevilla-teatro-de-la-maestranza", "Yuja Wang", "2027-02-05", None, "20:00", "Música", "https://www.escenaensevilla.es/conciertos/21699-yuja-wang", ["Piano", "Clásica"]),
+    ("sevilla-teatro-de-la-maestranza", "Royal Concertgebouw Orchestra", "2027-02-13", None, "20:00", "Música", "https://www.escenaensevilla.es/conciertos/21700-royal-concertgebouw-orchestra", ["Orquesta", "Clásica"]),
+    ("sevilla-teatro-de-la-maestranza", "Real Orquesta Sinfónica de Sevilla — La Quinta de Beethoven", "2027-02-18", "2027-02-19", "20:00", "Música", "https://www.escenaensevilla.es/conciertos/21701-real-orquesta-sinfonica-de-sevilla/1802977200", ["Orquesta", "Clásica"]),
+    ("sevilla-teatro-de-la-maestranza", "Ainhoa Arteta y José Bros", "2027-02-21", None, "19:00", "Música", "https://www.escenaensevilla.es/conciertos/21703-ainhoa-arteta-y-jose-bros", ["Lírica"]),
+    ("sevilla-teatro-de-la-maestranza", "Grigory Sokolov", "2027-03-07", None, "19:00", "Música", "https://www.escenaensevilla.es/conciertos/21706-grigory-sokolov", ["Piano", "Clásica"]),
+    ("sevilla-teatro-de-la-maestranza", "Pasión según San Mateo — 300 años de su estreno", "2027-03-21", None, "11:00", "Música", "https://www.escenaensevilla.es/conciertos/21707-pasion-segun-san-mateo-300-anos-de-estreno", ["Bach", "Clásica"]),
+    ("sevilla-teatro-de-la-maestranza", "Orquesta Joven de Andalucía — Álvaro Albiach", "2027-03-29", None, "20:00", "Música", "https://www.escenaensevilla.es/conciertos/21708-orquesta-joven-de-andalucia", ["Orquesta", "Clásica"]),
+    ("sevilla-teatro-de-la-maestranza", "Cuarteto Arriaga — Juventudes Musicales de Sevilla", "2027-03-30", None, "20:00", "Música", "https://www.escenaensevilla.es/conciertos/21709-cuarteto-arriaga", ["Cámara", "Clásica"]),
+    ("sevilla-fibes", "Raule — Gira Pasajero temporal", "2027-02-26", None, "22:00", "Música", "https://www.escenaensevilla.es/conciertos/22052-raule", ["Pop"]),
+    ("sevilla-fibes", "Belén Aguilera — Puro Teatro Tour", "2027-02-27", None, "21:00", "Música", "https://www.escenaensevilla.es/conciertos/22054-belen-aguilera", ["Pop"]),
+    ("sevilla-fibes", "Reza Sevilla", "2027-03-05", "2027-03-06", "20:00", "Música", "https://www.escenaensevilla.es/conciertos/21557-reza-sevilla/1804273200", ["Cofrade"]),
+    ("sevilla-fibes", "Fito & Fitipaldis — Aullidos Tour", "2027-03-20", None, "20:30", "Música", "https://www.escenaensevilla.es/conciertos/22055-fito-fitipaldis", ["Rock"]),
+    # Bilbao · ABAO opera at Euskalduna and Sala BBK
+    ("bilbao-euskalduna", "Die Walküre — ABAO Bilbao Opera", "2027-01-23", "2027-02-01", "Varias funciones", "Ópera", "https://www.planomato.com/es/bilbao/p/die-walkure-abao-bilbao", ["Wagner"]),
+    ("bilbao-euskalduna", "Roberto Devereux — ABAO Bilbao Opera", "2027-02-20", "2027-03-01", "Varias funciones", "Ópera", "https://planomato.com/es/bilbao/p/roberto-devereux-abao-bilbao", ["Donizetti"]),
+    ("bilbao-sala-bbk", "Albert Pla", "2027-02-05", None, "20:00", "Música", f"{CC}/bilbao-bizkaia/conciertos/128052-albert-pla", ["Cantautor"]),
+    ("bilbao-sala-bbk", "Parquesvr", "2027-03-05", None, "20:00", "Música", f"{CC}/bilbao-bizkaia/conciertos/128051-parquesvr", ["Indie"]),
+    # Barcelona · Palau de la Música Catalana
+    ("barcelona-palau-de-la-musica-catalana", "Candlelight: tributo a Hans Zimmer", "2027-02-20", None, "19:00", "Música", f"{CC}/barcelona/conciertos/118411-tributo-a-hans-zimmer-candlelight", ["Bandas sonoras", "Candlelight"]),
+    ("barcelona-palau-de-la-musica-catalana", "Candlelight: Queen vs. ABBA", "2027-03-27", None, "19:00", "Música", f"{CC}/barcelona/conciertos/123532-queen-vs-abba-candlelight", ["Pop", "Candlelight"]),
     # Sevilla · Cartuja Center CITE
     ("sevilla-cartuja-center-cite", "Mocedades y Los Panchos — 60 aniversario", "2026-12-22", None, "19:00", "Música", "https://www.escenaensevilla.es/conciertos/22203-60-aniversario-mocedades-y-los-panchos", ["Boleros"]),
     # Albacete · Cultural Albacete (official box office: GlobalEntradas)

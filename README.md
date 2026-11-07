@@ -340,6 +340,36 @@ Producción en **Vercel**, en [plancerca.com](https://plancerca.com). [`vercel.j
 
 El título, la descripción y el idioma del HTML se configuran en `.figma/make/site.json` y un *plugin* de Vite los inyecta al construir.
 
+### Por qué Vercel
+
+- Es un **hosting estático gratuito** y ya está conectado al repositorio.
+- Aplica las cabeceras y la regla de `vercel.json` que hace funcionar `/event/169` al recargar. Netlify o GitHub Pages necesitarían reescribir esa configuración; GitHub Pages, además, no permite cabeceras propias como la CSP.
+- **La web no depende de ninguna API, clave ni cuota:** los eventos, recintos e imágenes están en el repositorio. Nada puede caducar ni fallar durante la evaluación.
+
+### Cómo publicar y volver a publicar
+
+1. Comprueba en local que todo pasa:
+   ```bash
+   pnpm test && pnpm typecheck && pnpm build
+   pnpm check:a11y && pnpm check:terceros   # opcional, recomendado
+   ```
+2. Fusiona la rama de trabajo en `develop` y `develop` en `main` (con PR en GitHub). Vercel publica en producción lo que llega a `main` y crea una vista previa de cada rama.
+3. **Solo la primera vez:** `main` todavía muestra la página de «Próximamente» (`src/main.tsx` monta `ComingSoonPage`). Al fusionar `develop` en `main`, resuelve el conflicto de `src/main.tsx` quedándote con la versión de `develop`, que monta la app.
+4. Comprueba en la web publicada: que `/event/169` carga al recargar, que las cabeceras de seguridad aparecen en la respuesta y que Vercel tiene **pnpm** como gestor de paquetes.
+
+Para volver a publicar tras cambiar datos o código, repite los pasos 1, 2 y 4. Si prefieres no usar GitHub, con la CLI de Vercel basta con `vercel --prod` desde la raíz del proyecto.
+
+### Mantener el catálogo al día
+
+Los eventos que ya han pasado se ocultan solos, y los atajos Hoy/Mañana/Esta semana se calculan con la fecha del visitante. Para añadir eventos:
+
+```bash
+python scripts/add-events-2027.py   # añade los eventos de la lista (sin duplicar)
+pnpm images:fetch                   # busca cartel o foto de cada evento nuevo
+pnpm images:self-host && pnpm images:variants
+pnpm test                           # incluye la prueba que simula el 20/12, el 1/1 y el 31/1
+```
+
 ---
 
 ## 💻 Arrancarlo en local

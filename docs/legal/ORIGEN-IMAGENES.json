@@ -1958,8 +1958,141 @@
       "usedBy": [
         "event:355"
       ]
+    },
+    "/images/remote/2bbc4b43bdcad9b3.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_lorfeo-francois.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:357"
+      ]
+    },
+    "/images/remote/9e133390a35976e6.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_yuja_wang.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:358"
+      ]
+    },
+    "/images/remote/eece5e7bd0ce09e1.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_orquesta-real-del-concertgebou.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:359"
+      ]
+    },
+    "/images/remote/859343fdf3bdf4f4.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_lucas-macias-sinfonico.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:360"
+      ]
+    },
+    "/images/remote/8e052519afea7c79.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_ainhoa-arteta-y-bros.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:361"
+      ]
+    },
+    "/images/remote/52b2e49f757b52d5.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_sokolovanna-flegontova-4.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:362"
+      ]
+    },
+    "/images/remote/e596b4f749cc01e5.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_rias-kammerchor.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:363"
+      ]
+    },
+    "/images/remote/d84374d238e58a05.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_orquesta-joven.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:364"
+      ]
+    },
+    "/images/remote/a514f5eece978de1.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_cuarteto-arriaga.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:365"
+      ]
+    },
+    "/images/remote/147a8535ad5a033e.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_raule.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:366"
+      ]
+    },
+    "/images/remote/d77d1c69d3eec051.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_belen_aguilera.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:367"
+      ]
+    },
+    "/images/remote/466522f6b818e111.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_reza_sevilla.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:368"
+      ]
+    },
+    "/images/remote/7d998ae8f3e0d71f.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_fito_fibes.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:369"
+      ]
+    },
+    "/images/remote/224644bed2a43f40.webp": {
+      "original": "https://img.planomato.com/planimage1/venues/20200630-AUDITORIUM-1-scaled-e1593677033463_20260130_201811.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:370"
+      ]
+    },
+    "/images/remote/5962e0cf4744ec53.webp": {
+      "original": "https://img.planomato.com/planimage1/entities/Ismael-Jordi-operaactual_20260312_100147.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:371"
+      ]
+    },
+    "/images/remote/5513fed2219cf63c.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/albertpla_20270205.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:372"
+      ]
+    },
+    "/images/remote/22f7794ffd2df0df.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/parquesvr_20270305.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:373"
+      ]
+    },
+    "/images/remote/e417e899d3ca0eeb.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_candlelight.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:374"
+      ]
+    },
+    "/images/remote/47af90807577656e.webp": {
+      "original": "https://applications-media.feverup.com/image/upload/f_auto,w_550,h_550/fever2/plan/photo/cfc3a094-1945-11f0-a825-56c21721c770.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:375"
+      ]
     }
   },
   "failed": {},
-  "generatedAt": "2026-11-07T21:37:22.170Z"
+  "generatedAt": "2026-11-07T21:45:33.473Z"
 }
