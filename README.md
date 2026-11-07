@@ -249,7 +249,7 @@ erDiagram
 - **Si no hay nada aquí, mira allí.** Cuando la búsqueda no da resultados en tu ciudad pero sí en otras, se ofrecen botones «Valencia · 1» que repiten la búsqueda allí con los mismos filtros.
 - **Rangos de fecha por solapamiento.** Un evento de varios días entra en «Esta semana» si alguno de sus días cae dentro, no solo el primero.
 - **Atajos con recuento.** Hoy, Mañana, Esta semana y Próximos 30 días muestran cuántos planes hay y se desactivan cuando son cero, para no llevar a una lista vacía.
-- **Filtros que avisan antes.** El botón de la pantalla de filtros dice cuántos resultados vas a ver («Resultados · 12») y, si escribes una ciudad sin eventos, sugiere las que sí tienen.
+- **Filtros que avisan antes.** El botón de la pantalla de filtros dice cuántos resultados vas a ver («Ver resultados · 12») y, si escribes una ciudad sin eventos, sugiere las que sí tienen.
 - **Recomendados sin repetir artista.** Los tres destacados priorizan los eventos marcados como `featured` y descartan un segundo concierto del mismo artista, para que no salgan tres fechas de la misma gira.
 - **Franja de descubrimiento.** Las tres categorías con más eventos en la ciudad, cuántos hay esta semana y el evento mejor valorado.
 
@@ -261,7 +261,7 @@ erDiagram
 |---|---|
 | **Comprar** | Enlace a la venta oficial. Desaparece si el evento está agotado o ya pasó |
 | **Compartir** | `navigator.share` (menú nativo del móvil). Si no existe o falla, copia el enlace |
-| **Copiar enlace** | API del portapapeles con *fallback* a `execCommand("copy")` para navegadores antiguos; confirma con «Copiado» |
+| **Copiar enlace** | API del portapapeles con *fallback* a `execCommand("copy")` para navegadores antiguos; confirma con «Enlace copiado» |
 | **Añadir al calendario** | Google Calendar (enlace con plantilla) o archivo `.ics` para Outlook y Apple Calendar |
 | **Guardar** | Corazón con `aria-pressed`; se guarda en `localStorage` |
 
@@ -295,7 +295,7 @@ Además, cada ficha incluye un bloque **JSON-LD de schema.org** (`Event`, `Place
 Como proyecto de HCI, la accesibilidad se trató como requisito y no como repaso final:
 
 - **Enlace «Saltar al contenido»** y **foco movido al `<main>`** en cada cambio de página, para que el lector de pantalla no se quede en el menú.
-- **Diálogos accesibles.** El de bienvenida y el de «Acerca de» tienen `role="dialog"`, `aria-modal`, título enlazado, cierre con Escape y foco atrapado: Tab no se escapa a la página de detrás y, al cerrar, el foco vuelve al botón que lo abrió.
+- **Diálogos accesibles.** El de bienvenida y el de «Acerca de» tienen `role="dialog"`, `aria-modal`, título enlazado, cierre con Escape y foco atrapado: Tab no se escapa a la página de detrás. Al cerrar «Acerca de», el foco vuelve al botón que lo abrió.
 - **Estados anunciados.** Botones de alternar con `aria-pressed` (guardar, categorías, seguir), contador del carrusel con `aria-live` y mensajes de «sin resultados» con `role="status"`.
 - **Reducir movimiento.** Con `prefers-reduced-motion` se quitan las animaciones y el desplazamiento suave, también en los botones del carrusel.
 - **Imágenes que no rompen la página.** `FallbackImage` pinta un fondo del tema con el icono de la categoría si una imagen externa falla, incluido el caso de que falle antes de que React la monte.

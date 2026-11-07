@@ -45,9 +45,9 @@ Para cambiar de ciudad más tarde, pulsa su nombre en la cabecera (junto al núm
 
 **Por nombre.** Escribe en la barra de arriba un artista, un recinto o lo que buscas («rock», «flamenco», «ópera») y pulsa Intro. No hace falta poner tildes. Si en tu ciudad no hay nada pero sí en otra, te aparece un botón para ver los resultados allí.
 
-**Con varios criterios.** Pulsa **«Filtros»** para combinar ciudad, categorías y fecha. Con **«Elegir fecha»** puedes buscar un día concreto. El botón de abajo te dice cuántos resultados vas a ver antes de aplicarlo, y **«Limpiar»** lo deja todo como estaba.
+**Con varios criterios.** Pulsa **«Filtros»** para combinar ciudad, categorías y fecha. Con **«Elegir fecha»** puedes buscar un día concreto. El botón de abajo («Ver resultados · 12») te dice cuántos resultados vas a ver antes de aplicarlo, y **«Limpiar»** lo deja todo como estaba.
 
-**Ver más.** El catálogo enseña 12 eventos cada vez. Pulsa **«Ver más»** para seguir; si entras en una ficha y vuelves atrás, sigues donde estabas.
+**Mostrar más.** El catálogo enseña 12 eventos cada vez. Pulsa **«Mostrar más eventos»** para seguir; si entras en una ficha y vuelves atrás, sigues donde estabas.
 
 > 💡 Todo lo que eliges queda en la dirección de la página. Si copias el enlace y se lo mandas a alguien, verá la misma búsqueda con los mismos filtros.
 
@@ -58,9 +58,9 @@ Pulsa cualquier tarjeta para abrir su ficha. Arriba tienes fecha, hora, recinto 
 | Botón | Qué hace |
 |---|---|
 | **Comprar en la web oficial** | Abre la venta oficial (Ticketmaster, la web del recinto…). Plan Cerca no vende entradas |
-| **Compartir** | En el móvil abre el menú de compartir (WhatsApp, mensajes…). En el ordenador copia el enlace |
+| **Compartir** | Abre el menú de compartir del dispositivo (WhatsApp, mensajes…). Si el navegador no tiene ese menú, copia el enlace |
 | **Guardar** ♥ | Lo añade a tus favoritos |
-| **Copiar enlace** | Copia la dirección de la ficha y confirma con «Copiado» |
+| **Copiar enlace** | Copia la dirección de la ficha y confirma con «Enlace copiado» |
 | **Añadir al calendario** | **Google Calendar** abre el evento listo para guardar. **Outlook / archivo .ics** descarga un archivo que abren Outlook, Apple Calendar y casi cualquier calendario |
 
 Al añadirlo al calendario, la hora es la de España aunque estés en otro país. Si la hora aún no está confirmada, se guarda como evento de día completo.
@@ -83,7 +83,7 @@ Los favoritos se guardan **en este navegador**. Si cambias de móvil u ordenador
 
 **Recintos.** En la pestaña **Recintos** tienes las salas, teatros, estadios y museos de tu ciudad. Cada ficha trae la dirección, el botón **«Cómo llegar»** (Google Maps), la web oficial y sus próximos eventos.
 
-**Artistas.** Si un evento tiene ficha de artista, verás **«Ver ficha completa»** en la sección «Sobre la banda» o «Sobre el artista». Ahí aparecen todas sus fechas, en cualquier ciudad, y sus enlaces oficiales.
+**Artistas.** Si un evento tiene ficha de artista, verás **«Ver ficha completa»** en la sección «Sobre…» de la ficha del evento (por ejemplo, «Sobre la banda» o «Sobre Amaral»). Ahí aparecen todas sus fechas, en cualquier ciudad, y sus enlaces oficiales.
 
 Los botones **«Seguir artista»** y **«Avisarme de nuevos eventos»** guardan tu preferencia en el navegador, pero **por ahora no envían ningún aviso**.
 
@@ -206,7 +206,7 @@ La ficha estará en `/artist/<id>` y solo lista los eventos con `confirmed: true
 
 ### Publicar
 
-Las ramas de trabajo se fusionan en `develop` mediante PR, y de ahí a `main`. Vercel publica [plancerca.com](https://plancerca.com) desde el repositorio. Antes de fusionar:
+Las ramas de trabajo se fusionan en `develop` mediante PR, y de ahí a `main`. Vercel crea una vista previa de cada rama que se sube y publica en [plancerca.com](https://plancerca.com) lo que llega a `main`. Antes de fusionar:
 
 - [ ] `pnpm build` termina sin errores.
 - [ ] La app abre en local y la ficha de algún evento nuevo se ve bien.
