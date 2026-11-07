@@ -1,5 +1,19 @@
+import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ComingSoonPage from './components/ComingSoonPage'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App'
+import ErrorBoundary from './components/ErrorBoundary'
+import { PreferredCityProvider } from './context/PreferredCityContext'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<ComingSoonPage />)
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <PreferredCityProvider>
+          <App />
+        </PreferredCityProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
+  </React.StrictMode>,
+)

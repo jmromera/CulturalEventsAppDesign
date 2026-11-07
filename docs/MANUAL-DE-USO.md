@@ -148,7 +148,7 @@ Añade un objeto a [`src/data/events.json`](../src/data/events.json). Un ejemplo
   "venueId": "valencia-roig-arena",           // debe existir en venues.json
   "relatedEntityId": "muse",                  // opcional: ficha en related-entities.json
   "featured": true,                           // opcional: candidato a «Recomendados»
-  "image": "https://…",
+  "image": "https://…",                       // pon la URL original: el paso siguiente la cambia por una copia local
   "ticketUrl": "https://…",                   // venta oficial
   "price": "Consultar precio oficial",        // o "Desde 35 €"
   "availability": "Próximamente",             // "Entradas disponibles", "Agotado", "Consultar…"
@@ -161,6 +161,15 @@ Añade un objeto a [`src/data/events.json`](../src/data/events.json). Un ejemplo
   "fullDescription": "El texto largo de la ficha."
 }
 ```
+
+**Después, autoaloja la imagen.** La web no carga nada de otros dominios (lo exige la política de privacidad y una prueba falla si no):
+
+```bash
+pnpm images:self-host   # descarga las imágenes nuevas, las pasa a WebP y cambia la URL por /images/remote/…
+pnpm images:variants    # crea las copias de 640 px para móvil
+```
+
+El origen de cada imagen queda en `docs/legal/ORIGEN-IMAGENES.json`. Usa solo imágenes que tengas permiso para publicar.
 
 **Cuidado con:**
 
@@ -208,9 +217,11 @@ La ficha estará en `/artist/<id>` y solo lista los eventos con `confirmed: true
 
 Las ramas de trabajo se fusionan en `develop` mediante PR, y de ahí a `main`. Vercel crea una vista previa de cada rama que se sube y publica en [plancerca.com](https://plancerca.com) lo que llega a `main`. Antes de fusionar:
 
+- [ ] `pnpm test` y `pnpm typecheck` pasan.
 - [ ] `pnpm build` termina sin errores.
+- [ ] `pnpm check:terceros` y `pnpm check:a11y` pasan (si has cambiado diseño o páginas).
 - [ ] La app abre en local y la ficha de algún evento nuevo se ve bien.
-- [ ] Las imágenes nuevas cargan (algunas webs bloquean que otras usen sus imágenes).
+- [ ] Antes del primer lanzamiento: `datos-legales.json` completo y con `esEjemplo: false` (ver `docs/legal/PENDIENTE.md`).
 
 ### Rehacer las capturas
 

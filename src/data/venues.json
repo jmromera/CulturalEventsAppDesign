@@ -6,7 +6,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://static.ra.co/images/clubs/lg/capturadepantalla2023-10-30alas16.06.48.png?dateUpdated=1698678498017",
+    "image": null,
     "kind": {
       "es": "Sala de conciertos",
       "en": "Live music venue",
@@ -18,7 +18,13 @@
       "fr": "Une salle madrilène dédiée aux concerts et à la musique live."
     },
     "id": "madrid-lula-club",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lula%20Club%2C%20Gran%20V%C3%ADa%2054%2C%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lula%20Club%2C%20Gran%20V%C3%ADa%2054%2C%20Madrid",
+    "lat": 40.4213,
+    "lng": -3.70724,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
   },
   {
     "city": "Madrid",
@@ -27,7 +33,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://www.salabut.es/wp-content/uploads/2025/12/20726e5d0a9f687d3f8420f50cb58c32_088d0fc71e.webp",
+    "image": null,
     "kind": {
       "es": "Sala de conciertos",
       "en": "Live music venue",
@@ -39,7 +45,13 @@
       "fr": "Une salle madrilène dédiée aux concerts et à la musique live."
     },
     "id": "madrid-sala-but",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20But%2C%20Sala%20But%2C%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20But%2C%20Sala%20But%2C%20Madrid",
+    "lat": 40.42699,
+    "lng": -3.69959,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
   },
   {
     "city": "Madrid",
@@ -48,7 +60,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/5/55/Madrid_-_Teatro_Joy_Eslava_3.jpg",
+    "image": "/images/venues/madrid-teatro-eslava.webp",
     "kind": {
       "es": "Teatro",
       "en": "Theatre",
@@ -60,7 +72,18 @@
       "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
     },
     "id": "madrid-teatro-eslava",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Eslava%2C%20Teatro%20Eslava%2C%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Eslava%2C%20Teatro%20Eslava%2C%20Madrid",
+    "lat": 40.41707,
+    "lng": -3.70651,
+    "capacity": 1200,
+    "wikidata": "Q3826935",
+    "imageCredit": {
+      "author": "Luis García (Zaqarbal)",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Teatro_Eslava_(Madrid)_01.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q3826935"
   },
   {
     "city": "Madrid",
@@ -73,7 +96,7 @@
       "en": "Official programme",
       "fr": "Programme officiel"
     },
-    "image": "https://www.teatroreal.es/sites/default/files/2019-02/teatro-real.jpg",
+    "image": "/images/venues/madrid-teatro-real.webp",
     "kind": {
       "es": "Ópera y música",
       "en": "Opera and music",
@@ -85,7 +108,18 @@
       "fr": "Une scène consacrée à l’opéra et aux concerts."
     },
     "id": "madrid-teatro-real",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Real%2C%20Plaza%20de%20Isabel%20II%2C%20s%2Fn%2C%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Real%2C%20Plaza%20de%20Isabel%20II%2C%20s%2Fn%2C%20Madrid",
+    "lat": 40.41824,
+    "lng": -3.71037,
+    "capacity": 1958,
+    "wikidata": "Q211250",
+    "imageCredit": {
+      "author": "Fernando",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Teatro_Real_de_Madrid_2025.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q211250"
   },
   {
     "city": "Madrid",
@@ -94,7 +128,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://assets.realmadrid.com/is/image/realmadrid/Bernabeu?$Desktop$&fit=wrap&wid=1024",
+    "image": "/images/venues/madrid-estadio-santiago-bernabeu.webp",
     "kind": {
       "es": "Estadio",
       "en": "Stadium",
@@ -106,7 +140,18 @@
       "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
     },
     "id": "madrid-estadio-santiago-bernabeu",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Santiago%20Bernab%C3%A9u%2C%20Estadio%20Santiago%20Bernab%C3%A9u%2C%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Santiago%20Bernab%C3%A9u%2C%20Estadio%20Santiago%20Bernab%C3%A9u%2C%20Madrid",
+    "lat": 40.45306,
+    "lng": -3.68835,
+    "capacity": 83186,
+    "wikidata": "Q164027",
+    "imageCredit": {
+      "author": "Zoser",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Estadio_Santiago_Bernab%C3%A9u_Madrid.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q164027"
   },
   {
     "city": "Madrid",
@@ -115,7 +160,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wanda-Metropolitano.jpg/1280px-Wanda-Metropolitano.jpg",
+    "image": "/images/venues/madrid-riyadh-air-metropolitano.webp",
     "kind": {
       "es": "Estadio",
       "en": "Stadium",
@@ -127,7 +172,18 @@
       "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
     },
     "id": "madrid-riyadh-air-metropolitano",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Riyadh%20Air%20Metropolitano%2C%20Riyadh%20Air%20Metropolitano%2C%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Riyadh%20Air%20Metropolitano%2C%20Riyadh%20Air%20Metropolitano%2C%20Madrid",
+    "lat": 40.43611,
+    "lng": -3.59944,
+    "capacity": 70813,
+    "wikidata": "Q1369687",
+    "imageCredit": {
+      "author": "Fernandopascullo",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Wanda-Metropolitano.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q1369687"
   },
   {
     "city": "Madrid",
@@ -136,7 +192,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Estadio_de_Vallecas.jpg/1280px-Estadio_de_Vallecas.jpg",
+    "image": "/images/venues/madrid-estadio-de-vallecas.webp",
     "kind": {
       "es": "Estadio",
       "en": "Stadium",
@@ -148,7 +204,18 @@
       "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
     },
     "id": "madrid-estadio-de-vallecas",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20de%20Vallecas%2C%20Estadio%20de%20Vallecas%2C%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20de%20Vallecas%2C%20Estadio%20de%20Vallecas%2C%20Madrid",
+    "lat": 40.39194,
+    "lng": -3.65896,
+    "capacity": 14708,
+    "wikidata": "Q983806",
+    "imageCredit": {
+      "author": "K3T0",
+      "license": "CC BY 2.5 es",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/es/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Estadio_de_Vallecas.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q983806"
   },
   {
     "city": "Barcelona",
@@ -161,7 +228,7 @@
       "en": "Concert programme",
       "fr": "Programme des concerts"
     },
-    "image": "https://www.palaumusica.cat/images/1479156/full_inner_page.jpg",
+    "image": "/images/venues/barcelona-palau-de-la-musica-catalana.webp",
     "kind": {
       "es": "Sala de conciertos",
       "en": "Concert hall",
@@ -173,7 +240,18 @@
       "fr": "Un lieu barcelonais consacré aux concerts et à la musique live."
     },
     "id": "barcelona-palau-de-la-musica-catalana",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20de%20la%20M%C3%BAsica%20Catalana%2C%20Carrer%20del%20Palau%20de%20la%20M%C3%BAsica%2C%204-6%2C%2008003%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20de%20la%20M%C3%BAsica%20Catalana%2C%20Carrer%20del%20Palau%20de%20la%20M%C3%BAsica%2C%204-6%2C%2008003%20Barcelona",
+    "lat": 41.38767,
+    "lng": 2.17528,
+    "capacity": null,
+    "wikidata": "Q327940",
+    "imageCredit": {
+      "author": "Doomuu",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Palau_m%C3%BAsica_catalana_exterior.jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Barcelona",
@@ -182,7 +260,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Teatre_Nacional_de_Catalunya.jpg",
+    "image": "/images/venues/barcelona-teatre-nacional-de-catalunya.webp",
     "kind": {
       "es": "Teatro",
       "en": "Theatre",
@@ -194,7 +272,18 @@
       "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
     },
     "id": "barcelona-teatre-nacional-de-catalunya",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Nacional%20de%20Catalunya%2C%20Pla%C3%A7a%20de%20les%20Arts%2C%201%2C%2008013%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Nacional%20de%20Catalunya%2C%20Pla%C3%A7a%20de%20les%20Arts%2C%201%2C%2008013%20Barcelona",
+    "lat": 41.39972,
+    "lng": 2.18611,
+    "capacity": 886,
+    "wikidata": "Q1320197",
+    "imageCredit": {
+      "author": "Canaan",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Teatre_Nacional.JPG"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q1320197"
   },
   {
     "city": "Barcelona",
@@ -203,7 +292,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Teatre_Lliure_de_Gr%C3%A0cia.jpg/1280px-Teatre_Lliure_de_Gr%C3%A0cia.jpg",
+    "image": null,
     "kind": {
       "es": "Teatro",
       "en": "Theatre",
@@ -215,7 +304,13 @@
       "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
     },
     "id": "barcelona-teatre-lliure-de-gracia",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Lliure%20de%20Gr%C3%A0cia%2C%20Carrer%20de%20Montseny%2C%2047%2C%2008012%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Lliure%20de%20Gr%C3%A0cia%2C%20Carrer%20de%20Montseny%2C%2047%2C%2008012%20Barcelona",
+    "lat": 41.40272,
+    "lng": 2.15596,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
   },
   {
     "city": "Barcelona",
@@ -228,7 +323,7 @@
       "en": "Exhibitions",
       "fr": "Expositions"
     },
-    "image": "https://upload.wikimedia.org/wikipedia/commons/6/67/Barcelona_Museum_of_Contemporary_Art.jpg",
+    "image": "/images/venues/barcelona-macba.webp",
     "kind": {
       "es": "Museo de arte contemporáneo",
       "en": "Contemporary art museum",
@@ -240,7 +335,18 @@
       "fr": "Un musée barcelonais consacré à l’art contemporain et aux expositions."
     },
     "id": "barcelona-macba",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=MACBA%2C%20Pla%C3%A7a%20dels%20%C3%80ngels%2C%201%2C%2008001%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=MACBA%2C%20Pla%C3%A7a%20dels%20%C3%80ngels%2C%201%2C%2008001%20Barcelona",
+    "lat": 41.38311,
+    "lng": 2.16679,
+    "capacity": null,
+    "wikidata": "Q1067140",
+    "imageCredit": {
+      "author": "Zarateman",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Barcelona_-_Museu_d%27Art_Contemporani_de_Barcelona_(MACBA).jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Barcelona",
@@ -249,7 +355,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Museo_PIcasso_._Palau_Berenguer_._Barcelona.JPG",
+    "image": "/images/venues/barcelona-museu-picasso-de-barcelona.webp",
     "kind": {
       "es": "Museo de arte",
       "en": "Art museum",
@@ -261,7 +367,18 @@
       "fr": "Un musée barcelonais consacré à l’œuvre de Picasso et à son lien avec la ville."
     },
     "id": "barcelona-museu-picasso-de-barcelona",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Museu%20Picasso%20de%20Barcelona%2C%20Carrer%20de%20Montcada%2C%2015-23%2C%2008003%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Museu%20Picasso%20de%20Barcelona%2C%20Carrer%20de%20Montcada%2C%2015-23%2C%2008003%20Barcelona",
+    "lat": 41.38522,
+    "lng": 2.18089,
+    "capacity": null,
+    "wikidata": "Q1050032",
+    "imageCredit": {
+      "author": "Pere López",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Palau_Berenguer_d%27Aguilar.jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Barcelona",
@@ -274,7 +391,7 @@
       "en": "Stadium visits",
       "fr": "Visite du stade"
     },
-    "image": "https://www.fcbarcelona.com/photo-resources/2021/08/09/c4f2dddd-2152-4b8b-acf8-826b4377e29d/Camp-Nou-4.jpg?width=1600",
+    "image": "/images/venues/barcelona-spotify-camp-nou.webp",
     "kind": {
       "es": "Estadio",
       "en": "Stadium",
@@ -286,7 +403,18 @@
       "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
     },
     "id": "barcelona-spotify-camp-nou",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Spotify%20Camp%20Nou%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Spotify%20Camp%20Nou%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona",
+    "lat": 41.38083,
+    "lng": 2.12278,
+    "capacity": 105000,
+    "wikidata": "Q159848",
+    "imageCredit": {
+      "author": "Oh-Barcelona.com from Barcelona, Spain",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Camp_Nou_aerial_(cropped).jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q159848"
   },
   {
     "city": "Barcelona",
@@ -295,7 +423,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Estadi_Johan_Cruyff.jpg/1280px-Estadi_Johan_Cruyff.jpg",
+    "image": "/images/venues/barcelona-estadi-johan-cruyff.webp",
     "kind": {
       "es": "Estadio",
       "en": "Stadium",
@@ -307,7 +435,18 @@
       "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
     },
     "id": "barcelona-estadi-johan-cruyff",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadi%20Johan%20Cruyff%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadi%20Johan%20Cruyff%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona",
+    "lat": 41.37422,
+    "lng": 2.05051,
+    "capacity": 6000,
+    "wikidata": "Q29043488",
+    "imageCredit": {
+      "author": "Wilnel José Verdú Guerrero",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Estadi_Johan_Cruyff.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q29043488"
   },
   {
     "city": "Barcelona",
@@ -316,7 +455,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Palau_Blaugrana_%28Barcelona%2C_ESP%29.jpg/1280px-Palau_Blaugrana_%28Barcelona%2C_ESP%29.jpg",
+    "image": "/images/venues/barcelona-palau-blaugrana.webp",
     "kind": {
       "es": "Pabellón deportivo",
       "en": "Sports arena",
@@ -328,7 +467,18 @@
       "fr": "Une salle barcelonaise accueillant des compétitions et événements sportifs."
     },
     "id": "barcelona-palau-blaugrana",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20Blaugrana%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20Blaugrana%2C%20Carrer%20d'Ar%C3%ADstides%20Maillol%2C%2012%2C%2008028%20Barcelona",
+    "lat": 41.38008,
+    "lng": 2.12005,
+    "capacity": 7585,
+    "wikidata": "Q930832",
+    "imageCredit": {
+      "author": "Sergi Larripa (User:SergiL)",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:050529_Barcelona_132.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q930832"
   },
   {
     "city": "Barcelona",
@@ -337,7 +487,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Gran_Teatre_del_Liceu%2C_fa%C3%A7ana_Rambla.jpg",
+    "image": "/images/venues/barcelona-gran-teatre-del-liceu.webp",
     "kind": {
       "es": "Ópera y música",
       "en": "Opera and music",
@@ -349,7 +499,18 @@
       "fr": "Une scène consacrée à l’opéra et aux concerts."
     },
     "id": "barcelona-gran-teatre-del-liceu",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gran%20Teatre%20del%20Liceu%2C%20La%20Rambla%2C%2051-59%2C%2008002%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gran%20Teatre%20del%20Liceu%2C%20La%20Rambla%2C%2051-59%2C%2008002%20Barcelona",
+    "lat": 41.38028,
+    "lng": 2.17361,
+    "capacity": 2292,
+    "wikidata": "Q1130050",
+    "imageCredit": {
+      "author": "Chabe01",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Th%C3%A9%C3%A2tre_Liceu_Barcelone_3.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q1130050"
   },
   {
     "city": "Barcelona",
@@ -358,7 +519,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Teatre_Lliure_de_Montjuic.jpg/1280px-Teatre_Lliure_de_Montjuic.jpg",
+    "image": null,
     "kind": {
       "es": "Teatro",
       "en": "Theatre",
@@ -370,7 +531,13 @@
       "fr": "Un lieu de spectacle avec du théâtre, de la danse et de la musique."
     },
     "id": "barcelona-teatre-lliure-de-montjuic",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Lliure%20de%20Montju%C3%AFc%2C%20Pla%C3%A7a%20de%20Margarida%20Xirgu%2C%201%2C%2008004%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20Lliure%20de%20Montju%C3%AFc%2C%20Pla%C3%A7a%20de%20Margarida%20Xirgu%2C%201%2C%2008004%20Barcelona",
+    "lat": 41.37102,
+    "lng": 2.15749,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
   },
   {
     "city": "Bilbao",
@@ -379,7 +546,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://cms.guggenheim-bilbao.eus/uploads/2019/03/edificio-tulipanes-guggenheim-bilbao-museoa.jpeg",
+    "image": "/images/venues/bilbao-guggenheim-bilbao.webp",
     "kind": {
       "es": "Museo de arte contemporáneo",
       "en": "Contemporary art museum",
@@ -391,7 +558,18 @@
       "fr": "Un musée de Bilbao consacré à l’art moderne et contemporain, au bord de la ria."
     },
     "id": "bilbao-guggenheim-bilbao",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Guggenheim%20Bilbao%2C%20Avenida%20Abandoibarra%2C%202%2C%2048009%20Bilbao"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Guggenheim%20Bilbao%2C%20Avenida%20Abandoibarra%2C%202%2C%2048009%20Bilbao",
+    "lat": 43.26883,
+    "lng": -2.9341,
+    "capacity": null,
+    "wikidata": "Q179199",
+    "imageCredit": {
+      "author": "Naotake Murayama",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Museo_Guggenheim,_Bilbao_(31273245344).jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Bilbao",
@@ -400,7 +578,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://www.euskaldunabilbao.com/src/uploads/2015/06/palacio_1B.jpg?x72554",
+    "image": "/images/venues/bilbao-euskalduna.webp",
     "kind": {
       "es": "Palacio de congresos",
       "en": "Conference centre",
@@ -412,7 +590,18 @@
       "fr": "Un centre de congrès et de concerts au bord de la ria de Bilbao, dans un bâtiment contemporain remarquable."
     },
     "id": "bilbao-euskalduna",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Euskalduna%2C%20Abandoibarra%20Etorbidea%2C%204%2C%2048011%20Bilbao"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Euskalduna%2C%20Abandoibarra%20Etorbidea%2C%204%2C%2048011%20Bilbao",
+    "lat": 43.26694,
+    "lng": -2.94472,
+    "capacity": null,
+    "wikidata": "Q1783240",
+    "imageCredit": {
+      "author": "Zarateman",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Bilbao_-_Euskalduna_1.JPG"
+    },
+    "capacitySource": null
   },
   {
     "city": "Bilbao",
@@ -421,7 +610,7 @@
     "websiteUrl": null,
     "programmeUrl": null,
     "programmeLabel": null,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/2/24/San_Mames_stadium.jpg",
+    "image": "/images/venues/bilbao-san-mames.webp",
     "kind": {
       "es": "Estadio",
       "en": "Stadium",
@@ -433,7 +622,109 @@
       "fr": "Un stade qui accueille les matchs à domicile et l’agenda sportif du club."
     },
     "id": "bilbao-san-mames",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=San%20Mam%C3%A9s%2C%20Rafael%20Moreno%20Pitxitxi%20Kalea%2C%20s%2Fn%2C%2048013%20Bilbao"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=San%20Mam%C3%A9s%2C%20Rafael%20Moreno%20Pitxitxi%20Kalea%2C%20s%2Fn%2C%2048013%20Bilbao",
+    "lat": 43.26421,
+    "lng": -2.94937,
+    "capacity": 53289,
+    "wikidata": "Q182864",
+    "imageCredit": {
+      "author": "Валерий Дед",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Bilbao_San_Mam%C3%A9s_Stadium_4.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q182864"
+  },
+  {
+    "city": "Bilbao",
+    "name": "Bizkaia Arena - BEC",
+    "address": "Azkue Kalea, 1, 48902 Barakaldo, Bizkaia",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/bilbao-bizkaia-arena-bec.webp",
+    "kind": {
+      "es": "Pabellón multiusos",
+      "en": "Multi-purpose arena",
+      "fr": "Salle polyvalente"
+    },
+    "description": {
+      "es": "Un pabellón de Bizkaia para conciertos y grandes eventos.",
+      "en": "A Bizkaia arena for concerts and major events.",
+      "fr": "Une salle de Bizkaia pour les concerts et grands événements."
+    },
+    "id": "bilbao-bizkaia-arena-bec",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bizkaia%20Arena%20BEC%2C%20Azkue%20Kalea%2C%201%2C%2048902%20Barakaldo",
+    "lat": 43.28944,
+    "lng": -2.98972,
+    "capacity": 20000,
+    "wikidata": "Q4907607",
+    "imageCredit": {
+      "author": "Zarateman",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Baracaldo_-_Bilbao_Exhibition_Center_(BEC)_51.jpg"
+    },
+    "capacitySource": "https://bilbaoexhibitioncentre.com/en/?p=2161"
+  },
+  {
+    "city": "Bilbao",
+    "name": "Bilbao Arena",
+    "address": "Askatasuna Etorbidea, 13, 48003 Bilbao",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/bilbao-bilbao-arena.webp",
+    "kind": {
+      "es": "Pabellón deportivo",
+      "en": "Sports arena",
+      "fr": "Salle omnisports"
+    },
+    "description": {
+      "es": "Un pabellón bilbaíno para eventos deportivos y conciertos.",
+      "en": "A Bilbao arena for sporting events and concerts.",
+      "fr": "Une salle bilbaïenne pour les événements sportifs et les concerts."
+    },
+    "id": "bilbao-bilbao-arena",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bilbao%20Arena%2C%20Askatasuna%20Etorbidea%2C%2013%2C%2048003%20Bilbao",
+    "lat": 43.25222,
+    "lng": -2.92583,
+    "capacity": 10014,
+    "wikidata": "Q402599",
+    "imageCredit": {
+      "author": "Xabi1980 (xabier3007 at panoramio.com)",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Bilbao_Arena.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q402599"
+  },
+  {
+    "city": "Bilbao",
+    "name": "Sala Santana 27",
+    "address": "Telleria Kalea, 27, 48004 Bilbao",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": null,
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Live music venue",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Una sala bilbaína dedicada a conciertos y música en directo.",
+      "en": "A Bilbao venue dedicated to concerts and live music.",
+      "fr": "Une salle bilbaïenne dédiée aux concerts et à la musique live."
+    },
+    "id": "bilbao-sala-santana-27",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20Santana%2027%2C%20Telleria%20Kalea%2C%2027%2C%2048004%20Bilbao",
+    "lat": 43.2503,
+    "lng": -2.89998,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
   },
   {
     "city": "Valencia",
@@ -446,7 +737,7 @@
       "en": "Official programme",
       "fr": "Programme officiel"
     },
-    "image": "https://images.unsplash.com/photo-1719401542194-95139aed215c?auto=format&fit=crop&w=1400&q=85",
+    "image": "/images/venues/valencia-palau-de-la-musica-de-valencia.webp",
     "kind": {
       "es": "Auditorio de música",
       "en": "Concert hall",
@@ -458,7 +749,18 @@
       "fr": "Une salle consacrée à la musique symphonique, de chambre et à la programmation culturelle."
     },
     "id": "valencia-palau-de-la-musica-de-valencia",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20de%20la%20M%C3%BAsica%20de%20Val%C3%A8ncia%2C%20Passeig%20de%20l'Albereda%2C%2030%2C%2046023%20Val%C3%A8ncia"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20de%20la%20M%C3%BAsica%20de%20Val%C3%A8ncia%2C%20Passeig%20de%20l'Albereda%2C%2030%2C%2046023%20Val%C3%A8ncia",
+    "lat": 39.46611,
+    "lng": -0.36028,
+    "capacity": null,
+    "wikidata": "Q9054601",
+    "imageCredit": {
+      "author": "Espencat",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A8ncia_Palau_de_la_M%C3%BAsica.jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Valencia",
@@ -471,7 +773,7 @@
       "en": "Events",
       "fr": "Événements"
     },
-    "image": "https://www.roigarena.com/storyblok/f/336002/2557x1287/4b7ab73d36/roig-arena_exterior_fachada_01.png?optimize=high&format=auto&quality=70",
+    "image": "/images/venues/valencia-roig-arena.webp",
     "kind": {
       "es": "Arena multiusos",
       "en": "Multi-purpose arena",
@@ -483,7 +785,50 @@
       "fr": "Une enceinte valencienne pour le basket, les concerts et les grands spectacles."
     },
     "id": "valencia-roig-arena",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Roig%20Arena%2C%20C%2F%20Bomber%20Ram%C3%B3n%20Duart%2C%2012%2C%20Quatre%20Carreres%2C%2046013%20Valencia"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Roig%20Arena%2C%20C%2F%20Bomber%20Ram%C3%B3n%20Duart%2C%2012%2C%20Quatre%20Carreres%2C%2046013%20Valencia",
+    "lat": 39.44921,
+    "lng": -0.36426,
+    "capacity": 20000,
+    "wikidata": "Q82992187",
+    "imageCredit": {
+      "author": "M4THIelBromista",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Roig_Arena.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q82992187"
+  },
+  {
+    "city": "Valencia",
+    "name": "Estadio de Mestalla",
+    "address": "Av. de Suècia, s/n, 46010 Valencia",
+    "websiteUrl": "https://www.valenciacf.com/",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/valencia-estadio-de-mestalla.webp",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Valencia CF, que acoge sus partidos como local.",
+      "en": "Valencia CF's stadium, home to the club's home fixtures.",
+      "fr": "Le stade du Valencia CF, qui accueille ses matchs à domicile."
+    },
+    "id": "valencia-estadio-de-mestalla",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20de%20Mestalla%2C%20Av.%20de%20Su%C3%A8cia%2C%2046010%20Valencia",
+    "lat": 39.47472,
+    "lng": -0.35833,
+    "capacity": 49430,
+    "wikidata": "Q202762",
+    "imageCredit": {
+      "author": "Valencia CF",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:CAMP_DE_MESTALLA_GRADA_DE_LA_MAR_2014.JPG"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q202762"
   },
   {
     "city": "Sevilla",
@@ -496,7 +841,7 @@
       "en": "Official programme",
       "fr": "Programme officiel"
     },
-    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Teatro_de_la_Maestranza_001.jpg",
+    "image": "/images/venues/sevilla-teatro-de-la-maestranza.webp",
     "kind": {
       "es": "Ópera y música",
       "en": "Opera and music",
@@ -508,7 +853,18 @@
       "fr": "Une scène consacrée à l’opéra et aux concerts."
     },
     "id": "sevilla-teatro-de-la-maestranza",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20de%20la%20Maestranza%2C%20Paseo%20de%20Crist%C3%B3bal%20Col%C3%B3n%2C%2022%2C%2041001%20Sevilla"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20de%20la%20Maestranza%2C%20Paseo%20de%20Crist%C3%B3bal%20Col%C3%B3n%2C%2022%2C%2041001%20Sevilla",
+    "lat": 37.3838,
+    "lng": -5.99713,
+    "capacity": 1800,
+    "wikidata": "Q3527707",
+    "imageCredit": {
+      "author": "Vic Lic",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Teatro_de_la_Maestranza,_Guadalquivir.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q3527707"
   },
   {
     "city": "Albacete",
@@ -521,7 +877,7 @@
       "en": "Tickets and programme",
       "fr": "Billets et programme"
     },
-    "image": "https://www.globalentradas.com/uploads/promotor/1/promotor-programacion-cultural-albacete.webp",
+    "image": "/images/venues/albacete-teatro-circo.webp",
     "kind": {
       "es": "Teatro",
       "en": "Theatre",
@@ -533,7 +889,18 @@
       "fr": "Un lieu de spectacle proposant théâtre, musique et spectacles en direct."
     },
     "id": "albacete-teatro-circo",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Circo%2C%20Calle%20Isaac%20Peral%2C%202%2C%2002001%20Albacete"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Circo%2C%20Calle%20Isaac%20Peral%2C%202%2C%2002001%20Albacete",
+    "lat": 38.9959,
+    "lng": -1.8541,
+    "capacity": null,
+    "wikidata": "Q11951071",
+    "imageCredit": {
+      "author": "DnTrotaMundos ☮",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Teatro_Circo_de_Albacete_-_panoramio.jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Albacete",
@@ -546,7 +913,7 @@
       "en": "Tickets and programme",
       "fr": "Billets et programme"
     },
-    "image": "https://laguiaw.com/contenido/documentos/99306/fotografia.jpg",
+    "image": "/images/venues/albacete-teatro-de-la-paz.webp",
     "kind": {
       "es": "Teatro",
       "en": "Theatre",
@@ -558,25 +925,54 @@
       "fr": "Un lieu de spectacle proposant théâtre, musique et spectacles en direct."
     },
     "id": "albacete-teatro-de-la-paz",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20de%20La%20Paz%2C%20Plaza%20de%20la%20Paz%2C%20s%2Fn%2C%2002002%20Albacete"
-  }
-,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20de%20La%20Paz%2C%20Plaza%20de%20la%20Paz%2C%20s%2Fn%2C%2002002%20Albacete",
+    "lat": 39.00632,
+    "lng": -1.8629,
+    "capacity": null,
+    "wikidata": "Q17187030",
+    "imageCredit": {
+      "author": "JPOK",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Teatro_de_la_Paz._Albacete.jpg"
+    },
+    "capacitySource": null
+  },
   {
     "city": "Valencia",
     "name": "Teatro Olympia",
     "address": "Calle de San Vicente Mártir, 44, 46002 Valencia",
     "websiteUrl": "https://www.teatro-olympia.com/",
     "programmeUrl": "https://www.teatro-olympia.com/mamma-mia-el-musical",
-    "programmeLabel": { "es": "Información oficial", "en": "Official information", "fr": "Informations officielles" },
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfMehofO2L8fwM3Qu_2Iowy1ruMhJu8ss7ZLdqer5fsA&s=10",
-    "kind": { "es": "Teatro", "en": "Theatre", "fr": "Théâtre" },
+    "programmeLabel": {
+      "es": "Información oficial",
+      "en": "Official information",
+      "fr": "Informations officielles"
+    },
+    "image": "/images/venues/valencia-teatro-olympia.webp",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
     "description": {
       "es": "Teatro histórico de Valencia con programación de artes escénicas y musicales.",
       "en": "A historic Valencia theatre presenting performing arts and musicals.",
       "fr": "Un théâtre historique de Valence proposant des spectacles et des comédies musicales."
     },
     "id": "valencia-teatro-olympia",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Olympia%2C%20Calle%20de%20San%20Vicente%20M%C3%A1rtir%2C%2044%2C%2046002%20Valencia"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatro%20Olympia%2C%20Calle%20de%20San%20Vicente%20M%C3%A1rtir%2C%2044%2C%2046002%20Valencia",
+    "lat": 39.47091,
+    "lng": -0.37801,
+    "capacity": null,
+    "wikidata": "Q8772032",
+    "imageCredit": {
+      "author": "Desesser",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Teatre_Olympia.jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Barcelona",
@@ -584,16 +980,35 @@
     "address": "Carrer de Casp, 8, L'Eixample, 08010 Barcelona",
     "websiteUrl": "https://mammamiaelmusical.es/barcelona/",
     "programmeUrl": "https://tickets.oneboxtds.com/mamma-mia/events/49476?sessionView=CALENDAR",
-    "programmeLabel": { "es": "Entradas oficiales", "en": "Official tickets", "fr": "Billets officiels" },
-    "image": "https://www.carteleramusicales.es/storage/714/5G7w7Gigw3V69LwdSBr969Hd88OzMv-metaVGl2b2xpX3dlYi5qcGc%3D-.jpg",
-    "kind": { "es": "Teatro", "en": "Theatre", "fr": "Théâtre" },
+    "programmeLabel": {
+      "es": "Entradas oficiales",
+      "en": "Official tickets",
+      "fr": "Billets officiels"
+    },
+    "image": "/images/venues/barcelona-teatre-tivoli.webp",
+    "kind": {
+      "es": "Teatro",
+      "en": "Theatre",
+      "fr": "Théâtre"
+    },
     "description": {
       "es": "Teatro barcelonés de referencia para musicales y grandes producciones escénicas.",
       "en": "A Barcelona theatre known for musicals and major stage productions.",
       "fr": "Un théâtre barcelonais réputé pour les comédies musicales et les grandes productions."
     },
     "id": "barcelona-teatre-tivoli",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20T%C3%ADvoli%2C%20Carrer%20de%20Casp%2C%208%2C%2008010%20Barcelona"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teatre%20T%C3%ADvoli%2C%20Carrer%20de%20Casp%2C%208%2C%2008010%20Barcelona",
+    "lat": 41.3889,
+    "lng": 2.17031,
+    "capacity": null,
+    "wikidata": "Q5101816",
+    "imageCredit": {
+      "author": "Enric",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:041_Teatre_T%C3%ADvoli,_c._Casp_6-20_(Barcelona).jpg"
+    },
+    "capacitySource": null
   },
   {
     "city": "Madrid",
@@ -601,15 +1016,637 @@
     "address": "Av. de Felipe II, s/n, 28009 Madrid",
     "websiteUrl": "https://www.movistararena.es/",
     "programmeUrl": "https://www.movistararena.es/programacion",
-    "programmeLabel": { "es": "Programación oficial", "en": "Official programme", "fr": "Programme officiel" },
-    "image": "https://www.movistararena.es/assets/img/venue/movistar-arena/interior.webp",
-    "kind": { "es": "Recinto multiusos", "en": "Multi-purpose venue", "fr": "Salle polyvalente" },
+    "programmeLabel": {
+      "es": "Programación oficial",
+      "en": "Official programme",
+      "fr": "Programme officiel"
+    },
+    "image": "/images/venues/madrid-movistar-arena.webp",
+    "kind": {
+      "es": "Recinto multiusos",
+      "en": "Multi-purpose venue",
+      "fr": "Salle polyvalente"
+    },
     "description": {
       "es": "Recinto multiusos de Madrid para conciertos y grandes eventos.",
       "en": "A Madrid multi-purpose venue for concerts and major events.",
       "fr": "Une salle polyvalente à Madrid pour les concerts et grands événements."
     },
     "id": "madrid-movistar-arena",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Movistar%20Arena%2C%20Av.%20de%20Felipe%20II%2C%20s%2Fn%2C%2028009%20Madrid"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Movistar%20Arena%2C%20Av.%20de%20Felipe%20II%2C%20s%2Fn%2C%2028009%20Madrid",
+    "lat": 40.42389,
+    "lng": -3.67181,
+    "capacity": 17453,
+    "wikidata": "Q539019",
+    "imageCredit": {
+      "author": "Luis García (Zaqarbal)",
+      "license": "CC BY-SA 3.0 es",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/es/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Palacio_de_Deportes_(Madrid)_16.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q539019"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Palau Sant Jordi",
+    "address": "Passeig Olímpic, 5-7, 08038 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/barcelona-palau-sant-jordi.webp",
+    "kind": {
+      "es": "Pabellón multiusos",
+      "en": "Multi-purpose arena",
+      "fr": "Salle polyvalente"
+    },
+    "description": {
+      "es": "Un recinto de Barcelona para conciertos y grandes espectáculos.",
+      "en": "A Barcelona venue for concerts and major live shows.",
+      "fr": "Une salle barcelonaise pour les concerts et grands spectacles."
+    },
+    "id": "barcelona-palau-sant-jordi",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palau%20Sant%20Jordi%2C%20Passeig%20Ol%C3%ADmpic%2C%205-7%2C%2008038%20Barcelona",
+    "lat": 41.36339,
+    "lng": 2.15256,
+    "capacity": 17960,
+    "wikidata": "Q630630",
+    "imageCredit": {
+      "author": "Hosiawak",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Palau_Sant_Jordi_Barcelona_Catalonia.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q630630"
+  },
+  {
+    "city": "Barcelona",
+    "name": "Estadi Olímpic Lluís Companys",
+    "address": "Passeig Olímpic, 15-17, 08038 Barcelona",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/barcelona-estadi-olimpic-lluis-companys.webp",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio de Barcelona para grandes conciertos y eventos deportivos.",
+      "en": "A Barcelona stadium for major concerts and sporting events.",
+      "fr": "Un stade barcelonais accueillant de grands concerts et événements sportifs."
+    },
+    "id": "barcelona-estadi-olimpic-lluis-companys",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadi%20Ol%C3%ADmpic%20Llu%C3%ADs%20Companys%2C%20Passeig%20Ol%C3%ADmpic%2C%2015-17%2C%2008038%20Barcelona",
+    "lat": 41.36472,
+    "lng": 2.15556,
+    "capacity": 55926,
+    "wikidata": "Q275715",
+    "imageCredit": {
+      "author": "Amadalvarez",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:BCN-EstadiOlimpic-4860.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q275715"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Estadio La Cartuja de Sevilla",
+    "address": "Isla de la Cartuja, Sector Norte, 41092 Sevilla",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/sevilla-estadio-la-cartuja-de-sevilla.webp",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "Un estadio de Sevilla para grandes conciertos y eventos deportivos.",
+      "en": "A Seville stadium for major concerts and sporting events.",
+      "fr": "Un stade sévillan accueillant de grands concerts et événements sportifs."
+    },
+    "id": "sevilla-estadio-la-cartuja-de-sevilla",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20La%20Cartuja%20de%20Sevilla%2C%20Isla%20de%20la%20Cartuja%2C%20Sector%20Norte%2C%2041092%20Sevilla",
+    "lat": 37.41724,
+    "lng": -6.00456,
+    "capacity": 71374,
+    "wikidata": "Q368737",
+    "imageCredit": {
+      "author": "V&amp;A Dudush",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Panoramio_-_V%26A_Dudush_-_Estadio_Ol%C3%ADmpico_57_619.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q368737"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Estadio Benito Villamarín",
+    "address": "Av. de Heliópolis, s/n, 41012 Sevilla",
+    "websiteUrl": "https://www.realbetisbalompie.es/",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/sevilla-estadio-benito-villamarin.webp",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Real Betis, que acoge sus partidos como local.",
+      "en": "Real Betis's stadium, home to the club's home fixtures.",
+      "fr": "Le stade du Real Betis, qui accueille ses matchs à domicile."
+    },
+    "id": "sevilla-estadio-benito-villamarin",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Benito%20Villamar%C3%ADn%2C%20Av.%20de%20Heli%C3%B3polis%2C%2041012%20Sevilla",
+    "lat": 37.3564,
+    "lng": -5.98161,
+    "capacity": 60721,
+    "wikidata": "Q126844",
+    "imageCredit": {
+      "author": "Gregory Zeier",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Stade_Manuel_Ruiz_de_Lopera_S%C3%A9ville.JPG"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q126844"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Estadio Ramón Sánchez-Pizjuán",
+    "address": "C. Sevilla Fútbol Club, s/n, 41005 Sevilla",
+    "websiteUrl": "https://www.sevillafc.es/",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/sevilla-estadio-ramon-sanchez-pizjuan.webp",
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Sevilla FC, que acoge sus partidos como local.",
+      "en": "Sevilla FC's stadium, home to the club's home fixtures.",
+      "fr": "Le stade du Sevilla FC, qui accueille ses matchs à domicile."
+    },
+    "id": "sevilla-estadio-ramon-sanchez-pizjuan",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Ram%C3%B3n%20S%C3%A1nchez-Pizju%C3%A1n%2C%20Sevilla",
+    "lat": 37.38388,
+    "lng": -5.97047,
+    "capacity": 43751,
+    "wikidata": "Q275429",
+    "imageCredit": {
+      "author": "Niels98",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:2022-10-25_1_Estadio_Ram%C3%B3n_S%C3%A1nchez_Pizju%C3%A1n_(Sevilla_FC).jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q275429"
+  },
+  {
+    "city": "Sevilla",
+    "name": "Sala Pandora",
+    "address": "C/ Gramil, 2, Sevilla",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": null,
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Concert venue",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Una sala sevillana para conciertos en directo.",
+      "en": "A Seville venue for live concerts.",
+      "fr": "Une salle sévillane pour les concerts en direct."
+    },
+    "id": "sevilla-sala-pandora",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20Pandora%2C%20C%2F%20Gramil%2C%202%2C%20Sevilla",
+    "lat": 37.41027,
+    "lng": -5.95936,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
+  },
+  {
+    "city": "Sevilla",
+    "name": "Cartuja Center CITE",
+    "address": "Calle Leonardo da Vinci, 7, 41092 Sevilla",
+    "websiteUrl": "https://cartujacenter.com/",
+    "programmeUrl": "https://cartujacenter.com/",
+    "programmeLabel": {
+      "es": "Programa oficial",
+      "en": "Official programme",
+      "fr": "Programme officiel"
+    },
+    "image": "/images/venues/sevilla-cartuja-center-cite.webp",
+    "kind": {
+      "es": "Auditorio y centro de espectáculos",
+      "en": "Auditorium and entertainment venue",
+      "fr": "Auditorium et salle de spectacles"
+    },
+    "description": {
+      "es": "Un auditorio de Sevilla para conciertos y grandes espectáculos.",
+      "en": "A Seville auditorium for concerts and major live shows.",
+      "fr": "Un auditorium sévillan pour les concerts et grands spectacles."
+    },
+    "id": "sevilla-cartuja-center-cite",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cartuja%20Center%20CITE%2C%20Calle%20Leonardo%20da%20Vinci%2C%207%2C%2041092%20Sevilla",
+    "lat": 37.40537,
+    "lng": -6.0079,
+    "capacity": null,
+    "wikidata": "Q110103772",
+    "imageCredit": {
+      "author": "DireccióntecnicaJPA",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:FACHADA_PRINCIPAL_-_VISTA_NOCTURNA_DETALLE.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "city": "Sevilla",
+    "name": "Sala Custom",
+    "address": "Sala Custom, Sevilla",
+    "websiteUrl": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": null,
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Concert venue",
+      "fr": "Salle de concert"
+    },
+    "description": {
+      "es": "Una sala sevillana para conciertos de rock y música en directo.",
+      "en": "A Seville venue for rock concerts and live music.",
+      "fr": "Une salle sévillane pour les concerts rock et la musique live."
+    },
+    "id": "sevilla-sala-custom",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20Custom%2C%20Sevilla",
+    "lat": 37.40842,
+    "lng": -5.9577,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
+  },
+  {
+    "city": "Madrid",
+    "name": "Museo Reina Sofía",
+    "address": "Calle Santa Isabel, 52, 28012 Madrid",
+    "websiteUrl": "https://www.museoreinasofia.es/",
+    "programmeUrl": "https://www.museoreinasofia.es/exposiciones",
+    "programmeLabel": {
+      "es": "Exposiciones",
+      "en": "Exhibitions",
+      "fr": "Expositions"
+    },
+    "image": "/images/venues/madrid-museo-reina-sofia.webp",
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "Un museo madrileño dedicado al arte moderno y contemporáneo, con sede en los edificios Sabatini y Nouvel.",
+      "en": "A Madrid museum devoted to modern and contemporary art, housed in the Sabatini and Nouvel buildings.",
+      "fr": "Un musée madrilène consacré à l’art moderne et contemporain, installé dans les bâtiments Sabatini et Nouvel."
+    },
+    "id": "madrid-museo-reina-sofia",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Museo%20Reina%20Sof%C3%ADa%2C%20Calle%20Santa%20Isabel%2C%2052%2C%2028012%20Madrid",
+    "lat": 40.40857,
+    "lng": -3.694,
+    "capacity": null,
+    "wikidata": "Q460889",
+    "imageCredit": {
+      "author": "Luis García (Zaqarbal)",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:MNCARS_05.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "city": "Valencia",
+    "name": "IVAM",
+    "address": "Carrer de Guillem de Castro, 118, 46003 València",
+    "websiteUrl": "https://ivam.es/es/",
+    "programmeUrl": "https://ivam.es/es/exposiciones/",
+    "programmeLabel": {
+      "es": "Exposiciones",
+      "en": "Exhibitions",
+      "fr": "Expositions"
+    },
+    "image": "/images/venues/valencia-ivam.webp",
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "El Institut Valencià d’Art Modern, un museo valenciano de arte moderno y contemporáneo.",
+      "en": "The Institut Valencià d’Art Modern, a Valencia museum of modern and contemporary art.",
+      "fr": "L’Institut Valencià d’Art Modern, un musée valencien d’art moderne et contemporain."
+    },
+    "id": "valencia-ivam",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=IVAM%2C%20Carrer%20de%20Guillem%20de%20Castro%2C%20118%2C%2046003%20Val%C3%A8ncia",
+    "lat": 39.48,
+    "lng": -0.38278,
+    "capacity": null,
+    "wikidata": "Q1600831",
+    "imageCredit": {
+      "author": "Juan García",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Fachada_del_IVAM_febrero_2018.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "city": "Sevilla",
+    "name": "CAAC",
+    "address": "Cartuja de Santa María de las Cuevas, C. Américo Vespucio, 2, 41092 Sevilla",
+    "websiteUrl": "https://www.caac.es/",
+    "programmeUrl": "https://www.caac.es/programa/exposiciones/",
+    "programmeLabel": {
+      "es": "Exposiciones",
+      "en": "Exhibitions",
+      "fr": "Expositions"
+    },
+    "image": "/images/venues/sevilla-caac.webp",
+    "kind": {
+      "es": "Museo de arte contemporáneo",
+      "en": "Contemporary art museum",
+      "fr": "Musée d’art contemporain"
+    },
+    "description": {
+      "es": "El Centro Andaluz de Arte Contemporáneo, con sede en el monasterio de la Cartuja de Sevilla.",
+      "en": "The Centro Andaluz de Arte Contemporáneo, housed in Seville’s Cartuja monastery.",
+      "fr": "Le Centro Andaluz de Arte Contemporáneo, installé dans le monastère de la Cartuja de Séville."
+    },
+    "id": "sevilla-caac",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=CAAC%2C%20C.%20Am%C3%A9rico%20Vespucio%2C%202%2C%2041092%20Sevilla",
+    "lat": 37.39804,
+    "lng": -6.00772,
+    "capacity": null,
+    "wikidata": "Q8343569",
+    "imageCredit": {
+      "author": "The original uploader was Asterion at English Wikipedia.",
+      "license": "CC BY-SA 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Monasterio_de_la_Cartuja,_Sevilla.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "city": "Albacete",
+    "name": "Sala ClanDestino",
+    "address": "Avenida España, 47, 02002 Albacete",
+    "websiteUrl": "https://www.salaclandestino.com/",
+    "programmeUrl": "https://www.salaclandestino.com/web/?menu=36&pagina=eventos&siteID=salaclandestino",
+    "programmeLabel": {
+      "es": "Programa oficial",
+      "en": "Official programme",
+      "fr": "Programme officiel"
+    },
+    "image": null,
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Live music venue",
+      "fr": "Salle de concerts"
+    },
+    "description": {
+      "es": "Una sala albaceteña para conciertos y programación musical en directo.",
+      "en": "An Albacete venue for concerts and live music programming.",
+      "fr": "Une salle d’Albacete dédiée aux concerts et à la musique live."
+    },
+    "id": "albacete-sala-clandestino",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20ClanDestino%2C%20Avenida%20Espa%C3%B1a%2C%2047%2C%2002002%20Albacete",
+    "lat": 38.98394,
+    "lng": -1.85354,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
+  },
+  {
+    "id": "albacete-estadio-carlos-belmonte",
+    "city": "Albacete",
+    "name": "Estadio Carlos Belmonte",
+    "address": "Avenida de España, s/n, 02008 Albacete",
+    "websiteUrl": "https://www.albacetebalompie.es",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Albacete Balompié, inaugurado en 1960.",
+      "en": "Albacete Balompié's stadium, opened in 1960.",
+      "fr": "Le stade de l'Albacete Balompié, inauguré en 1960."
+    },
+    "image": "/images/venues/albacete-estadio-carlos-belmonte.webp",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Carlos%20Belmonte%2C%20Avenida%20de%20Espa%C3%B1a%2C%20s/n%2C%2002008%20Albacete",
+    "lat": 38.98112,
+    "lng": -1.85214,
+    "capacity": 17524,
+    "wikidata": "Q1369118",
+    "imageCredit": {
+      "author": "Alex83",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Carlos_Belmonte.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q1369118"
+  },
+  {
+    "id": "bilbao-kafe-antzokia",
+    "city": "Bilbao",
+    "name": "Kafe Antzokia",
+    "address": "Done Bikendi kalea, 2, 48001 Bilbao",
+    "websiteUrl": "https://www.kafeantzokia.eus",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Live music venue",
+      "fr": "Salle de concert"
+    },
+    "description": {
+      "es": "Antiguo cine convertido en centro cultural vasco y una de las salas de conciertos de referencia de Bilbao.",
+      "en": "A former cinema turned Basque cultural centre and one of Bilbao's reference live music venues.",
+      "fr": "Ancien cinéma devenu centre culturel basque et l'une des salles de concert de référence de Bilbao."
+    },
+    "image": "/images/venues/bilbao-kafe-antzokia.webp",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kafe%20Antzokia%2C%20Done%20Bikendi%20kalea%2C%202%2C%2048001%20Bilbao",
+    "lat": 43.26389,
+    "lng": -2.92792,
+    "capacity": null,
+    "wikidata": "Q12261187",
+    "imageCredit": {
+      "author": "Toniher",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Kafe_Antzokia.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "id": "valencia-palacio-de-congresos",
+    "city": "Valencia",
+    "name": "Palacio de Congresos de Valencia",
+    "address": "Avinguda de les Corts Valencianes, 60, 46015 Valencia",
+    "websiteUrl": "https://www.palcongres-vlc.com",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Auditorio",
+      "en": "Auditorium",
+      "fr": "Auditorium"
+    },
+    "description": {
+      "es": "Palacio de congresos diseñado por Norman Foster, con auditorio para conciertos y espectáculos.",
+      "en": "Convention centre designed by Norman Foster, with an auditorium for concerts and shows.",
+      "fr": "Palais des congrès conçu par Norman Foster, avec un auditorium pour concerts et spectacles."
+    },
+    "image": "/images/venues/valencia-palacio-de-congresos.webp",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palacio%20de%20Congresos%20de%20Valencia%2C%20Avinguda%20de%20les%20Corts%20Valencianes%2C%2060%2C%2046015%20Valencia",
+    "lat": 39.49624,
+    "lng": -0.40209,
+    "capacity": null,
+    "wikidata": "Q9054458",
+    "imageCredit": {
+      "author": "Felipe Araya Allende",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Palau_del_congres.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "id": "valencia-la-rambleta",
+    "city": "Valencia",
+    "name": "La Rambleta",
+    "address": "Carrer de Pius IX, 2, 46017 Valencia",
+    "websiteUrl": "https://www.larambleta.com",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Centro cultural",
+      "en": "Arts centre",
+      "fr": "Centre culturel"
+    },
+    "description": {
+      "es": "Centro cultural municipal con teatro y sala de conciertos junto al Bulevar Sur.",
+      "en": "Municipal arts centre with a theatre and concert hall by the Bulevar Sur.",
+      "fr": "Centre culturel municipal avec théâtre et salle de concert près du Bulevar Sur."
+    },
+    "image": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=La%20Rambleta%2C%20Carrer%20de%20Pius%20IX%2C%202%2C%2046017%20Valencia",
+    "lat": 39.44724,
+    "lng": -0.39267,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
+  },
+  {
+    "id": "albacete-museo-de-la-cuchilleria",
+    "city": "Albacete",
+    "name": "Museo Municipal de la Cuchillería",
+    "address": "Plaza de la Catedral, s/n, 02001 Albacete",
+    "websiteUrl": "https://www.museocuchilleria.es",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/albacete-museo-de-la-cuchilleria.webp",
+    "kind": {
+      "es": "Museo",
+      "en": "Museum",
+      "fr": "Musée"
+    },
+    "description": {
+      "es": "Museo dedicado a la tradición cuchillera de Albacete, en la Casa del Hortelano.",
+      "en": "Museum devoted to Albacete's knife-making tradition, in the Casa del Hortelano.",
+      "fr": "Musée consacré à la tradition coutelière d'Albacete, dans la Casa del Hortelano."
+    },
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Museo%20Municipal%20de%20la%20Cuchiller%C3%ADa%2C%20Albacete",
+    "lat": 38.99625,
+    "lng": -1.85647,
+    "capacity": null,
+    "wikidata": "Q9047061",
+    "imageCredit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Museo_de_la_Cuchiller%C3%ADa,_Albacete,_Espa%C3%B1a,_2022-07-12,_DD_14.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "id": "sevilla-fibes",
+    "city": "Sevilla",
+    "name": "Auditorio FIBES",
+    "address": "Calle Doctor Miguel Ríos Sarmiento, 41020 Sevilla",
+    "websiteUrl": "https://www.fibes.es",
+    "kind": {
+      "es": "Auditorio",
+      "en": "Auditorium",
+      "fr": "Auditorium"
+    },
+    "description": {
+      "es": "Auditorio del Palacio de Exposiciones y Congresos de Sevilla, escenario de grandes giras.",
+      "en": "Auditorium of Seville's exhibition and convention centre, a stop for major tours.",
+      "fr": "Auditorium du palais des expositions et des congrès de Séville, étape des grandes tournées."
+    },
+    "lat": 37.40347,
+    "lng": -5.93311,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null,
+    "image": null,
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auditorio%20FIBES%2C%20Calle%20Doctor%20Miguel%20R%C3%ADos%20Sarmiento%2C%2041020%20Sevilla"
+  },
+  {
+    "id": "bilbao-sala-bbk",
+    "city": "Bilbao",
+    "name": "Sala BBK",
+    "address": "Gran Vía de Don Diego López de Haro, 19, 48001 Bilbao",
+    "websiteUrl": "https://www.salabbk.eus",
+    "kind": {
+      "es": "Centro cultural",
+      "en": "Arts centre",
+      "fr": "Centre culturel"
+    },
+    "description": {
+      "es": "Centro cultural de la Gran Vía de Bilbao con auditorio para conciertos y espectáculos.",
+      "en": "Arts centre on Bilbao's Gran Vía with an auditorium for concerts and shows.",
+      "fr": "Centre culturel de la Gran Vía de Bilbao avec un auditorium pour concerts et spectacles."
+    },
+    "image": "/images/venues/bilbao-sala-bbk.webp",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sala%20BBK%2C%20Gran%20V%C3%ADa%20de%20Don%20Diego%20L%C3%B3pez%20de%20Haro%2C%2019%2C%2048001%20Bilbao",
+    "lat": 43.26204,
+    "lng": -2.93151,
+    "capacity": null,
+    "wikidata": "Q23833370",
+    "imageCredit": {
+      "author": "Alex Lillo from Madrid, Spain",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Bilbao_Vizcaya_Kutxa.jpg"
+    },
+    "capacitySource": null
   }
 ]

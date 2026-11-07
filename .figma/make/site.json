@@ -6,7 +6,10 @@
     "index": true
   },
   "accessibility": {
-    "addBypassLinks": true,
+    "addBypassLinks": false,
     "ignoreReducedMotion": false
+  },
+  "openGraph": {
+    "image": "https://plancerca.com/images/og-image.jpg"
   }
 }
