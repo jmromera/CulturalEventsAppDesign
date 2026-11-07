@@ -22,3 +22,13 @@ Registro de cada iteración: qué cambió, por qué (principio de usabilidad o c
 - **Qué:** `datos-legales.json` pasa de una empresa ficticia a los datos mínimos de un proyecto académico: nombre, condición de estudiante, asignatura, contacto (`jmromera@hotmail.com`) y «proyecto académico sin actividad comercial». Se eliminan NIF, domicilio y datos registrales. Plazo de respuesta: «un mes» (el máximo del art. 12.3 RGPD). Los datos de Vercel se redactan sin cifras inventadas.
 - **Por qué:** minimización de datos (art. 5.1.c RGPD): no se publica nada que no haga falta. La web tiene que poder publicarse para la evaluación.
 - **Pendiente:** `[TU NOMBRE]` y `[UNIVERSIDAD]` siguen como marcadores. Mientras estén, `esEjemplo` sigue en `true` y las páginas legales muestran el aviso rojo. Una prueba impide poner `esEjemplo: false` con marcadores o con el proveedor sin verificar.
+
+### Iteración 3 · Catálogo calculado con la fecha del visitante
+
+- **Qué:**
+  - El catálogo pasa a ser una función de la fecha (`catalogAt(now)`) en lugar de calcularse una sola vez.
+  - Recomendados sale de una función probada (`recommendedEvents`): primero los grandes eventos, luego los destacados y luego el resto, cada grupo por fecha. Las exposiciones van al final y hay una sola entrada por artista.
+  - Si Hoy, Mañana y Esta semana están a 0, el hero muestra «No hay planes para estos días» con un botón a «Próximos 30 días», o a todo el catálogo si tampoco hay nada en el mes.
+- **Por qué:**
+  - Prevención de errores y visibilidad del estado del sistema (heurísticas de Nielsen 5 y 1): la web se evalúa entre el 20/12/2026 y el 31/01/2027 y nunca debe mostrar una pantalla vacía ni botones muertos sin salida.
+- **Problema encontrado:** la prueba con fechas simuladas falla el 31/01/2027 con los datos actuales: Albacete se queda sin eventos y Bilbao sin tres recomendados. Se resuelve en la iteración del catálogo.

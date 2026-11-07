@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, Route, Routes, useLocation, useNavigate, useNavigationType, useParams } from "react-router-dom";
 import { entityFor, relatedEntities } from "./data/entities";
-import { cityEventCounts, cityImages, endedEvents, events, relatedEventsByEntity } from "./data/event-catalog";
+import { cityEventCounts, cityImages, endedEvents, events, recommendedEvents, relatedEventsByEntity } from "./data/event-catalog";
 import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } from "./data/artist-preferences";
 import { LANGUAGE_KEY, readLanguage, type Language } from "./data/language";
 import { STORAGE_KEYS } from "./data/storage-keys";
@@ -425,16 +425,7 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
     if (when) params.set("when", when);
     return `/search?${params.toString()}`;
   };
-  const recommendationCandidates = [...cityEvents.filter((event) => event.featured), ...cityEvents.filter((event) => !event.featured)];
-  const seenRecommendationArtists = new Set<string>();
-  const highlightedEvents = recommendationCandidates.filter((event) => {
-    if (!event.title?.trim()) return false;
-    const artistName = event.title.split(/\s+[—–-]\s+/)[0];
-    const artistKey = event.relatedEntityId ?? normalizeSearch(artistName);
-    if (seenRecommendationArtists.has(artistKey)) return false;
-    seenRecommendationArtists.add(artistKey);
-    return true;
-  }).slice(0, 3);
+  const highlightedEvents = recommendedEvents(cityEvents);
   const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.seeAll} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><CardCarousel className="featured-grid" count={highlightedEvents.length} labels={labels}>{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</CardCarousel></section>;
   const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => event.category === item).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
   const weekRange = dateRangeFor("week");
@@ -452,7 +443,7 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
     if (next) document.getElementById("catalogue")?.scrollIntoView();
   };
   return <main id="main-content" tabIndex={-1}>
-    {!isSearching && <section className="hero"><img src={cityImages[selectedCity]} srcSet={srcSetFor(cityImages[selectedCity])} sizes="100vw" alt={selectedCity} width={1600} height={900} fetchPriority="high" /><div className="hero-shade" /><div className="hero-copy"><div className="hero-meta"><div className="hero-city-group"><span className="hero-city-copy"><strong className="hero-city-name">{selectedCity}</strong><small className="hero-city-count">{cityEventCounts[selectedCity]} {labels.availableEvents}</small></span></div></div><h1>{t.hero}</h1><p>{t.heroText}</p><div className="hero-quick" role="group" aria-label={t.when}>{quickWhen.map(([option, count]) => <button type="button" key={option} className={`hero-chip ${when === option ? "active" : ""}`} aria-pressed={when === option} disabled={count === 0 && when !== option} onClick={() => pickWhen(option)}>{whenNames[option]}<span>{count}</span></button>)}</div></div></section>}
+    {!isSearching && <section className="hero"><img src={cityImages[selectedCity]} srcSet={srcSetFor(cityImages[selectedCity])} sizes="100vw" alt={selectedCity} width={1600} height={900} fetchPriority="high" /><div className="hero-shade" /><div className="hero-copy"><div className="hero-meta"><div className="hero-city-group"><span className="hero-city-copy"><strong className="hero-city-name">{selectedCity}</strong><small className="hero-city-count">{cityEventCounts[selectedCity]} {labels.availableEvents}</small></span></div></div><h1>{t.hero}</h1><p>{t.heroText}</p><div className="hero-quick" role="group" aria-label={t.when}>{quickWhen.map(([option, count]) => <button type="button" key={option} className={`hero-chip ${when === option ? "active" : ""}`} aria-pressed={when === option} disabled={count === 0 && when !== option} onClick={() => pickWhen(option)}>{whenNames[option]}<span>{count}</span></button>)}</div>{when === null && quickWhen.slice(0, 3).every(([, count]) => count === 0) && <p className="hero-hint">{labels.noPlansSoon} <button type="button" onClick={() => quickWhen[3][1] > 0 ? pickWhen("month") : document.getElementById("catalogue")?.scrollIntoView()}>{quickWhen[3][1] > 0 ? labels.seeNextMonth : labels.seeWholeCatalogue}</button></p>}</div></section>}
     <div className="home-content">
       {isSearching ? <>{catalogue}{recommendations}{discovery}</> : <>{recommendations}{discovery}{catalogue}</>}
     </div>

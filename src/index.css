@@ -634,3 +634,7 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .legal-article ol{list-style:decimal}
 .legal-article ul{list-style:disc}
 .legal-article li::marker{color:var(--accent-text);font-weight:700}
+/* Hint shown when today, tomorrow and this week have no plans: never a dead end. */
+.hero-hint{margin:14px 0 0;color:#fff;font-size:15px}
+.hero-hint button{min-height:44px;padding:0 4px;border:0;background:none;color:#ddd6fe;font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.hero-hint button:focus-visible{outline:3px solid #ddd6fe;outline-offset:2px}

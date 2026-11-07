@@ -11,6 +11,10 @@ export type LocalizedText = { es: string; en: string; fr: string };
 export type Venue = {
   id: string; city: City; name: string; address: string; description: LocalizedText; image: string | null; mapsUrl: string; kind: LocalizedText;
   websiteUrl: string | null; programmeUrl: string | null; programmeLabel: LocalizedText | null;
+  /** Maximum capacity (people), used for the objective "big event" label. */
+  capacity?: number | null;
+  /** Coordinates of the venue entrance, for distance and the map. */
+  lat?: number | null; lng?: number | null;
 };
 
 export type RelatedEntityKind = "artist" | "musical" | "play" | "show";
