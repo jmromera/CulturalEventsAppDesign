@@ -28,7 +28,7 @@
 
 Plan Cerca es una agenda cultural y deportiva para seis ciudades de España: **Madrid, Barcelona, Valencia, Sevilla, Bilbao y Albacete**. Eliges ciudad, ves qué hay hoy, mañana o este mes, guardas lo que te interesa y, desde cada ficha, llegas a la web oficial para comprar la entrada.
 
-Es el proyecto de la asignatura de **Interacción Persona-Ordenador (HCI)**. Por eso pesan tanto la usabilidad, la accesibilidad y la jerarquía visual como las funciones: cada cambio importante salió de una revisión de uso.
+Es el proyecto de la asignatura **«HCI: Desarrollo web y móvil»**. Por eso pesan tanto la usabilidad, la accesibilidad y la jerarquía visual como las funciones: cada cambio importante salió de una revisión de uso.
 
 > **En cifras (7 de noviembre de 2026):** 185 eventos próximos, 44 recintos y 11 fichas de artista o espectáculo. Los eventos que ya han pasado se ocultan solos.
 
@@ -440,7 +440,7 @@ Los carteles de eventos y las fotos de recintos y artistas pertenecen a sus orga
 
 <div align="center">
 
-Proyecto académico de la asignatura de **Interacción Persona-Ordenador (HCI)**. 🎭
+Proyecto académico de la asignatura **«HCI: Desarrollo web y móvil»**. 🎭
 
 <sub>Las entradas, precios y horarios definitivos son siempre los de la web oficial de cada evento. Desarrollado con ayuda de <a href="https://claude.com/claude-code">Claude Code</a>.</sub>
 
