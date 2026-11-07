@@ -37,3 +37,11 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **Menú de ciudades a todo el ancho en móvil**, debajo de la cabecera: así no deja pestañas tapadas a medias (WCAG 2.5.8).
 - **Degradado de portada más oscuro en escritorio** en la zona del texto: Madrid y Bilbao no llegaban a 4,5:1 por las luces de la foto.
 - **Autoridad de reclamación sin nombrar**: no he podido confirmar qué organismo es competente ni si la Ley Europea de Accesibilidad te aplica (exime a microempresas que prestan servicios). Queda en `PENDIENTE.md`.
+
+## Seguridad
+- **Sin login, registro, formularios ni servidor propio**: no aplican límites de peticiones, CSRF, SSRF, inyección SQL, subidas de archivos ni autorización por identificador. Si se añade un backend, habrá que hacer este bloque entero.
+- **CSP estricta sin `'unsafe-inline'`** ni para scripts ni para estilos; solo se permite `data:` en fuentes (Vite incrusta las más pequeñas) e imágenes. Se comprueba en navegador real con `pnpm check:terceros`. Las vistas previas de Vercel con la barra de comentarios activada podrían bloquearse por la CSP; producción no la usa.
+- **HSTS de 2 años con subdominios, sin `preload`**: `preload` es difícil de deshacer y exige inscribir el dominio en una lista; mejor decidirlo cuando el dominio sea definitivo.
+- **Dependencias**: Vite actualizado a 8.1.6 y versiones mínimas forzadas para PostCSS, nanoid y source-map-js. Las 15 vulnerabilidades eran de herramientas de desarrollo, no del código que llega al navegador. `pnpm audit`: 0.
+- **Se elimina `package-lock.json`**: estaba desactualizado y podía hacer que el despliegue usara npm con versiones viejas. El gestor oficial es pnpm (`packageManager` en `package.json`).
+- **Registros**: la app solo escribe en la consola del navegador cuando falla el renderizado (sin datos personales) y muestra al usuario un mensaje genérico. No hay registros de servidor propios.

@@ -7,3 +7,4 @@
 - [x] **Consentimiento y borrado**: página «Tus datos» (descargar y borrar), explicación antes de pedir la ubicación, nada se guarda solo por visitar; pruebas de borrado, de ubicación y de primera visita.
 - [x] **Cookies y terceros**: fuentes e imágenes autoalojadas (210 imágenes de 37 dominios), cero peticiones a terceros y cero cookies, comprobado con pruebas y en navegador real.
 - [x] **Accesibilidad**: axe en 21 páginas y estados (móvil y escritorio) sin problemas, zoom 200 %, contraste sobre portadas, resultados anunciados con aria-live y declaración en `/accesibilidad`.
+- [x] **Seguridad**: cabeceras (CSP estricta, HSTS, nosniff, Referrer-Policy, Permissions-Policy, frame-ancestors), 0 vulnerabilidades, JSON-LD a prueba de XSS, sin secretos; pruebas automáticas.

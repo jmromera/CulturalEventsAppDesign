@@ -21,3 +21,6 @@ logs/
 /.opencode-skills/
 capturas/
 .vscode/*
+
+# Local browser automation output
+.playwright-mcp/
