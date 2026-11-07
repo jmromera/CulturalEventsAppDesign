@@ -399,7 +399,7 @@ docs/                            Guía visual, manual de uso y capturas
 - **«Invitado» es un marcador de posición.** No hay cuentas, así que los favoritos no pasan de un dispositivo a otro.
 - **Datos curados a mano.** Cada evento se añade editando `events.json`; precios y disponibilidad pueden quedarse atrás respecto a la web oficial.
 - **`App.tsx` y `index.css` son grandes** (unas 770 líneas y casi 100 KB). Separar páginas y estilos facilitaría el mantenimiento.
-- **La imagen de portada de Madrid no carga:** el servidor de origen devuelve una página antibots en lugar de la foto. Hay que alojarla en el repo o cambiarla.
+- **Las imágenes dependen de webs ajenas.** Portadas, carteles y fotos de recintos se enlazan desde su origen; si una web cambia o bloquea el enlace, en las tarjetas `FallbackImage` pinta un icono, pero la portada de ciudad usa un `<img>` normal y se queda en blanco. Ya pasó con Madrid, cuya foto pasó a Unsplash como las demás.
 
 ---
 
