@@ -34,6 +34,8 @@ export type RelatedEntity = {
 export type EventItem = {
   id: number; category: EventCategory; title: string; date: string; startDate: string | null; endDate?: string | null; featured?: boolean; time: string; duration: string;
   venueId: string; relatedEntityId?: string; distance?: string; price: string; availability: string;
-  organizer: string; rating?: number; popularity?: string; tags: string[]; image: string;
+  organizer: string; tags: string[]; image: string | null;
+  /** Official page the data was taken from (venue, club, league or ticket seller). */
+  sourceUrl?: string;
   description: string; fullDescription: string; ticketUrl: string; confirmed: boolean;
 };

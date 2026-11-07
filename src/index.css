@@ -638,3 +638,6 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .hero-hint{margin:14px 0 0;color:#fff;font-size:15px}
 .hero-hint button{min-height:44px;padding:0 4px;border:0;background:none;color:#ddd6fe;font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .hero-hint button:focus-visible{outline:3px solid #ddd6fe;outline-offset:2px}
+/* Objective "big event" label (venue capacity >= 10,000), replaces ratings without a source. */
+.big-event-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;background:#fbbf24;color:#1f1300;font-size:12px;font-weight:800;letter-spacing:.2px}
+.event-image .big-event-badge{position:absolute;right:12px;bottom:12px}

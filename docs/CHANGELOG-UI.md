@@ -32,3 +32,11 @@ Registro de cada iteración: qué cambió, por qué (principio de usabilidad o c
 - **Por qué:**
   - Prevención de errores y visibilidad del estado del sistema (heurísticas de Nielsen 5 y 1): la web se evalúa entre el 20/12/2026 y el 31/01/2027 y nunca debe mostrar una pantalla vacía ni botones muertos sin salida.
 - **Problema encontrado:** la prueba con fechas simuladas falla el 31/01/2027 con los datos actuales: Albacete se queda sin eventos y Bilbao sin tres recomendados. Se resuelve en la iteración del catálogo.
+
+### Iteración 4 · Fuera valoraciones y popularidad; etiqueta «Gran evento»
+
+- **Qué:**
+  - Se eliminan la valoración («★ 4.8»), el «% de popularidad» y la tarjeta «Mejor valorado», también de los datos.
+  - En su lugar, la etiqueta **«Gran evento»**.
+- **Criterio de «Gran evento»:** el recinto tiene aforo para **10.000 personas o más** (estadios, pabellones y arenas: Movistar Arena, Palau Sant Jordi, Roig Arena, Metropolitano, Bernabéu, Mestalla, San Mamés…). Es un dato objetivo y comprobable: el aforo de cada recinto se guarda en `venues.json` con su fuente. La misma regla ordena Recomendados (grandes eventos primero).
+- **Por qué:** las cifras no tenían fuente y no podían demostrarse (veracidad de la información comercial; ver `docs/legal/TEXTOS-A-REVISAR.md`). Una etiqueta basada en un dato verificable es honesta y además resume de un vistazo la escala del evento (reconocer antes que recordar, heurística 6).
