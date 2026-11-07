@@ -40,3 +40,20 @@ Registro de cada iteración: qué cambió, por qué (principio de usabilidad o c
   - En su lugar, la etiqueta **«Gran evento»**.
 - **Criterio de «Gran evento»:** el recinto tiene aforo para **10.000 personas o más** (estadios, pabellones y arenas: Movistar Arena, Palau Sant Jordi, Roig Arena, Metropolitano, Bernabéu, Mestalla, San Mamés…). Es un dato objetivo y comprobable: el aforo de cada recinto se guarda en `venues.json` con su fuente. La misma regla ordena Recomendados (grandes eventos primero).
 - **Por qué:** las cifras no tenían fuente y no podían demostrarse (veracidad de la información comercial; ver `docs/legal/TEXTOS-A-REVISAR.md`). Una etiqueta basada en un dato verificable es honesta y además resume de un vistazo la escala del evento (reconocer antes que recordar, heurística 6).
+
+### Iteración 5 · Recintos con coordenadas, aforo y foto libre
+
+- **Qué:** `scripts/enrich-venues.mjs` añade a los 44 recintos:
+  - **coordenadas**: de Wikidata o, si falta, de OpenStreetMap Nominatim;
+  - **aforo** con su fuente: Wikidata, o la web oficial del BEC;
+  - **foto con licencia libre** de Wikimedia Commons, con autor y licencia guardados para la atribución.
+
+  Se consulta una sola vez y se guarda en el repo: la web no depende de ninguna API.
+- **Resultado:** 15 recintos superan los 10.000 de aforo («Gran evento»); 36 de 44 tienen foto libre; los 8 restantes (salas pequeñas y los dos Lliure) usan el fondo con el icono de la categoría.
+- **Por qué:**
+  - Las coordenadas permiten el mapa y «Cerca de mí», que pide el enunciado.
+  - El aforo da un criterio objetivo para «Gran evento».
+  - Las fotos de recintos sustituyen a carteles con personas famosas y sin licencia.
+- **Problemas encontrados:**
+  - **Coordenadas erróneas:** Nominatim situó el Teatre Lliure de Gràcia en Sabadell, porque confundió la calle Montseny. Se detectó con una comprobación de distancia al centro de la ciudad (> 8 km) y se corrigió buscando por el nombre del teatro.
+  - **Aforo ausente:** el BEC no tenía aforo en Wikidata. Se tomó el de su web oficial (20.000), más prudente que los 26.000 que dan otras fuentes para conciertos.

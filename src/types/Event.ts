@@ -13,6 +13,9 @@ export type Venue = {
   websiteUrl: string | null; programmeUrl: string | null; programmeLabel: LocalizedText | null;
   /** Maximum capacity (people), used for the objective "big event" label. */
   capacity?: number | null;
+  capacitySource?: string | null;
+  wikidata?: string | null;
+  imageCredit?: { author: string; license: string; licenseUrl: string | null; source: string } | null;
   /** Coordinates of the venue entrance, for distance and the map. */
   lat?: number | null; lng?: number | null;
 };

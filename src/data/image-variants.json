@@ -922,5 +922,215 @@
     "variants": [
       640
     ]
+  },
+  "/images/venues/albacete-teatro-circo.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/albacete-teatro-de-la-paz.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-estadi-johan-cruyff.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-estadi-olimpic-lluis-companys.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-gran-teatre-del-liceu.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-macba.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-museu-picasso-de-barcelona.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-palau-blaugrana.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-palau-de-la-musica-catalana.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-palau-sant-jordi.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-spotify-camp-nou.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-teatre-nacional-de-catalunya.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/barcelona-teatre-tivoli.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/bilbao-bilbao-arena.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/bilbao-bizkaia-arena-bec.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/bilbao-euskalduna.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/bilbao-guggenheim-bilbao.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/bilbao-san-mames.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/madrid-estadio-de-vallecas.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/madrid-estadio-santiago-bernabeu.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/madrid-movistar-arena.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/madrid-museo-reina-sofia.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/madrid-riyadh-air-metropolitano.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/madrid-teatro-eslava.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/madrid-teatro-real.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/sevilla-caac.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/sevilla-cartuja-center-cite.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/sevilla-estadio-benito-villamarin.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/sevilla-estadio-la-cartuja-de-sevilla.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/sevilla-estadio-ramon-sanchez-pizjuan.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/valencia-estadio-de-mestalla.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/valencia-ivam.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/valencia-palau-de-la-musica-de-valencia.webp": {
+    "width": 1000,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/valencia-roig-arena.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
+  },
+  "/images/venues/valencia-teatro-olympia.webp": {
+    "width": 1200,
+    "variants": [
+      640
+    ]
   }
 }

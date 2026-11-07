@@ -6,11 +6,13 @@ import path from "node:path";
 import sharp from "sharp";
 
 const root = path.resolve(import.meta.dirname, "..");
-const dir = path.join(root, "public", "images", "remote");
+const dirs = ["remote", "venues"];
 const cityFiles = new Set(Object.values(JSON.parse(readFileSync(path.join(root, "src/data/city-images.json"), "utf8"))).map((url) => path.basename(url)));
 let created = 0;
 const manifest = {};
-for (const file of readdirSync(dir).filter((name) => /^[0-9a-f]{16}\.webp$/.test(name))) {
+for (const folder of dirs) {
+const dir = path.join(root, "public", "images", folder);
+for (const file of readdirSync(dir).filter((name) => /\.webp$/.test(name) && !/-\d+\.webp$/.test(name))) {
   const source = path.join(dir, file);
   const { width } = await sharp(source).metadata();
   const variants = [];
@@ -23,7 +25,8 @@ for (const file of readdirSync(dir).filter((name) => /^[0-9a-f]{16}\.webp$/.test
     }
     variants.push(target);
   }
-  if (variants.length) manifest[`/images/remote/${file}`] = { width, variants };
+  if (variants.length) manifest[`/images/${folder}/${file}`] = { width, variants };
+}
 }
 writeFileSync(path.join(root, "src/data/image-variants.json"), `${JSON.stringify(manifest, null, 2)}
 `);
