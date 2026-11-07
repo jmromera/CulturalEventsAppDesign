@@ -29,3 +29,4 @@ capturas/
 public/sitemap.xml
 # Legal deliverable screenshots (the generic capturas/ rule above ignores them otherwise)
 !docs/legal/capturas/
+!docs/capturas/
