@@ -156,7 +156,7 @@ export default function YourDataPage({ language, onDeleted = reloadAfterDelete }
         <h2 id="delete-confirm-title">{text.confirmTitle}</h2>
         <p id="delete-confirm-text">{text.confirmText}</p>
         <div className="your-data-confirm-actions">
-          <button type="button" className="button button--primary" onClick={confirmDelete}>{text.confirmYes}</button>
+          <button type="button" className="button button--secondary" onClick={confirmDelete}>{text.confirmYes}</button>
           <button type="button" className="button button--secondary" onClick={() => setConfirming(false)} autoFocus>{text.confirmNo}</button>
         </div>
       </section>}

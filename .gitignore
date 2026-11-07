@@ -24,3 +24,8 @@ capturas/
 
 # Local browser automation output
 .playwright-mcp/
+
+# Generated at build time by scripts/generate-sitemap.mjs
+public/sitemap.xml
+# Legal deliverable screenshots (the generic capturas/ rule above ignores them otherwise)
+!docs/legal/capturas/

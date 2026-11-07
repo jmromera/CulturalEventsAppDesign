@@ -45,3 +45,12 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **Dependencias**: Vite actualizado a 8.1.6 y versiones mínimas forzadas para PostCSS, nanoid y source-map-js. Las 15 vulnerabilidades eran de herramientas de desarrollo, no del código que llega al navegador. `pnpm audit`: 0.
 - **Se elimina `package-lock.json`**: estaba desactualizado y podía hacer que el despliegue usara npm con versiones viejas. El gestor oficial es pnpm (`packageManager` en `package.json`).
 - **Registros**: la app solo escribe en la consola del navegador cuando falla el renderizado (sin datos personales) y muestra al usuario un mensaje genérico. No hay registros de servidor propios.
+
+## Calidad y rendimiento
+- **Imagen Open Graph propia** (`public/images/og-image.jpg`), recortada de la captura de la portada: no depende de terceros.
+- **`canonical` por página con la ciudad solo en los listados** (portada y recintos); en las fichas, sin parámetros, para no duplicar URL.
+- **`noindex` en búsqueda, favoritos, «Tus datos» y páginas que no existen**: son personales, infinitas o errores. Como Vercel responde 200 a cualquier ruta (SPA), la 404 se marca con `noindex`.
+- **Sitemap generado en cada `pnpm build`** a partir de los datos y no guardado en git (se ignora), para que nunca liste eventos pasados.
+- **Copias de imágenes de 640 px (y 1024 px las portadas) con `srcset`**: Lighthouse móvil pasó de 78 a 81 y el peso de la portada de 758 a 666 KB.
+- **No se pre-renderizan las páginas**: subiría el rendimiento en móvil por encima de 90, pero cambia la arquitectura de la app. Queda como decisión de producto en `PENDIENTE.md`.
+- **Botones de la confirmación de borrado con el mismo estilo**, para cumplir lo de «sin patrones oscuros».

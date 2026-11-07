@@ -6,6 +6,8 @@ import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } 
 import { LANGUAGE_KEY, readLanguage, type Language } from "./data/language";
 import { STORAGE_KEYS } from "./data/storage-keys";
 import { serializeJsonLd } from "./lib/json-ld";
+import { updatePageMeta } from "./lib/page-meta";
+import { srcSetFor } from "./lib/responsive-image";
 import { entityKindCopy, copy, eventActionCopy, interfaceText, venueLinkCopy } from "./data/translations";
 import { venueFor, venues } from "./data/venue-catalog";
 import CityOnboardingDialog from "./components/CityOnboardingDialog";
@@ -450,7 +452,7 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
     if (next) document.getElementById("catalogue")?.scrollIntoView();
   };
   return <main id="main-content" tabIndex={-1}>
-    {!isSearching && <section className="hero"><img src={cityImages[selectedCity]} alt={selectedCity} width={1600} height={900} fetchPriority="high" /><div className="hero-shade" /><div className="hero-copy"><div className="hero-meta"><div className="hero-city-group"><span className="hero-city-copy"><strong className="hero-city-name">{selectedCity}</strong><small className="hero-city-count">{cityEventCounts[selectedCity]} {labels.availableEvents}</small></span></div></div><h1>{t.hero}</h1><p>{t.heroText}</p><div className="hero-quick" role="group" aria-label={t.when}>{quickWhen.map(([option, count]) => <button type="button" key={option} className={`hero-chip ${when === option ? "active" : ""}`} aria-pressed={when === option} disabled={count === 0 && when !== option} onClick={() => pickWhen(option)}>{whenNames[option]}<span>{count}</span></button>)}</div></div></section>}
+    {!isSearching && <section className="hero"><img src={cityImages[selectedCity]} srcSet={srcSetFor(cityImages[selectedCity])} sizes="100vw" alt={selectedCity} width={1600} height={900} fetchPriority="high" /><div className="hero-shade" /><div className="hero-copy"><div className="hero-meta"><div className="hero-city-group"><span className="hero-city-copy"><strong className="hero-city-name">{selectedCity}</strong><small className="hero-city-count">{cityEventCounts[selectedCity]} {labels.availableEvents}</small></span></div></div><h1>{t.hero}</h1><p>{t.heroText}</p><div className="hero-quick" role="group" aria-label={t.when}>{quickWhen.map(([option, count]) => <button type="button" key={option} className={`hero-chip ${when === option ? "active" : ""}`} aria-pressed={when === option} disabled={count === 0 && when !== option} onClick={() => pickWhen(option)}>{whenNames[option]}<span>{count}</span></button>)}</div></div></section>}
     <div className="home-content">
       {isSearching ? <>{catalogue}{recommendations}{discovery}</> : <>{recommendations}{discovery}{catalogue}</>}
     </div>
@@ -702,6 +704,10 @@ export default function App() {
     const prefix = pathname.startsWith("/entity/") ? "/entity/" : "/artist/";
     return isEntityPath ? entityFor(pathname.slice(prefix.length)) : undefined;
   }, [isEntityPath, pathname]);
+  useEffect(() => {
+    const missing = page === "not-found" || (page === "detail" && !event) || (page === "venue-detail" && !activeVenue) || (page === "entity" && !activeEntity);
+    updatePageMeta(pathname, location.search, missing);
+  }, [activeEntity, activeVenue, event, location.search, page, pathname]);
   useEffect(() => {
     if (page === "home") document.title = `Plan Cerca · ${selectedCity}`;
     else if (page === "detail" && event) document.title = `${event.title} · Plan Cerca`;

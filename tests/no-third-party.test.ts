@@ -10,7 +10,9 @@ const walk = (dir: string): string[] => readdirSync(path.join(root, dir)).flatMa
   return statSync(path.join(root, rel)).isDirectory() ? walk(rel) : [rel];
 });
 const hostOf = (url: string) => new URL(url).hostname;
-const undeclared = (urls: string[]) => urls.map(hostOf).filter((host) => !DECLARED_THIRD_PARTY_HOSTS.includes(host));
+// Our own domain (canonical links, Open Graph image) is first party, not a third party.
+const ownHost = new URL(JSON.parse(readFileSync(path.join(root, "datos-legales.json"), "utf8")).sitio.url).hostname;
+const undeclared = (urls: string[]) => urls.map(hostOf).filter((host) => host !== ownHost && !DECLARED_THIRD_PARTY_HOSTS.includes(host));
 
 describe("no automatic requests to third parties", () => {
   it("index.html loads nothing from other domains", () => {
@@ -48,5 +50,11 @@ describe("no automatic requests to third parties", () => {
     for (const file of ["events", "venues", "related-entities"]) visit(JSON.parse(read(`src/data/${file}.json`)), file);
     for (const [city, url] of Object.entries(JSON.parse(read("src/data/city-images.json")))) check(url, `city-images.${city}`);
     expect(problems).toEqual([]);
+  });
+
+  it("every responsive copy listed for srcset exists", () => {
+    const manifest = JSON.parse(read("src/data/image-variants.json")) as Record<string, { variants: number[] }>;
+    const missing = Object.entries(manifest).flatMap(([src, info]) => [src, ...info.variants.map((width) => src.replace(/\.webp$/, `-${width}.webp`))]).filter((file) => !existsSync(path.join(root, "public", file)));
+    expect(missing).toEqual([]);
   });
 });

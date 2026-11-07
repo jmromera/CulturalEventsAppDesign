@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /favorites
 Disallow: /search
+Disallow: /tus-datos
+
+Sitemap: https://plancerca.com/sitemap.xml
