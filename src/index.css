@@ -576,3 +576,36 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .availability.soldout{background:rgba(239,68,68,.14);color:#fca5a5}
 .availability.soldout i,.stock--soldout i{background:#f87171}
 .stock.stock--soldout{color:#fca5a5}
+
+/* Legal pages, footer legal links and draft notice */
+.legal-page{max-width:900px}
+.legal-article{line-height:1.65;font-size:16px}
+.legal-article h1{margin:0 0 6px;font-size:clamp(30px,5vw,44px);line-height:1.1}
+.legal-article h2{margin:36px 0 10px;font-size:22px;line-height:1.25}
+.legal-article p,.legal-article li,.legal-article dd{color:var(--muted);max-width:72ch}
+.legal-article a{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px}
+.legal-article a:hover{color:var(--accent-text-hover)}
+.legal-article ul,.legal-article ol{padding-left:22px}
+.legal-article li{margin:6px 0}
+.legal-updated{font-size:14px}
+.legal-facts{display:grid;grid-template-columns:max-content 1fr;gap:8px 20px;margin:16px 0}
+.legal-facts dt{font-weight:700}
+.legal-facts dd{margin:0}
+@media(max-width:560px){.legal-facts{grid-template-columns:1fr}.legal-facts dd{margin-bottom:8px}}
+.legal-summary{margin:24px 0;padding:20px 24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.legal-summary h2{margin-top:0}
+.legal-table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px}
+.legal-table-wrap:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+.legal-table{width:100%;min-width:720px;border-collapse:collapse;font-size:14px;line-height:1.5}
+.legal-table th,.legal-table td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.legal-table thead th{background:var(--surface-raised);font-weight:700}
+.legal-table tbody th{font-weight:600}
+.legal-table td{color:var(--muted)}
+.legal-table code{font-size:13px;word-break:break-all}
+.legal-draft{margin:0 0 24px;padding:16px 20px;border:2px solid #b91c1c;border-radius:12px;background:#fee2e2;color:#7f1d1d}
+.legal-draft strong{display:block;font-size:16px}
+.legal-draft p{margin:4px 0 0;color:#7f1d1d}
+.legal-language-note{margin:0 0 20px;font-style:italic;color:var(--muted)}
+.site-footer-legal ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 18px}
+.site-footer-legal a{min-height:44px;display:inline-flex;align-items:center;color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.site-footer-legal a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}

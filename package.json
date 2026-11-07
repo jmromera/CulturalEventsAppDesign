@@ -7,22 +7,33 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/manrope": "^5.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^6.0.0",
+    "jsdom": "^31.0.0",
     "oxfmt": "^0.2.0",
+    "playwright": "^1.65.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0",
-    "vite": "^8.0.5"
+    "vite": "^8.0.5",
+    "vitest": "^4.1.12"
   }
 }

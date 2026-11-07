@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import cityCoordinates from "../data/city-coordinates.json";
+import { STORAGE_KEYS } from "../data/storage-keys";
 import { cities, type City } from "../types/Event";
 
 export type CityResolutionStatus = "idle" | "loading" | "location-detected" | "location-failed" | "city-selected" | "city-not-found";
@@ -19,11 +20,11 @@ type PreferredCityContextValue = {
 type CityCoordinates = { latitude: number; longitude: number; radiusKm: number };
 
 const PreferredCityContext = createContext<PreferredCityContextValue | null>(null);
-const PREFERRED_CITY_KEY = "plan-cerca.preferred-city";
+const PREFERRED_CITY_KEY = STORAGE_KEYS.preferredCity;
 const LOCATION_TIMEOUT_MS = 10_000;
-const GEOLOCATION_STATUS_KEY = "plan-cerca.geolocation-status";
-const DETECTED_CITY_KEY = "plan-cerca.detected-city";
-const ONBOARDING_DISMISSED_KEY = "plan-cerca.city-onboarding-dismissed";
+const GEOLOCATION_STATUS_KEY = STORAGE_KEYS.geolocationStatus;
+const DETECTED_CITY_KEY = STORAGE_KEYS.detectedCity;
+const ONBOARDING_DISMISSED_KEY = STORAGE_KEYS.onboardingDismissed;
 const DEFAULT_CITY: City = cities[0] ?? "Madrid";
 
 function readStorage(key: string): string | null {

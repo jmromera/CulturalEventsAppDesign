@@ -1,0 +1,45 @@
+{
+  "esEjemplo": true,
+  "_nota": "Datos de EJEMPLO. Sustituye cada valor marcado como EJEMPLO por el real y pon esEjemplo a false solo cuando todo esté revisado. Las páginas legales muestran un aviso rojo mientras esEjemplo sea true.",
+  "versionTextos": "2026-11-07",
+  "fechaActualizacion": "7 de noviembre de 2026",
+  "sitio": {
+    "nombre": "Plan Cerca",
+    "dominio": "plancerca.com",
+    "url": "https://plancerca.com"
+  },
+  "titular": {
+    "nombre": "EJEMPLO Titular de Plan Cerca, S.L.",
+    "nif": "B00000000",
+    "direccion": "Calle de Ejemplo 0, 00000 Ciudad de Ejemplo (España)",
+    "email": "privacidad@ejemplo.invalid",
+    "datosRegistrales": "EJEMPLO: Registro Mercantil de Ciudad de Ejemplo, tomo 0, folio 0, hoja X-0. Si eres persona física sin inscripción, escribe «No aplica»."
+  },
+  "contacto": {
+    "emailErrores": "errores@ejemplo.invalid",
+    "plazoRespuestaErrores": "EJEMPLO: 10 días hábiles"
+  },
+  "proveedores": [
+    {
+      "nombre": "Vercel Inc.",
+      "finalidad": "Alojamiento de la web, red de distribución (CDN) y registros técnicos del servidor",
+      "datos": "Dirección IP, navegador y página solicitada",
+      "region": "EJEMPLO: Estados Unidos y red global de CDN (verificar en tu panel de Vercel)",
+      "transferenciaFueraUE": true,
+      "garantiaTransferencia": "EJEMPLO: Marco de Privacidad de Datos UE-EE. UU. y cláusulas contractuales tipo (verificar en el DPA de Vercel)",
+      "dpa": "https://vercel.com/legal/dpa",
+      "verificado": false
+    }
+  ],
+  "plazos": {
+    "registrosServidor": "EJEMPLO: el que fije Vercel para tu plan (verificar; suele ser de pocos días)",
+    "datosNavegador": "Hasta que los borres desde «Tus datos» o desde tu navegador",
+    "ubicacion": "No se conserva: solo se guarda el nombre de la ciudad elegida",
+    "comunicaciones": "EJEMPLO: el tiempo necesario para responderte y, después, bloqueados durante los plazos de prescripción legales"
+  },
+  "autoridadControl": {
+    "nombre": "Agencia Española de Protección de Datos (AEPD)",
+    "url": "https://www.aepd.es"
+  },
+  "leyAplicable": "Legislación española"
+}

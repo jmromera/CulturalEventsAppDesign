@@ -1,0 +1,6 @@
+# Progreso
+
+## 7 de noviembre de 2026 · Preparación para el lanzamiento (rama `chore/lanzamiento-legal`)
+
+- [x] **Auditoría** (`docs/legal/AUDITORIA.md`): sin backend, cuentas ni cookies; 37 dominios externos de imágenes (58 miniaturas de Google) y Google Fonts reciben la IP del visitante.
+- [x] **Bloque legal**: `datos-legales.json`, aviso legal, privacidad, cookies y términos, enlaces en el pie, aviso rojo mientras `esEjemplo` sea `true`, pruebas de campos obligatorios.

@@ -4,6 +4,7 @@ import { entityFor, relatedEntities } from "./data/entities";
 import { cityEventCounts, cityImages, endedEvents, events, relatedEventsByEntity } from "./data/event-catalog";
 import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } from "./data/artist-preferences";
 import { LANGUAGE_KEY, readLanguage, type Language } from "./data/language";
+import { STORAGE_KEYS } from "./data/storage-keys";
 import { entityKindCopy, copy, eventActionCopy, interfaceText, venueLinkCopy } from "./data/translations";
 import { venueFor, venues } from "./data/venue-catalog";
 import CityOnboardingDialog from "./components/CityOnboardingDialog";
@@ -11,10 +12,15 @@ import CitySelector from "./components/CitySelector";
 import FallbackImage from "./components/FallbackImage";
 import Icon, { type IconName } from "./components/Icon";
 import StatusPage from "./components/StatusPage";
+import { CookiePolicyPage, LegalNoticePage, PrivacyPolicyPage, TermsPage } from "./legal/LegalPages";
+import { legalCopy, LEGAL_PATHS } from "./legal/legal-copy";
 import { usePreferredCity } from "./context/PreferredCityContext";
 import { cities, eventCategories, type City, type EventCategory, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
 
-type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "not-found";
+type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "legal" | "not-found";
+
+// Pages that set their own document title.
+const LEGAL_PAGE_PATHS: string[] = Object.values(LEGAL_PATHS);
 function BrandMark({ className = "" }: { className?: string }) {
   return <span className={`brand-mark ${className}`} aria-hidden="true"><Icon name="location" /></span>;
 }
@@ -595,6 +601,7 @@ function SiteFooter({ language }: { language: Language }) {
   return <footer className="site-footer">
     <div className="site-footer-inner">
       <div><strong>Plan Cerca</strong><p>{labels.footerTagline}</p><p>{labels.footerAcademic}</p></div>
+      <nav className="site-footer-legal" aria-label={legalCopy[language].footerNav}><ul>{([["legalNotice", LEGAL_PATHS.legalNotice], ["privacy", LEGAL_PATHS.privacy], ["cookies", LEGAL_PATHS.cookies], ["terms", LEGAL_PATHS.terms]] as const).map(([key, path]) => <li key={path}><Link to={path}>{legalCopy[language][key]}</Link></li>)}</ul></nav>
       <div className="site-footer-meta"><button ref={triggerRef} type="button" className="site-footer-link" onClick={() => setAboutOpen(true)}>{labels.aboutLink}</button><small>© 2026 Plan Cerca</small></div>
     </div>
     {aboutOpen && <div className="about-backdrop" onClick={() => setAboutOpen(false)}><div ref={modalRef} className="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title" onClick={(e) => e.stopPropagation()}>
@@ -609,7 +616,7 @@ function SiteFooter({ language }: { language: Language }) {
 
 const scrollPositions = new Map<string, number>();
 
-const SAVED_EVENTS_KEY = "plan-cerca.saved-events";
+const SAVED_EVENTS_KEY = STORAGE_KEYS.savedEvents;
 
 // Favoritos guardados en este navegador; si el almacenamiento no está disponible, duran lo que la sesión.
 function readSavedEvents(): number[] {
@@ -661,7 +668,7 @@ export default function App() {
     focusedPath.current = pathname;
     focusMain(false);
   }, [pathname]);
-  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : "not-found";
+  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : LEGAL_PAGE_PATHS.includes(pathname) ? "legal" : "not-found";
   const [language, setLanguage] = useState<Language>(readLanguage);
   useEffect(() => {
     document.documentElement.lang = language;
@@ -695,6 +702,7 @@ export default function App() {
     else if (page === "venues") document.title = `${interfaceText[language].venues} · ${selectedCity} · Plan Cerca`;
     else if (page === "favorites") document.title = `${interfaceText[language].favourites} · Plan Cerca`;
     else if (page === "search") document.title = `${t.search} · Plan Cerca`;
+    else if (page === "legal") return;
     else document.title = `${t.notFoundTitle} · Plan Cerca`;
   }, [activeEntity, activeVenue, event, language, page, selectedCity, t.notFoundTitle, t.search]);
   useEffect(() => {
@@ -765,6 +773,10 @@ export default function App() {
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />
       <Route path="/entity/:slug" element={<EntityRoute back={goBack} language={language} t={t} />} />
       <Route path="/artist/:slug" element={<EntityRoute back={goBack} language={language} t={t} />} />
+      <Route path={LEGAL_PATHS.legalNotice} element={<LegalNoticePage language={language} />} />
+      <Route path={LEGAL_PATHS.privacy} element={<PrivacyPolicyPage language={language} />} />
+      <Route path={LEGAL_PATHS.cookies} element={<CookiePolicyPage language={language} />} />
+      <Route path={LEGAL_PATHS.terms} element={<TermsPage language={language} />} />
       <Route path="*" element={<NotFound t={t} />} />
     </Routes>
     <SiteFooter language={language} />
