@@ -1,9 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import cityCoordinates from "../data/city-coordinates.json";
+import { STORAGE_KEYS } from "../data/storage-keys";
 import { cities, type City } from "../types/Event";
 
-export type CityResolutionStatus = "loading" | "location-detected" | "geolocation-denied" | "city-selected" | "city-not-found";
+export type CityResolutionStatus = "idle" | "loading" | "location-detected" | "location-failed" | "city-selected" | "city-not-found";
 
 type PreferredCityContextValue = {
   selectedCity: City;
@@ -11,18 +12,20 @@ type PreferredCityContextValue = {
   detectedCity: City | null;
   status: CityResolutionStatus;
   onboardingOpen: boolean;
-  selectCity: (city: City, destinationPath?: string) => void;
+  /** `persist: false` uses the city for this visit only (e.g. it came in a shared link) without storing it. */
+  selectCity: (city: City, destinationPath?: string, persist?: boolean) => void;
+  requestLocation: () => void;
   dismissOnboarding: () => void;
 };
 
 type CityCoordinates = { latitude: number; longitude: number; radiusKm: number };
 
 const PreferredCityContext = createContext<PreferredCityContextValue | null>(null);
-const PREFERRED_CITY_KEY = "plan-cerca.preferred-city";
-const GEOLOCATION_ATTEMPTED_KEY = "plan-cerca.geolocation-attempted";
-const GEOLOCATION_STATUS_KEY = "plan-cerca.geolocation-status";
-const DETECTED_CITY_KEY = "plan-cerca.detected-city";
-const ONBOARDING_DISMISSED_KEY = "plan-cerca.city-onboarding-dismissed";
+const PREFERRED_CITY_KEY = STORAGE_KEYS.preferredCity;
+const LOCATION_TIMEOUT_MS = 10_000;
+const GEOLOCATION_STATUS_KEY = STORAGE_KEYS.geolocationStatus;
+const DETECTED_CITY_KEY = STORAGE_KEYS.detectedCity;
+const ONBOARDING_DISMISSED_KEY = STORAGE_KEYS.onboardingDismissed;
 const DEFAULT_CITY: City = cities[0] ?? "Madrid";
 
 function readStorage(key: string): string | null {
@@ -49,17 +52,16 @@ function readCity(key: string): City | null {
 
 function readStoredStatus(): CityResolutionStatus | null {
   const status = readStorage(GEOLOCATION_STATUS_KEY);
-  return status === "geolocation-denied" || status === "city-not-found" || status === "location-detected" ? status : null;
+  return status === "city-not-found" || status === "location-detected" ? status : null;
 }
 
+// La ciudad de la URL (?city=) tiene prioridad sobre la guardada.
 function readInitialCity(): City {
-  const savedCity = readCity(PREFERRED_CITY_KEY);
-  if (savedCity) return savedCity;
   if (typeof window !== "undefined") {
     const routeCity = new URLSearchParams(window.location.search).get("city");
     if (routeCity && (cities as string[]).includes(routeCity)) return routeCity as City;
   }
-  return DEFAULT_CITY;
+  return readCity(PREFERRED_CITY_KEY) ?? DEFAULT_CITY;
 }
 
 function cityNearCoordinates(latitude: number, longitude: number): City | null {
@@ -87,11 +89,14 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<CityResolutionStatus>(() => {
     if (readCity(PREFERRED_CITY_KEY)) return "city-selected";
     const routeCity = typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("city");
-    return routeCity && (cities as string[]).includes(routeCity) ? "city-selected" : "loading";
+    return routeCity && (cities as string[]).includes(routeCity) ? "city-selected" : "idle";
   });
   const [onboardingOpen, setOnboardingOpen] = useState(false);
   const initialized = useRef(false);
   const pendingDestinationPath = useRef<string | null>(null);
+  // Refs y no estado: el efecto debe ver la última ciudad elegida aunque la URL aún no se haya actualizado.
+  const currentPreferredCity = useRef<City | null>(preferredCity);
+  const lastRouteCity = useRef<City | null>(null);
 
   const syncCityInUrl = useCallback((city: City, replace = false, destinationPath = location.pathname) => {
     const params = new URLSearchParams(location.search);
@@ -107,18 +112,52 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
     navigate({ pathname: location.pathname, search: params.size ? `?${params.toString()}` : "" }, { replace: true });
   }, [location.pathname, location.search, navigate]);
 
-  const selectCity = useCallback((city: City, destinationPath?: string) => {
+  const selectCity = useCallback((city: City, destinationPath?: string, persist = true) => {
+    currentPreferredCity.current = city;
     setPreferredCity(city);
     setSelectedCity(city);
     setDetectedCity(null);
     setStatus("city-selected");
     setOnboardingOpen(false);
-    writeStorage(PREFERRED_CITY_KEY, city);
-    writeStorage(GEOLOCATION_STATUS_KEY, "city-selected");
-    try { window.localStorage.removeItem(DETECTED_CITY_KEY); } catch { /* Optional cached suggestion. */ }
+    // Only a city the person chose is remembered; one that arrived in the URL stays in memory.
+    if (persist) {
+      writeStorage(PREFERRED_CITY_KEY, city);
+      writeStorage(GEOLOCATION_STATUS_KEY, "city-selected");
+      try { window.localStorage.removeItem(DETECTED_CITY_KEY); } catch { /* Optional cached suggestion. */ }
+    }
     if (destinationPath) pendingDestinationPath.current = destinationPath;
     syncCityInUrl(city, false, destinationPath);
   }, [syncCityInUrl]);
+
+  const requestLocation = useCallback(() => {
+    // Rechazo, error o permiso sin responder: se vuelve al estado normal con un aviso, nunca se queda buscando.
+    let settled = false;
+    const fail = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      if (!readCity(PREFERRED_CITY_KEY)) setStatus("location-failed");
+    };
+    const timer = window.setTimeout(fail, LOCATION_TIMEOUT_MS);
+    if (!window.navigator.geolocation) { fail(); return; }
+    setStatus("loading");
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timer);
+        if (readCity(PREFERRED_CITY_KEY)) return;
+        const city = cityNearCoordinates(position.coords.latitude, position.coords.longitude);
+        setDetectedCity(city);
+        const nextStatus = city ? "location-detected" : "city-not-found";
+        setStatus(nextStatus);
+        writeStorage(GEOLOCATION_STATUS_KEY, nextStatus);
+        if (city) writeStorage(DETECTED_CITY_KEY, city);
+      },
+      fail,
+      { enableHighAccuracy: false, maximumAge: 300_000, timeout: 8_000 },
+    );
+  }, []);
 
   const dismissOnboarding = useCallback(() => {
     setOnboardingOpen(false);
@@ -129,80 +168,51 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
     const routeCityValue = new URLSearchParams(location.search).get("city");
     const routeCity = routeCityValue && (cities as string[]).includes(routeCityValue) ? routeCityValue as City : null;
     const isEntityRoute = location.pathname.startsWith("/entity/") || location.pathname.startsWith("/artist/");
+    const routeCityChanged = routeCity !== lastRouteCity.current;
+    lastRouteCity.current = routeCity;
 
     if (isEntityRoute && routeCityValue) removeCityFromUrl();
 
     if (initialized.current) {
       if (pendingDestinationPath.current) {
-        if (location.pathname === pendingDestinationPath.current && routeCity === preferredCity) {
+        if (location.pathname === pendingDestinationPath.current && routeCity === currentPreferredCity.current) {
           pendingDestinationPath.current = null;
         } else {
           return;
         }
       }
       if (isEntityRoute) return;
-      if (preferredCity && routeCity !== preferredCity) syncCityInUrl(preferredCity, true);
+      // Un ?city= nuevo en la URL (enlace compartido, atrás/adelante) manda sobre la ciudad guardada.
+      if (routeCity && routeCityChanged && routeCity !== currentPreferredCity.current) selectCity(routeCity, undefined, false);
+      else if (currentPreferredCity.current && routeCity !== currentPreferredCity.current) syncCityInUrl(currentPreferredCity.current, true);
       return;
     }
     initialized.current = true;
+
+    if (routeCity) {
+      selectCity(routeCity, undefined, false);
+      return;
+    }
 
     const savedCity = readCity(PREFERRED_CITY_KEY);
     if (savedCity) {
       setPreferredCity(savedCity);
       setSelectedCity(savedCity);
       setStatus("city-selected");
-      if (!isEntityRoute && routeCity !== savedCity) syncCityInUrl(savedCity, true);
+      if (!isEntityRoute) syncCityInUrl(savedCity, true);
       return;
     }
 
-    if (routeCity) {
-      selectCity(routeCity);
-      return;
+    // Sin ciudad elegida se pregunta al entrar, no a mitad de la visita; la ubicación solo se pide desde el diálogo.
+    const cachedCity = readCity(DETECTED_CITY_KEY);
+    if (readStoredStatus() === "location-detected" && cachedCity) {
+      setStatus("location-detected");
+      setDetectedCity(cachedCity);
     }
-
-    const dismissed = readStorage(ONBOARDING_DISMISSED_KEY) === "true";
-    const attempted = readStorage(GEOLOCATION_ATTEMPTED_KEY) === "true";
-    if (attempted) {
-      const previousStatus = readStoredStatus() ?? "geolocation-denied";
-      setStatus(previousStatus);
-      setDetectedCity(readCity(DETECTED_CITY_KEY));
-      setOnboardingOpen(!dismissed);
-      return;
-    }
-
-    if (typeof window === "undefined" || !window.navigator.geolocation) {
-      writeStorage(GEOLOCATION_ATTEMPTED_KEY, "true");
-      writeStorage(GEOLOCATION_STATUS_KEY, "city-not-found");
-      setStatus("city-not-found");
-      setOnboardingOpen(!dismissed);
-      return;
-    }
-
-    writeStorage(GEOLOCATION_ATTEMPTED_KEY, "true");
-    setStatus("loading");
-    window.navigator.geolocation.getCurrentPosition(
-      (position) => {
-        if (readCity(PREFERRED_CITY_KEY)) return;
-        const city = cityNearCoordinates(position.coords.latitude, position.coords.longitude);
-        setDetectedCity(city);
-        const nextStatus = city ? "location-detected" : "city-not-found";
-        setStatus(nextStatus);
-        writeStorage(GEOLOCATION_STATUS_KEY, nextStatus);
-        if (city) writeStorage(DETECTED_CITY_KEY, city);
-        setOnboardingOpen(!dismissed);
-      },
-      (error) => {
-        if (readCity(PREFERRED_CITY_KEY)) return;
-        const nextStatus = error.code === error.PERMISSION_DENIED ? "geolocation-denied" : "city-not-found";
-        setStatus(nextStatus);
-        writeStorage(GEOLOCATION_STATUS_KEY, nextStatus);
-        setOnboardingOpen(!dismissed);
-      },
-      { enableHighAccuracy: false, maximumAge: 300_000, timeout: 8_000 },
-    );
+    setOnboardingOpen(readStorage(ONBOARDING_DISMISSED_KEY) !== "true");
   }, [location.pathname, location.search, preferredCity, removeCityFromUrl, selectCity, syncCityInUrl]);
 
-  const value = useMemo(() => ({ selectedCity, preferredCity, detectedCity, status, onboardingOpen, selectCity, dismissOnboarding }), [selectedCity, preferredCity, detectedCity, status, onboardingOpen, selectCity, dismissOnboarding]);
+  const value = useMemo(() => ({ selectedCity, preferredCity, detectedCity, status, onboardingOpen, selectCity, requestLocation, dismissOnboarding }), [selectedCity, preferredCity, detectedCity, status, onboardingOpen, selectCity, requestLocation, dismissOnboarding]);
   return <PreferredCityContext.Provider value={value}>{children}</PreferredCityContext.Provider>;
 }
 

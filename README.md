@@ -28,7 +28,7 @@
 
 Plan Cerca es una agenda cultural y deportiva para seis ciudades de España: **Madrid, Barcelona, Valencia, Sevilla, Bilbao y Albacete**. Eliges ciudad, ves qué hay hoy, mañana o este mes, guardas lo que te interesa y, desde cada ficha, llegas a la web oficial para comprar la entrada.
 
-Es el proyecto de la asignatura de **Interacción Persona-Ordenador (HCI)**. Por eso pesan tanto la usabilidad, la accesibilidad y la jerarquía visual como las funciones: cada cambio importante salió de una revisión de uso.
+Es el proyecto de la asignatura **«HCI: Desarrollo web y móvil»**. Por eso pesan tanto la usabilidad, la accesibilidad y la jerarquía visual como las funciones: cada cambio importante salió de una revisión de uso.
 
 > **En cifras (7 de noviembre de 2026):** 185 eventos próximos, 44 recintos y 11 fichas de artista o espectáculo. Los eventos que ya han pasado se ocultan solos.
 
@@ -42,7 +42,8 @@ Es el proyecto de la asignatura de **Interacción Persona-Ordenador (HCI)**. Por
 | 🔍 **Búsqueda que perdona** | Ignora tildes y mayúsculas, busca en título, recinto, organizador y etiquetas, y si en tu ciudad no hay nada te dice en qué otras ciudades sí. |
 | 📅 **Ficha completa** | Añadir al calendario (Google o `.ics` con la hora de Madrid bien calculada), compartir con el menú nativo del móvil y datos estructurados de schema.org para buscadores. |
 | ♿ **Accesible de serie** | Enlace para saltar al contenido, foco gestionado al cambiar de página, diálogos con foco atrapado, `aria-pressed` y `aria-live`, y respeto a «reducir movimiento». |
-| 🤖 **Legible por máquinas** | `llms.txt` y `ai-catalog.json` describen el sitio para agentes de IA; `robots.txt` deja fuera favoritos y búsquedas. |
+| 🔒 **Privacidad por diseño** | Sin cookies, sin analítica y sin terceros: fuentes e imágenes se sirven desde el propio dominio, la ubicación nunca sale del dispositivo y cada persona puede descargar o borrar sus datos en un clic. Lo comprueban pruebas automáticas. |
+| 🤖 **Legible por máquinas** | `llms.txt`, `ai-catalog.json` y un `sitemap.xml` generado en cada build; `robots.txt` deja fuera las páginas personales. |
 | 🌍 **Tres idiomas** | Español, inglés y francés, también en los textos de recintos y artistas. El atributo `lang` del documento cambia con el idioma. |
 
 ---
@@ -150,7 +151,8 @@ flowchart TB
 | Estilos | **Tailwind CSS 4** + CSS propio (`src/index.css`) | Tema oscuro con acento violeta, variables por categoría y *media queries* para móvil |
 | Build | **Vite 8** | Arranque instantáneo y recarga en caliente |
 | Formato | **oxfmt** | Formateador rápido, sin configuración |
-| Tipografías | **DM Sans** y **Manrope** (Google Fonts) | Cargadas con `preconnect` + `<link>`, sin `@import` que bloquee |
+| Tipografías | **DM Sans** y **Manrope** (`@fontsource`, autoalojadas) | Se sirven desde el propio dominio: ninguna petición a Google Fonts |
+| Pruebas | **Vitest** + Testing Library, **Playwright** + **axe-core** | Pruebas unitarias y comprobaciones en navegador real (accesibilidad, terceros, CSP, tamaños de pantalla) |
 | Despliegue | **Vercel** | Estáticos con reescritura SPA y cabeceras propias |
 | Origen | **Figma Make** | El prototipo inicial salió de ahí; quedan sus *plugins* de Vite en `vite.config.ts` |
 
@@ -321,20 +323,52 @@ Como proyecto de HCI, la accesibilidad se trató como requisito y no como repaso
 ## ⚡ Rendimiento
 
 - **Sin peticiones de datos.** El catálogo viaja en el JavaScript; al abrir la portada ya está todo.
-- **Fuentes sin cadena bloqueante.** Se pasó de `@import` en el CSS a `preconnect` + `<link>` en el HTML.
-- **Imágenes con prioridad.** La portada y la imagen principal de cada ficha llevan `fetchpriority="high"`; las tarjetas usan `loading="lazy"` y `decoding="async"`, y todas tienen ancho y alto para no mover la maqueta al cargar.
+- **Fuentes autoalojadas** dentro del CSS, sin conexiones a otros dominios.
+- **Imágenes ligeras.** Todas en WebP y autoalojadas, con copias de 640 y 1024 px que el navegador elige con `srcset`. La portada y la imagen principal de cada ficha llevan `fetchpriority="high"`; las tarjetas usan `loading="lazy"`, y todas tienen ancho y alto para no mover la maqueta.
 - **Catálogo por tandas** de 12 tarjetas en vez de pintar cientos de golpe.
+- **Lighthouse** (7 de noviembre de 2026): escritorio 97 · 100 · 100 · 100 y móvil 81 · 100 · 100 · 100 (rendimiento · accesibilidad · buenas prácticas · SEO). El rendimiento en móvil lo limita que la página no se pinta hasta ejecutar el JavaScript, que incluye el catálogo.
 
 ---
 
 ## 🚀 Despliegue
 
-Producción en **Vercel**, en [plancerca.com](https://plancerca.com). [`vercel.json`](vercel.json) hace dos cosas:
+Producción en **Vercel**, en [plancerca.com](https://plancerca.com). [`vercel.json`](vercel.json):
 
 - **Reescribe todas las rutas a `index.html`**, para que `/event/89` funcione al recargar o al abrirlo desde un enlace (React Router resuelve la ruta en el navegador).
-- **Fija el `Content-Type`** de `llms.txt`, `ai-catalog.json` y `robots.txt` con `charset=utf-8`, para que las tildes no lleguen rotas.
+- **Añade cabeceras de seguridad** a todas las respuestas: CSP estricta (solo el propio dominio, sin código en línea), HSTS, `nosniff`, `Referrer-Policy`, `Permissions-Policy` y prohibición de incrustar la web en otras.
+- **Fija el `Content-Type`** de `llms.txt`, `ai-catalog.json`, `robots.txt` y `sitemap.xml` con `charset=utf-8`, y la caché de los recursos con nombre único.
 
 El título, la descripción y el idioma del HTML se configuran en `.figma/make/site.json` y un *plugin* de Vite los inyecta al construir.
+
+### Por qué Vercel
+
+- Es un **hosting estático gratuito** y ya está conectado al repositorio.
+- Aplica las cabeceras y la regla de `vercel.json` que hace funcionar `/event/169` al recargar. Netlify o GitHub Pages necesitarían reescribir esa configuración; GitHub Pages, además, no permite cabeceras propias como la CSP.
+- **La web no depende de ninguna API, clave ni cuota:** los eventos, recintos e imágenes están en el repositorio. Nada puede caducar ni fallar durante la evaluación.
+
+### Cómo publicar y volver a publicar
+
+1. Comprueba en local que todo pasa:
+   ```bash
+   pnpm test && pnpm typecheck && pnpm build
+   pnpm check:a11y && pnpm check:terceros   # opcional, recomendado
+   ```
+2. Fusiona la rama de trabajo en `develop` y `develop` en `main` (con PR en GitHub). Vercel publica en producción lo que llega a `main` y crea una vista previa de cada rama.
+3. **Solo la primera vez:** `main` todavía muestra la página de «Próximamente» (`src/main.tsx` monta `ComingSoonPage`). Al fusionar `develop` en `main`, resuelve el conflicto de `src/main.tsx` quedándote con la versión de `develop`, que monta la app.
+4. Comprueba en la web publicada: que `/event/169` carga al recargar, que las cabeceras de seguridad aparecen en la respuesta y que Vercel tiene **pnpm** como gestor de paquetes.
+
+Para volver a publicar tras cambiar datos o código, repite los pasos 1, 2 y 4. Si prefieres no usar GitHub, con la CLI de Vercel basta con `vercel --prod` desde la raíz del proyecto.
+
+### Mantener el catálogo al día
+
+Los eventos que ya han pasado se ocultan solos, y los atajos Hoy/Mañana/Esta semana se calculan con la fecha del visitante. Para añadir eventos:
+
+```bash
+python scripts/add-events-2027.py   # añade los eventos de la lista (sin duplicar)
+pnpm images:fetch                   # busca cartel o foto de cada evento nuevo
+pnpm images:self-host && pnpm images:variants
+pnpm test                           # incluye la prueba que simula el 20/12, el 1/1 y el 31/1
+```
 
 ---
 
@@ -353,6 +387,12 @@ pnpm dev          # http://localhost:8443 (o el puerto de la variable PORT)
 | `pnpm build` | Build de producción en `dist/` |
 | `pnpm preview` | Sirve el build localmente |
 | `pnpm format` | Formatea el código con oxfmt |
+| `pnpm test` | Pruebas automáticas |
+| `pnpm typecheck` | Comprobación de tipos |
+| `pnpm check:a11y` | Accesibilidad con axe-core en todas las páginas, móvil y escritorio, y zoom al 200 % |
+| `pnpm check:terceros` | Navegador real: ninguna petición a terceros, ninguna cookie, ninguna violación de la CSP |
+| `pnpm check:contraste` | Contraste del texto sobre las portadas de ciudad |
+| `pnpm check:responsive` | 360, 390 y 768 px, conexión 3G lenta y sin permiso de ubicación |
 
 No hace falta ninguna clave ni variable de entorno. Cómo añadir eventos, recintos o ciudades está en el **[manual de uso](docs/MANUAL-DE-USO.md#para-quien-mantiene-la-app)**.
 
@@ -382,9 +422,14 @@ src/
 │   ├── city-coordinates.json    Centro y radio de cada ciudad
 │   ├── translations.json        Textos en es, en y fr
 │   └── *.ts                     Acceso tipado: catálogo, recintos, idioma, preferencias de artista
-└── types/Event.ts               Tipos de evento, recinto, ciudad, categoría y ficha
-public/                          favicon, robots.txt, llms.txt, ai-catalog.json
-docs/                            Guía visual, manual de uso y capturas
+├── types/Event.ts               Tipos de evento, recinto, ciudad, categoría y ficha
+├── legal/                       Páginas legales, «Tus datos» y textos de la zona legal
+└── lib/                         JSON-LD seguro, metadatos por página e imágenes responsive
+public/                          favicon, robots.txt, llms.txt, ai-catalog.json e images/ (imágenes autoalojadas)
+scripts/                         Imágenes, sitemap y comprobaciones en navegador (accesibilidad, terceros, tamaños)
+tests/                           Pruebas automáticas (pnpm test)
+datos-legales.json               Datos del titular y proveedores que leen las páginas legales
+docs/                            Guía visual, manual de uso, capturas y docs/legal/ (auditoría y checklist de lanzamiento)
 ```
 
 ---
@@ -395,12 +440,14 @@ docs/                            Guía visual, manual de uso y capturas
 
 **Pendiente o mejorable:**
 
-- **Sin pruebas automáticas.** Lo más delicado (rangos de fecha, hora de Madrid en el `.ics`, resolución de ciudad) merece pruebas unitarias.
+- **Datos legales de ejemplo.** `datos-legales.json` tiene `esEjemplo: true` y las páginas legales muestran un aviso rojo hasta completarlo. Lo que falta está en [`docs/legal/PENDIENTE.md`](docs/legal/PENDIENTE.md).
+- **Faltan pruebas de lógica** como los rangos de fecha o la hora de Madrid en el `.ics`; las pruebas actuales cubren privacidad, legal, seguridad y metadatos.
 - **«Seguir artista» y «Avisarme» solo guardan la preferencia** en el navegador. No hay notificaciones de verdad porque no hay backend que las envíe.
 - **«Invitado» es un marcador de posición.** No hay cuentas, así que los favoritos no pasan de un dispositivo a otro.
 - **Datos curados a mano.** Cada evento se añade editando `events.json`; precios y disponibilidad pueden quedarse atrás respecto a la web oficial.
 - **`App.tsx` y `index.css` son grandes** (unas 770 líneas y casi 100 KB). Separar páginas y estilos facilitaría el mantenimiento.
-- **Las imágenes dependen de webs ajenas.** Portadas, carteles y fotos de recintos se enlazan desde su origen; si una web cambia o bloquea el enlace, en las tarjetas `FallbackImage` pinta un icono, pero la portada de ciudad usa un `<img>` normal y se queda en blanco. Ya pasó con la antigua foto de Madrid; por eso las portadas vienen ahora de Unsplash y Wikimedia Commons, que permiten enlazarlas.
+- **Licencias de imágenes por revisar.** Las 210 imágenes están autoalojadas, pero la mayoría son carteles y fotos promocionales de terceros sin licencia documentada. Su origen está en [`docs/legal/ORIGEN-IMAGENES.json`](docs/legal/ORIGEN-IMAGENES.json).
+- **Valoraciones y «% de popularidad» sin fuente.** Ver [`docs/legal/TEXTOS-A-REVISAR.md`](docs/legal/TEXTOS-A-REVISAR.md).
 
 ---
 
@@ -417,13 +464,13 @@ Las portadas de ciudad son fotos nocturnas elegidas para que encajen con el tema
 | Bilbao | Museo Guggenheim y la ría de noche | Niclas Dehmel · [Unsplash](https://unsplash.com/photos/bAfk_mr8VU4) · [Licencia Unsplash](https://unsplash.com/license) |
 | Albacete | Feria de Albacete: Puerta de Hierros y guirnaldas de luces | Ángel Aroca Escámez · [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Feria_de_albacete_puertas_de_hierro_de_noche.JPG) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 
-Los carteles de eventos y las fotos de recintos y artistas pertenecen a sus organizadores, recintos o artistas, y se enlazan desde sus webs oficiales.
+Los carteles de eventos y las fotos de recintos y artistas pertenecen a sus organizadores, recintos o artistas. Se sirven copias optimizadas desde el propio dominio para no enviar la IP de los visitantes a terceros; el origen de cada una está en [`docs/legal/ORIGEN-IMAGENES.json`](docs/legal/ORIGEN-IMAGENES.json).
 
 ---
 
 <div align="center">
 
-Proyecto académico de la asignatura de **Interacción Persona-Ordenador (HCI)**. 🎭
+Proyecto académico de la asignatura **«HCI: Desarrollo web y móvil»**. 🎭
 
 <sub>Las entradas, precios y horarios definitivos son siempre los de la web oficial de cada evento. Desarrollado con ayuda de <a href="https://claude.com/claude-code">Claude Code</a>.</sub>
 

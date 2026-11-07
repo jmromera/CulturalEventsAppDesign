@@ -1,0 +1,2098 @@
+{
+  "images": {
+    "/images/remote/a1f44913ed658848.webp": {
+      "original": "https://images.unsplash.com/photo-1488285284925-76b108c65d01?auto=format&fit=crop&w=2000&q=85",
+      "kind": "city",
+      "usedBy": [
+        "city:Madrid"
+      ]
+    },
+    "/images/remote/552fdfe301a1b964.webp": {
+      "original": "https://images.unsplash.com/photo-1711534283558-812f4dadb433?auto=format&fit=crop&w=2000&q=85",
+      "kind": "city",
+      "usedBy": [
+        "city:Barcelona"
+      ]
+    },
+    "/images/remote/48754e283df43647.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Nightwalk_to_the_City_of_Arts_and_Sciences_%28Valencia%29_-_Spain_Paseo_hacia_la_ciudad_de_las_artes_y_las_ciencias_%2832244618773%29.jpg/1920px-Nightwalk_to_the_City_of_Arts_and_Sciences_%28Valencia%29_-_Spain_Paseo_hacia_la_ciudad_de_las_artes_y_las_ciencias_%2832244618773%29.jpg",
+      "kind": "city",
+      "usedBy": [
+        "city:Valencia"
+      ]
+    },
+    "/images/remote/2a9864bdf1502499.webp": {
+      "original": "https://images.unsplash.com/photo-1685594255041-c68675df65f5?auto=format&fit=crop&w=2000&q=85",
+      "kind": "city",
+      "usedBy": [
+        "city:Sevilla"
+      ]
+    },
+    "/images/remote/2007e0186486a636.webp": {
+      "original": "https://images.unsplash.com/photo-1554212264-aae064407bd6?auto=format&fit=crop&w=2000&q=85",
+      "kind": "city",
+      "usedBy": [
+        "city:Bilbao"
+      ]
+    },
+    "/images/remote/f5587c4e77e04c5a.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Feria_de_albacete_puertas_de_hierro_de_noche.JPG/1920px-Feria_de_albacete_puertas_de_hierro_de_noche.JPG",
+      "kind": "city",
+      "usedBy": [
+        "city:Albacete"
+      ]
+    },
+    "/images/remote/8a186801a6c8c326.webp": {
+      "original": "https://www.surefolk.es/wp-content/uploads/karmento-c.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:16",
+        "entity:karmento"
+      ]
+    },
+    "/images/remote/502369b9d08a352a.webp": {
+      "original": "https://prismic-images.tmol.io/ticketmaster-tm-global/ahaT0LK9tuLqEK_f_TKM2426x1365a150-4-.jpg?auto=format%2Ccompress&rect=0%2C0%2C2426%2C1023&w=1600&h=900",
+      "kind": "event",
+      "usedBy": [
+        "event:1"
+      ]
+    },
+    "/images/remote/9f2f70679467a183.webp": {
+      "original": "https://prismic-images.tmol.io/ticketmaster-tm-global/afGs8MBOoF08xaBs_2426x1365.jpg?auto=format%2Ccompress&rect=0%2C0%2C2426%2C1023&w=1600&h=900",
+      "kind": "event",
+      "usedBy": [
+        "event:2"
+      ]
+    },
+    "/images/remote/257a082039722b8e.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_OPERA_FEDORA.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:3"
+      ]
+    },
+    "/images/remote/7067f6a15f0dce4b.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_DANZA_CND06.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:4"
+      ]
+    },
+    "/images/remote/fb79d7a3fa57907d.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_CONCIERTOS_ERMONELAJAHO.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:5"
+      ]
+    },
+    "/images/remote/9fe5e45d8cd4ffc0.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_OPERA_KATIAKABANOVA.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:6"
+      ]
+    },
+    "/images/remote/b30d46464038a130.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_OPERA_BODASDESANGRE.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:7"
+      ]
+    },
+    "/images/remote/dc5bd629e3f08da5.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_OPERA_NORMA%20%281%29.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:8"
+      ]
+    },
+    "/images/remote/ac684e5c0717cc37.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_CONCIERTOS_BENJAMINBERNHEIM.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:9"
+      ]
+    },
+    "/images/remote/09b4f4714ad22bfb.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_DANZA_PINABAUSCH.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:10"
+      ]
+    },
+    "/images/remote/13369c29c56a24fb.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_OPERA_ELBARBERODESEVILLA.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:11"
+      ]
+    },
+    "/images/remote/61a990aa20c32baa.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/espectaculos/CabeceraWeb_1920x550_DOMINGOS_Concierto6.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:12"
+      ]
+    },
+    "/images/remote/df3b7b823a12ee67.webp": {
+      "original": "https://www.palaumusica.cat/images/1623931/facebook.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:17"
+      ]
+    },
+    "/images/remote/ab5ae93241ba6ae8.webp": {
+      "original": "https://www.palaumusica.cat/images/1632289/facebook.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:19"
+      ]
+    },
+    "/images/remote/11cc2ba62bd9b190.webp": {
+      "original": "https://www.palaumusica.cat/images/1641007/facebook.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:20"
+      ]
+    },
+    "/images/remote/bfe37b04e804e557.webp": {
+      "original": "https://www.tnc.cat/img-tnc-cat/uploads/2026-05/espectacles/740x740-EL%20CADELL.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:21"
+      ]
+    },
+    "/images/remote/b7135820bf781e50.webp": {
+      "original": "https://www.tnc.cat/img-tnc-cat/uploads/2026-05/espectacles/740x740-LA%20%C3%9ALTIMA%20NOCHE%20CON%20MI%20HERMANO.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:22"
+      ]
+    },
+    "/images/remote/0a60485712407967.webp": {
+      "original": "https://www.tnc.cat/img-tnc-cat/uploads/2026-09/espectacles/740x740-GOTA%20%281%29.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:23"
+      ]
+    },
+    "/images/remote/75237cb6f90ad9cb.webp": {
+      "original": "https://www.teatrelliure.com/uploads/20260603/Julia_thumbnail-(4).jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:24"
+      ]
+    },
+    "/images/remote/4f084177e98e6eac.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/6/67/Barcelona_Museum_of_Contemporary_Art.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:25",
+        "event:27",
+        "venue:barcelona-macba"
+      ]
+    },
+    "/images/remote/630287faf4f591ed.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/b/ba/MACBA_BCN.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:26"
+      ]
+    },
+    "/images/remote/c6d8d1ea68306af3.webp": {
+      "original": "https://commons.wikimedia.org/wiki/Special:FilePath/Museo_PIcasso_._Palau_Berenguer_._Barcelona.JPG?width=1200",
+      "kind": "event",
+      "usedBy": [
+        "event:28"
+      ]
+    },
+    "/images/remote/52c5390c4b5ed63a.webp": {
+      "original": "https://www.liceubarcelona.cat/sites/default/files/2026-04/Cap%C3%A7alera%20Aida.png",
+      "kind": "event",
+      "usedBy": [
+        "event:32"
+      ]
+    },
+    "/images/remote/6527d73983663492.webp": {
+      "original": "https://www.liceubarcelona.cat/sites/default/files/2026-01/Cap%C3%A7alera%20Jove%20Aida.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:33"
+      ]
+    },
+    "/images/remote/1b843a2eed93b0ab.webp": {
+      "original": "https://www.teatrelliure.com/uploads/20260603/Lopera_thumbnail-(4).jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:34"
+      ]
+    },
+    "/images/remote/e0b8329b58d94b54.webp": {
+      "original": "https://www.liceubarcelona.cat/sites/default/files/2026-07/Cap%C3%A7alera%20sara%20baras%202.png",
+      "kind": "event",
+      "usedBy": [
+        "event:35"
+      ]
+    },
+    "/images/remote/9801bfb5e4c7093a.webp": {
+      "original": "https://images.unsplash.com/photo-1551186839-9e4a19b27812?auto=format&fit=crop&w=1400&q=85",
+      "kind": "event",
+      "usedBy": [
+        "event:36"
+      ]
+    },
+    "/images/remote/e9201fd602633b2f.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/003/001/ficheros/t00030050/2783_58/med_JAVIER-COMESANA-Y-ENRIQUE-LAPAZ.png",
+      "kind": "event",
+      "usedBy": [
+        "event:37"
+      ]
+    },
+    "/images/remote/58751d2ff0f03269.webp": {
+      "original": "https://images.unsplash.com/photo-1719401542194-95139aed215c?auto=format&fit=crop&w=1400&q=85",
+      "kind": "event",
+      "usedBy": [
+        "event:38",
+        "venue:valencia-palau-de-la-musica-de-valencia"
+      ]
+    },
+    "/images/remote/5117c09af09784c6.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2784/galeria/131026-GASPARIAN-1024.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:39"
+      ]
+    },
+    "/images/remote/7ac647de71f436c0.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2573/galeria/Visuals_03_WEB_VAL.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:40"
+      ]
+    },
+    "/images/remote/8d0b532ad2d9fbd1.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2630/galeria/171026-ALEXEJ-GERASSIMEZ-1024.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:41"
+      ]
+    },
+    "/images/remote/b625d089b7ad8b68.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2781/galeria/181026-CORPUS-1024.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:42"
+      ]
+    },
+    "/images/remote/2321ace349316446.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2639/galeria/201027-ADAM-FISCHER-1024.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:43"
+      ]
+    },
+    "/images/remote/7370b66e21c00e54.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2785/galeria/211026-TRONDHEIM-1024.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:44"
+      ]
+    },
+    "/images/remote/a8f8d0c447f3b855.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2642/galeria/231026-ZIMMERMANN-1024.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:45"
+      ]
+    },
+    "/images/remote/2f3a5e600302e023.webp": {
+      "original": "https://www.servientradas.com/ERP/3.1/empresas/456/001/ficheros/t00030027/2790/galeria/251026-VNCERO-1024.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:46"
+      ]
+    },
+    "/images/remote/ea02ea2a4e6e3899.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgeGI6q3ZNy4T9dL5GtpStgW-9rGI3oEqsK110sGN9QA&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:77",
+        "event:79",
+        "event:153",
+        "event:154",
+        "event:155",
+        "event:156",
+        "event:157",
+        "event:158"
+      ]
+    },
+    "/images/remote/f415aca2e0d62312.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fdf1171c9-6de4-4e9c-b8de-e6b38ed5f71e?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:78"
+      ]
+    },
+    "/images/remote/c54309172fd39509.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F9951deaf-043b-46ee-9982-881a7aae7cef?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:80"
+      ]
+    },
+    "/images/remote/c37cdb4e5a0a7b93.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fca45ed75-e44d-482d-a9fc-d35aa0b9c739?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:81"
+      ]
+    },
+    "/images/remote/13648aa8e77c4eab.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F10ca90d2-54dc-4fcb-8138-c51c61c754d0?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:82"
+      ]
+    },
+    "/images/remote/bdcd36cce53ec97f.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Ffdd78560-d4c2-4d3b-a103-c43fcf60ca86?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:83"
+      ]
+    },
+    "/images/remote/efcf198697f9ba28.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F8729fb92-032b-4b50-802b-0f0f57824f31?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:84"
+      ]
+    },
+    "/images/remote/b2342e990a6c4af2.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/XobSq776ZH6mXK8F8RaFbtJaR_c=/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/fabrizio-sansoni-teatro-dellopera-de-roma/romeo-et-juliette-1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:47"
+      ]
+    },
+    "/images/remote/eac663e9f4e2e4b4.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Teatro_de_la_Maestranza_001.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:48",
+        "event:54",
+        "event:55",
+        "event:56",
+        "venue:sevilla-teatro-de-la-maestranza"
+      ]
+    },
+    "/images/remote/c8d192e702e28997.webp": {
+      "original": "https://rossevilla.es/wp-content/uploads/2026/05/S02-WEB-Slider-Desktop-1920x600-1.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:49"
+      ]
+    },
+    "/images/remote/515b174a13c8f9d6.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/rulOtz_TVCnWtJT3S4bcqdXnU_A=/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/vox-luminis-leslie-artamonow/vox-luminis-leslie-artamonow.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:50"
+      ]
+    },
+    "/images/remote/4ee829d0dfb7d084.webp": {
+      "original": "https://rossevilla.es/wp-content/uploads/2026/05/S03-WEB-Slider-Desktop-1920x600-1.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:51"
+      ]
+    },
+    "/images/remote/45efa476111accd9.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/NP9BjZQPOsGl6rxHTUsHQqC-Mg8=/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/bejart-ballet-lausanne-bejart-et-nous-gregory-batardon/bejart-ballet-lausanne-bejart-et-no.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:52"
+      ]
+    },
+    "/images/remote/e625bfdd2b13d9cb.webp": {
+      "original": "https://rossevilla.es/wp-content/uploads/2026/05/S04-WEB-Slider-Mobile-450x650-1.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:53"
+      ]
+    },
+    "/images/remote/8549a49f7fb122f8.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha/100CINE26/caratula/20260202112254_1770027774.1748ZIMMER.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:57"
+      ]
+    },
+    "/images/remote/60ba4e5e93678cc3.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha//caratula/20261001171220_1790867540.5074BANDA.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:58"
+      ]
+    },
+    "/images/remote/4b5efabf30d5ffec.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha//caratula/20260508114243_1778233363.7142CUADRADO.png",
+      "kind": "event",
+      "usedBy": [
+        "event:59"
+      ]
+    },
+    "/images/remote/92245b3173f895f7.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha/LAGO25/caratula/20260211133825_1770813505.7034lagocisn.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:60"
+      ]
+    },
+    "/images/remote/00eaad58646fc6ca.webp": {
+      "original": "https://www.euskaldunabilbao.com/src/uploads/2015/06/palacio_1B.jpg?x72554",
+      "kind": "event",
+      "usedBy": [
+        "event:61",
+        "event:62",
+        "venue:bilbao-euskalduna"
+      ]
+    },
+    "/images/remote/d69364b9d07467e2.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha/TECHNO26/caratula/20260608111212_1780909932.4853POPKB.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:63"
+      ]
+    },
+    "/images/remote/1fe33fe84cda3185.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha//caratula/20260401173342_1775057622.0805JULIOJR.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:64",
+        "entity:julio-iglesias-jr"
+      ]
+    },
+    "/images/remote/5cf133fa0c1c9f4e.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha//caratula/20260323122155_1774264915.536BILBAO-1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:65"
+      ]
+    },
+    "/images/remote/4fe79487c2531c4e.webp": {
+      "original": "https://cdn.janto.es/pro/kb/eventos/ficha//caratula/20260224131544_1771935344.1014kb.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:66"
+      ]
+    },
+    "/images/remote/2fb8b2815d8d07a8.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13734/esencia_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:67"
+      ]
+    },
+    "/images/remote/8db9a9bea6a05fe9.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13514/raimund-amad_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:68"
+      ]
+    },
+    "/images/remote/bed15d85f5c90667.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13762/julio-iglesias_list.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:69"
+      ]
+    },
+    "/images/remote/3029db78bfbdedbf.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13544/farra_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:70"
+      ]
+    },
+    "/images/remote/021042080dd66c1a.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13048/d-fist-nac_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:71"
+      ]
+    },
+    "/images/remote/c5f41187c2172a60.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13648/pink-floyd_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:72"
+      ]
+    },
+    "/images/remote/08beaf743c5ce4e0.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13735/una-noche-opera_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:73"
+      ]
+    },
+    "/images/remote/ec58b453e64c143f.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13547/santi-auser_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:74"
+      ]
+    },
+    "/images/remote/cbd0884aee5dcd38.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13469/ultima-folclorica_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:75"
+      ]
+    },
+    "/images/remote/179425c3b3afcc51.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13647/corsario_list.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:76"
+      ]
+    },
+    "/images/remote/69ca2e7e2db49043.webp": {
+      "original": "https://mammamiaelmusical.es/wp-content/uploads/2025/11/chiquititaBRILLO-1-copia.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:85",
+        "event:86",
+        "entity:mamma-mia"
+      ]
+    },
+    "/images/remote/dfed51701c440acf.webp": {
+      "original": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20261001175930-evento.png&v=2",
+      "kind": "event",
+      "usedBy": [
+        "event:87",
+        "event:88",
+        "entity:muse"
+      ]
+    },
+    "/images/remote/4f42c4144fe26353.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F2e52fab9-f338-4db8-8f99-18be8413f9bd?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:89"
+      ]
+    },
+    "/images/remote/c62bede8a9267310.webp": {
+      "original": "https://prismic-images.tmol.io/ticketmaster-tm-global/aeH8xZ1ZCF7ETSD-_KarolGArtistImage.jpg?auto=format%2Ccompress&rect=187%2C0%2C3086%2C1302&w=2048&h=864",
+      "kind": "event",
+      "usedBy": [
+        "event:90",
+        "event:91",
+        "event:92",
+        "event:93",
+        "event:94",
+        "event:95",
+        "event:96",
+        "event:97",
+        "event:98"
+      ]
+    },
+    "/images/remote/d44295469df39d8a.webp": {
+      "original": "https://s1.ticketm.net/img/tat/dam/a/51a/83c6ba6d-f258-4bfe-a477-1b347ec3151a_CUSTOM.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:99",
+        "event:100",
+        "event:101",
+        "event:102",
+        "event:103",
+        "event:104",
+        "event:105",
+        "event:106",
+        "entity:tini"
+      ]
+    },
+    "/images/remote/686e820a2f7cbe8a.webp": {
+      "original": "https://prismic-images.tmol.io/ticketmaster-tm-global/umFawHBUs-C0LjSc_MonLaferte-Ticketmaster-1500x500.jpg?auto=format,compress&rect=157,0,1185,500&w=2048&h=864",
+      "kind": "event",
+      "usedBy": [
+        "event:107"
+      ]
+    },
+    "/images/remote/469144b3230e139e.webp": {
+      "original": "https://prismic-images.tmol.io/ticketmaster-tm-global/ZzIePK8jQArT0sSN_tmes_elkanka24-header.jpg?auto=format,compress&rect=0,0,1024,432&w=1024&h=432",
+      "kind": "event",
+      "usedBy": [
+        "event:108",
+        "event:109",
+        "entity:el-kanka"
+      ]
+    },
+    "/images/remote/95818ac739c18f53.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAk2cyhBn-vOP4vXOyGBB_VYUgcexFqPlYCiEb97TYaA&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:110"
+      ]
+    },
+    "/images/remote/7e7152df472fdefc.webp": {
+      "original": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20251027181215-evento.png&v=2",
+      "kind": "event",
+      "usedBy": [
+        "event:111",
+        "entity:amaral"
+      ]
+    },
+    "/images/remote/fa4a02bb548707bb.webp": {
+      "original": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20251016184615-evento.png&v=2",
+      "kind": "event",
+      "usedBy": [
+        "event:112",
+        "entity:la-oreja-de-van-gogh"
+      ]
+    },
+    "/images/remote/1d1bb59fed23dd4e.webp": {
+      "original": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20251125142602-evento.png&v=2",
+      "kind": "event",
+      "usedBy": [
+        "event:113"
+      ]
+    },
+    "/images/remote/5b0e0aaa15e271e2.webp": {
+      "original": "https://conciertosensevilla.es/wp-content/uploads/2026/10/diego-el-cigala-aurora-42521-1024x576.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:114"
+      ]
+    },
+    "/images/remote/62ec968962e2c793.webp": {
+      "original": "https://conciertosensevilla.es/wp-content/uploads/ces-fotos/16c89f310ae5c4ef2af8bc8f487a277f-480.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:115"
+      ]
+    },
+    "/images/remote/a624d3ea14ae3416.webp": {
+      "original": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/carolina-durante-2026_400.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:116",
+        "entity:carolina-durante"
+      ]
+    },
+    "/images/remote/5a0a994db0fdec20.webp": {
+      "original": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/fito-fitipaldis-teatros-2027_400.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:117",
+        "event:118",
+        "event:119",
+        "event:120"
+      ]
+    },
+    "/images/remote/f607ac9e9ccf9499.webp": {
+      "original": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/sidecars-2026_400.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:121"
+      ]
+    },
+    "/images/remote/cd07f32f46955a4d.webp": {
+      "original": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/kase-o-2027_400.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:122"
+      ]
+    },
+    "/images/remote/2ebb18e406c64966.webp": {
+      "original": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/kabrones-2027_400.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:123"
+      ]
+    },
+    "/images/remote/f8845d99cc80bf6a.webp": {
+      "original": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/los-zigarros-2027_400.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:124"
+      ]
+    },
+    "/images/remote/50d4e899410984d7.webp": {
+      "original": "https://s1.ppllstatics.com/rc/www/multimedia/2026/04/22/realmadrid-RgRAgEaN3Jwx8Z5Uorbj2dN-1200x840@RC.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:125",
+        "event:126",
+        "event:127",
+        "event:128",
+        "event:129"
+      ]
+    },
+    "/images/remote/2f98d8b9e919554d.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2OiMgeTZDwduyIkeJNQl9nXAT5kyLy9L-2hd6SSLqPw&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:130",
+        "event:131",
+        "event:132",
+        "event:133",
+        "event:134",
+        "event:135"
+      ]
+    },
+    "/images/remote/4986b9b9d6c1e602.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRho6Qlj3LuqUNrZyd4MQXwPWfchOCgY5_RzpSIYuH6vg&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:136",
+        "event:137",
+        "event:138",
+        "event:139",
+        "event:140"
+      ]
+    },
+    "/images/remote/725d7700e8237cee.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ43eRXFug0YKeMlsZeSf9m9t7dCygPbaqUd1ocQKgogw&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:141",
+        "event:143",
+        "event:144",
+        "event:146"
+      ]
+    },
+    "/images/remote/a68bba45e5046a4a.webp": {
+      "original": "https://www.fcbarcelona.com/photo-resources/2021/08/09/c4f2dddd-2152-4b8b-acf8-826b4377e29d/Camp-Nou-4.jpg?width=1600",
+      "kind": "event",
+      "usedBy": [
+        "event:142",
+        "event:145",
+        "venue:barcelona-spotify-camp-nou"
+      ]
+    },
+    "/images/remote/c81cb3c6c886ab2a.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYAjqLu8SBaeVQbktCwKW-O0AXrIBTNBKBCQ13s-svpw&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:147",
+        "event:148",
+        "event:149",
+        "event:150",
+        "event:151",
+        "event:152"
+      ]
+    },
+    "/images/remote/4206848a0c742726.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZFokpUEExa5UXTGYxDSa2nRli4meTrIW-162ks64Yvw&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:159",
+        "event:160",
+        "event:161"
+      ]
+    },
+    "/images/remote/8b5d416313e3cc46.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2Caogkf4aWReYMBxyaVKnBXnrQKrhHl87Mha8a7Oj8g&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:162",
+        "event:163",
+        "event:164",
+        "event:165"
+      ]
+    },
+    "/images/remote/cb3ccc883835a5cd.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6CnUel4n-J74jISna6pM4cHDTDQxNUdvPDW3V1zTDFw&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:166",
+        "event:167",
+        "event:168"
+      ]
+    },
+    "/images/remote/11c54245a995df9c.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdczHvA5A7H06SAFAA0YOrAI8_BUGYswGjTs6CDru3Zw&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:169",
+        "event:170",
+        "event:171",
+        "event:172"
+      ]
+    },
+    "/images/remote/98dbc71fd43f840d.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2nVnmaI0XPQncOejV4neR04uQc91WB9hKrexQL55kZA&s=10",
+      "kind": "event",
+      "usedBy": [
+        "event:173",
+        "event:174"
+      ]
+    },
+    "/images/remote/8de3dd26b234afa0.webp": {
+      "original": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1400&q=85",
+      "kind": "event",
+      "usedBy": [
+        "event:175"
+      ]
+    },
+    "/images/remote/e06d540cd073ee77.webp": {
+      "original": "https://cms.guggenheim-bilbao.eus/uploads/2019/03/edificio-tulipanes-guggenheim-bilbao-museoa.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:178",
+        "venue:bilbao-guggenheim-bilbao"
+      ]
+    },
+    "/images/remote/6381868821188bc3.webp": {
+      "original": "https://www.musikaze.net/upload/usrs/02042/web/CABECERA.jpg.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:180"
+      ]
+    },
+    "/images/remote/94619acf9342c488.webp": {
+      "original": "https://www.musikaze.net/upload/usrs/02042/web/gafapstaweb.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:181"
+      ]
+    },
+    "/images/remote/8c2a8a812d5369ef.webp": {
+      "original": "https://www.musikaze.net/upload/usrs/02042/web/2026-CLANDESTINO-01_9549.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:182"
+      ]
+    },
+    "/images/remote/cbf8d391d28088ae.webp": {
+      "original": "https://www.musikaze.net/upload/usrs/02042/web/WhatsApp_Image_2026-09-11_at_16.51.55_h.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:183"
+      ]
+    },
+    "/images/remote/c696678fcab971c3.webp": {
+      "original": "https://www.musikaze.net/upload/usrs/02042/web/tab-web.png",
+      "kind": "event",
+      "usedBy": [
+        "event:184"
+      ]
+    },
+    "/images/remote/c20857acf4ab0179.webp": {
+      "original": "https://www.musikaze.net/upload/usrs/02042/web/WhatsApp_Image_2026-10-26_at_13.33.59.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:185"
+      ]
+    },
+    "/images/remote/92b2976551093111.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13784/latidos_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:186"
+      ]
+    },
+    "/images/remote/e0e46813488dcae8.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13791/broadway-at-christ_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:187"
+      ]
+    },
+    "/images/remote/87a80d40dbb7e0db.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13785/carlos-nunez_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:188"
+      ]
+    },
+    "/images/remote/41cf53f3d5ead801.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/12586/cascanueces_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:189"
+      ]
+    },
+    "/images/remote/edaec921bf3fac2d.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13786/soy-salvaje_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:190"
+      ]
+    },
+    "/images/remote/2e05760637407e9c.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13792/virtuosis-extr_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:191"
+      ]
+    },
+    "/images/remote/36444ab8f5685db1.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13874/sr-ibrahim_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:192"
+      ]
+    },
+    "/images/remote/3a5d68aa9fd50e7f.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13875/atocha_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:193"
+      ]
+    },
+    "/images/remote/758645d2a3978508.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13876/feriantes_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:194"
+      ]
+    },
+    "/images/remote/92ad234baf635612.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14008/merino-seve_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:195"
+      ]
+    },
+    "/images/remote/51f1d74078c561b0.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/G3EjtefAHu3zLV7TqN_jEbgcnjY=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/english-national-opera-lloyd-winters/la-boheme-english-national-opera-lloyd-winters-2.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:196"
+      ]
+    },
+    "/images/remote/18fd3fdbfa0c62a3.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/myJkTr-rOO5-VlntCwcHC6I7ejI=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/kiki-morente-elias-fersan/kiki-morente-elias-fersan-recortada.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:197"
+      ]
+    },
+    "/images/remote/ea03d8c882610968.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/aIIjR7-SyBBZdxpf2WdkY6oyvTo=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/martyna-pastuszka-sinfionico-5.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:198"
+      ]
+    },
+    "/images/remote/f37def67e2c2cdf8.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/Cjm4oXP6NhWtVFfXSYSDiyiMhQQ=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/copia-de-250721_mm_carminho_0830.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:199"
+      ]
+    },
+    "/images/remote/89b2786d7e76dbba.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/5V-SV1dQDTIHhkPfOQRA5NB574w=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/circa-duck-pond-pia-johnson-2.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:200"
+      ]
+    },
+    "/images/remote/3015c910838fbb0e.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/-ORcw4rY5ATLaAgeIn-J7LfJ3aA=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/maxim-emelyanychev-c-andrej-grilc-02872-baremboim.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:201"
+      ]
+    },
+    "/images/remote/97a695ee0547265b.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/w5Q8roV_-_z_xXhlktLaNKI2ASk=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/ballet-nacional-de-ucrania-oorlova-ozlunitsyna-vraievsky-1.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:202"
+      ]
+    },
+    "/images/remote/f13273ca17a73c2f.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/bRORYhzA-2TAunC-tt6oTuc-hwk=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/foto-principal.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:203"
+      ]
+    },
+    "/images/remote/e171c3972662e29f.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/8kfhTcZTMZ1dtdtAL1Eu3VXkvuI=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/chailly5_fotode_amosrest.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:204"
+      ]
+    },
+    "/images/remote/8c7af58e7823768a.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/3jEPRuyTGF6fZ24A5DAUPy7h0VM=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/salvador-sobral-nueva.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:205"
+      ]
+    },
+    "/images/remote/11653b26d17989f7.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/TMqeb8PFM4fcVuinXEWdp8oFd5A=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/3-anna-netrebko-c-vladimir-shirokov-img_4160.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:206"
+      ]
+    },
+    "/images/remote/762f001434132199.webp": {
+      "original": "https://thumbor.teatrodelamaestranza.es/olGdaPPIxjn_tiniTwEvTIepwEs=/587x380/smart/filters:quality(80):image-format(webp)/teatro-maestranza/shows/la-argentina.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:207"
+      ]
+    },
+    "/images/remote/ac27963d1fc34381.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fc25f557b-e7f6-4c77-a83b-8aa91ead1f4a?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:208"
+      ]
+    },
+    "/images/remote/d5b1f22177865e0a.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fcf32db53-28f6-4fd5-a8ed-cc6c7314983a?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:209",
+        "event:212",
+        "event:215"
+      ]
+    },
+    "/images/remote/cdbae378942ff5dc.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fb222d5ea-4537-469c-b461-bb2c7d4418ca?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:210"
+      ]
+    },
+    "/images/remote/0b145427e25e50a1.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F58470773-4730-4415-abae-8de131afc1e2?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:211"
+      ]
+    },
+    "/images/remote/16e82786f21b5346.webp": {
+      "original": "https://www.santana27.com/images/imagenes/hardzgz10dic26_nuevocartel.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:213"
+      ]
+    },
+    "/images/remote/d54462c65fc3bec0.webp": {
+      "original": "https://www.santana27.com/images/imagenes/hardzgz11dic26_soldout.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:214"
+      ]
+    },
+    "/images/remote/111a734496c01cac.webp": {
+      "original": "https://cdn.prod.website-files.com/69fd286c60760ba80faff294/6a3227f2ce5de8f28735787c_Static_LiveNation-PR_1720x720_Aespa_2026_National.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:216"
+      ]
+    },
+    "/images/remote/8cbc22d841ba7c5e.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F2e245831-e5be-48de-be3c-840bb5432f18?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:217"
+      ]
+    },
+    "/images/remote/3a33767d7a86d0a5.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fae1602d9-e2c0-4182-a226-9b97346d6bfc?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:218"
+      ]
+    },
+    "/images/remote/9fd01ac29f5ad891.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fdfc5b936-ed3f-4fc5-8734-fc50571d87a1?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:219"
+      ]
+    },
+    "/images/remote/6937c96c74778a8b.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F146e7642-024c-4a7a-b510-554e7572f83b?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:220"
+      ]
+    },
+    "/images/remote/4aec3a6df641eb05.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F36ea97a0-e99f-476c-9707-6c0316f16f56?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:221"
+      ]
+    },
+    "/images/remote/6cb41b1e048cf1ce.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F42cbbd32-2afe-43c2-b7bd-15e3d2762834?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:222"
+      ]
+    },
+    "/images/remote/c7ae93beede9dc10.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F9999766d-b8d4-4d74-a88a-85448125ea90?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:223"
+      ]
+    },
+    "/images/remote/509235dae0d1a18b.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F7799514b-e092-47d5-92dc-a95e57efb748?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:224"
+      ]
+    },
+    "/images/remote/52a5d0df646d71ac.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F0b758bb5-7961-4a03-ba66-09f91667908b?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:225"
+      ]
+    },
+    "/images/remote/f537c3a4bdef072d.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F7addd8f6-4c17-450d-bf85-8e1c533a0574?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:226"
+      ]
+    },
+    "/images/remote/4675349a11fea6a8.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fff157125-a46e-4932-9d2b-f3bf3e984bcd?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:227"
+      ]
+    },
+    "/images/remote/a3ffba4a02af70a1.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F9b392c25-0a85-4fad-bcd8-05176c6f3ea5?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:228"
+      ]
+    },
+    "/images/remote/7808804a0e9375ff.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Ff5c50d2c-4bd8-46ff-8a26-8eead8e51460?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:229"
+      ]
+    },
+    "/images/remote/36e62f155c397c52.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F9c07e356-92aa-4d62-9a55-d2c1f76ad39f?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:230"
+      ]
+    },
+    "/images/remote/e40f41f235ca6d1e.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F5a3c62c9-95f5-4232-8479-e2b3d3292783?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:231"
+      ]
+    },
+    "/images/remote/1b5ca93c7c619c8a.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F14d5286d-ab69-4c3d-81ca-18e9eb0233a0?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:232"
+      ]
+    },
+    "/images/remote/d6c6313fc393c502.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fe4b6f7df-4c3a-42f3-a145-553abee6126e?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:233"
+      ]
+    },
+    "/images/remote/5e4b9f78b0eb51b1.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F8c84522b-ecff-4934-8ce6-b45e4bda2506?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:234"
+      ]
+    },
+    "/images/remote/126edb060e138919.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F98116171-95a7-40d9-b8bb-f3e5a31cd50a?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:235"
+      ]
+    },
+    "/images/remote/562c323709e26c43.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F54f535c7-2ec0-45d7-b118-519060d0f6ff?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:236"
+      ]
+    },
+    "/images/remote/c4d07c853884baa7.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Facc7c0c0-8cf6-4445-8f77-14f18238a11c?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:237"
+      ]
+    },
+    "/images/remote/ce193c7068037a48.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F26978bf8-d308-41e1-924d-1c9f53ef19c8?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:238"
+      ]
+    },
+    "/images/remote/4686c0b86e2ef9a4.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Ff1b6ec5c-23f1-4921-b114-16ab9d1f9dd3?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:239"
+      ]
+    },
+    "/images/remote/dd3d37dfb4972f1e.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F603cb838-f334-4e51-b537-17ced7d5c938?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:240"
+      ]
+    },
+    "/images/remote/c2e1e3c3e88513fe.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fc057e3c6-3fe7-4c11-a4a6-1f5c87d43c2c?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:241"
+      ]
+    },
+    "/images/remote/b5a1c23b5b01110b.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fd35e2f07-8734-418f-8887-ba7d107c4525?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:242"
+      ]
+    },
+    "/images/remote/eb722ce16ac51c61.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fcf93a519-fae7-40cf-86ce-13cf0c83aa7f?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:243"
+      ]
+    },
+    "/images/remote/2e203b3f3aa7cd02.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2Fa17e7599-5c30-4736-a937-252f99693444?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:244"
+      ]
+    },
+    "/images/remote/be585b91759a55a7.webp": {
+      "original": "https://www.roigarena.com/firebase/v0/b/ra-mobileapp-424007.appspot.com/o/public%2F7115ba1f-c2bc-4cec-9daa-3fa6754b16dd?alt=media&optimize=high&quality=70",
+      "kind": "event",
+      "usedBy": [
+        "event:245"
+      ]
+    },
+    "/images/remote/38763317df28165f.webp": {
+      "original": "https://static.ra.co/images/clubs/lg/capturadepantalla2023-10-30alas16.06.48.png?dateUpdated=1698678498017",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-lula-club"
+      ]
+    },
+    "/images/remote/2b0ff54840230d52.webp": {
+      "original": "https://www.salabut.es/wp-content/uploads/2025/12/20726e5d0a9f687d3f8420f50cb58c32_088d0fc71e.webp",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-sala-but"
+      ]
+    },
+    "/images/remote/1a6e1a8f75fa3454.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/5/55/Madrid_-_Teatro_Joy_Eslava_3.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-teatro-eslava"
+      ]
+    },
+    "/images/remote/5916325d93ecb14b.webp": {
+      "original": "https://www.teatroreal.es/sites/default/files/2019-02/teatro-real.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-teatro-real"
+      ]
+    },
+    "/images/remote/c2a4360c729f5808.webp": {
+      "original": "https://assets.realmadrid.com/is/image/realmadrid/Bernabeu?$Desktop$&fit=wrap&wid=1024",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-estadio-santiago-bernabeu"
+      ]
+    },
+    "/images/remote/2e1750c69cad3b42.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wanda-Metropolitano.jpg/1280px-Wanda-Metropolitano.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-riyadh-air-metropolitano"
+      ]
+    },
+    "/images/remote/f2e00352a93185c5.webp": {
+      "original": "https://www.palaumusica.cat/images/1479156/full_inner_page.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-palau-de-la-musica-catalana"
+      ]
+    },
+    "/images/remote/bbccdd80ddae37cb.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNLVIdQCbjppzJLd6NRIIe7FANoIAx91J9YakkQJ31Eg&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:bilbao-bizkaia-arena-bec"
+      ]
+    },
+    "/images/remote/7afd5990d95eaa32.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRujHnp8QOWR3SsVf4_lHYUoHy6ru41eKJQ6x_rNixEg&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:bilbao-bilbao-arena"
+      ]
+    },
+    "/images/remote/dc3ef03c2c68a8d7.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAjlA1e3L5T4Y0ISkBGLsriQpFcfE7fQIJF-1tk4npeA&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:bilbao-sala-santana-27"
+      ]
+    },
+    "/images/remote/9ccadee49217cc4f.webp": {
+      "original": "https://www.roigarena.com/storyblok/f/336002/2557x1287/4b7ab73d36/roig-arena_exterior_fachada_01.png?optimize=high&format=auto&quality=70",
+      "kind": "venue",
+      "usedBy": [
+        "venue:valencia-roig-arena"
+      ]
+    },
+    "/images/remote/a8041fb99168063b.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2iog96TCJdn1JW2h0HXGEYY-ynrmj_8wcw4oKymsK0A&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:valencia-estadio-de-mestalla"
+      ]
+    },
+    "/images/remote/33cc9ede35cdf3c3.webp": {
+      "original": "https://www.globalentradas.com/uploads/promotor/1/promotor-programacion-cultural-albacete.webp",
+      "kind": "venue",
+      "usedBy": [
+        "venue:albacete-teatro-circo"
+      ]
+    },
+    "/images/remote/62e71cf4a62cce2a.webp": {
+      "original": "https://laguiaw.com/contenido/documentos/99306/fotografia.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:albacete-teatro-de-la-paz"
+      ]
+    },
+    "/images/remote/d953934c2fd8ca5b.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfMehofO2L8fwM3Qu_2Iowy1ruMhJu8ss7ZLdqer5fsA&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:valencia-teatro-olympia"
+      ]
+    },
+    "/images/remote/729c0adf60d7c62b.webp": {
+      "original": "https://www.carteleramusicales.es/storage/714/5G7w7Gigw3V69LwdSBr969Hd88OzMv-metaVGl2b2xpX3dlYi5qcGc%3D-.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-teatre-tivoli"
+      ]
+    },
+    "/images/remote/d5cd4c2f85c77d72.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ2o4G0-RONJYyHnCKP2zuUqG5eA5VBhX5GOUbRpHxag&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-palau-sant-jordi"
+      ]
+    },
+    "/images/remote/4e7d567a250db427.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRo500km9IYbtPCWn_7EDS23_vLaxwBwUXkBVjNmUU3g&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-estadi-olimpic-lluis-companys"
+      ]
+    },
+    "/images/remote/0b97fc6434b9b228.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL418_VrCgSlK5MOI4uBi4VY7UPAPsHptGjBl-BdcZCQ&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:sevilla-estadio-la-cartuja-de-sevilla"
+      ]
+    },
+    "/images/remote/96bc9a8d36f82531.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmq44w2S6xKR3zi8SfyFOIoj5u6rD0SVNCFxFjoejXZQ&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:sevilla-estadio-benito-villamarin"
+      ]
+    },
+    "/images/remote/a4783ece2bb2a244.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGipdkvVWkNPc7RpCIRauVkSqDYvUb-VjLBbTACvEPJg&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:sevilla-estadio-ramon-sanchez-pizjuan"
+      ]
+    },
+    "/images/remote/e8d59941d3c5974d.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX36mbixoJ5SZSx6zFpy5xrQK1Ic65bJ71dKC9Q5TxKg&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:sevilla-sala-pandora"
+      ]
+    },
+    "/images/remote/0d3109b023b4dcd9.webp": {
+      "original": "https://meyersound.es/es/wp-content/uploads/2022/03/Meyer-Sound-Cartuja-Center-1.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:sevilla-cartuja-center-cite"
+      ]
+    },
+    "/images/remote/55c1911e1616c740.webp": {
+      "original": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM4Q6EPblhwmCfyU-PnlNbhGoQZtFs1pO-dxd0ByxgZg&s=10",
+      "kind": "venue",
+      "usedBy": [
+        "venue:sevilla-sala-custom"
+      ]
+    },
+    "/images/remote/073b43127b00ef8b.webp": {
+      "original": "https://i.scdn.co/image/ab676161000051743869e286c9043f85e8e4bc06",
+      "kind": "entity",
+      "usedBy": [
+        "entity:karol-g"
+      ]
+    },
+    "/images/remote/57c83e9c2bc4d5cb.webp": {
+      "original": "https://www.fitoyfitipaldis.com/wp-content/uploads/2026/06/silueta-cabecera-fyf-768x498.png",
+      "kind": "entity",
+      "usedBy": [
+        "entity:fito-y-fitipaldis"
+      ]
+    },
+    "/images/remote/d65bda71f939bb8e.webp": {
+      "original": "https://www.palaumusica.cat/images/980625/facebook.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:18"
+      ]
+    },
+    "/images/remote/cd15f50bb3793b4e.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Estadio_de_Vallecas.jpg/1280px-Estadio_de_Vallecas.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-estadio-de-vallecas"
+      ]
+    },
+    "/images/remote/22eddd516c33fe8b.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Teatre_Nacional_de_Catalunya.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-teatre-nacional-de-catalunya"
+      ]
+    },
+    "/images/remote/6084d24149dc048b.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Teatre_Lliure_de_Gr%C3%A0cia.jpg/1280px-Teatre_Lliure_de_Gr%C3%A0cia.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-teatre-lliure-de-gracia"
+      ]
+    },
+    "/images/remote/8d32eeb9d74e6559.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Museo_PIcasso_._Palau_Berenguer_._Barcelona.JPG",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-museu-picasso-de-barcelona"
+      ]
+    },
+    "/images/remote/6123f281b62c2c3f.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Estadi_Johan_Cruyff.jpg/1280px-Estadi_Johan_Cruyff.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-estadi-johan-cruyff"
+      ]
+    },
+    "/images/remote/f6ff00d567951629.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Palau_Blaugrana_%28Barcelona%2C_ESP%29.jpg/1280px-Palau_Blaugrana_%28Barcelona%2C_ESP%29.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-palau-blaugrana"
+      ]
+    },
+    "/images/remote/fa21d6d583cdab53.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Teatre_Lliure_de_Montjuic.jpg/1280px-Teatre_Lliure_de_Montjuic.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-teatre-lliure-de-montjuic"
+      ]
+    },
+    "/images/remote/7474de28cc4e209f.webp": {
+      "original": "https://www.movistararena.es/assets/img/venue/movistar-arena/interior.webp",
+      "kind": "venue",
+      "usedBy": [
+        "venue:madrid-movistar-arena"
+      ]
+    },
+    "/images/remote/09c3f2ae2c0fc863.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/2/23/Gran_Teatre_del_Liceu%2C_fa%C3%A7ana_Rambla.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:barcelona-gran-teatre-del-liceu"
+      ]
+    },
+    "/images/remote/f7c640fb5d99f200.webp": {
+      "original": "https://upload.wikimedia.org/wikipedia/commons/2/24/San_Mames_stadium.jpg",
+      "kind": "venue",
+      "usedBy": [
+        "venue:bilbao-san-mames"
+      ]
+    },
+    "/images/remote/b801659738460284.webp": {
+      "original": "https://assets.laliga.com/assets/2023/07/03/medium/7576f38f25dd599cfc62edd851778f80.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:285"
+      ]
+    },
+    "/images/remote/831a229c22a43d96.webp": {
+      "original": "https://assets.realmadrid.com/is/image/realmadrid/ND-J19-EUROLEAGUE-RM-DUBAI-ALEGRIA-CAMPAZZO-TAVARES-FELIZ_SG23744?wid=1200&amp;hei=675",
+      "kind": "event",
+      "usedBy": [
+        "event:289"
+      ]
+    },
+    "/images/remote/0903d0816bbcc16f.webp": {
+      "original": "https://conciertos.club/doc/c/2025/c_melendi2026.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:291"
+      ]
+    },
+    "/images/remote/7907697942e60f33.webp": {
+      "original": "https://conciertos.club/doc/a/2017/a_taburete.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:292"
+      ]
+    },
+    "/images/remote/6db75df8bd9b4d82.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/lulipampin_20270104.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:293"
+      ]
+    },
+    "/images/remote/931096b7337f1f2a.webp": {
+      "original": "https://conciertos.club/doc/a/2020/a_ninapolaca.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:315"
+      ]
+    },
+    "/images/remote/685abcf7c0d9ef62.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/duncandhum_20270116.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:296"
+      ]
+    },
+    "/images/remote/431cd351419af8b9.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/dvalentino_20270122.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:297"
+      ]
+    },
+    "/images/remote/373972baf8a1e6e2.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/barrybmadr_20270123.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:298"
+      ]
+    },
+    "/images/remote/93e598d3f576db91.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_sidecars.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:299"
+      ]
+    },
+    "/images/remote/afa6642f9004943d.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/carlosares_20270130.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:300"
+      ]
+    },
+    "/images/remote/870762119cab2339.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/elbarrioen_20270205.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:301"
+      ]
+    },
+    "/images/remote/62fe78a2f1564c51.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_obk.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:302"
+      ]
+    },
+    "/images/remote/0c4256121a2dd3f1.webp": {
+      "original": "https://conciertos.club/doc/a/2024/a_alcalanorte.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:303"
+      ]
+    },
+    "/images/remote/53ebb46d16f34a3e.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_sergiodalma2026.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:312"
+      ]
+    },
+    "/images/remote/1d52423fec677ac3.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/disneydesc_20270224.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:305"
+      ]
+    },
+    "/images/remote/bf9f4c670551e2ad.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/kaseocamis_20270227.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:306"
+      ]
+    },
+    "/images/remote/223171900e198729.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/lacasaazul_20270305.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:307"
+      ]
+    },
+    "/images/remote/dd9b8d4926576e8b.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/siloe_20270313.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:308"
+      ]
+    },
+    "/images/remote/9c372c1312df021b.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/3101622_590761_1764331809511.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:309"
+      ]
+    },
+    "/images/remote/a21a4590557ac2c5.webp": {
+      "original": "https://conciertos.club/doc/a/2023/a_hakunagroupmusic.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:317"
+      ]
+    },
+    "/images/remote/33e76895a138d688.webp": {
+      "original": "https://conciertos.club/doc/a/2017/a_vivasuecia.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:311"
+      ]
+    },
+    "/images/remote/ccba3c572b70e5c9.webp": {
+      "original": "https://conciertos.club/doc/a/2021/a_lacasazul.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:313"
+      ]
+    },
+    "/images/remote/d3cb328032c75afd.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/sb2tourdel_20270204.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:314"
+      ]
+    },
+    "/images/remote/7f8c708ba600e1f1.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/kaseocamis_20270206.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:316"
+      ]
+    },
+    "/images/remote/d249d5c91a9a5231.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/benitokame_20270313.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:318"
+      ]
+    },
+    "/images/remote/846a617118a7d15b.webp": {
+      "original": "https://conciertos.club/doc/a/2022/a_manowar.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:320"
+      ]
+    },
+    "/images/remote/db5298076895ad36.webp": {
+      "original": "https://conciertos.club/doc/a/2020/a_jeanette.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:321"
+      ]
+    },
+    "/images/remote/f6a8a062f91b5df7.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/aramalikia_20261227.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:322"
+      ]
+    },
+    "/images/remote/10142f1164e4e071.webp": {
+      "original": "https://conciertos.club/doc/a/2024/a_royalfilmco.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:323"
+      ]
+    },
+    "/images/remote/dc2fa3b34ba8b488.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/revolverla_20261230.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:324"
+      ]
+    },
+    "/images/remote/7ae8673b61e79609.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/3284141_676008_177623596898220270102.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:325"
+      ]
+    },
+    "/images/remote/e0500244a61e55a6.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/2027-1-16-tanxugueiras2027116.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:326"
+      ]
+    },
+    "/images/remote/976cbd10c1c770a7.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/aurumbanda_20270122.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:327"
+      ]
+    },
+    "/images/remote/a8a2fe46de7a5829.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/2027-3-11-pau-vallve-nou-disc-20272027311.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:328"
+      ]
+    },
+    "/images/remote/9d19bd285e033542.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/peioetapan_20270109.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:329"
+      ]
+    },
+    "/images/remote/befa8bb3f6000881.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/rodrigocue_20270116.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:330"
+      ]
+    },
+    "/images/remote/48e99b775aa594ac.webp": {
+      "original": "https://conciertos.club/doc/a/2023/a_malu.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:331"
+      ]
+    },
+    "/images/remote/3310d203b845c927.webp": {
+      "original": "https://conciertos.club/doc/a/2020/a_enautelorrieta.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:334"
+      ]
+    },
+    "/images/remote/57c131e5d0445519.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/supercrema_20270114.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:335"
+      ]
+    },
+    "/images/remote/06c7eead29bf22ba.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/mujeres_20270129.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:337"
+      ]
+    },
+    "/images/remote/19b96610474f3f11.webp": {
+      "original": "https://conciertos.club/doc/a/2023/a_lacabramecanica.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:339"
+      ]
+    },
+    "/images/remote/ccc999706a8f9bd5.webp": {
+      "original": "https://conciertos.club/doc/a/2021/a_ginebras.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:340"
+      ]
+    },
+    "/images/remote/2350ce5a3d533959.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/depedro_20270312.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:341"
+      ]
+    },
+    "/images/remote/33c8baa74eed1c47.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/elliottmur_20270122.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:342"
+      ]
+    },
+    "/images/remote/e7df64a18a2a6c2b.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_mocedades_panchos.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:343"
+      ]
+    },
+    "/images/remote/2b99eacb038e1444.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14011/conc-guit-tpaz_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:344"
+      ]
+    },
+    "/images/remote/5624dbf4cd93ae0b.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14022/isra-fer_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:345"
+      ]
+    },
+    "/images/remote/3086a4e85f2388bb.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14035/cangrej-arroyo_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:346"
+      ]
+    },
+    "/images/remote/ba3dc74043531fdd.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14038/d-quij-femuba_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:347"
+      ]
+    },
+    "/images/remote/b1da974999177a3a.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14023/maestr-4-manos_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:348"
+      ]
+    },
+    "/images/remote/7e7182c140d8dcc8.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14039/francoeur-paris_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:349"
+      ]
+    },
+    "/images/remote/ebe7fd5d9f7a52c2.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14047/fest-circ-2027_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:350"
+      ]
+    },
+    "/images/remote/7a9aeaea05466fac.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13877/protas-guerra_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:351"
+      ]
+    },
+    "/images/remote/8baf6cc7ab9073ec.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14020/gala-stradivarius_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:352"
+      ]
+    },
+    "/images/remote/ed51c9687b78ad95.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14048/catherine-russell_1.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:353"
+      ]
+    },
+    "/images/remote/0b84276ed8953869.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14032/amalur_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:354"
+      ]
+    },
+    "/images/remote/6ca6e5342ab6bdb1.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14033/aida_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:355"
+      ]
+    },
+    "/images/remote/2bbc4b43bdcad9b3.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_lorfeo-francois.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:357"
+      ]
+    },
+    "/images/remote/9e133390a35976e6.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_yuja_wang.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:358"
+      ]
+    },
+    "/images/remote/eece5e7bd0ce09e1.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_orquesta-real-del-concertgebou.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:359"
+      ]
+    },
+    "/images/remote/859343fdf3bdf4f4.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_lucas-macias-sinfonico.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:360"
+      ]
+    },
+    "/images/remote/8e052519afea7c79.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_ainhoa-arteta-y-bros.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:361"
+      ]
+    },
+    "/images/remote/52b2e49f757b52d5.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_sokolovanna-flegontova-4.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:362"
+      ]
+    },
+    "/images/remote/e596b4f749cc01e5.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_rias-kammerchor.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:363"
+      ]
+    },
+    "/images/remote/d84374d238e58a05.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_orquesta-joven.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:364"
+      ]
+    },
+    "/images/remote/a514f5eece978de1.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_cuarteto-arriaga.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:365"
+      ]
+    },
+    "/images/remote/147a8535ad5a033e.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_raule.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:366"
+      ]
+    },
+    "/images/remote/d77d1c69d3eec051.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_belen_aguilera.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:367"
+      ]
+    },
+    "/images/remote/466522f6b818e111.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_reza_sevilla.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:368"
+      ]
+    },
+    "/images/remote/7d998ae8f3e0d71f.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_fito_fibes.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:369"
+      ]
+    },
+    "/images/remote/224644bed2a43f40.webp": {
+      "original": "https://img.planomato.com/planimage1/venues/20200630-AUDITORIUM-1-scaled-e1593677033463_20260130_201811.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:370"
+      ]
+    },
+    "/images/remote/5962e0cf4744ec53.webp": {
+      "original": "https://img.planomato.com/planimage1/entities/Ismael-Jordi-operaactual_20260312_100147.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:371"
+      ]
+    },
+    "/images/remote/5513fed2219cf63c.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/albertpla_20270205.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:372"
+      ]
+    },
+    "/images/remote/22f7794ffd2df0df.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/parquesvr_20270305.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:373"
+      ]
+    },
+    "/images/remote/e417e899d3ca0eeb.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_candlelight.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:374"
+      ]
+    },
+    "/images/remote/47af90807577656e.webp": {
+      "original": "https://applications-media.feverup.com/image/upload/f_auto,w_550,h_550/fever2/plan/photo/cfc3a094-1945-11f0-a825-56c21721c770.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:375"
+      ]
+    }
+  },
+  "failed": {},
+  "generatedAt": "2026-11-07T21:45:33.473Z"
+}

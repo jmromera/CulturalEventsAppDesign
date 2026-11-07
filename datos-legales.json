@@ -1,0 +1,44 @@
+{
+  "esEjemplo": true,
+  "_nota": "Proyecto académico. Sustituye [TU NOMBRE] y [UNIVERSIDAD] por los datos reales y pon esEjemplo a false. Mientras esEjemplo sea true, las páginas legales muestran un aviso rojo.",
+  "versionTextos": "2026-11-07",
+  "fechaActualizacion": "7 de noviembre de 2026",
+  "sitio": {
+    "nombre": "Plan Cerca",
+    "dominio": "plancerca.com",
+    "url": "https://plancerca.com"
+  },
+  "titular": {
+    "nombre": "[TU NOMBRE]",
+    "condicion": "Estudiante de [UNIVERSIDAD]",
+    "proyecto": "Proyecto académico de la asignatura «HCI: Desarrollo web y móvil», sin actividad comercial: no vende nada, no tiene publicidad ni ingresos.",
+    "email": "jmromera@hotmail.com"
+  },
+  "contacto": {
+    "emailErrores": "jmromera@hotmail.com",
+    "plazoRespuestaErrores": "un mes"
+  },
+  "proveedores": [
+    {
+      "nombre": "Vercel Inc.",
+      "finalidad": "Alojamiento de la web, red de distribución (CDN) y registros técnicos del servidor",
+      "datos": "Dirección IP, navegador y página solicitada",
+      "region": "Estados Unidos (Vercel Inc.), con red de distribución global",
+      "transferenciaFueraUE": true,
+      "garantiaTransferencia": "Las que establece el acuerdo de tratamiento de datos (DPA) de Vercel",
+      "dpa": "https://vercel.com/legal/dpa",
+      "verificado": false
+    }
+  ],
+  "plazos": {
+    "registrosServidor": "Los que conserve Vercel según su política; el responsable no los consulta ni los exporta",
+    "datosNavegador": "Hasta que los borres desde «Tus datos» o desde tu navegador",
+    "ubicacion": "No se conserva: solo se guarda el nombre de la ciudad elegida",
+    "comunicaciones": "El tiempo necesario para responderte; después se borran del buzón."
+  },
+  "autoridadControl": {
+    "nombre": "Agencia Española de Protección de Datos (AEPD)",
+    "url": "https://www.aepd.es"
+  },
+  "leyAplicable": "Legislación española"
+}
