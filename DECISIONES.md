@@ -23,3 +23,11 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **La app ya no guarda nada solo por visitarla**: idioma y favoritos se escriben únicamente cuando la persona los cambia. Antes se guardaban el idioma y una lista vacía de favoritos en la primera visita.
 - **Geolocalización**: se mantiene como estaba (solo al pulsar «Usar mi ubicación», cálculo en el dispositivo, se guarda solo el nombre de la ciudad) y se añade una explicación junto al botón antes de pedir el permiso.
 - **Sin búsqueda por código postal**: la lista de seis ciudades ya permite usar la app sin ubicación; un buscador por código postal no aporta y necesitaría datos de geocodificación.
+
+## Cookies y terceros
+- **Sin banner de cookies**: la app no pone cookies ni usa analítica, píxeles ni publicidad. Solo usa almacenamiento local técnico o pedido por el usuario (exento según el art. 22.2 LSSI). Hay página de cookies con la tabla real y pruebas que la comparan con el código.
+- **Fuentes autoalojadas** (paquetes `@fontsource` de DM Sans y Manrope, licencia OFL) en lugar de Google Fonts, que recibía la IP de cada visitante.
+- **Las 210 imágenes autoalojadas** (portadas, carteles, recintos y artistas), convertidas a WebP. Antes se cargaban desde 37 dominios, entre ellos 58 miniaturas de Google Imágenes, y cada visita les enviaba la IP. El origen de cada una queda en `docs/legal/ORIGEN-IMAGENES.json` para revisar licencias.
+- **Las imágenes de la web no van por Git LFS** (`.gitattributes`): así el despliegue funciona aunque el alojamiento no descargue objetos LFS.
+- **Lista de terceros declarados vacía** (`src/legal/third-parties.ts`): una prueba sobre el código y un script en navegador real (`pnpm check:terceros`) fallan si aparece cualquier dominio externo.
+- **Los enlaces externos se mantienen** (comprar entradas, Google Maps, Google Calendar, webs oficiales): no envían nada hasta que la persona los pulsa, y la política de privacidad lo explica.

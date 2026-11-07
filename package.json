@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "format": "oxfmt",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:terceros": "node scripts/check-external-requests.mjs",
+    "images:self-host": "node scripts/self-host-images.mjs"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.3.0",

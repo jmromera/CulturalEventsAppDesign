@@ -4,7 +4,7 @@
     "name": "Karmento",
     "kind": "artist",
     "description": "Artista folclórica manchega, Karmento es una de las figuras del neofolclore español. Con su álbum La Serrana profundiza en sus raíces y en la identidad de las mujeres de su pueblo. Fue finalista del Benidorm Fest 2023.",
-    "image": "https://www.surefolk.es/wp-content/uploads/karmento-c.jpg",
+    "image": "/images/remote/8a186801a6c8c326.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.surefolk.es/artista/karmento/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/@Karmento" },
@@ -19,7 +19,7 @@
     "name": "Julio Iglesias Jr.",
     "kind": "artist",
     "description": "Cantante y artista español que presenta en directo los grandes clásicos de Julio Iglesias en un espectáculo dedicado a la música romántica.",
-    "image": "https://cdn.janto.es/pro/kb/eventos/ficha//caratula/20260401173342_1775057622.0805JULIOJR.JPG",
+    "image": "/images/remote/1fe33fe84cda3185.webp",
     "links": [],
     "aboutTitle": { "es": "Sobre el artista", "en": "About the artist", "fr": "À propos de l’artiste" },
     "relatedEventsTitle": { "es": "Otros eventos de este artista", "en": "Other events by this artist", "fr": "Autres événements de cet artiste" },
@@ -30,7 +30,7 @@
     "name": "Mamma Mia! El Musical",
     "kind": "musical",
     "description": "Comedia musical basada en canciones de ABBA, con una historia de amistad, familia y amor. La producción se representa en distintas ciudades y teatros.",
-    "image": "https://mammamiaelmusical.es/wp-content/uploads/2025/11/chiquititaBRILLO-1-copia.webp",
+    "image": "/images/remote/69ca2e7e2db49043.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://mammamiaelmusical.es/" }
     ],
@@ -43,7 +43,7 @@
     "name": "Muse",
     "kind": "artist",
     "description": "Banda británica de rock que presenta The Wow! Signal Europa Tour en Madrid y Valencia en enero de 2027.",
-    "image": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20261001175930-evento.png&v=2",
+    "image": "/images/remote/dfed51701c440acf.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.muse.mu/" }
     ],
@@ -56,7 +56,7 @@
     "name": "Karol G",
     "kind": "artist",
     "description": "Carolina Giraldo Navarro, conocida como Karol G, es una cantante y compositora colombiana de música urbana latina. En 2027 presenta Viajando por el Mundo Tropitour en varias ciudades de España.",
-    "image": "https://i.scdn.co/image/ab676161000051743869e286c9043f85e8e4bc06",
+    "image": "/images/remote/073b43127b00ef8b.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://karolg.com/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/@karolg" },
@@ -71,7 +71,7 @@
     "name": "Fito y Fitipaldis",
     "kind": "artist",
     "description": "Fito y Fitipaldis es el grupo de rock liderado por Fito Cabrales. En su gira Aullidos Tour recorre teatros y auditorios con canciones de su nuevo disco y clásicos de su repertorio.",
-    "image": "https://www.fitoyfitipaldis.com/wp-content/uploads/2026/06/silueta-cabecera-fyf-768x498.png",
+    "image": "/images/remote/57c83e9c2bc4d5cb.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.fitoyfitipaldis.com/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/user/fitoyfitipaldis/videos" },
@@ -86,7 +86,7 @@
     "name": "TINI",
     "kind": "artist",
     "description": "Martina Stoessel, conocida artísticamente como TINI, es una cantante y compositora argentina de pop. En 2027 presenta en España FUTTTURA, la gira más ambiciosa de su carrera.",
-    "image": "https://s1.ticketm.net/img/tat/dam/a/51a/83c6ba6d-f258-4bfe-a477-1b347ec3151a_CUSTOM.jpg",
+    "image": "/images/remote/d44295469df39d8a.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://tinistoessel.com/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/@TiniStoessel" },
@@ -101,7 +101,7 @@
     "name": "Amaral",
     "kind": "artist",
     "description": "Amaral es el dúo español de pop rock formado por Eva Amaral y Juan Aguirre, con una trayectoria marcada por canciones emblemáticas y una sólida carrera en directo.",
-    "image": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20251027181215-evento.png&v=2",
+    "image": "/images/remote/7e7152df472fdefc.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.amaral.es/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/channel/UCjH_5vNh4ry5FZ9mzfJN8dA/?sub_confirmation=1" },
@@ -116,7 +116,7 @@
     "name": "El Kanka",
     "kind": "artist",
     "description": "Juan Gómez Canca, conocido como El Kanka, es un cantautor malagueño que combina canción de autor, humor y ritmos populares en sus discos y conciertos.",
-    "image": "https://prismic-images.tmol.io/ticketmaster-tm-global/ZzIePK8jQArT0sSN_tmes_elkanka24-header.jpg?auto=format,compress&rect=0,0,1024,432&w=1024&h=432",
+    "image": "/images/remote/469144b3230e139e.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://elkanka.com/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/user/kankautor" }
@@ -130,7 +130,7 @@
     "name": "La Oreja de Van Gogh",
     "kind": "artist",
     "description": "La Oreja de Van Gogh es una banda donostiarra de pop formada en 1996, conocida por sus melodías y letras que han marcado varias generaciones.",
-    "image": "https://www.movistararena.es/api/images/webp.php?src=https%3A%2F%2Fdynamic.appronet.es%2Feventos%2F6%2F20251016184615-evento.png&v=2",
+    "image": "/images/remote/fa4a02bb548707bb.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://www.laorejadevangogh.com/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/watch?v=p9huAz5f_9A" }
@@ -144,7 +144,7 @@
     "name": "Carolina Durante",
     "kind": "artist",
     "description": "Carolina Durante es una banda madrileña de punk pop conocida por sus guitarras directas, letras generacionales y enérgicos conciertos en directo.",
-    "image": "https://www.laganzua.net/conciertosbdnew/fotosnoticias/carolina-durante-2026_400.jpg",
+    "image": "/images/remote/a624d3ea14ae3416.webp",
     "links": [
       { "label": { "es": "Web oficial", "en": "Official website", "fr": "Site officiel" }, "url": "https://carolinadurante.com/" },
       { "label": { "es": "YouTube", "en": "YouTube", "fr": "YouTube" }, "url": "https://www.youtube.com/@carolinadurante8774" },
