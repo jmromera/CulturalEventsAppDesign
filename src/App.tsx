@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, Route, Routes, useLocation, useNavigate, useNavigationType, useParams } from "react-router-dom";
 import { entityFor, relatedEntities } from "./data/entities";
-import { cityEventCounts, cityImages, endedEvents, events, isBigEvent, recommendedEvents, relatedEventsByEntity } from "./data/event-catalog";
+import { cityEventCounts, cityImages, endedEvents, eventImage, events, isBigEvent, recommendedEvents, relatedEventsByEntity } from "./data/event-catalog";
 import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } from "./data/artist-preferences";
 import { LANGUAGE_KEY, readLanguage, type Language } from "./data/language";
 import { STORAGE_KEYS } from "./data/storage-keys";
@@ -80,7 +80,7 @@ function EventCard({ event, saved, onSave, t, featured = false }: { event: Event
   const venue = venueFor(event.venueId);
   const eventPath = cityPath(`/event/${event.id}`, venue.city);
   return <article className={`event-card ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
-    <Link className="event-image" to={eventPath} aria-hidden="true" tabIndex={-1}><FallbackImage src={event.image} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}</Link>
+    <Link className="event-image" to={eventPath} aria-hidden="true" tabIndex={-1}><FallbackImage src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}</Link>
     <div className="event-body"><div className="event-title-row"><Link className="event-title" to={eventPath}>{event.title}</Link><SaveButton active={saved} onClick={onSave} t={t} compact /></div>
       <p className="event-description">{event.description}</p>
       <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name}</span><span><Icon name="time" />{event.duration}</span></div>
@@ -95,7 +95,7 @@ function RelatedEventCard({ event }: { event: EventItem }) {
   const venue = venueFor(event.venueId);
   const eventPath = `/event/${event.id}?city=${encodeURIComponent(venue.city)}`;
   return <Link className="artist-event-card" to={eventPath}>
-    <FallbackImage className="artist-event-image" src={event.image} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={320} height={200} />
+    <FallbackImage className="artist-event-image" src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={320} height={200} />
     <div className="artist-event-body">
       <h3 className="artist-event-title">{event.title}</h3>
       <p><Icon name="calendar" />{event.date}</p>
@@ -142,6 +142,12 @@ function ArtistActions({ entity, language }: { entity: RelatedEntity; language: 
       {entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer"><Icon name={iconForLink(link.url)} />{link.label[language]}</a>)}
     </nav>}
   </div>;
+}
+
+// Attribution required by the Creative Commons licences of the venue photos (Wikimedia Commons).
+function PhotoCredit({ credit }: { credit: Venue["imageCredit"] }) {
+  if (!credit) return null;
+  return <p className="photo-credit">Foto: {credit.author} · {credit.licenseUrl ? <a href={credit.licenseUrl} target="_blank" rel="noreferrer">{credit.license}</a> : credit.license} · <a href={credit.source} target="_blank" rel="noreferrer">Wikimedia Commons</a></p>;
 }
 
 function NotFound({ t }: { t: typeof copy.es }) {
@@ -273,7 +279,7 @@ function eventStructuredData(event: EventItem, venue: Venue): Record<string, unk
     ...(event.endDate && { endDate: event.endDate }),
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    ...(event.image && { image: [new URL(event.image, window.location.origin).href] }),
+    ...(eventImage(event) && { image: [new URL(eventImage(event)!, window.location.origin).href] }),
     url: eventUrl,
     location: {
       "@type": "Place",
@@ -493,7 +499,7 @@ function VenueRoute({ saved, toggleSaved, goBack, language, t }: { saved: number
   const venue = venues.find((item) => item.id === id);
   if (!venue) return <NotFound t={t} />;
   const upcoming = upcomingEventsAtVenue(venue.id).slice(0, 6);
-  return <main id="main-content" tabIndex={-1} className="detail-page venue-detail-page"><div className="detail-top"><button onClick={goBack}><Icon name="arrow" />{t.back}</button></div><section className={`detail-hero venue-detail-hero ${venue.image ? "" : "venue-detail-hero--placeholder"}`} data-cat={venueCategoryKey(venue.kind.es)}><div className="detail-intro venue-detail-copy"><span className="category">{venue.city} · {venue.kind[language]}</span><h1>{venue.name}</h1><p className="detail-lead">{venue.description[language]}</p><div className="detail-intro-facts venue-detail-address"><span><Icon name="location" />{venue.address}</span><a href={venue.mapsUrl} target="_blank" rel="noreferrer"><Icon name="location" />{t.map}<Icon name="chevron" /></a></div></div><div className="detail-gallery venue-detail-gallery">{venue.image ? <FallbackImage className="gallery-main" src={venue.image} alt={venueAlt(venue.name, language)} icon="location" category={venueCategoryKey(venue.kind.es)} width={1200} height={675} lazy={false} /> : <div className="venue-detail-placeholder" aria-hidden="true"><BrandMark className="venue-detail-placeholder-mark" /></div>}</div></section><section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} />{upcoming.length ? <div className="venue-event-grid">{upcoming.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</div> : <p className="venue-empty">{t.venueEmpty}</p>}</div></section></main>;
+  return <main id="main-content" tabIndex={-1} className="detail-page venue-detail-page"><div className="detail-top"><button onClick={goBack}><Icon name="arrow" />{t.back}</button></div><section className={`detail-hero venue-detail-hero ${venue.image ? "" : "venue-detail-hero--placeholder"}`} data-cat={venueCategoryKey(venue.kind.es)}><div className="detail-intro venue-detail-copy"><span className="category">{venue.city} · {venue.kind[language]}</span><h1>{venue.name}</h1><p className="detail-lead">{venue.description[language]}</p><div className="detail-intro-facts venue-detail-address"><span><Icon name="location" />{venue.address}</span><a href={venue.mapsUrl} target="_blank" rel="noreferrer"><Icon name="location" />{t.map}<Icon name="chevron" /></a></div></div><div className="detail-gallery venue-detail-gallery">{venue.image ? <FallbackImage className="gallery-main" src={venue.image} alt={venueAlt(venue.name, language)} icon="location" category={venueCategoryKey(venue.kind.es)} width={1200} height={675} lazy={false} /> : <div className="venue-detail-placeholder" aria-hidden="true"><BrandMark className="venue-detail-placeholder-mark" /></div>}{venue.image && <PhotoCredit credit={venue.imageCredit} />}</div></section><section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} />{upcoming.length ? <div className="venue-event-grid">{upcoming.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</div> : <p className="venue-empty">{t.venueEmpty}</p>}</div></section></main>;
 }
 
 function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: EventItem; savedIds: number[]; toggleSavedId: (id: number) => void; back: () => void; language: Language; t: typeof copy.es }) {
@@ -534,7 +540,7 @@ function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: 
     await copyEventLink();
   };
   return <main id="main-content" tabIndex={-1} className="detail-page">{structuredEvent && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredEvent) }} />}<div className="detail-top detail-top--event"><button onClick={back}><Icon name="arrow" /><span>{t.back}</span></button><div className="detail-actions"><DetailActionButton icon="share" label={actionLabels.share} onClick={() => { void shareEvent(); }} /><DetailActionButton icon="heart" label={saved ? t.savedLabel : t.save} onClick={toggleSaved} active={saved} /><DetailActionButton icon={copyConfirmed ? "check" : "copy"} label={copyConfirmed ? actionLabels.copied : actionLabels.copyLink} onClick={() => { void copyEventLink(); }} /><CalendarAction labels={actionLabels} url={calendarUrl} onDownload={() => { if (calendarTiming) downloadEventCalendar(event, venue, calendarTiming); }} /></div></div>
-    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><FallbackImage className="gallery-main" src={event.image} alt={interfaceText[language].eventImageAlt.replace("{title}", event.title)} icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={1200} height={675} lazy={false} /></div><div className="detail-intro"><span className="category">{t.categoryNames[event.category]}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span><span><Icon name="time" />{event.duration}</span></div><div className="detail-social">{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}{tags.length > 0 && <span>{tags.join(" · ")}</span>}</div><p className="detail-lead">{event.description}</p>{!ended && !soldOut && <div className="detail-cta">{/\d/.test(event.price) && <strong className="detail-cta-price">{event.price}</strong>}<a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a></div>}</div></section>
+    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><FallbackImage className="gallery-main" src={eventImage(event)} alt={interfaceText[language].eventImageAlt.replace("{title}", event.title)} icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={1200} height={675} lazy={false} />{!event.image && <PhotoCredit credit={venue.imageCredit} />}</div><div className="detail-intro"><span className="category">{t.categoryNames[event.category]}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span><span><Icon name="time" />{event.duration}</span></div><div className="detail-social">{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}{tags.length > 0 && <span>{tags.join(" · ")}</span>}</div><p className="detail-lead">{event.description}</p>{!ended && !soldOut && <div className="detail-cta">{/\d/.test(event.price) && <strong className="detail-cta-price">{event.price}</strong>}<a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a></div>}</div></section>
     <div className="detail-content"><div className="detail-main">
       <section><h2>{t.description}</h2><p>{event.fullDescription}</p></section>
       {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}><FallbackImage src={entity.image} alt="" icon="profile" width={124} height={124} /><div className="artist-profile-copy"><div className="artist-profile-head"><h3>{entity.name}</h3><span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></div><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}

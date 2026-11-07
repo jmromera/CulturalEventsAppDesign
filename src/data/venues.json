@@ -1434,5 +1434,160 @@
     "wikidata": null,
     "imageCredit": null,
     "capacitySource": null
+  },
+  {
+    "id": "albacete-estadio-carlos-belmonte",
+    "city": "Albacete",
+    "name": "Estadio Carlos Belmonte",
+    "address": "Avenida de España, s/n, 02008 Albacete",
+    "websiteUrl": "https://www.albacetebalompie.es",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Estadio",
+      "en": "Stadium",
+      "fr": "Stade"
+    },
+    "description": {
+      "es": "El estadio del Albacete Balompié, inaugurado en 1960.",
+      "en": "Albacete Balompié's stadium, opened in 1960.",
+      "fr": "Le stade de l'Albacete Balompié, inauguré en 1960."
+    },
+    "image": "/images/venues/albacete-estadio-carlos-belmonte.webp",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Estadio%20Carlos%20Belmonte%2C%20Avenida%20de%20Espa%C3%B1a%2C%20s/n%2C%2002008%20Albacete",
+    "lat": 38.98112,
+    "lng": -1.85214,
+    "capacity": 17524,
+    "wikidata": "Q1369118",
+    "imageCredit": {
+      "author": "Alex83",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Carlos_Belmonte.jpg"
+    },
+    "capacitySource": "https://www.wikidata.org/wiki/Q1369118"
+  },
+  {
+    "id": "bilbao-kafe-antzokia",
+    "city": "Bilbao",
+    "name": "Kafe Antzokia",
+    "address": "Done Bikendi kalea, 2, 48001 Bilbao",
+    "websiteUrl": "https://www.kafeantzokia.eus",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Sala de conciertos",
+      "en": "Live music venue",
+      "fr": "Salle de concert"
+    },
+    "description": {
+      "es": "Antiguo cine convertido en centro cultural vasco y una de las salas de conciertos de referencia de Bilbao.",
+      "en": "A former cinema turned Basque cultural centre and one of Bilbao's reference live music venues.",
+      "fr": "Ancien cinéma devenu centre culturel basque et l'une des salles de concert de référence de Bilbao."
+    },
+    "image": "/images/venues/bilbao-kafe-antzokia.webp",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kafe%20Antzokia%2C%20Done%20Bikendi%20kalea%2C%202%2C%2048001%20Bilbao",
+    "lat": 43.26389,
+    "lng": -2.92792,
+    "capacity": null,
+    "wikidata": "Q12261187",
+    "imageCredit": {
+      "author": "Toniher",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Kafe_Antzokia.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "id": "valencia-palacio-de-congresos",
+    "city": "Valencia",
+    "name": "Palacio de Congresos de Valencia",
+    "address": "Avinguda de les Corts Valencianes, 60, 46015 Valencia",
+    "websiteUrl": "https://www.palcongres-vlc.com",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Auditorio",
+      "en": "Auditorium",
+      "fr": "Auditorium"
+    },
+    "description": {
+      "es": "Palacio de congresos diseñado por Norman Foster, con auditorio para conciertos y espectáculos.",
+      "en": "Convention centre designed by Norman Foster, with an auditorium for concerts and shows.",
+      "fr": "Palais des congrès conçu par Norman Foster, avec un auditorium pour concerts et spectacles."
+    },
+    "image": "/images/venues/valencia-palacio-de-congresos.webp",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Palacio%20de%20Congresos%20de%20Valencia%2C%20Avinguda%20de%20les%20Corts%20Valencianes%2C%2060%2C%2046015%20Valencia",
+    "lat": 39.49624,
+    "lng": -0.40209,
+    "capacity": null,
+    "wikidata": "Q9054458",
+    "imageCredit": {
+      "author": "Felipe Araya Allende",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Palau_del_congres.jpg"
+    },
+    "capacitySource": null
+  },
+  {
+    "id": "valencia-la-rambleta",
+    "city": "Valencia",
+    "name": "La Rambleta",
+    "address": "Carrer de Pius IX, 2, 46017 Valencia",
+    "websiteUrl": "https://www.larambleta.com",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "kind": {
+      "es": "Centro cultural",
+      "en": "Arts centre",
+      "fr": "Centre culturel"
+    },
+    "description": {
+      "es": "Centro cultural municipal con teatro y sala de conciertos junto al Bulevar Sur.",
+      "en": "Municipal arts centre with a theatre and concert hall by the Bulevar Sur.",
+      "fr": "Centre culturel municipal avec théâtre et salle de concert près du Bulevar Sur."
+    },
+    "image": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=La%20Rambleta%2C%20Carrer%20de%20Pius%20IX%2C%202%2C%2046017%20Valencia",
+    "lat": 39.44724,
+    "lng": -0.39267,
+    "capacity": null,
+    "wikidata": null,
+    "imageCredit": null,
+    "capacitySource": null
+  },
+  {
+    "id": "albacete-museo-de-la-cuchilleria",
+    "city": "Albacete",
+    "name": "Museo Municipal de la Cuchillería",
+    "address": "Plaza de la Catedral, s/n, 02001 Albacete",
+    "websiteUrl": "https://www.museocuchilleria.es",
+    "programmeUrl": null,
+    "programmeLabel": null,
+    "image": "/images/venues/albacete-museo-de-la-cuchilleria.webp",
+    "kind": {
+      "es": "Museo",
+      "en": "Museum",
+      "fr": "Musée"
+    },
+    "description": {
+      "es": "Museo dedicado a la tradición cuchillera de Albacete, en la Casa del Hortelano.",
+      "en": "Museum devoted to Albacete's knife-making tradition, in the Casa del Hortelano.",
+      "fr": "Musée consacré à la tradition coutelière d'Albacete, dans la Casa del Hortelano."
+    },
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Museo%20Municipal%20de%20la%20Cuchiller%C3%ADa%2C%20Albacete",
+    "lat": 38.99625,
+    "lng": -1.85647,
+    "capacity": null,
+    "wikidata": "Q9047061",
+    "imageCredit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Museo_de_la_Cuchiller%C3%ADa,_Albacete,_Espa%C3%B1a,_2022-07-12,_DD_14.jpg"
+    },
+    "capacitySource": null
   }
 ]

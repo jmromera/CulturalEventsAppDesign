@@ -27,6 +27,7 @@ const WIKIDATA = {
   "sevilla-teatro-de-la-maestranza": "Q3527707", "sevilla-estadio-la-cartuja-de-sevilla": "Q368737", "sevilla-estadio-benito-villamarin": "Q126844",
   "sevilla-estadio-ramon-sanchez-pizjuan": "Q275429", "sevilla-cartuja-center-cite": "Q110103772", "sevilla-caac": "Q8343569",
   "albacete-teatro-circo": "Q11951071", "albacete-teatro-de-la-paz": "Q17187030",
+  "albacete-estadio-carlos-belmonte": "Q1369118", "bilbao-kafe-antzokia": "Q12261187", "valencia-palacio-de-congresos": "Q9054458", "albacete-museo-de-la-cuchilleria": "Q9047061",
 };
 const FREE_LICENCE = /^(cc[ -]by|cc0|public domain|pd|cc-by-sa|cc by-sa)/i;
 
@@ -77,7 +78,8 @@ async function geocode(venue) {
 }
 
 const venues = JSON.parse(readFileSync(venuesPath, "utf8"));
-for (const venue of venues) {
+// Venues already enriched keep their data (re-run only processes new ones).
+for (const venue of venues.filter((item) => item.lat === undefined)) {
   const qid = WIKIDATA[venue.id] ?? null;
   const report = [];
   let wd = { lat: null, lng: null, capacity: null, image: null };

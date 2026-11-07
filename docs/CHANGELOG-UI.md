@@ -57,3 +57,33 @@ Registro de cada iteración: qué cambió, por qué (principio de usabilidad o c
 - **Problemas encontrados:**
   - **Coordenadas erróneas:** Nominatim situó el Teatre Lliure de Gràcia en Sabadell, porque confundió la calle Montseny. Se detectó con una comprobación de distancia al centro de la ciudad (> 8 km) y se corrigió buscando por el nombre del teatro.
   - **Aforo ausente:** el BEC no tenía aforo en Wikidata. Se tomó el de su web oficial (20.000), más prudente que los 26.000 que dan otras fuentes para conciertos.
+
+### Iteración 6 · Catálogo del 20/12/2026 al 31/03/2027 y nuevas reglas de Recomendados
+
+**Catálogo.** `scripts/add-events-2027.py` añade **111 eventos reales** (350 en total), cada uno con `sourceUrl`. Se puede volver a ejecutar sin duplicar: compara recinto, fecha (±2 días) y protagonista.
+
+| Tipo | Fuente | Qué se añadió |
+|---|---|---|
+| Fútbol | Calendario oficial de cada club en laliga.com | Partidos en casa de Real Madrid, Atlético, Rayo, Barça, Valencia, Sevilla, Betis, Athletic y Albacete (Hypermotion), incluidos los de Champions League con hora oficial. LaLiga fija el día exacto y la hora unas semanas antes: se muestran como «Jornada del fin de semana del 9-10 de enero (día por confirmar)». |
+| Baloncesto | Calendarios de EuroLeague de realmadrid.com y fcbarcelona.com | Real Madrid en el Movistar Arena y el Clásico del 5/3 en el Palau Blaugrana. |
+| Conciertos | Listados por recinto de conciertos.club y escenaensevilla.es, que enlazan a la venta oficial | Movistar Arena, Palau Sant Jordi, Roig Arena, Palacio de Congresos y La Rambleta (Valencia), BEC, Euskalduna y Kafe Antzokia (Bilbao) y Cartuja Center (Sevilla). |
+| Albacete | GlobalEntradas, la taquilla oficial de Cultural Albacete | FEMUBA 2027, *El Cascanueces*, *Aida*, el 20.º Festival Internacional de Circo, Víctor Manuel, Israel Fernández, Catherine Russell… |
+| Recintos nuevos | Wikidata / Commons / OpenStreetMap | Estadio Carlos Belmonte, Kafe Antzokia, Palacio de Congresos de Valencia, La Rambleta y Museo de la Cuchillería. |
+
+**Problemas encontrados y cómo se resolvieron:**
+- **Recinto equivocado.** El Real Betis juega la temporada 2026-27 en **La Cartuja** mientras se reconstruye el Villamarín, y cuatro partidos estaban situados en el Villamarín. Se corrigieron.
+- **Programación de invierno sin publicar.** La del Teatro Circo no aparecía en su web; se encontró completa en GlobalEntradas, su taquilla oficial.
+- **Semana sin eventos confirmados.** Del 28/12 al 3/1 Albacete no tenía nada: se añadió la colección permanente del Museo de la Cuchillería, abierta todo el periodo.
+- **Partidos descartados.** Los del Albacete Basket quedan fuera porque no se encontró la dirección del Pabellón del Parque, necesaria para el mapa.
+- **Filtro de precio:** solo 33 de 350 eventos publican un precio en cifras y ninguno es gratuito con certeza. El filtro «Gratis / De pago» no se puede ofrecer con datos fiables y se descarta.
+
+**Imágenes.** Cada evento muestra su cartel o una foto del artista, sacados de su propia página de venta (`og:image`) y autoalojados. A los partidos sin imagen se les asigna la de otro partido del mismo club. La foto libre del recinto (Wikimedia Commons, con autor y licencia al pie) solo aparece como **último recurso**: en 7 de 350 eventos. Por indicación expresa, se asume el riesgo de derechos de autor de los carteles, al ser un proyecto universitario sin carácter comercial.
+
+**Reglas de Recomendados.** Antes, Barcelona, Madrid y Sevilla recomendaban solo partidos de fútbol, porque el criterio era «gran evento primero» y los estadios son los recintos más grandes. Ahora `recommendedEvents` aplica estas reglas:
+
+1. **Mayoría de conciertos.** Al menos 2 de cada 3 recomendados son de Música, con los grandes conciertos y giras (recinto de ≥ 10.000 personas) primero, después los destacados y luego por fecha.
+2. **Deporte limitado.** Como máximo 1 evento deportivo de cada 3, así que nunca hay dos deportivos seguidos.
+3. **Variedad.** No se repiten artista, equipo (el local) ni recinto.
+4. **Huecos.** Si faltan conciertos, se completa con un musical, teatro, ópera o danza antes que con deporte. Las exposiciones solo entran como último recurso y nunca encabezan.
+
+Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exposiciones») y la variedad ayuda a descubrir planes nuevos. Que no se repita el recinto obliga a mostrar escenarios distintos de la ciudad. `tests/catalog-dates.test.ts` comprueba las cuatro reglas en las 6 ciudades simulando el 20/12/2026, el 01/01/2027 y el 31/01/2027. También comprueba que cada ciudad tiene eventos futuros y que «Próximos 30 días» nunca está vacío.

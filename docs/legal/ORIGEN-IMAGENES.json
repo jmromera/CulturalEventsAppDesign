@@ -1552,8 +1552,414 @@
       "usedBy": [
         "venue:bilbao-san-mames"
       ]
+    },
+    "/images/remote/b801659738460284.webp": {
+      "original": "https://assets.laliga.com/assets/2023/07/03/medium/7576f38f25dd599cfc62edd851778f80.jpeg",
+      "kind": "event",
+      "usedBy": [
+        "event:285"
+      ]
+    },
+    "/images/remote/831a229c22a43d96.webp": {
+      "original": "https://assets.realmadrid.com/is/image/realmadrid/ND-J19-EUROLEAGUE-RM-DUBAI-ALEGRIA-CAMPAZZO-TAVARES-FELIZ_SG23744?wid=1200&amp;hei=675",
+      "kind": "event",
+      "usedBy": [
+        "event:289"
+      ]
+    },
+    "/images/remote/0903d0816bbcc16f.webp": {
+      "original": "https://conciertos.club/doc/c/2025/c_melendi2026.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:291"
+      ]
+    },
+    "/images/remote/7907697942e60f33.webp": {
+      "original": "https://conciertos.club/doc/a/2017/a_taburete.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:292"
+      ]
+    },
+    "/images/remote/6db75df8bd9b4d82.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/lulipampin_20270104.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:293"
+      ]
+    },
+    "/images/remote/931096b7337f1f2a.webp": {
+      "original": "https://conciertos.club/doc/a/2020/a_ninapolaca.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:315"
+      ]
+    },
+    "/images/remote/685abcf7c0d9ef62.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/duncandhum_20270116.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:296"
+      ]
+    },
+    "/images/remote/431cd351419af8b9.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/dvalentino_20270122.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:297"
+      ]
+    },
+    "/images/remote/373972baf8a1e6e2.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/barrybmadr_20270123.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:298"
+      ]
+    },
+    "/images/remote/93e598d3f576db91.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_sidecars.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:299"
+      ]
+    },
+    "/images/remote/afa6642f9004943d.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/carlosares_20270130.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:300"
+      ]
+    },
+    "/images/remote/870762119cab2339.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/elbarrioen_20270205.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:301"
+      ]
+    },
+    "/images/remote/62fe78a2f1564c51.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_obk.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:302"
+      ]
+    },
+    "/images/remote/0c4256121a2dd3f1.webp": {
+      "original": "https://conciertos.club/doc/a/2024/a_alcalanorte.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:303"
+      ]
+    },
+    "/images/remote/53ebb46d16f34a3e.webp": {
+      "original": "https://conciertos.club/doc/a/2025/a_sergiodalma2026.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:312"
+      ]
+    },
+    "/images/remote/1d52423fec677ac3.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/disneydesc_20270224.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:305"
+      ]
+    },
+    "/images/remote/bf9f4c670551e2ad.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/kaseocamis_20270227.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:306"
+      ]
+    },
+    "/images/remote/223171900e198729.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/lacasaazul_20270305.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:307"
+      ]
+    },
+    "/images/remote/dd9b8d4926576e8b.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/siloe_20270313.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:308"
+      ]
+    },
+    "/images/remote/9c372c1312df021b.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/3101622_590761_1764331809511.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:309"
+      ]
+    },
+    "/images/remote/a21a4590557ac2c5.webp": {
+      "original": "https://conciertos.club/doc/a/2023/a_hakunagroupmusic.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:317"
+      ]
+    },
+    "/images/remote/33e76895a138d688.webp": {
+      "original": "https://conciertos.club/doc/a/2017/a_vivasuecia.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:311"
+      ]
+    },
+    "/images/remote/ccba3c572b70e5c9.webp": {
+      "original": "https://conciertos.club/doc/a/2021/a_lacasazul.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:313"
+      ]
+    },
+    "/images/remote/d3cb328032c75afd.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/sb2tourdel_20270204.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:314"
+      ]
+    },
+    "/images/remote/7f8c708ba600e1f1.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/kaseocamis_20270206.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:316"
+      ]
+    },
+    "/images/remote/d249d5c91a9a5231.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/benitokame_20270313.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:318"
+      ]
+    },
+    "/images/remote/846a617118a7d15b.webp": {
+      "original": "https://conciertos.club/doc/a/2022/a_manowar.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:320"
+      ]
+    },
+    "/images/remote/db5298076895ad36.webp": {
+      "original": "https://conciertos.club/doc/a/2020/a_jeanette.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:321"
+      ]
+    },
+    "/images/remote/f6a8a062f91b5df7.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/aramalikia_20261227.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:322"
+      ]
+    },
+    "/images/remote/10142f1164e4e071.webp": {
+      "original": "https://conciertos.club/doc/a/2024/a_royalfilmco.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:323"
+      ]
+    },
+    "/images/remote/dc2fa3b34ba8b488.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/revolverla_20261230.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:324"
+      ]
+    },
+    "/images/remote/7ae8673b61e79609.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/3284141_676008_177623596898220270102.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:325"
+      ]
+    },
+    "/images/remote/e0500244a61e55a6.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/2027-1-16-tanxugueiras2027116.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:326"
+      ]
+    },
+    "/images/remote/976cbd10c1c770a7.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/aurumbanda_20270122.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:327"
+      ]
+    },
+    "/images/remote/a8a2fe46de7a5829.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2026/2027-3-11-pau-vallve-nou-disc-20272027311.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:328"
+      ]
+    },
+    "/images/remote/9d19bd285e033542.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/peioetapan_20270109.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:329"
+      ]
+    },
+    "/images/remote/befa8bb3f6000881.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/rodrigocue_20270116.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:330"
+      ]
+    },
+    "/images/remote/48e99b775aa594ac.webp": {
+      "original": "https://conciertos.club/doc/a/2023/a_malu.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:331"
+      ]
+    },
+    "/images/remote/3310d203b845c927.webp": {
+      "original": "https://conciertos.club/doc/a/2020/a_enautelorrieta.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:334"
+      ]
+    },
+    "/images/remote/57c131e5d0445519.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/supercrema_20270114.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:335"
+      ]
+    },
+    "/images/remote/06c7eead29bf22ba.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/mujeres_20270129.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:337"
+      ]
+    },
+    "/images/remote/19b96610474f3f11.webp": {
+      "original": "https://conciertos.club/doc/a/2023/a_lacabramecanica.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:339"
+      ]
+    },
+    "/images/remote/ccc999706a8f9bd5.webp": {
+      "original": "https://conciertos.club/doc/a/2021/a_ginebras.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:340"
+      ]
+    },
+    "/images/remote/2350ce5a3d533959.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/depedro_20270312.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:341"
+      ]
+    },
+    "/images/remote/33c8baa74eed1c47.webp": {
+      "original": "https://doc.conciertos.club/doc/c/2027/elliottmur_20270122.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:342"
+      ]
+    },
+    "/images/remote/e7df64a18a2a6c2b.webp": {
+      "original": "https://www.escenaensevilla.es/doc/c/2026/c_mocedades_panchos.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:343"
+      ]
+    },
+    "/images/remote/2b99eacb038e1444.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14011/conc-guit-tpaz_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:344"
+      ]
+    },
+    "/images/remote/5624dbf4cd93ae0b.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14022/isra-fer_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:345"
+      ]
+    },
+    "/images/remote/3086a4e85f2388bb.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14035/cangrej-arroyo_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:346"
+      ]
+    },
+    "/images/remote/ba3dc74043531fdd.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14038/d-quij-femuba_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:347"
+      ]
+    },
+    "/images/remote/b1da974999177a3a.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14023/maestr-4-manos_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:348"
+      ]
+    },
+    "/images/remote/7e7182c140d8dcc8.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14039/francoeur-paris_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:349"
+      ]
+    },
+    "/images/remote/ebe7fd5d9f7a52c2.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14047/fest-circ-2027_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:350"
+      ]
+    },
+    "/images/remote/7a9aeaea05466fac.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/13877/protas-guerra_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:351"
+      ]
+    },
+    "/images/remote/8baf6cc7ab9073ec.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14020/gala-stradivarius_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:352"
+      ]
+    },
+    "/images/remote/ed51c9687b78ad95.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14048/catherine-russell_1.JPG",
+      "kind": "event",
+      "usedBy": [
+        "event:353"
+      ]
+    },
+    "/images/remote/0b84276ed8953869.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14032/amalur_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:354"
+      ]
+    },
+    "/images/remote/6ca6e5342ab6bdb1.webp": {
+      "original": "https://www.globalentradas.com/uploads/evento/14033/aida_1.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:355"
+      ]
     }
   },
   "failed": {},
-  "generatedAt": "2026-11-07T20:23:15.404Z"
+  "generatedAt": "2026-11-07T21:37:22.170Z"
 }

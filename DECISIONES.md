@@ -58,3 +58,9 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **Copias de imágenes de 640 px (y 1024 px las portadas) con `srcset`**: Lighthouse móvil pasó de 78 a 81 y el peso de la portada de 758 a 666 KB.
 - **No se pre-renderizan las páginas**: subiría el rendimiento en móvil por encima de 90, pero cambia la arquitectura de la app. Queda como decisión de producto en `PENDIENTE.md`.
 - **Botones de la confirmación de borrado con el mismo estilo**, para cumplir lo de «sin patrones oscuros».
+
+## Interfaz y catálogo (rama `feat/ui-hci`)
+- **Carteles y fotos de artistas, aceptando el riesgo de derechos de autor** (decisión expresa del autor: proyecto universitario sin carácter comercial). Se autoalojan para no enviar la IP a terceros. La foto libre del recinto solo se usa cuando no hay otra.
+- **Sin filtro «Gratis / De pago»**: casi ningún evento publica su precio y ninguno es gratuito con certeza.
+- **Recomendados con mayoría de conciertos y como mucho un evento deportivo**, sin repetir artista, equipo ni recinto (criterio en `docs/CHANGELOG-UI.md`).
+- **«Gran evento» = recinto con aforo ≥ 10.000 personas**, con el aforo tomado de Wikidata o de la web oficial del recinto.
