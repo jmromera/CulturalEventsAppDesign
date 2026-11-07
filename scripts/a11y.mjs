@@ -16,6 +16,7 @@ const interactions = [
   { name: "calendario-abierto", route: "evento", act: (page) => page.locator(".detail-calendar summary").click() },
   { name: "confirmar-borrado", route: "tus-datos", act: (page) => page.getByRole("button", { name: "Borrar mis datos" }).click() },
   { name: "acerca-de", route: "inicio", act: (page) => page.getByRole("button", { name: "Acerca de" }).click() },
+  { name: "cerca-de-mi", route: "inicio", act: (page) => page.getByRole("button", { name: "Cerca de mí" }).click() },
 ];
 
 const { url: base, stop } = await startPreview({ build: !process.argv.includes("--no-build") });

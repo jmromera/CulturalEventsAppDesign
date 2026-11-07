@@ -61,7 +61,7 @@ export function PrivacyPolicyPage({ language }: { language: Language }) {
       <ol>
         <li><strong>No tenemos cuentas ni formularios.</strong> No te pedimos nombre, email ni teléfono, así que no sabemos quién eres.</li>
         <li><strong>Lo que eliges se queda en tu navegador.</strong> Favoritos, idioma y ciudad se guardan solo en tu dispositivo. Puedes descargarlos o borrarlos en <Link to={LEGAL_PATHS.yourData}>Tus datos</Link>.</li>
-        <li><strong>Tu ubicación no sale de tu dispositivo.</strong> Solo se usa si pulsas «Usar mi ubicación», para elegir la ciudad más cercana. No la enviamos ni la guardamos: solo recordamos el nombre de la ciudad.</li>
+        <li><strong>Tu ubicación no sale de tu dispositivo.</strong> Solo se usa si la pides: para elegir la ciudad más cercana o, en «Cerca de mí», para ordenar los eventos por distancia. No la enviamos ni la guardamos: como mucho recordamos el nombre de la ciudad, y la posición para ordenar se olvida al cerrar la página.</li>
         <li><strong>Sin cookies, analítica ni publicidad.</strong> Las fuentes y las imágenes se sirven desde nuestro propio dominio. El único tercero que recibe tu IP es nuestro proveedor de alojamiento, {vercel.nombre}, para poder mostrarte la web.</li>
         <li><strong>Tus derechos.</strong> Escríbenos a <Mail to={d.titular.email} /> para cualquier consulta. Si no quedas satisfecho, puedes reclamar ante la {d.autoridadControl.nombre}.</li>
       </ol>
@@ -93,8 +93,8 @@ export function PrivacyPolicyPage({ language }: { language: Language }) {
             <td>No</td>
           </tr>
           <tr>
-            <th scope="row">Ubicación aproximada (solo si pulsas «Usar mi ubicación»)</th>
-            <td>Proponerte la ciudad con eventos más cercana</td>
+            <th scope="row">Ubicación aproximada (solo si la pides con «Usar mi ubicación»)</th>
+            <td>Proponerte la ciudad con eventos más cercana y, en «Cerca de mí», ordenar los eventos por distancia</td>
             <td>Tu consentimiento, dado con el permiso del navegador (art. 6.1.a RGPD)</td>
             <td>{d.plazos.ubicacion}</td>
             <td>Ninguno: el cálculo se hace en tu dispositivo</td>

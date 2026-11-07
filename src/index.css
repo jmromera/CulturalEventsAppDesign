@@ -647,3 +647,22 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .photo-credit a{color:#ddd6fe;text-decoration:underline}
 .detail-social .big-event-badge,.detail-hero[data-cat] .detail-social .big-event-badge{background:#fbbf24;color:#1f1300}
 .detail-hero[data-cat] .detail-social>span.big-event-badge:first-child{color:#1f1300}
+/* "Near me" control */
+.catalogue-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.near-me{position:relative}
+.near-me-trigger{min-height:44px}
+.near-me-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;width:min(380px,calc(100vw - 32px));padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface-raised);box-shadow:var(--shadow)}
+.near-me-panel h3{margin:0 0 8px;font-size:17px}
+.near-me-panel p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.5}
+.near-me-actions{display:flex;flex-wrap:wrap;gap:10px}
+.near-me-actions .button{min-height:44px}
+.near-me-radius{margin:0 0 12px;padding:0;border:0}
+.near-me-radius legend{margin-bottom:8px;font-weight:700;font-size:14px}
+.near-me-radius div{display:flex;flex-wrap:wrap;gap:8px}
+.near-me-radius button{min-height:44px;min-width:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:inherit;font-weight:600;cursor:pointer}
+.near-me-radius button.active{border-color:var(--accent-text);background:var(--accent-tint);color:var(--accent-text-hover)}
+.near-me-stop{min-height:44px;padding:0;border:0;background:none;color:var(--accent-text);font:inherit;font-weight:600;text-decoration:underline;cursor:pointer}
+.event-distance{color:var(--accent-text);font-weight:700}
+@media(max-width:650px){.catalogue-actions{width:100%}.near-me{flex:1}.near-me-trigger{width:100%}.near-me-panel{left:0;right:auto}}
+/* Mobile: the near-me button keeps its label (the filter button stays icon-only next to it). */
+@media(max-width:650px){.filter-control.near-me-trigger{width:100%;padding:0 14px;gap:8px;font-size:14px}}

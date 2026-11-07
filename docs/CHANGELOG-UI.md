@@ -117,3 +117,27 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 
 - **Lectura:** en el periodo de evaluación (20/12–31/01) todas las ciudades tienen eventos todas las semanas. La única semana floja es la de Navidad en Albacete (28/12–3/1), cubierta con la colección permanente del Museo de la Cuchillería.
 - **Pendiente:** quedan a 0 Bilbao desde el 15/03, Sevilla del 22 al 28/03 y Madrid del 29 al 31/03. Coinciden con el parón de selecciones y con programación que los recintos aún no han publicado. Se recomienda repetir la búsqueda a mediados de enero y ampliar con `scripts/add-events-2027.py`.
+
+---
+
+## P1 · Lo que pide el enunciado y accesibilidad
+
+### Iteración P1.1 · «Cerca de mí»: ordenar y filtrar por distancia
+
+- **Qué:**
+  - Botón «Cerca de mí» junto a Filtros. Abre un panel que **explica antes** para qué se usa la ubicación y solo después la pide.
+  - Con la ubicación: los eventos se ordenan por distancia, cada tarjeta muestra «a 2,3 km» y se puede limitar el radio (sin límite, 1, 5, 10 o 25 km).
+  - «Dejar de usar mi ubicación» la olvida al momento.
+  - Si se deniega el permiso o no responde en 10 s, un aviso (`role="alert"`) explica cómo seguir: por ciudad o buscando un recinto o barrio.
+- **Por qué:**
+  - El enunciado pide filtrar por ubicación.
+  - Control y libertad del usuario y prevención de errores (heurísticas 3 y 5).
+  - Privacidad desde el diseño: la posición se redondea a unos 100 m, se usa solo en memoria, no se envía ni se guarda, y la política de privacidad se actualizó para decirlo.
+- **Accesibilidad:**
+  - El botón indica su estado con `aria-expanded`.
+  - El panel recibe el foco al abrirse y se cierra con Esc, devolviendo el foco al botón.
+  - Los radios son botones con `aria-pressed`.
+  - Todos los objetivos miden 44 px o más.
+- **Barrio o distrito:** no hay datos de barrio; el radio de distancia lo sustituye, como se acordó.
+- **Pruebas:** `tests/near-me.test.tsx` comprueba cinco cosas: que no se pide la ubicación antes de aceptar, el orden por distancia, el radio, que no se guarda ni se envía nada, y el permiso denegado.
+- **Problema encontrado:** en móvil, una regla existente reducía los botones de la barra a un icono de 44 px (`font-size:0`), y «Cerca de mí» se veía como una caja vacía. Se le devolvió la etiqueta solo a ese botón.

@@ -12,6 +12,9 @@ import { entityKindCopy, copy, eventActionCopy, interfaceText, venueLinkCopy } f
 import { venueFor, venues } from "./data/venue-catalog";
 import CityOnboardingDialog from "./components/CityOnboardingDialog";
 import CitySelector from "./components/CitySelector";
+import NearMePanel from "./components/NearMePanel";
+import { NearMeProvider, useNearMe } from "./context/NearMeContext";
+import { distanceKm, formatDistance } from "./lib/geo";
 import FallbackImage from "./components/FallbackImage";
 import Icon, { type IconName } from "./components/Icon";
 import StatusPage from "./components/StatusPage";
@@ -76,14 +79,14 @@ function SaveButton({ active, onClick, t, compact = false }: { active: boolean; 
   return <button className={`save-button ${active ? "active" : ""} ${compact ? "compact" : ""}`} onClick={onClick} aria-label={label} aria-pressed={active} title={label}><Icon name="heart" filled={active} /><span>{label}</span></button>;
 }
 
-function EventCard({ event, saved, onSave, t, featured = false }: { event: EventItem; saved: boolean; onSave: () => void; t: typeof copy.es; featured?: boolean }) {
+function EventCard({ event, saved, onSave, t, featured = false, distance }: { event: EventItem; saved: boolean; onSave: () => void; t: typeof copy.es; featured?: boolean; distance?: string }) {
   const venue = venueFor(event.venueId);
   const eventPath = cityPath(`/event/${event.id}`, venue.city);
   return <article className={`event-card ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
     <Link className="event-image" to={eventPath} aria-hidden="true" tabIndex={-1}><FallbackImage src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}</Link>
     <div className="event-body"><div className="event-title-row"><Link className="event-title" to={eventPath}>{event.title}</Link><SaveButton active={saved} onClick={onSave} t={t} compact /></div>
       <p className="event-description">{event.description}</p>
-      <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name}</span><span><Icon name="time" />{event.duration}</span></div>
+      <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name}{distance && <strong className="event-distance"> · {distance}</strong>}</span><span><Icon name="time" />{event.duration}</span></div>
       <div className="tag-row">{visibleTags(event, venue.city).slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}</div>
       <div className="event-footer"><div><small>{event.organizer}</small><strong className={/\d/.test(event.price) ? "" : "price--none"}>{event.price}</strong></div><Link className="button button--secondary" to={eventPath}>{t.details}<Icon name="chevron" /></Link></div>
       <div className={`availability ${availabilityTone(event)}`}><i />{event.availability}</div>
@@ -413,8 +416,20 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
     const matchesQuery = !query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query);
     return matchesCategory && matchesQuery && eventInRange(event, dateRange);
   };
-  const filtered = cityEvents.filter(matchesSearch);
-  const listKey = [selectedCity, categories.join(","), when ?? "", query].join("|");
+  const nearMe = useNearMe();
+  // With "near me" on: distance from the visitor to each venue, optional radius and nearest first.
+  const distanceTo = (event: EventItem) => {
+    const venue = venueFor(event.venueId);
+    return nearMe.position && venue.lat != null && venue.lng != null ? distanceKm(nearMe.position, { lat: venue.lat, lng: venue.lng }) : null;
+  };
+  const matched = cityEvents.filter(matchesSearch);
+  const filtered = nearMe.position
+    ? matched
+      .filter((event) => nearMe.radiusKm === null || (distanceTo(event) ?? Infinity) <= nearMe.radiusKm)
+      .sort((a, b) => (distanceTo(a) ?? Infinity) - (distanceTo(b) ?? Infinity) || (a.startDate ?? "").localeCompare(b.startDate ?? ""))
+    : matched;
+  const distanceLabel = (event: EventItem) => { const km = distanceTo(event); return km === null ? undefined : formatDistance(km, language); };
+  const listKey = [selectedCity, categories.join(","), when ?? "", query, nearMe.position ? `near-${nearMe.radiusKm}` : ""].join("|");
   const [shown, setShown] = useState({ key: listKey, count: visibleCounts.get(listKey) ?? PAGE_SIZE });
   const visibleCount = shown.key === listKey ? shown.count : visibleCounts.get(listKey) ?? PAGE_SIZE;
   const showMore = () => {
@@ -437,7 +452,7 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
   const weekRange = dateRangeFor("week");
   const weekCount = cityEvents.filter((event) => eventInRange(event, weekRange)).length;
   const discovery = topCategories.length > 0 && <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("{city}", selectedCity)}</small><strong>{topCategories.map(([item]) => t.categoryNames[item]).join(" · ")}</strong></span></div>{weekCount > 0 && <div><Icon name="calendar" /><span><small>{t.thisWeek}</small><strong>{eventCountLabel(weekCount, labels)}</strong></span></div>}</section>;
-  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters}><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div>{filtered.length ? <><div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
+  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><div className="catalogue-actions"><NearMePanel language={language} /><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters}><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div></div>{filtered.length ? <><div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} distance={distanceLabel(event)} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : nearMe.position && nearMe.radiusKm !== null && matched.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={() => nearMe.setRadiusKm(null)}>{labels.viewAllEvents}</Button></div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
   const isSearching = query.length > 0;
   // Atajos de fecha del hero: cada uno muestra cuántos eventos hay y se desactiva si no hay ninguno.
   const whenNames: Record<(typeof whenOptions)[number], string> = { today: labels.whenToday, tomorrow: labels.whenTomorrow, week: t.thisWeek, month: labels.whenMonth };
@@ -773,7 +788,7 @@ export default function App() {
   };
   const homePage = <Home selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} toggleCategory={toggleCategory} goFilters={goFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
   const showFilters = searchParams.has("filters") || !searchParams.has("q");
-  return <div className="app-shell"><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
+  return <NearMeProvider><div className="app-shell"><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={showFilters ? <Filters selectedCity={selectedCity} initialCategories={activeCategories} initialWhen={activeWhen} onApply={applyFilters} back={goBack} language={language} t={t} /> : homePage} />
@@ -792,5 +807,5 @@ export default function App() {
       <Route path="*" element={<NotFound t={t} />} />
     </Routes>
     <SiteFooter language={language} />
-  </div></div>;
+  </div></div></NearMeProvider>;
 }
