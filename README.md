@@ -64,6 +64,7 @@ Es el proyecto de la asignatura de **Interacción Persona-Ordenador (HCI)**. Por
 13. [Arrancarlo en local](#-arrancarlo-en-local)
 14. [Estructura del repositorio](#-estructura-del-repositorio)
 15. [Estado y qué falta](#-estado-y-qué-falta)
+16. [Créditos de las imágenes](#-créditos-de-las-imágenes)
 
 ---
 
@@ -390,7 +391,7 @@ docs/                            Guía visual, manual de uso y capturas
 
 ## 📌 Estado y qué falta
 
-**Hecho:** seis ciudades con portada propia · búsqueda y filtros por categoría y fecha · fichas de evento, recinto y artista · favoritos · calendario y compartir · tres idiomas · tema oscuro con animaciones que respetan «reducir movimiento» · accesibilidad revisada · datos para buscadores y agentes · despliegue en Vercel.
+**Hecho:** seis ciudades con portada nocturna propia · búsqueda y filtros por categoría y fecha · fichas de evento, recinto y artista · favoritos · calendario y compartir · tres idiomas · tema oscuro con animaciones que respetan «reducir movimiento» · accesibilidad revisada · datos para buscadores y agentes · despliegue en Vercel.
 
 **Pendiente o mejorable:**
 
@@ -399,7 +400,24 @@ docs/                            Guía visual, manual de uso y capturas
 - **«Invitado» es un marcador de posición.** No hay cuentas, así que los favoritos no pasan de un dispositivo a otro.
 - **Datos curados a mano.** Cada evento se añade editando `events.json`; precios y disponibilidad pueden quedarse atrás respecto a la web oficial.
 - **`App.tsx` y `index.css` son grandes** (unas 770 líneas y casi 100 KB). Separar páginas y estilos facilitaría el mantenimiento.
-- **Las imágenes dependen de webs ajenas.** Portadas, carteles y fotos de recintos se enlazan desde su origen; si una web cambia o bloquea el enlace, en las tarjetas `FallbackImage` pinta un icono, pero la portada de ciudad usa un `<img>` normal y se queda en blanco. Ya pasó con Madrid, cuya foto pasó a Unsplash como las demás.
+- **Las imágenes dependen de webs ajenas.** Portadas, carteles y fotos de recintos se enlazan desde su origen; si una web cambia o bloquea el enlace, en las tarjetas `FallbackImage` pinta un icono, pero la portada de ciudad usa un `<img>` normal y se queda en blanco. Ya pasó con la antigua foto de Madrid; por eso las portadas vienen ahora de Unsplash y Wikimedia Commons, que permiten enlazarlas.
+
+---
+
+## 📷 Créditos de las imágenes
+
+Las portadas de ciudad son fotos nocturnas elegidas para que encajen con el tema oscuro y violeta de la app.
+
+| Ciudad | Foto | Autor y licencia |
+|---|---|---|
+| Madrid | Edificio Metrópolis y Gran Vía con estelas de luz | Carlos Zurita · [Unsplash](https://unsplash.com/photos/MhlonjDt80A) · [Licencia Unsplash](https://unsplash.com/license) |
+| Barcelona | Plaza de España y Montjuïc de noche | Javier Bosch · [Unsplash](https://unsplash.com/photos/C6oFJKusQPs) · [Licencia Unsplash](https://unsplash.com/license) |
+| Valencia | Hemisfèric y Palau de les Arts iluminados | David Ferris · [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Nightwalk_to_the_City_of_Arts_and_Sciences_(Valencia)_-_Spain_Paseo_hacia_la_ciudad_de_las_artes_y_las_ciencias_(32244618773).jpg) · [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| Sevilla | Las Setas (Metropol Parasol) y la Giralda de noche | María López Jorge · [Unsplash](https://unsplash.com/photos/KxjMODCJ42s) · [Licencia Unsplash](https://unsplash.com/license) |
+| Bilbao | Museo Guggenheim y la ría de noche | Niclas Dehmel · [Unsplash](https://unsplash.com/photos/bAfk_mr8VU4) · [Licencia Unsplash](https://unsplash.com/license) |
+| Albacete | Feria de Albacete: Puerta de Hierros y guirnaldas de luces | Ángel Aroca Escámez · [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Feria_de_albacete_puertas_de_hierro_de_noche.JPG) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+
+Los carteles de eventos y las fotos de recintos y artistas pertenecen a sus organizadores, recintos o artistas, y se enlazan desde sus webs oficiales.
 
 ---
 

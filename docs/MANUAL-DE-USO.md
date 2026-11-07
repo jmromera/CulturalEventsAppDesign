@@ -199,7 +199,7 @@ La ficha estará en `/artist/<id>` y solo lista los eventos con `confirmed: true
 
 ### Añadir una ciudad
 
-1. **[`city-images.json`](../src/data/city-images.json):** añade `"Nombre": "url-de-la-foto"`. Con esto la ciudad aparece en el selector, los contadores y los filtros. Mejor una foto alojada en un sitio estable (Unsplash, o dentro del repo en `public/`).
+1. **[`city-images.json`](../src/data/city-images.json):** añade `"Nombre": "url-de-la-foto"`. Con esto la ciudad aparece en el selector, los contadores y los filtros. Para que encaje con las demás, usa una foto **nocturna y con luces**, alojada en un sitio que permita enlazarla (Unsplash o Wikimedia Commons). Pruébala en la portada en escritorio y en móvil: el texto y el degradado tapan la parte izquierda. Añade el autor y la licencia a la tabla de [créditos del README](../README.md#-créditos-de-las-imágenes); las licencias CC BY y CC BY-SA lo exigen.
 2. **[`city-coordinates.json`](../src/data/city-coordinates.json):** latitud, longitud y `radiusKm` del centro, para la ubicación.
 3. **`venues.json`** y **`events.json`:** sus recintos y eventos.
 4. **[`public/llms.txt`](../public/llms.txt)** y **[`public/ai-catalog.json`](../public/ai-catalog.json):** añade la ciudad a las listas, y a la descripción de `.figma/make/site.json`.
