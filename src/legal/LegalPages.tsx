@@ -178,3 +178,30 @@ export function TermsPage({ language }: { language: Language }) {
     <p>Se rigen por la {d.leyAplicable.toLocaleLowerCase("es")}. Si eres consumidor, puedes acudir a los tribunales de tu domicilio.</p>
   </LegalLayout>;
 }
+
+export function AccessibilityPage({ language }: { language: Language }) {
+  return <LegalLayout title="Declaración de accesibilidad" language={language}>
+    <p>{d.titular.nombre} quiere que {d.sitio.nombre} pueda usarlo cualquier persona, también con lector de pantalla, solo con teclado, con zoom o con preferencias de movimiento reducido.</p>
+    <h2>Situación de cumplimiento</h2>
+    <p>Esta web es <strong>parcialmente conforme</strong> con las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.2, nivel AA, debido a las excepciones que se indican abajo.</p>
+    <h2>Contenido no accesible</h2>
+    <ul>
+      <li><strong>Carteles de eventos.</strong> Muchos carteles son imágenes con texto (fechas, artistas, lugares). Su texto alternativo indica el evento, pero no transcribe todo el cartel. La información esencial (fecha, hora, lugar, precio) está siempre como texto en la ficha.</li>
+      <li><strong>Webs de terceros.</strong> Las páginas de venta de entradas, mapas y calendarios a las que enlazamos no dependen de nosotros.</li>
+      <li><strong>Textos legales.</strong> Solo están en español; en inglés y francés se indica que la versión que hace fe es la española.</li>
+    </ul>
+    <h2>Qué hemos comprobado</h2>
+    <ul>
+      <li>Análisis automático con axe-core (reglas WCAG 2.0, 2.1 y 2.2, niveles A y AA) en todas las páginas y en sus estados con datos, vacíos y de error, en móvil y en escritorio.</li>
+      <li>Reajuste del contenido con zoom al 200 % sin desplazamiento horizontal.</li>
+      <li>Navegación completa con teclado, foco visible, enlace para saltar al contenido y diálogos que retienen el foco.</li>
+      <li>Resultados de búsqueda y avisos anunciados a los lectores de pantalla, idioma de cada página declarado y animaciones desactivadas con «reducir movimiento».</li>
+      <li>Objetivos táctiles de al menos 24 × 24 píxeles y contraste de texto suficiente, también sobre las imágenes de portada.</li>
+    </ul>
+    <h2>Preparación de esta declaración</h2>
+    <p>Declaración preparada el {d.fechaActualizacion} mediante una autoevaluación del propio titular. No ha sido revisada por una entidad externa.</p>
+    <h2>Observaciones y contacto</h2>
+    <p>Si encuentras una barrera de accesibilidad o necesitas un contenido en otro formato, escríbenos a <Mail to={d.titular.email} />. Responderemos en un plazo de {d.contacto.plazoRespuestaErrores.toLocaleLowerCase("es")}.</p>
+    <p>Si la respuesta no te satisface, puedes presentar una reclamación ante la autoridad de consumo o de accesibilidad competente.</p>
+  </LegalLayout>;
+}

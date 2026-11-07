@@ -31,3 +31,9 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **Las imágenes de la web no van por Git LFS** (`.gitattributes`): así el despliegue funciona aunque el alojamiento no descargue objetos LFS.
 - **Lista de terceros declarados vacía** (`src/legal/third-parties.ts`): una prueba sobre el código y un script en navegador real (`pnpm check:terceros`) fallan si aparece cualquier dominio externo.
 - **Los enlaces externos se mantienen** (comprar entradas, Google Maps, Google Calendar, webs oficiales): no envían nada hasta que la persona los pulsa, y la política de privacidad lo explica.
+
+## Accesibilidad
+- **Declaración «parcialmente conforme»**, no «plenamente»: la revisión es una autoevaluación con herramientas y pruebas manuales básicas, sin auditoría externa, y los carteles con texto no se transcriben completos.
+- **Menú de ciudades a todo el ancho en móvil**, debajo de la cabecera: así no deja pestañas tapadas a medias (WCAG 2.5.8).
+- **Degradado de portada más oscuro en escritorio** en la zona del texto: Madrid y Bilbao no llegaban a 4,5:1 por las luces de la foto.
+- **Autoridad de reclamación sin nombrar**: no he podido confirmar qué organismo es competente ni si la Ley Europea de Accesibilidad te aplica (exime a microempresas que prestan servicios). Queda en `PENDIENTE.md`.

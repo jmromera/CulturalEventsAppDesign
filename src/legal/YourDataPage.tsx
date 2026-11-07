@@ -133,7 +133,7 @@ export default function YourDataPage({ language, onDeleted = reloadAfterDelete }
       <p>{text.intro}</p>
 
       <h2>{text.storedHeading}</h2>
-      {hasData ? <div className="legal-table-wrap">
+      {hasData ? <div className="legal-table-wrap" role="region" aria-label={text.storedHeading} tabIndex={0}>
         <table className="legal-table your-data-table">
           <thead><tr><th scope="col">{text.item}</th><th scope="col">{text.state}</th></tr></thead>
           <tbody>{STORAGE_REGISTRY.map((entry) => <tr key={entry.key}><th scope="row"><span lang="es">{entry.purpose}</span></th><td>{entry.key in stored ? text.stored : text.notStored}</td></tr>)}</tbody>

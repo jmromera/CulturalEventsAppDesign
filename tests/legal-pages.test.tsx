@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { STORAGE_REGISTRY } from "../src/data/storage-keys";
-import { CookiePolicyPage, LegalNoticePage, PrivacyPolicyPage, TermsPage } from "../src/legal/LegalPages";
+import { AccessibilityPage, CookiePolicyPage, LegalNoticePage, PrivacyPolicyPage, TermsPage } from "../src/legal/LegalPages";
 import { legalData } from "../src/legal/legal-data";
 
-const pages = { LegalNoticePage, PrivacyPolicyPage, CookiePolicyPage, TermsPage };
+const pages = { LegalNoticePage, PrivacyPolicyPage, CookiePolicyPage, TermsPage, AccessibilityPage };
 
 describe("legal pages", () => {
   it.each(Object.entries(pages))("%s shows the red draft notice while esEjemplo is true", (_, Page) => {

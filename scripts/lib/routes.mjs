@@ -22,6 +22,7 @@ export const routes = [
   { name: "privacidad", path: "/privacidad", storage: withCity },
   { name: "cookies", path: "/cookies", storage: withCity },
   { name: "terminos", path: "/terminos", storage: withCity },
+  { name: "accesibilidad", path: "/accesibilidad", storage: withCity },
   { name: "tus-datos", path: "/tus-datos", storage: withFavourites },
   { name: "tus-datos-vacio", path: "/tus-datos", storage: withCity },
 ];

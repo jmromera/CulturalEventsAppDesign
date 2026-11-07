@@ -6,3 +6,4 @@
 - [x] **Bloque legal**: `datos-legales.json`, aviso legal, privacidad, cookies y términos, enlaces en el pie, aviso rojo mientras `esEjemplo` sea `true`, pruebas de campos obligatorios.
 - [x] **Consentimiento y borrado**: página «Tus datos» (descargar y borrar), explicación antes de pedir la ubicación, nada se guarda solo por visitar; pruebas de borrado, de ubicación y de primera visita.
 - [x] **Cookies y terceros**: fuentes e imágenes autoalojadas (210 imágenes de 37 dominios), cero peticiones a terceros y cero cookies, comprobado con pruebas y en navegador real.
+- [x] **Accesibilidad**: axe en 21 páginas y estados (móvil y escritorio) sin problemas, zoom 200 %, contraste sobre portadas, resultados anunciados con aria-live y declaración en `/accesibilidad`.

@@ -1,0 +1,296 @@
+{
+  "date": "2026-11-07T20:33:11.053Z",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "results": [
+    {
+      "page": "inicio · movil",
+      "violations": []
+    },
+    {
+      "page": "bienvenida · movil",
+      "violations": []
+    },
+    {
+      "page": "busqueda · movil",
+      "violations": []
+    },
+    {
+      "page": "busqueda-sin-resultados · movil",
+      "violations": []
+    },
+    {
+      "page": "busqueda-otra-ciudad · movil",
+      "violations": []
+    },
+    {
+      "page": "filtros · movil",
+      "violations": []
+    },
+    {
+      "page": "evento · movil",
+      "violations": []
+    },
+    {
+      "page": "evento-pasado · movil",
+      "violations": []
+    },
+    {
+      "page": "recintos · movil",
+      "violations": []
+    },
+    {
+      "page": "recinto · movil",
+      "violations": []
+    },
+    {
+      "page": "artista · movil",
+      "violations": []
+    },
+    {
+      "page": "favoritos · movil",
+      "violations": []
+    },
+    {
+      "page": "favoritos-vacio · movil",
+      "violations": []
+    },
+    {
+      "page": "404 · movil",
+      "violations": []
+    },
+    {
+      "page": "aviso-legal · movil",
+      "violations": []
+    },
+    {
+      "page": "privacidad · movil",
+      "violations": []
+    },
+    {
+      "page": "cookies · movil",
+      "violations": []
+    },
+    {
+      "page": "terminos · movil",
+      "violations": []
+    },
+    {
+      "page": "accesibilidad · movil",
+      "violations": []
+    },
+    {
+      "page": "tus-datos · movil",
+      "violations": []
+    },
+    {
+      "page": "tus-datos-vacio · movil",
+      "violations": []
+    },
+    {
+      "page": "selector-ciudad-abierto · movil",
+      "violations": []
+    },
+    {
+      "page": "calendario-abierto · movil",
+      "violations": []
+    },
+    {
+      "page": "confirmar-borrado · movil",
+      "violations": []
+    },
+    {
+      "page": "acerca-de · movil",
+      "violations": []
+    },
+    {
+      "page": "inicio · escritorio",
+      "violations": []
+    },
+    {
+      "page": "bienvenida · escritorio",
+      "violations": []
+    },
+    {
+      "page": "busqueda · escritorio",
+      "violations": []
+    },
+    {
+      "page": "busqueda-sin-resultados · escritorio",
+      "violations": []
+    },
+    {
+      "page": "busqueda-otra-ciudad · escritorio",
+      "violations": []
+    },
+    {
+      "page": "filtros · escritorio",
+      "violations": []
+    },
+    {
+      "page": "evento · escritorio",
+      "violations": []
+    },
+    {
+      "page": "evento-pasado · escritorio",
+      "violations": []
+    },
+    {
+      "page": "recintos · escritorio",
+      "violations": []
+    },
+    {
+      "page": "recinto · escritorio",
+      "violations": []
+    },
+    {
+      "page": "artista · escritorio",
+      "violations": []
+    },
+    {
+      "page": "favoritos · escritorio",
+      "violations": []
+    },
+    {
+      "page": "favoritos-vacio · escritorio",
+      "violations": []
+    },
+    {
+      "page": "404 · escritorio",
+      "violations": []
+    },
+    {
+      "page": "aviso-legal · escritorio",
+      "violations": []
+    },
+    {
+      "page": "privacidad · escritorio",
+      "violations": []
+    },
+    {
+      "page": "cookies · escritorio",
+      "violations": []
+    },
+    {
+      "page": "terminos · escritorio",
+      "violations": []
+    },
+    {
+      "page": "accesibilidad · escritorio",
+      "violations": []
+    },
+    {
+      "page": "tus-datos · escritorio",
+      "violations": []
+    },
+    {
+      "page": "tus-datos-vacio · escritorio",
+      "violations": []
+    },
+    {
+      "page": "selector-ciudad-abierto · escritorio",
+      "violations": []
+    },
+    {
+      "page": "calendario-abierto · escritorio",
+      "violations": []
+    },
+    {
+      "page": "confirmar-borrado · escritorio",
+      "violations": []
+    },
+    {
+      "page": "acerca-de · escritorio",
+      "violations": []
+    },
+    {
+      "page": "inicio · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "bienvenida · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "busqueda · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "busqueda-sin-resultados · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "busqueda-otra-ciudad · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "filtros · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "evento · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "evento-pasado · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "recintos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "recinto · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "artista · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "favoritos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "favoritos-vacio · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "404 · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "aviso-legal · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "privacidad · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "cookies · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "terminos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "accesibilidad · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "tus-datos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "tus-datos-vacio · zoom 200 %",
+      "violations": []
+    }
+  ]
+}
