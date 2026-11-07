@@ -1,4 +1,13 @@
 @import "tailwindcss";
+/* Self-hosted fonts: no request to Google Fonts (visitors' IPs stay with us). */
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+@import "@fontsource/dm-sans/700.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/manrope/800.css";
 
 :root { --ink:#111827; --muted:#4b5563; --forest:#1d4ed8; --forest-2:#111827; --paper:#fafaf8; --white:#fff; --terracotta:#1d4ed8; --terracotta-dark:#1d4ed8; --peach:#eff6ff; --sage:#eff6ff; --sky:#eef4ff; --gold:#a16207; --line:#e5e7eb; --success:#059669; --success-strong:#047857; --action-hover:#2563eb; --shadow:0 14px 38px rgba(17,24,39,.08); --sm:8px; --md:14px; --lg:20px; }
 .hero-brand{position:absolute;z-index:2;top:24px;right:clamp(20px,4vw,58px);display:flex;align-items:center;gap:8px;padding:7px 11px 7px 7px;border:1px solid rgba(255,255,255,.72);border-radius:999px;background:rgba(250,250,248,.92);color:#111827;box-shadow:0 4px 18px rgba(17,24,39,.12);backdrop-filter:blur(10px)}.hero-brand>span{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#e8efff;color:#1d4ed8}.hero-brand .icon{width:15px;height:15px}.hero-brand strong{font-size:9px;font-weight:800}
@@ -576,3 +585,65 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .availability.soldout{background:rgba(239,68,68,.14);color:#fca5a5}
 .availability.soldout i,.stock--soldout i{background:#f87171}
 .stock.stock--soldout{color:#fca5a5}
+
+/* Legal pages, footer legal links and draft notice */
+.legal-page{max-width:900px}
+.legal-article{line-height:1.65;font-size:16px}
+.legal-article h1{margin:0 0 6px;font-size:clamp(30px,5vw,44px);line-height:1.1}
+.legal-article h2{margin:36px 0 10px;font-size:22px;line-height:1.25}
+.legal-article p,.legal-article li,.legal-article dd{color:var(--muted);max-width:72ch}
+.legal-article a{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px}
+.legal-article a:hover{color:var(--accent-text-hover)}
+.legal-article ul,.legal-article ol{padding-left:22px}
+.legal-article li{margin:6px 0}
+.legal-updated{font-size:14px}
+.legal-facts{display:grid;grid-template-columns:max-content 1fr;gap:8px 20px;margin:16px 0}
+.legal-facts dt{font-weight:700}
+.legal-facts dd{margin:0}
+@media(max-width:560px){.legal-facts{grid-template-columns:1fr}.legal-facts dd{margin-bottom:8px}}
+.legal-summary{margin:24px 0;padding:20px 24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.legal-summary h2{margin-top:0}
+.legal-table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px}
+.legal-table-wrap:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+.legal-table{width:100%;min-width:720px;border-collapse:collapse;font-size:14px;line-height:1.5}
+.legal-table th,.legal-table td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.legal-table thead th{background:var(--surface-raised);font-weight:700}
+.legal-table tbody th{font-weight:600}
+.legal-table td{color:var(--muted)}
+.legal-table code{font-size:13px;word-break:break-all}
+.legal-draft{margin:0 0 24px;padding:16px 20px;border:2px solid #b91c1c;border-radius:12px;background:#fee2e2;color:#7f1d1d}
+.legal-draft strong{display:block;font-size:16px}
+.legal-draft p{margin:4px 0 0;color:#7f1d1d}
+.legal-language-note{margin:0 0 20px;font-style:italic;color:var(--muted)}
+.site-footer-legal ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 18px}
+.site-footer-legal a{min-height:44px;display:inline-flex;align-items:center;color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.site-footer-legal a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+.your-data-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:26px 0}
+.your-data-actions .button{min-height:44px}
+.your-data-hint{margin:8px 0 0;font-size:14px}
+.your-data-confirm{margin:0 0 26px;padding:20px 22px;border:2px solid var(--accent-text);border-radius:12px;background:var(--surface)}
+.your-data-confirm h2{margin-top:0}
+.your-data-confirm-actions{display:flex;flex-wrap:wrap;gap:12px}
+.your-data-confirm-actions .button{min-height:44px}
+.your-data-done{padding:12px 16px;border-radius:10px;background:var(--accent-tint);color:var(--ink);font-weight:600}
+.city-onboarding-privacy{margin:4px 0 0;font-size:13px;line-height:1.45;color:var(--muted)}
+/* Mobile: the open city menu spans the whole width so it never leaves half-covered tabs underneath (WCAG 2.5.8). */
+@media(max-width:650px){.header-city-picker{position:static}.header-city-menu{position:absolute;left:12px;right:12px;width:auto;max-width:none;z-index:60}}
+/* Desktop: keep the hero text area dark enough for 4.5:1 contrast over bright city lights (WCAG 1.4.3). */
+@media(min-width:651px){.hero-shade{background:linear-gradient(90deg,rgba(15,23,60,.9),rgba(15,23,60,.82) 40%,rgba(30,27,75,.5) 60%,rgba(15,23,60,.08))}}
+.legal-article ol{list-style:decimal}
+.legal-article ul{list-style:disc}
+.legal-article li::marker{color:var(--accent-text);font-weight:700}
+/* Hint shown when today, tomorrow and this week have no plans: never a dead end. */
+.hero-hint{margin:14px 0 0;color:#fff;font-size:15px}
+.hero-hint button{min-height:44px;padding:0 4px;border:0;background:none;color:#ddd6fe;font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.hero-hint button:focus-visible{outline:3px solid #ddd6fe;outline-offset:2px}
+/* Objective "big event" label (venue capacity >= 10,000), replaces ratings without a source. */
+.big-event-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;background:#fbbf24;color:#1f1300;font-size:12px;font-weight:800;letter-spacing:.2px}
+.event-image .big-event-badge{position:absolute;right:12px;bottom:12px}
+/* Photo attribution (CC licences of the venue photos) */
+.detail-gallery{position:relative}
+.photo-credit{position:absolute;right:0;bottom:0;max-width:100%;margin:0;padding:4px 8px;border-top-left-radius:8px;background:rgba(15,23,42,.82);color:#e2e8f0;font-size:11px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.photo-credit a{color:#ddd6fe;text-decoration:underline}
+.detail-social .big-event-badge,.detail-hero[data-cat] .detail-social .big-event-badge{background:#fbbf24;color:#1f1300}
+.detail-hero[data-cat] .detail-social>span.big-event-badge:first-child{color:#1f1300}
