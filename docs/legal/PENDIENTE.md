@@ -26,14 +26,14 @@
 
 | Proveedor | Tarea | Por qué |
 |---|---|---|
-| Vercel Inc. | Aceptar o firmar su acuerdo de tratamiento de datos (DPA), confirmar la región y el mecanismo de transferencia (Marco UE-EE. UU. o cláusulas tipo) y cuánto guarda los registros en tu plan. Después, poner `verificado: true` | Vercel recibe la IP de cada visitante; es encargado del tratamiento (art. 28 RGPD) y hay transferencia a EE. UU. |
+| Vercel Inc. | Comprobar el enlace al DPA (`https://vercel.com/legal/dpa`, escrito de memoria, sin verificar), aceptar o firmar su acuerdo de tratamiento de datos, confirmar la región y el mecanismo de transferencia (Marco UE-EE. UU. o cláusulas tipo) y cuánto guarda los registros en tu plan. Después, poner `verificado: true` | Vercel recibe la IP de cada visitante; es encargado del tratamiento (art. 28 RGPD) y hay transferencia a EE. UU. |
 | Proveedor de email (si usas uno para los buzones) | Añadirlo a `proveedores` en `datos-legales.json` con su DPA | Tratará los mensajes que te envíen. |
 
 ## 4. Licencias de datos e imágenes
 
 | Tarea | Por qué |
 |---|---|
-| Revisar el origen de las 210 imágenes en `docs/legal/ORIGEN-IMAGENES.json` | Son carteles y fotos promocionales de terceros sin licencia documentada. **58 eran miniaturas de Google Imágenes**, cuya licencia real es desconocida. Ahora se sirven desde tu dominio, lo que no cambia quién tiene los derechos. Lo prudente: pedir permiso o usar material de prensa con autorización, o sustituirlas. |
+| **Decidir qué hacer con las 210 imágenes autoalojadas** (origen en `docs/legal/ORIGEN-IMAGENES.json`) | Son carteles y fotos promocionales de terceros sin licencia documentada; **58 eran miniaturas de Google Imágenes**. Al autoalojarlas para no enviar la IP de los visitantes a 37 dominios, **cambié un riesgo de privacidad por un posible riesgo de derechos de autor**: servir una copia es reproducir la imagen, algo distinto de enlazarla. Opciones: pedir permiso o usar material de prensa autorizado; o quitar las que no tengan licencia (poner `"image": null` en los datos: la app muestra el icono de la categoría). |
 | Mantener los créditos de las portadas de ciudad (README) y añadirlos también en la web si lo ves necesario | Las fotos de Valencia (CC BY 2.0) y Albacete (CC BY-SA 4.0) exigen atribución; hoy está en el README. |
 | Revisar las descripciones de eventos (`description`, `fullDescription`) | Si alguna se copió literalmente de la web del organizador, puede tener derechos de autor. Mejor redactarlas con palabras propias. |
 | Decidir qué hacer con valoraciones y «% de popularidad» | No tienen fuente. Ver `TEXTOS-A-REVISAR.md`. |

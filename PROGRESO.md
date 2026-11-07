@@ -10,5 +10,6 @@
 - [x] **Seguridad**: cabeceras (CSP estricta, HSTS, nosniff, Referrer-Policy, Permissions-Policy, frame-ancestors), 0 vulnerabilidades, JSON-LD a prueba de XSS, sin secretos; pruebas automáticas.
 - [x] **Calidad**: canonical, noindex, Open Graph, sitemap, imágenes responsive; Lighthouse escritorio 97/100/100/100 y móvil 81/100/100/100; 360/390/768 px, 3G lenta y sin ubicación comprobados.
 - [x] **Entregables**: `docs/legal/` (AUDITORIA, CHECKLIST, PENDIENTE, TEXTOS-A-REVISAR, ACCESIBILIDAD, capturas).
+- [x] **Correcciones finales**: la ciudad de un enlace compartido ya no se guarda sola; el diálogo de bienvenida no tapa las páginas legales; aviso explícito del riesgo de derechos de autor de las imágenes autoalojadas.
 
 **Siguiente paso (tuyo)**: completar `datos-legales.json`, revisar `docs/legal/PENDIENTE.md` y `TEXTOS-A-REVISAR.md`, y no publicar hasta poner `esEjemplo: false`.

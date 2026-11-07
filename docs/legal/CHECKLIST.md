@@ -39,7 +39,7 @@
 | Emails solo de servicio y baja en un clic | ❌ | La app no envía emails. |
 | Geolocalización: solo al pulsar, explicación previa, funciona sin ella, sin guardar la ubicación exacta | ✅ | Probado: no se pide hasta pulsar, no se guardan coordenadas ni se envían; lista de ciudades siempre disponible. |
 | Búsqueda por código postal | ❌ | La lista de seis ciudades cubre el uso sin ubicación (`DECISIONES.md`). |
-| Nada se guarda solo por visitar | ✅ | Probado (`tests/storage-on-visit.test.tsx`). |
+| Nada se guarda solo por visitar | ✅ | Tampoco al llegar por un enlace compartido con `?city=`: esa ciudad se usa en memoria y solo se guarda si la persona la elige. Probado (`tests/storage-on-visit.test.tsx`). |
 
 ## 4. Cookies y terceros
 
@@ -49,19 +49,19 @@
 | Página de cookies con tabla real y prueba de que coincide con el código | ✅ | `tests/storage-registry.test.ts` y `tests/legal-pages.test.tsx`. |
 | Analítica, mapas con cookies, píxeles | ❌ | No hay. |
 | Fuentes, iconos y librerías autoalojados | ✅ | Fuentes con `@fontsource`; iconos SVG propios; librerías en el bundle. |
-| Imágenes autoalojadas | ✅ | 210 imágenes de 37 dominios (incluidas 58 de Google Imágenes) copiadas y optimizadas. |
+| Imágenes autoalojadas | ⚠️ | 210 imágenes de 37 dominios (incluidas 58 de Google Imágenes) copiadas y optimizadas. Resuelve la privacidad, pero las licencias están sin revisar (`PENDIENTE.md` §4). |
 | Prueba que falla ante dominios externos no declarados | ✅ | `tests/no-third-party.test.ts` y `pnpm check:terceros` en navegador real. |
 
 ## 5. Accesibilidad
 
 | Punto | Estado | Explicación |
 |---|---|---|
-| axe-core en todas las páginas, móvil y escritorio, con datos, vacío y error | ✅ | `pnpm check:a11y`: 71 comprobaciones, 0 problemas. |
+| axe-core en todas las páginas, móvil y escritorio, con datos, vacío y error | ✅ | `pnpm check:a11y`: 77 comprobaciones, 0 problemas (incluidas primeras visitas sin nada guardado). |
 | Contraste (también sobre imágenes) | ✅ | `pnpm check:contraste`: las 6 portadas ≥ 4,5:1. |
 | Textos alternativos, etiquetas, encabezados, `lang` | ✅ | Revisado por axe; `lang="es"` en textos legales. |
 | Foco visible y «saltar al contenido» | ✅ | Ya existían; verificados. |
 | Objetivos táctiles de 24 px | ✅ | Arreglado el menú de ciudades en móvil. |
-| Zoom al 200 % | ✅ | Sin scroll horizontal en 21 páginas. |
+| Zoom al 200 % | ✅ | Sin scroll horizontal en 23 páginas. |
 | `prefers-reduced-motion` | ✅ | Las pruebas se ejecutan con movimiento reducido. |
 | Mapa usable sin ratón con lista equivalente | ❌ | No hay mapa embebido. |
 | Filtros y fechas con teclado; resultados y errores con `aria-live` | ✅ | Añadido el anuncio de resultados en catálogo y filtros. |
@@ -94,4 +94,4 @@
 | schema.org/Event | ✅ | Ya existía; ahora con imagen local. |
 | Imágenes optimizadas y diferidas | ✅ | WebP, versiones de 640/1024 px con `srcset`, carga diferida. |
 | Páginas 404 y de error | ✅ | Ya existían; la 404 ahora es `noindex`. |
-| 360, 390 y 768 px; conexión lenta; sin ubicación | ✅ | `node scripts/responsive.mjs`: sin scroll horizontal, portada en 4,9 s con 3G lenta, funciona con la ubicación denegada. |
+| 360, 390 y 768 px; conexión lenta; sin ubicación | ✅ | `pnpm check:responsive`: sin scroll horizontal, portada en 4,9 s con 3G lenta, funciona con la ubicación denegada. |

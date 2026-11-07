@@ -8,9 +8,9 @@
 
 | Comprobación | Resultado |
 |---|---|
-| axe-core, reglas WCAG 2.0 / 2.1 / 2.2 A y AA, 21 páginas y estados × móvil (390 px) y escritorio (1440 px) | ✅ 0 problemas |
+| axe-core, reglas WCAG 2.0 / 2.1 / 2.2 A y AA, 23 páginas y estados × móvil (390 px) y escritorio (1440 px) | ✅ 0 problemas |
 | Estados abiertos: selector de ciudad, menú de calendario, confirmación de borrado, «Acerca de» | ✅ 0 problemas |
-| Zoom al 200 % (equivalente a 640 px de ancho) sin desplazamiento horizontal, 21 páginas | ✅ |
+| Zoom al 200 % (equivalente a 640 px de ancho) sin desplazamiento horizontal, 23 páginas | ✅ |
 | Contraste del texto de portada sobre las 6 fotos de ciudad (percentil 98 de brillo), móvil y escritorio | ✅ todas ≥ 4,5:1 (la peor, Bilbao en escritorio: 4,8:1) |
 | Objetivos táctiles ≥ 24 px (regla `target-size` de axe) | ✅ |
 | `prefers-reduced-motion` (las pruebas se ejecutan con movimiento reducido) | ✅ |
@@ -19,6 +19,7 @@ El detalle de la última ejecución está en `docs/legal/accesibilidad-informe.j
 
 ## Qué se arregló
 
+- El diálogo de bienvenida aparecía encima de las páginas legales y de «Tus datos» en la primera visita: ya no se muestra en esas páginas.
 - La tabla de «Tus datos» se desplazaba en móvil sin poder enfocarse con teclado: ahora es una región con nombre y `tabindex`.
 - El menú de ciudades abierto en móvil tapaba a medias la pestaña «Eventos» (objetivo táctil < 24 px visible): ahora se abre a todo el ancho, bajo la cabecera.
 - El número de resultados no se anunciaba al cambiar categoría, fecha o filtros: ahora hay regiones `aria-live` en el catálogo y en la pantalla de filtros.

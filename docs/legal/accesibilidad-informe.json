@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-07T20:50:47.577Z",
+  "date": "2026-11-07T20:57:56.317Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -14,6 +14,14 @@
     },
     {
       "page": "bienvenida · movil",
+      "violations": []
+    },
+    {
+      "page": "enlace-compartido · movil",
+      "violations": []
+    },
+    {
+      "page": "privacidad-primera-visita · movil",
       "violations": []
     },
     {
@@ -117,6 +125,14 @@
       "violations": []
     },
     {
+      "page": "enlace-compartido · escritorio",
+      "violations": []
+    },
+    {
+      "page": "privacidad-primera-visita · escritorio",
+      "violations": []
+    },
+    {
       "page": "busqueda · escritorio",
       "violations": []
     },
@@ -214,6 +230,14 @@
     },
     {
       "page": "bienvenida · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "enlace-compartido · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "privacidad-primera-visita · zoom 200 %",
       "violations": []
     },
     {

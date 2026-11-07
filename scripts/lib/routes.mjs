@@ -6,6 +6,9 @@ const withFavourites = { ...withCity, "plan-cerca.saved-events": "[89,99,104]" }
 export const routes = [
   { name: "inicio", path: "/?city=Valencia", storage: withCity },
   { name: "bienvenida", path: "/", storage: {} },
+  // First visits through a shared link or the sitemap: nothing stored yet.
+  { name: "enlace-compartido", path: "/event/89?city=Valencia", storage: {} },
+  { name: "privacidad-primera-visita", path: "/privacidad", storage: {} },
   { name: "busqueda", path: "/search?q=rock&city=Valencia", storage: withCity },
   { name: "busqueda-sin-resultados", path: "/search?q=zzzz&city=Valencia", storage: withCity },
   { name: "busqueda-otra-ciudad", path: "/search?q=melendi&city=Barcelona", storage: withCity },

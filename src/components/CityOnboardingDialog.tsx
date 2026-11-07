@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { LEGAL_PATHS } from "../legal/legal-copy";
 import { onboardingCopy } from "../data/translations";
 import { cities, type City } from "../types/Event";
 import { usePreferredCity } from "../context/PreferredCityContext";
@@ -6,7 +8,10 @@ import { usePreferredCity } from "../context/PreferredCityContext";
 type Language = keyof typeof onboardingCopy;
 
 export default function CityOnboardingDialog({ language }: { language: Language }) {
-  const { selectedCity, detectedCity, status, onboardingOpen, selectCity, requestLocation, dismissOnboarding } = usePreferredCity();
+  const { selectedCity, detectedCity, status, onboardingOpen: requested, selectCity, requestLocation, dismissOnboarding } = usePreferredCity();
+  // Never cover the legal pages or the "your data" page: people go there to read or delete, not to share their location.
+  const { pathname } = useLocation();
+  const onboardingOpen = requested && !(Object.values(LEGAL_PATHS) as string[]).includes(pathname);
   const [manualSelection, setManualSelection] = useState(false);
   const [manualCity, setManualCity] = useState<City>(detectedCity ?? selectedCity);
   const dialogRef = useRef<HTMLElement>(null);

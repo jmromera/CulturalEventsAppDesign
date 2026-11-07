@@ -14,6 +14,7 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **Rutas legales en español** (`/aviso-legal`, `/privacidad`, `/cookies`, `/terminos`, `/accesibilidad`, `/tus-datos`): es el idioma principal y el de los textos.
 - **Vercel aparece como único encargado del tratamiento**, con `verificado: false`. Es el único proveedor que recibe datos del visitante (la IP) una vez autoalojadas fuentes e imágenes; su región, garantía y plazo de registros no se han podido verificar desde el código.
 - **Las páginas legales leen de `datos-legales.json`** y un registro central (`src/data/storage-keys.ts`) alimenta la tabla de cookies, para que texto y código no se separen.
+- **Promesas que el código no puede cumplir por ti**: el plazo de conservación de los emails recibidos (`plazos.comunicaciones`) y el de los registros de Vercel (`plazos.registrosServidor`) dependen de cómo gestiones tu correo y de tu plan de Vercel. Quedan como ejemplo en `datos-legales.json` y en `PENDIENTE.md`.
 - **Plazo de respuesta a errores: 10 días hábiles (ejemplo).** Es una decisión de negocio; queda marcada como ejemplo.
 
 ## Consentimiento, derechos y borrado
@@ -21,13 +22,16 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **«Tus datos» (`/tus-datos`) en lugar de Ajustes de cuenta**: descarga en JSON y borrado de todo lo guardado en el navegador. No pide contraseña porque no hay cuenta; pide confirmación con «Sí, borrar» y «Cancelar» del mismo peso.
 - **Tras borrar, se recarga la página**, para que la app no vuelva a escribir los datos que tenía en memoria.
 - **La app ya no guarda nada solo por visitarla**: idioma y favoritos se escriben únicamente cuando la persona los cambia. Antes se guardaban el idioma y una lista vacía de favoritos en la primera visita.
+- **La ciudad que llega en un enlace (`?city=`) se usa solo en memoria**: antes se guardaba en el navegador al abrir cualquier enlace compartido. Ahora solo se guarda cuando la persona elige ciudad (diálogo de bienvenida o selector). Elegir ciudad en Filtros tampoco la guarda: vale para esa visita.
+- **El diálogo de bienvenida no aparece en las páginas legales ni en «Tus datos»**: tapaba la política a quien llegaba desde un buscador y el aviso de «datos borrados» tras borrar.
 - **Geolocalización**: se mantiene como estaba (solo al pulsar «Usar mi ubicación», cálculo en el dispositivo, se guarda solo el nombre de la ciudad) y se añade una explicación junto al botón antes de pedir el permiso.
 - **Sin búsqueda por código postal**: la lista de seis ciudades ya permite usar la app sin ubicación; un buscador por código postal no aporta y necesitaría datos de geocodificación.
 
 ## Cookies y terceros
 - **Sin banner de cookies**: la app no pone cookies ni usa analítica, píxeles ni publicidad. Solo usa almacenamiento local técnico o pedido por el usuario (exento según el art. 22.2 LSSI). Hay página de cookies con la tabla real y pruebas que la comparan con el código.
 - **Fuentes autoalojadas** (paquetes `@fontsource` de DM Sans y Manrope, licencia OFL) en lugar de Google Fonts, que recibía la IP de cada visitante.
-- **Las 210 imágenes autoalojadas** (portadas, carteles, recintos y artistas), convertidas a WebP. Antes se cargaban desde 37 dominios, entre ellos 58 miniaturas de Google Imágenes, y cada visita les enviaba la IP. El origen de cada una queda en `docs/legal/ORIGEN-IMAGENES.json` para revisar licencias.
+- **Las 210 imágenes autoalojadas — esto cambia un riesgo por otro.** Resuelve la privacidad (la IP ya no va a 37 dominios), pero servir copias de carteles y miniaturas de Google sin licencia puede aumentar el riesgo de derechos de autor frente a enlazarlas. Alternativa: quitar las imágenes sin licencia (`"image": null`). Está en `PENDIENTE.md` §4.
+- **Detalle de las imágenes:** las 210 (portadas, carteles, recintos y artistas), convertidas a WebP. Antes se cargaban desde 37 dominios, entre ellos 58 miniaturas de Google Imágenes, y cada visita les enviaba la IP. El origen de cada una queda en `docs/legal/ORIGEN-IMAGENES.json` para revisar licencias.
 - **Las imágenes de la web no van por Git LFS** (`.gitattributes`): así el despliegue funciona aunque el alojamiento no descargue objetos LFS.
 - **Lista de terceros declarados vacía** (`src/legal/third-parties.ts`): una prueba sobre el código y un script en navegador real (`pnpm check:terceros`) fallan si aparece cualquier dominio externo.
 - **Los enlaces externos se mantienen** (comprar entradas, Google Maps, Google Calendar, webs oficiales): no envían nada hasta que la persona los pulsa, y la política de privacidad lo explica.
