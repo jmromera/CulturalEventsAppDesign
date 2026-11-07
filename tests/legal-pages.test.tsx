@@ -18,7 +18,7 @@ describe("legal pages", () => {
   it("legal notice shows every LSSI field from datos-legales.json", () => {
     render(<MemoryRouter><LegalNoticePage language="es" /></MemoryRouter>);
     const text = document.body.textContent ?? "";
-    for (const value of [legalData.titular.nombre, legalData.titular.nif, legalData.titular.direccion, legalData.titular.email, legalData.titular.datosRegistrales]) {
+    for (const value of [legalData.titular.nombre, legalData.titular.condicion, legalData.titular.proyecto, legalData.titular.email]) {
       expect(text).toContain(value);
     }
   });

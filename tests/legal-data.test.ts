@@ -25,7 +25,7 @@ describe("datos-legales.json", () => {
   it("does not leave sample markers once esEjemplo is false", () => {
     if (legalData.esEjemplo) return;
     const text = JSON.stringify(legalData);
-    expect(text).not.toMatch(/EJEMPLO|ejemplo\.invalid|B00000000/);
+    expect(text).not.toMatch(/EJEMPLO|ejemplo\.invalid|B00000000|\[TU NOMBRE\]|\[UNIVERSIDAD\]/);
     expect(legalData.proveedores.every((provider) => provider.verificado)).toBe(true);
   });
 });

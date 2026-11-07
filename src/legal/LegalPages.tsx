@@ -33,18 +33,17 @@ const Mail = ({ to }: { to: string }) => <a href={`mailto:${to}`}>{to}</a>;
 export function LegalNoticePage({ language }: { language: Language }) {
   return <LegalLayout title="Aviso legal" language={language}>
     <h2>Titular del sitio web</h2>
-    <p>En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), se informa de los datos del titular de {d.sitio.dominio}:</p>
+    <p>Datos del responsable de {d.sitio.dominio}, en la línea de lo que pide el artículo 10 de la Ley 34/2002 (LSSI-CE):</p>
     <dl className="legal-facts">
-      <dt>Titular</dt><dd>{d.titular.nombre}</dd>
-      <dt>NIF</dt><dd>{d.titular.nif}</dd>
-      <dt>Domicilio</dt><dd>{d.titular.direccion}</dd>
+      <dt>Responsable</dt><dd>{d.titular.nombre}</dd>
+      <dt>Condición</dt><dd>{d.titular.condicion}</dd>
+      <dt>Naturaleza</dt><dd>{d.titular.proyecto}</dd>
       <dt>Correo electrónico</dt><dd><Mail to={d.titular.email} /></dd>
-      <dt>Datos registrales</dt><dd>{d.titular.datosRegistrales}</dd>
     </dl>
     <h2>Objeto</h2>
-    <p>{d.sitio.nombre} es una agenda informativa y gratuita de eventos culturales, deportivos y de ocio. No vende entradas ni cobra a los usuarios: cada evento enlaza a la web oficial del organizador o del vendedor.</p>
+    <p>{d.sitio.nombre} es una agenda informativa y gratuita de eventos culturales, deportivos y de ocio, creada como proyecto académico. No vende entradas, no cobra a los usuarios ni tiene publicidad: cada evento enlaza a la web del organizador o del vendedor.</p>
     <h2>Propiedad intelectual e industrial</h2>
-    <p>El diseño y el código de la web pertenecen a su titular. Los nombres, logotipos, carteles y fotografías de artistas, recintos y eventos pertenecen a sus respectivos titulares y se muestran solo para identificar el evento. Si eres titular de algún contenido y quieres que lo retiremos o corrijamos, escríbenos a <Mail to={d.contacto.emailErrores} />.</p>
+    <p>El diseño y el código de la web pertenecen a su autor. Los nombres, logotipos, carteles y fotografías de artistas, recintos y eventos pertenecen a sus respectivos titulares y se muestran solo para identificar el evento. Si eres titular de algún contenido y quieres que lo retiremos o corrijamos, escríbenos a <Mail to={d.contacto.emailErrores} />.</p>
     <h2>Enlaces a otras webs</h2>
     <p>La web contiene enlaces a sitios de terceros (venta de entradas, mapas, calendarios, webs de recintos y artistas). No controlamos su contenido ni sus políticas de privacidad, que se aplican desde que entras en ellos.</p>
     <h2>Responsabilidad</h2>
@@ -69,7 +68,7 @@ export function PrivacyPolicyPage({ language }: { language: Language }) {
     </section>
 
     <h2>Responsable del tratamiento</h2>
-    <p>{d.titular.nombre}, con NIF {d.titular.nif} y domicilio en {d.titular.direccion}. Contacto: <Mail to={d.titular.email} />.</p>
+    <p>{d.titular.nombre}, {d.titular.condicion.charAt(0).toLocaleLowerCase("es") + d.titular.condicion.slice(1)}. {d.titular.proyecto} Contacto: <Mail to={d.titular.email} />.</p>
 
     <h2>Qué datos tratamos, para qué y durante cuánto tiempo</h2>
     <div className="legal-table-wrap" role="region" aria-label="Tabla de tratamientos" tabIndex={0}>
@@ -199,7 +198,7 @@ export function AccessibilityPage({ language }: { language: Language }) {
       <li>Objetivos táctiles de al menos 24 × 24 píxeles y contraste de texto suficiente, también sobre las imágenes de portada.</li>
     </ul>
     <h2>Preparación de esta declaración</h2>
-    <p>Declaración preparada el {d.fechaActualizacion} mediante una autoevaluación del propio titular. No ha sido revisada por una entidad externa.</p>
+    <p>Declaración preparada el {d.fechaActualizacion} mediante una autoevaluación de su autor. No ha sido revisada por una entidad externa.</p>
     <h2>Observaciones y contacto</h2>
     <p>Si encuentras una barrera de accesibilidad o necesitas un contenido en otro formato, escríbenos a <Mail to={d.titular.email} />. Responderemos en un plazo de {d.contacto.plazoRespuestaErrores.toLocaleLowerCase("es")}.</p>
     <p>Si la respuesta no te satisface, puedes presentar una reclamación ante la autoridad de consumo o de accesibilidad competente.</p>

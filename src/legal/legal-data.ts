@@ -16,7 +16,7 @@ export type LegalData = {
   versionTextos: string;
   fechaActualizacion: string;
   sitio: { nombre: string; dominio: string; url: string };
-  titular: { nombre: string; nif: string; direccion: string; email: string; datosRegistrales: string };
+  titular: { nombre: string; condicion: string; proyecto: string; email: string };
   contacto: { emailErrores: string; plazoRespuestaErrores: string };
   proveedores: Provider[];
   plazos: { registrosServidor: string; datosNavegador: string; ubicacion: string; comunicaciones: string };
@@ -35,10 +35,9 @@ export const REQUIRED_LEGAL_FIELDS = [
   "sitio.dominio",
   "sitio.url",
   "titular.nombre",
-  "titular.nif",
-  "titular.direccion",
+  "titular.condicion",
+  "titular.proyecto",
   "titular.email",
-  "titular.datosRegistrales",
   "contacto.emailErrores",
   "contacto.plazoRespuestaErrores",
   "proveedores",

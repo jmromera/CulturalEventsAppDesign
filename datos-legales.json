@@ -1,6 +1,6 @@
 {
   "esEjemplo": true,
-  "_nota": "Datos de EJEMPLO. Sustituye cada valor marcado como EJEMPLO por el real y pon esEjemplo a false solo cuando todo esté revisado. Las páginas legales muestran un aviso rojo mientras esEjemplo sea true.",
+  "_nota": "Proyecto académico. Sustituye [TU NOMBRE] y [UNIVERSIDAD] por los datos reales y pon esEjemplo a false. Mientras esEjemplo sea true, las páginas legales muestran un aviso rojo.",
   "versionTextos": "2026-11-07",
   "fechaActualizacion": "7 de noviembre de 2026",
   "sitio": {
@@ -9,33 +9,32 @@
     "url": "https://plancerca.com"
   },
   "titular": {
-    "nombre": "EJEMPLO Titular de Plan Cerca, S.L.",
-    "nif": "B00000000",
-    "direccion": "Calle de Ejemplo 0, 00000 Ciudad de Ejemplo (España)",
-    "email": "privacidad@ejemplo.invalid",
-    "datosRegistrales": "EJEMPLO: Registro Mercantil de Ciudad de Ejemplo, tomo 0, folio 0, hoja X-0. Si eres persona física sin inscripción, escribe «No aplica»."
+    "nombre": "[TU NOMBRE]",
+    "condicion": "Estudiante de [UNIVERSIDAD]",
+    "proyecto": "Proyecto académico de la asignatura «HCI: Desarrollo web y móvil», sin actividad comercial: no vende nada, no tiene publicidad ni ingresos.",
+    "email": "jmromera@hotmail.com"
   },
   "contacto": {
-    "emailErrores": "errores@ejemplo.invalid",
-    "plazoRespuestaErrores": "EJEMPLO: 10 días hábiles"
+    "emailErrores": "jmromera@hotmail.com",
+    "plazoRespuestaErrores": "un mes"
   },
   "proveedores": [
     {
       "nombre": "Vercel Inc.",
       "finalidad": "Alojamiento de la web, red de distribución (CDN) y registros técnicos del servidor",
       "datos": "Dirección IP, navegador y página solicitada",
-      "region": "EJEMPLO: Estados Unidos y red global de CDN (verificar en tu panel de Vercel)",
+      "region": "Estados Unidos (Vercel Inc.), con red de distribución global",
       "transferenciaFueraUE": true,
-      "garantiaTransferencia": "EJEMPLO: Marco de Privacidad de Datos UE-EE. UU. y cláusulas contractuales tipo (verificar en el DPA de Vercel)",
+      "garantiaTransferencia": "Las que establece el acuerdo de tratamiento de datos (DPA) de Vercel",
       "dpa": "https://vercel.com/legal/dpa",
       "verificado": false
     }
   ],
   "plazos": {
-    "registrosServidor": "EJEMPLO: el que fije Vercel para tu plan (verificar; suele ser de pocos días)",
+    "registrosServidor": "Los que conserve Vercel según su política; el responsable no los consulta ni los exporta",
     "datosNavegador": "Hasta que los borres desde «Tus datos» o desde tu navegador",
     "ubicacion": "No se conserva: solo se guarda el nombre de la ciudad elegida",
-    "comunicaciones": "EJEMPLO: el tiempo necesario para responderte y, después, bloqueados durante los plazos de prescripción legales"
+    "comunicaciones": "El tiempo necesario para responderte; después se borran del buzón."
   },
   "autoridadControl": {
     "nombre": "Agencia Española de Protección de Datos (AEPD)",
