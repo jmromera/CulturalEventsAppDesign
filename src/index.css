@@ -609,3 +609,12 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .site-footer-legal ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 18px}
 .site-footer-legal a{min-height:44px;display:inline-flex;align-items:center;color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;font-weight:600}
 .site-footer-legal a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+.your-data-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:26px 0}
+.your-data-actions .button{min-height:44px}
+.your-data-hint{margin:8px 0 0;font-size:14px}
+.your-data-confirm{margin:0 0 26px;padding:20px 22px;border:2px solid var(--accent-text);border-radius:12px;background:var(--surface)}
+.your-data-confirm h2{margin-top:0}
+.your-data-confirm-actions{display:flex;flex-wrap:wrap;gap:12px}
+.your-data-confirm-actions .button{min-height:44px}
+.your-data-done{padding:12px 16px;border-radius:10px;background:var(--accent-tint);color:var(--ink);font-weight:600}
+.city-onboarding-privacy{margin:4px 0 0;font-size:13px;line-height:1.45;color:var(--muted)}

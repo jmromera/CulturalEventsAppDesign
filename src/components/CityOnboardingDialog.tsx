@@ -71,7 +71,8 @@ export default function CityOnboardingDialog({ language }: { language: Language 
           {cities.map((city) => <option value={city} key={city}>{city}</option>)}
         </select>
         <button type="button" className="button button--primary" onClick={() => selectCity(manualCity)}>{labels.viewEvents.replace("{city}", manualCity)}</button>
-        <button type="button" className="button button--secondary" onClick={requestLocation} disabled={status === "loading"}>{status === "loading" ? labels.locating : labels.useLocation}</button>
+        <button type="button" className="button button--secondary" onClick={requestLocation} disabled={status === "loading"} aria-describedby="location-privacy">{status === "loading" ? labels.locating : labels.useLocation}</button>
+        <p id="location-privacy" className="city-onboarding-privacy">{labels.locationPrivacy}</p>
       </div>}
       <button type="button" className="city-onboarding-dismiss" onClick={dismissOnboarding}>{labels.notNow}</button>
     </section>

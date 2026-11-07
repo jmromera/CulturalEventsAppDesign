@@ -13,6 +13,7 @@ import FallbackImage from "./components/FallbackImage";
 import Icon, { type IconName } from "./components/Icon";
 import StatusPage from "./components/StatusPage";
 import { CookiePolicyPage, LegalNoticePage, PrivacyPolicyPage, TermsPage } from "./legal/LegalPages";
+import YourDataPage from "./legal/YourDataPage";
 import { legalCopy, LEGAL_PATHS } from "./legal/legal-copy";
 import { usePreferredCity } from "./context/PreferredCityContext";
 import { cities, eventCategories, type City, type EventCategory, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
@@ -601,7 +602,7 @@ function SiteFooter({ language }: { language: Language }) {
   return <footer className="site-footer">
     <div className="site-footer-inner">
       <div><strong>Plan Cerca</strong><p>{labels.footerTagline}</p><p>{labels.footerAcademic}</p></div>
-      <nav className="site-footer-legal" aria-label={legalCopy[language].footerNav}><ul>{([["legalNotice", LEGAL_PATHS.legalNotice], ["privacy", LEGAL_PATHS.privacy], ["cookies", LEGAL_PATHS.cookies], ["terms", LEGAL_PATHS.terms]] as const).map(([key, path]) => <li key={path}><Link to={path}>{legalCopy[language][key]}</Link></li>)}</ul></nav>
+      <nav className="site-footer-legal" aria-label={legalCopy[language].footerNav}><ul>{([["legalNotice", LEGAL_PATHS.legalNotice], ["privacy", LEGAL_PATHS.privacy], ["cookies", LEGAL_PATHS.cookies], ["terms", LEGAL_PATHS.terms], ["yourData", LEGAL_PATHS.yourData]] as const).map(([key, path]) => <li key={path}><Link to={path}>{legalCopy[language][key]}</Link></li>)}</ul></nav>
       <div className="site-footer-meta"><button ref={triggerRef} type="button" className="site-footer-link" onClick={() => setAboutOpen(true)}>{labels.aboutLink}</button><small>© 2026 Plan Cerca</small></div>
     </div>
     {aboutOpen && <div className="about-backdrop" onClick={() => setAboutOpen(false)}><div ref={modalRef} className="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title" onClick={(e) => e.stopPropagation()}>
@@ -669,22 +670,28 @@ export default function App() {
     focusMain(false);
   }, [pathname]);
   const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : LEGAL_PAGE_PATHS.includes(pathname) ? "legal" : "not-found";
-  const [language, setLanguage] = useState<Language>(readLanguage);
+  const [language, setLanguageState] = useState<Language>(readLanguage);
   useEffect(() => {
     document.documentElement.lang = language;
-    try {
-      window.localStorage.setItem(LANGUAGE_KEY, language);
-    } catch {
-      // Sin almacenamiento disponible la sesión sigue funcionando.
-    }
   }, [language]);
+  // Storage is only written when the person changes something, never just by visiting.
+  const setLanguage = (next: Language) => {
+    setLanguageState(next);
+    try {
+      window.localStorage.setItem(LANGUAGE_KEY, next);
+    } catch {
+      // Without storage the session keeps working.
+    }
+  };
   const [searchQuery, setSearchQuery] = useState(() => new URLSearchParams(window.location.search).get("q") ?? "");
   const [saved, setSaved] = useState<number[]>(readSavedEvents);
+  const savedChanged = useRef(false);
   useEffect(() => {
+    if (!savedChanged.current) return;
     try {
       window.localStorage.setItem(SAVED_EVENTS_KEY, JSON.stringify(saved));
     } catch {
-      // Sin almacenamiento disponible la sesión sigue funcionando.
+      // Without storage the session keeps working.
     }
   }, [saved]);
   const t = copy[language];
@@ -723,7 +730,7 @@ export default function App() {
     navigateWithCity(`/search?q=${encodeURIComponent(trimmed)}`);
   };
   const goToEvents = () => { setSearchQuery(""); navigateWithCity("/"); };
-   const toggleSaved = (id: number) => setSaved((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+  const toggleSaved = (id: number) => { savedChanged.current = true; setSaved((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]); };
   const goBack = () => {
     const historyIndex = window.history.state?.idx;
     if (typeof historyIndex === "number" && historyIndex > 0) navigate(-1);
@@ -777,6 +784,7 @@ export default function App() {
       <Route path={LEGAL_PATHS.privacy} element={<PrivacyPolicyPage language={language} />} />
       <Route path={LEGAL_PATHS.cookies} element={<CookiePolicyPage language={language} />} />
       <Route path={LEGAL_PATHS.terms} element={<TermsPage language={language} />} />
+      <Route path={LEGAL_PATHS.yourData} element={<YourDataPage language={language} />} />
       <Route path="*" element={<NotFound t={t} />} />
     </Routes>
     <SiteFooter language={language} />

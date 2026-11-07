@@ -26,7 +26,7 @@ export type StorageEntry = {
 
 export const STORAGE_REGISTRY: StorageEntry[] = [
   { key: STORAGE_KEYS.savedEvents, purpose: "Recordar tus favoritos", content: "Números de los eventos que has guardado", createdWhen: "Al pulsar el corazón de un evento" },
-  { key: STORAGE_KEYS.language, purpose: "Recordar el idioma", content: "Código del idioma (es, en o fr)", createdWhen: "Al abrir la web" },
+  { key: STORAGE_KEYS.language, purpose: "Recordar el idioma", content: "Código del idioma (es, en o fr)", createdWhen: "Al cambiar el idioma" },
   { key: STORAGE_KEYS.preferredCity, purpose: "Recordar tu ciudad", content: "Nombre de la ciudad elegida", createdWhen: "Al elegir una ciudad" },
   { key: STORAGE_KEYS.detectedCity, purpose: "Proponerte la ciudad más cercana", content: "Nombre de la ciudad detectada (nunca las coordenadas)", createdWhen: "Al usar «Usar mi ubicación»" },
   { key: STORAGE_KEYS.geolocationStatus, purpose: "Saber si ya elegiste ciudad o usaste la ubicación", content: "Un estado: ciudad elegida, ubicación detectada o sin ciudad cercana", createdWhen: "Al elegir ciudad o usar la ubicación" },

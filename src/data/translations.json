@@ -61,7 +61,8 @@
       "cityLabel": "Ciudad",
       "useLocation": "Usar mi ubicación",
       "locating": "Buscando tu ubicación…",
-      "notNow": "Ahora no"
+      "notNow": "Ahora no",
+      "locationPrivacy": "Si la usas, tu ubicación solo sirve para elegir la ciudad más cercana: se calcula en tu dispositivo, no se envía a ningún sitio y no se guarda."
     },
     "en": {
       "title": "Which city do you want to explore?",
@@ -74,7 +75,8 @@
       "cityLabel": "City",
       "useLocation": "Use my location",
       "locating": "Finding your location…",
-      "notNow": "Not now"
+      "notNow": "Not now",
+      "locationPrivacy": "If you use it, your location is only used to pick the nearest city: it is worked out on your device, never sent anywhere and never stored."
     },
     "fr": {
       "title": "Quelle ville souhaitez-vous explorer ?",
@@ -87,7 +89,8 @@
       "cityLabel": "Ville",
       "useLocation": "Utiliser ma position",
       "locating": "Recherche de votre position…",
-      "notNow": "Plus tard"
+      "notNow": "Plus tard",
+      "locationPrivacy": "Si vous l’utilisez, votre position sert uniquement à choisir la ville la plus proche : elle est calculée sur votre appareil, n’est envoyée nulle part et n’est pas enregistrée."
     }
   },
   "interfaceText": {
