@@ -27,10 +27,14 @@ export default function ProfileMenu({ avatar, language, savedCount, profilePath,
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") { setOpen(false); button.current?.focus(); } };
-    const onClick = (event: MouseEvent) => { if (!root.current?.contains(event.target as Node)) setOpen(false); };
+    // pointerdown (not mousedown) so a tap outside also closes it on iOS Safari; focus leaving the menu closes it too.
+    const onPointer = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node)) setOpen(false); };
+    const onFocusOut = (event: FocusEvent) => { if (event.relatedTarget && !root.current?.contains(event.relatedTarget as Node)) setOpen(false); };
+    const node = root.current;
     document.addEventListener("keydown", onKey);
-    document.addEventListener("mousedown", onClick);
-    return () => { document.removeEventListener("keydown", onKey); document.removeEventListener("mousedown", onClick); };
+    document.addEventListener("pointerdown", onPointer);
+    node?.addEventListener("focusout", onFocusOut);
+    return () => { document.removeEventListener("keydown", onKey); document.removeEventListener("pointerdown", onPointer); node?.removeEventListener("focusout", onFocusOut); };
   }, [open]);
 
   return <div ref={root} className="profile-menu">

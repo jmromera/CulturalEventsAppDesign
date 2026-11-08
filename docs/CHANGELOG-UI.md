@@ -420,9 +420,10 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 
 - **Qué:**
   - La franja «Tendencias en Valencia: Música · Deportes · Teatro / Esta semana: N eventos» solo se podía leer.
-  - Ahora se titula «Lo que más hay en Valencia» y cada elemento es un botón con su recuento («Música 49», «Deportes 13», «Esta semana 8»).
+  - Ahora se titula «Lo que más hay en Valencia» y cada elemento es un botón con su recuento («Música 49», «Deportes 13»).
   - Al pulsarlo se aplica ese filtro (la categoría sola, sustituyendo a las que hubiera) y la página baja hasta la lista.
   - El título dice lo que es: las categorías con más eventos, no una «tendencia» que no medimos.
+  - **El número es exactamente lo que mostrará la lista:** se cuenta con la misma función de filtrado que la lista, respetando la fecha, la franja, la búsqueda y el radio que haya activos. Antes ponía el total de la ciudad (por ejemplo «Música 49») aunque, con «Próximos 30 días» y «Por la noche» activos, la lista fuese a enseñar muchos menos; era el mismo error de número prometido que se corrigió en P1.3.
 - **Por qué:**
   - **Eficiencia (Nielsen 7):** el camino más común (ver los conciertos, ver lo de esta semana) se queda en un toque.
   - **Coincidencia con el mundo real (Nielsen 2):** el texto ya no sugiere datos de popularidad que no tenemos.
@@ -432,7 +433,7 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - El recuento de la lista se anuncia en la región `status` que ya existía.
 - **Problemas encontrados:** la primera versión quitaba los filtros y luego añadía la categoría en dos navegaciones seguidas, y la segunda leía la URL antigua. Ahora es una sola navegación.
 - **Pruebas:**
-  - `tests/shortcuts.test.tsx`: el atajo deja solo esa categoría y queda marcado.
+  - `tests/shortcuts.test.tsx`: el atajo deja solo esa categoría y queda marcado; con otros filtros activos, el número del atajo (categoría y «Esta semana») es igual al de la lista tras pulsarlo.
   - En navegador real: el clic aplica `cat=Música` y lleva a la lista (49 eventos en Valencia), y axe no encuentra problemas.
   - Capturas: `docs/capturas/despues/accesos-directos-390.jpg`, `accesos-directos-1440.jpg`.
 
@@ -451,7 +452,10 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - **Estética (Nielsen 8):** la cabecera pasa de cinco controles sueltos a tres bloques (buscar, navegar, preferencias y perfil).
 - **Accesibilidad:**
   - **Patrón de despliegue:** botón con `aria-expanded` y `aria-controls`.
-  - **Cierre:** con Esc o con un clic fuera. Con Esc, el foco vuelve al botón.
+  - **Cierre:**
+    - con Esc, y el foco vuelve al botón;
+    - con un toque fuera (`pointerdown`, que también funciona en iPhone, donde tocar en una zona no interactiva no genera `mousedown`);
+    - cuando el foco sale del menú con Tab, para que no quede un panel abierto tapando la página.
   - **Enlaces:** los del menú miden 44 px.
 - **Problemas encontrados:** en móvil, el menú tapaba en parte el enlace «Recintos» y dejaba visible una franja de menos de 24 px (axe: `target-size`). Ahora el menú cubre la fila entera.
 - **Pruebas:**
@@ -465,7 +469,9 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - **Un solo «Guardar»**, el de la barra de acciones de arriba. Antes también aparecía en la tarjeta de compra.
   - **«Hora por confirmar» una sola vez**, en el encabezado. Antes salía «… · Por confirmar» arriba y «Fecha confirmada · hora por confirmar» en la tarjeta. Si la duración no se conoce, ya no se muestra la línea «Por confirmar».
   - **Escritorio:** la tarjeta de compra se queda fija bajo la cabecera al hacer scroll. Antes se fijaba a 25 px del borde y quedaba debajo de la cabecera.
-  - **Móvil:** cuando el botón de compra sale de la pantalla aparece una barra inferior con el título, el precio o el vendedor, y «Comprar en la web oficial». Al volver arriba desaparece. La página reserva espacio para que la barra no tape el pie.
+  - **Móvil:** cuando el botón de compra sale de la pantalla aparece una barra inferior con el título, el precio o el vendedor, y «Comprar en la web oficial». Al volver arriba desaparece.
+  - **Espacio reservado bajo el pie:** así la barra no tapa los últimos enlaces. Comprobado a 390 px al final de la ficha: el pie termina en 761 px y la barra empieza en 779 px. La primera versión reservaba el espacio dentro de la página, antes del pie, y la barra tapaba «Tu perfil», «Acerca de» y el ©.
+  - **Margen de desplazamiento:** `scroll-padding-top` para la cabecera fija y `scroll-padding-bottom` mientras la barra está visible. Así, al tabular o al saltar a un ancla, el elemento con el foco no queda oculto bajo la cabecera ni bajo la barra (WCAG 2.4.11).
 - **Por qué:**
   - **Estética y diseño minimalista (Nielsen 8):** cada dato aparece una vez.
   - **Eficiencia (Nielsen 7):** la acción principal está siempre a un toque, también al final de una ficha larga.
@@ -483,13 +489,13 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 ### Iteración P2.6 · Pie sin huecos
 
 - **Qué:**
-  - **Páginas cortas:** el contenido ya no reserva una pantalla entera (`min-height: 100vh`). Ahora el contenedor de la página ocupa la altura de la pantalla y el pie se queda abajo del todo, sin dejar media pantalla vacía (favoritos vacío, perfil, páginas legales) ni espacio libre debajo.
+  - **Páginas cortas:** el contenido ya no reserva una pantalla entera (`min-height: 100vh`). Ahora el contenedor de la página ocupa la altura de la pantalla y el pie se queda abajo del todo en todas las rutas, sin dejar media pantalla vacía ni espacio libre debajo.
   - **Portada:** desaparece el hueco de unos 220 px que se acumulaba entre «Mostrar más» y el pie (margen de la última sección, más relleno inferior, más margen del pie).
   - **Enlaces del pie:** «Tu perfil» y «Acerca de» van en una sola fila, alineados con el texto y con el ©.
 - **Por qué:** **Estética y diseño minimalista (Nielsen 8)** y **proximidad (Gestalt):** lo que va junto se ve junto, y el pie no parece desconectado del contenido.
 - **Problemas encontrados:** el pie está dentro del contenedor de la página, no a su mismo nivel. Por eso el primer intento dejaba espacio libre debajo del pie, y el reparto de altura se movió a ese contenedor.
   - Al convertir ese contenedor en una columna flexible, las páginas con tablas anchas (privacidad, cookies, «Tus datos») dejaron de encogerse: había 46 px de scroll horizontal a 768 px y 372 px a 390 px, y axe marcaba `reflow` con zoom del 200 %. Lo detectaron `pnpm check:responsive` y axe; ese commit se hizo sin esperar a su resultado y se corrigió en el siguiente limitando el ancho de los hijos del contenedor (`min-width: 0`).
 - **Pruebas:**
-  - En navegador real, a 1440 × 900, el borde inferior del pie coincide con el de la pantalla en favoritos vacío y al final de la portada.
+  - Nuevo `pnpm check:pie` (`scripts/check-footer.mjs`): recorre las 30 rutas a 1440 × 900 y falla si alguna deja espacio libre bajo el pie. Las 30 pasan.
   - axe sin problemas (112 comprobaciones), responsive y sin terceros.
   - Capturas: `docs/capturas/despues/pie-vacio-1440.jpg`, `pie-inicio-390.jpg`, `pie-inicio-1440.jpg`.

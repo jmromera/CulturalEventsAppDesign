@@ -421,9 +421,9 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
   const filterText = filtersCopy[language];
   const cityEvents = events.filter((event) => venueFor(event.venueId).city === selectedCity);
   const query = normalizeSearch(searchQuery.trim());
-  const matchesSearch = (event: EventItem, range = dateRange, eventSlots = slots) => {
+  const matchesSearch = (event: EventItem, range = dateRange, eventSlots = slots, eventCategories: string[] = categories) => {
     const venue = venueFor(event.venueId);
-    const matchesCategory = !categories.length || categories.includes(event.category);
+    const matchesCategory = !eventCategories.length || eventCategories.includes(event.category);
     const matchesQuery = !query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query);
     return matchesCategory && matchesQuery && eventInRange(event, range) && matchesSlots(event, eventSlots);
   };
@@ -435,8 +435,8 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
   };
   const inRadius = (event: EventItem) => !nearMe.position || nearMe.radiusKm === null || (distanceTo(event) ?? Infinity) <= nearMe.radiusKm;
   // One predicate for the list, the live count in the filters panel and the calendar dots, so the three always agree.
-  const matchesList = (event: EventItem, city: City, range: typeof dateRange, eventSlots: TimeSlot[]) =>
-    venueFor(event.venueId).city === city && matchesSearch(event, range, eventSlots) && inRadius(event);
+  const matchesList = (event: EventItem, city: City, range: typeof dateRange, eventSlots: TimeSlot[], eventCategories: string[] = categories) =>
+    venueFor(event.venueId).city === city && matchesSearch(event, range, eventSlots, eventCategories) && inRadius(event);
   const countResults = (draft: FilterDraft) => events.filter((event) => matchesList(event, draft.city, dateRangeFor(draft.when), draft.slots)).length;
   const countForDay = (city: City, key: string, daySlots: TimeSlot[]) => events.filter((event) => matchesList(event, city, [key, key], daySlots)).length;
   const matched = cityEvents.filter((event) => matchesSearch(event));
@@ -469,9 +469,10 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
   };
   const highlightedEvents = recommendedEvents(cityEvents, undefined, favouriteCategories);
   const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.seeAll} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><CardCarousel className="featured-grid" count={highlightedEvents.length} labels={labels}>{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</CardCarousel></section>;
-  const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => event.category === item).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  // Each shortcut shows exactly what the list will show once pressed (same predicate, with that category or this week).
+  const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => matchesList(event, selectedCity, dateRange, slots, [item])).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
   const weekRange = dateRangeFor("week");
-  const weekCount = cityEvents.filter((event) => eventInRange(event, weekRange)).length;
+  const weekCount = cityEvents.filter((event) => matchesList(event, selectedCity, weekRange, slots)).length;
   // Shortcuts (P2.3): each one applies a filter and takes you to the list, instead of a strip of figures you could only read.
   const goToList = () => window.setTimeout(() => document.getElementById("catalogue")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }), 0);
   const shortcutText = shortcutsCopy[language];

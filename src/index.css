@@ -950,3 +950,12 @@ button.guest-profile[aria-expanded="true"]{color:var(--accent-text)}
 .app-shell>.main-shell{display:flex;flex-direction:column}
 .main-shell>main{flex:1 0 auto}
 .main-shell>*{min-width:0;max-width:100%}
+
+/* Fixed chrome must not hide content (WCAG 2.4.11): space for the sticky header when jumping or tabbing, and while
+   the mobile buy bar is visible, room below the footer and at the bottom of the scroll area. */
+html{scroll-padding-top:90px}
+@media(max-width:650px){
+  .detail-page{padding-bottom:0}
+  html:has(.detail-mobile-cta.visible){scroll-padding-bottom:84px}
+  .main-shell:has(.detail-mobile-cta:not(.disabled)) .site-footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+}
