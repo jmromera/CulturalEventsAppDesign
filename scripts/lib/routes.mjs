@@ -20,6 +20,8 @@ export const routes = [
   { name: "artista", path: "/artist/muse", storage: withCity },
   { name: "favoritos", path: "/favorites?city=Valencia", storage: withFavourites },
   { name: "favoritos-compartidos", path: "/favorites?lista=89,99,104&city=Valencia", storage: withCity },
+  { name: "perfil", path: "/perfil?city=Valencia", storage: { ...withFavourites, "plan-cerca.profile": JSON.stringify({ avatar: "mask", categories: ["Teatro", "Danza"] }) } },
+  { name: "perfil-vacio", path: "/perfil", storage: withCity },
   { name: "favoritos-vacio", path: "/favorites?city=Valencia", storage: withCity },
   { name: "404", path: "/no-existe", storage: withCity },
   { name: "aviso-legal", path: "/aviso-legal", storage: withCity },

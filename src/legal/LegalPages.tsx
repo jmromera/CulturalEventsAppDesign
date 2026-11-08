@@ -86,7 +86,7 @@ export function PrivacyPolicyPage({ language }: { language: Language }) {
             <td>{vercel.transferenciaFueraUE ? `Sí: ${vercel.region}. Garantía: ${vercel.garantiaTransferencia}` : "No"}</td>
           </tr>
           <tr>
-            <th scope="row">Preferencias guardadas en tu navegador (favoritos, idioma, ciudad, artistas seguidos)</th>
+            <th scope="row">Preferencias guardadas en tu navegador (favoritos, idioma, ciudad, artistas seguidos y perfil: avatar y categorías favoritas)</th>
             <td>Recordar lo que eliges entre visitas</td>
             <td>Prestar la función que pides (art. 6.1.b RGPD); almacenamiento estrictamente necesario (art. 22.2 LSSI)</td>
             <td>{d.plazos.datosNavegador}</td>

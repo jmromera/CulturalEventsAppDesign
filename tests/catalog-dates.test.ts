@@ -23,22 +23,31 @@ describe.each(EVALUATION_DAYS)("on %s", (day) => {
     expect(soon.length).toBeGreaterThan(0);
   });
 
-  it.each(cities)("%s shows three recommendations that follow the rules", (city) => {
-    const recommended = recommendedEvents(catalog.events.filter((event) => venueFor(event.venueId).city === city));
-    const summary = recommended.map((event) => `${event.category}: ${event.title} @ ${event.venueId}`).join("\n");
-    expect(recommended, summary).toHaveLength(RECOMMENDATION_RULES.size);
-    // At least 2 of 3 are concerts.
-    expect(recommended.filter((event) => event.category === "Música").length, summary).toBeGreaterThanOrEqual(RECOMMENDATION_RULES.minMusic);
-    // At most 1 sports event, and never two sports events in a row.
-    expect(recommended.filter((event) => event.category === "Deportes").length, summary).toBeLessThanOrEqual(RECOMMENDATION_RULES.maxSport);
-    recommended.forEach((event, index) => {
-      if (index > 0) expect(event.category === "Deportes" && recommended[index - 1].category === "Deportes", summary).toBe(false);
+  // The same rules hold with the favourite categories a person can pick in their profile.
+  const FAVOURITE_SETS: string[][] = [[], ["Teatro"], ["Deportes"], ["Exposiciones", "Museos"], ["Danza", "Ópera", "Teatro"], ["Música"]];
+  describe.each(FAVOURITE_SETS.map((set) => [set.join(", ") || "no favourites", set] as const))("with %s", (_, favourites) => {
+    it.each(cities)("%s shows three recommendations that follow the rules", (city) => {
+      const cityEvents = catalog.events.filter((event) => venueFor(event.venueId).city === city);
+      const recommended = recommendedEvents(cityEvents, undefined, favourites);
+      const summary = recommended.map((event) => `${event.category}: ${event.title} @ ${event.venueId}`).join("\n");
+      expect(recommended, summary).toHaveLength(RECOMMENDATION_RULES.size);
+      // At least 2 of 3 are concerts.
+      expect(recommended.filter((event) => event.category === "Música").length, summary).toBeGreaterThanOrEqual(RECOMMENDATION_RULES.minMusic);
+      // At most 1 sports event, and never two sports events in a row.
+      expect(recommended.filter((event) => event.category === "Deportes").length, summary).toBeLessThanOrEqual(RECOMMENDATION_RULES.maxSport);
+      recommended.forEach((event, index) => {
+        if (index > 0) expect(event.category === "Deportes" && recommended[index - 1].category === "Deportes", summary).toBe(false);
+      });
+      // No repeated artist, team or venue.
+      expect(new Set(recommended.map(protagonistKey)).size, summary).toBe(recommended.length);
+      expect(new Set(recommended.map((event) => event.venueId)).size, summary).toBe(recommended.length);
+      // Exhibitions never lead.
+      expect(["Exposiciones", "Museos"]).not.toContain(recommended[0].category);
+      // A favourite outside music shows up whenever the city has one that fits the rules.
+      const others = favourites.filter((category) => category !== "Música");
+      const fits = cityEvents.some((event) => others.includes(event.category) && !recommended.slice(0, RECOMMENDATION_RULES.minMusic).some((pick) => pick.venueId === event.venueId || protagonistKey(pick) === protagonistKey(event)));
+      if (others.length && fits) expect(recommended.some((event) => others.includes(event.category)), summary).toBe(true);
     });
-    // No repeated artist, team or venue.
-    expect(new Set(recommended.map(protagonistKey)).size, summary).toBe(recommended.length);
-    expect(new Set(recommended.map((event) => event.venueId)).size, summary).toBe(recommended.length);
-    // Exhibitions never lead.
-    expect(["Exposiciones", "Museos"]).not.toContain(recommended[0].category);
   });
 
   it("hides events that already finished", () => {

@@ -70,10 +70,13 @@ export const RECOMMENDATION_RULES = { size: 3, minMusic: 2, maxSport: 1 } as con
  * - no two events with the same artist, team or venue;
  * - gaps are filled with theatre, musicals, opera or dance before sport; exhibitions only as a last resort.
  * Within each group: big events (venue capacity >= 10,000) first, then featured, then by date.
+ * With favourite categories (profile), they come first inside each group and a favourite outside music takes
+ * the slot that is not reserved for concerts; the rules above still apply.
  */
-export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOMMENDATION_RULES.size): EventItem[] {
+export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOMMENDATION_RULES.size, favourites: readonly string[] = []): EventItem[] {
+  const liked = (event: EventItem) => (favourites.includes(event.category) ? 0 : 1);
   const priority = (event: EventItem) => (isBigEvent(event) ? 0 : event.featured ? 1 : 2);
-  const byPriority = (a: EventItem, b: EventItem) => priority(a) - priority(b) || (a.startDate ?? "9999").localeCompare(b.startDate ?? "9999");
+  const byPriority = (a: EventItem, b: EventItem) => liked(a) - liked(b) || priority(a) - priority(b) || (a.startDate ?? "9999").localeCompare(b.startDate ?? "9999");
   const valid = cityEvents.filter((event) => event.title?.trim()).sort(byPriority);
   const music = valid.filter((event) => event.category === "Música");
   const stage = valid.filter((event) => !["Música", "Deportes"].includes(event.category) && !LONG_RUNNING.has(event.category));
@@ -96,6 +99,11 @@ export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOM
       max -= 1;
     }
   };
+  const likedOthers = valid.filter((event) => event.category !== "Música" && favourites.includes(event.category));
+  if (likedOthers.length) {
+    take(music, Math.min(limit, RECOMMENDATION_RULES.minMusic)); // the concerts the rules require
+    take(likedOthers, limit);                                     // then the person's favourite categories
+  }
   take(music, limit);          // concerts fill as many slots as they can
   take(stage, limit);          // then a big musical, theatre, opera or dance
   take(sport, RECOMMENDATION_RULES.maxSport);

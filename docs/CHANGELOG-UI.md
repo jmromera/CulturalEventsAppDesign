@@ -234,3 +234,42 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `storage-on-visit`: añadida `/favorites?lista=…`.
   - En navegador real: 94 comprobaciones de axe sin problemas (nuevas rutas: favoritos con pasados, lista compartida y favorito quitado), sin peticiones a terceros.
   - Capturas: `docs/capturas/despues/favoritos-390.jpg`, `favoritos-1440.jpg`, `favoritos-deshacer-390.jpg`, `favoritos-deshacer-1440.jpg`.
+
+### Iteración P1.4b · «Tu perfil»: avatar, ciudad, categorías favoritas e idioma
+
+- **Qué:**
+  - Nueva página `/perfil`, enlazada desde la cabecera (sustituye al rótulo «Invitado», que no hacía nada) y desde el pie. Por debajo de 375 px el enlace de la cabecera cede el sitio a la ciudad, como antes, y el del pie sigue disponible.
+  - **Avatar:** se elige entre ocho dibujos de la propia web. Sale en la cabecera.
+  - **Ciudad por defecto:** es la misma preferencia que ya existía.
+  - **Categorías favoritas:** alimentan «Recomendados para ti».
+  - **Idioma:** el mismo selector de la cabecera, también aquí.
+  - Cada cambio se confirma con «Cambios guardados en este navegador».
+- **Recomendados con categorías favoritas:**
+  - Las reglas que fijaste no cambian: al menos 2 conciertos de cada 3, como mucho 1 evento deportivo y nunca dos seguidos, y sin repetir artista, equipo ni recinto.
+  - Las favoritas tienen prioridad **dentro** de esas reglas: van primero en cada grupo, y una favorita que no sea Música ocupa el hueco que no está reservado a conciertos.
+  - Ejemplo en Madrid con Danza y Teatro: Melendi, Karol G y la Compañía Nacional de Danza.
+  - Sin favoritas, el resultado es idéntico al anterior. Se comprobó comparando con la versión previa en 4 fechas × 6 ciudades.
+  - **Pendiente de decidir:** si prefieres que las favoritas manden sobre la regla de «2 de cada 3 conciertos» (por ejemplo, alguien que solo marca Teatro), es un cambio de una línea, pero contradice la regla que pediste y no lo he hecho sin preguntarte.
+- **Por qué:**
+  - **Flexibilidad y personalización (Nielsen 7):** ajustar la portada a los gustos de cada persona sin necesidad de cuenta.
+  - **Consistencia (Nielsen 4):** la ciudad y el idioma son las mismas preferencias que en la cabecera, no una copia aparte.
+- **Privacidad:**
+  - **Sin datos personales:** no se piden nombre, correo ni foto, y la página lo dice.
+  - **Almacenamiento:** se guarda en una sola clave nueva, `plan-cerca.profile` (avatar y categorías). Está en el registro, así que aparece en la tabla de la política de cookies y en «Tus datos» (descargar y borrar). También se han actualizado los textos que enumeran a mano lo que se guarda: privacidad y «Tus datos» en es, en y fr.
+  - **Escritura:** solo al cambiar algo. Visitar `/perfil` no guarda nada, y hay un test que lo comprueba.
+  - **Lectura segura:** un valor estropeado o desconocido vuelve a los valores por defecto.
+  - `/perfil` lleva `noindex`.
+- **Modo claro:** no hay selector de tema todavía, porque no haría nada. Llegará con el modo claro en P3.
+- **Accesibilidad:**
+  - **Avatar:** es un grupo de radios con nombre («Máscaras de teatro»…), manejable con las flechas.
+  - **Categorías:** usan `aria-pressed`, y la ayuda va asociada con `aria-describedby`.
+  - **Confirmación:** está en `role="status"`.
+  - **Enlace de la cabecera:** `aria-current="page"` en el perfil y 44 px de área táctil.
+- **Problemas encontrados:**
+  - En móvil, el texto del enlace de la cabecera estaba oculto con `display:none` y el enlace se quedaba sin nombre (axe: `link-name`). Ahora se oculta solo de forma visual.
+  - A 320 px el enlace de la cabecera volvía a aparecer y pisaba el logo. Se ha recuperado la ocultación por debajo de 375 px y se ha añadido el enlace en el pie.
+- **Pruebas:**
+  - `tests/profile.test.tsx`: no guarda nada al visitar, enlace de cabecera, avatar y categorías, ciudad e idioma, valores estropeados, exportación en «Tus datos».
+  - `tests/catalog-dates.test.ts`: las reglas de Recomendados se comprueban ahora con 6 conjuntos de favoritas × 3 fechas × 6 ciudades, y además se comprueba que la favorita aparece cuando cabe.
+  - En navegador real: 100 comprobaciones de axe sin problemas, sin peticiones a terceros, responsive correcto.
+  - Capturas: `docs/capturas/despues/perfil-320.jpg`, `perfil-390.jpg`, `perfil-1440.jpg`, `recomendados-con-perfil-1440.jpg`.

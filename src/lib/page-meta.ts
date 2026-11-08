@@ -4,7 +4,7 @@ const SITE_URL = legalData.sitio.url.replace(/\/$/, "");
 // Listing pages whose content depends on the city keep it in the canonical URL.
 const CITY_PAGES = new Set(["/", "/venues"]);
 // Personal or endless pages that search engines should not index.
-const NOINDEX_PAGES = new Set(["/search", "/favorites", "/tus-datos"]);
+const NOINDEX_PAGES = new Set(["/search", "/favorites", "/tus-datos", "/perfil"]);
 
 function upsert(selector: string, create: () => HTMLElement): HTMLElement {
   return document.head.querySelector<HTMLElement>(selector) ?? document.head.appendChild(create());

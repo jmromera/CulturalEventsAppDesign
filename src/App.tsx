@@ -15,6 +15,8 @@ import CitySelector from "./components/CitySelector";
 import NearMePanel from "./components/NearMePanel";
 import MapView, { mapCopy } from "./components/MapView";
 import FiltersDrawer, { filtersCopy, WHEN_SHORTCUTS, type FilterDraft } from "./components/FiltersDrawer";
+import ProfilePage, { profileCopy } from "./components/ProfilePage";
+import { readProfile, writeProfile, type Profile } from "./data/profile";
 import { buildCalendar, downloadTextFile, type CalendarEntry } from "./lib/ics";
 import { parseSharedList, sharedListPath } from "./lib/shared-list";
 import { matchesSlots, parseSlots, SLOT_URL_NAMES, type TimeSlot } from "./lib/time-slot";
@@ -31,7 +33,7 @@ import { legalCopy, LEGAL_PATHS } from "./legal/legal-copy";
 import { usePreferredCity } from "./context/PreferredCityContext";
 import { cities, eventCategories, type City, type EventCategory, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
 
-type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "legal" | "not-found";
+type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "profile" | "legal" | "not-found";
 
 // Pages that set their own document title.
 const LEGAL_PAGE_PATHS: string[] = Object.values(LEGAL_PATHS);
@@ -59,7 +61,7 @@ function Button({ children, onClick, variant = "primary", disabled = false }: { 
   return <button className={`button button--${variant}`} onClick={onClick} disabled={disabled}>{children}</button>;
 }
 
-function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, onSearch, t }: { page: Page; city: City; language: Language; setLanguage: (language: Language) => void; searchQuery: string; setSearchQuery: (query: string) => void; onSearch: (query: string) => void; t: typeof copy.es }) {
+function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, onSearch, profile, t }: { page: Page; city: City; language: Language; setLanguage: (language: Language) => void; searchQuery: string; setSearchQuery: (query: string) => void; onSearch: (query: string) => void; profile: Profile; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const activePage = page === "detail" || page === "search" ? "home" : page === "venue-detail" ? "venues" : page;
   const item = (target: Page, path: string, icon: IconName, label: string) => <Link className={`primary-nav-item ${activePage === target ? "active" : ""}`} to={cityPath(path, city)} aria-current={activePage === target ? "page" : undefined} key={target}><Icon name={icon} /><span>{label}</span></Link>;
@@ -67,7 +69,7 @@ function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, o
     <Logo to={cityPath("/", city)} label={labels.logoHome} />
     <form className="global-search" role="search" onSubmit={(event) => { event.preventDefault(); onSearch(searchQuery); }}><Icon name="search" /><input name="q" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder={t.searchPlaceholder} aria-label={t.searchPlaceholder} />{searchQuery && <button type="button" className="global-search-clear" aria-label={labels.clearSearch} title={labels.clearSearch} onClick={(event) => { const input = event.currentTarget.form?.querySelector("input"); onSearch(""); input?.focus(); }}><Icon name="close" /></button>}<button type="submit" aria-label={labels.searchResults}><Icon name="search" /></button></form>
     <nav className="primary-nav" aria-label={labels.events}>{item("home", "/", "calendar", labels.events)}{item("venues", "/venues", "location", labels.venues)}{item("favorites", "/favorites", "heart", labels.favourites)}</nav>
-    <div className="header-actions"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div><div className="guest-profile"><span><Icon name="profile" /></span><strong>{labels.guest}</strong></div></div>
+    <div className="header-actions"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div><Link className={`guest-profile ${page === "profile" ? "active" : ""}`} to={cityPath("/perfil", city)} aria-current={page === "profile" ? "page" : undefined}><span><Icon name={profile.avatar} /></span><strong>{profileCopy[language].navLabel}</strong></Link></div>
   </div></header>;
 }
 
@@ -412,7 +414,7 @@ function eventInRange(event: EventItem, range: [string, string] | null): boolean
 const PAGE_SIZE = 12;
 const visibleCounts = new Map<string, number>();
 
-function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, slots, setSlots, toggleCategory, goFilters, filtersOpen, closeFilters, applyFilters, clearFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; slots: TimeSlot[]; setSlots: (slots: TimeSlot[]) => void; toggleCategory: (category: string | null) => void; goFilters: () => void; filtersOpen: boolean; closeFilters: () => void; applyFilters: (draft: FilterDraft) => void; clearFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; t: typeof copy.es }) {
+function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categories, when, setWhen, slots, setSlots, toggleCategory, goFilters, filtersOpen, closeFilters, applyFilters, clearFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; slots: TimeSlot[]; setSlots: (slots: TimeSlot[]) => void; toggleCategory: (category: string | null) => void; goFilters: () => void; filtersOpen: boolean; closeFilters: () => void; applyFilters: (draft: FilterDraft) => void; clearFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; favouriteCategories: string[]; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const dateRange = dateRangeFor(when);
   const activeFilterCount = categories.length + (dateRange ? 1 : 0) + slots.length;
@@ -461,7 +463,7 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, slo
     if (when) params.set("when", when);
     return `/search?${params.toString()}`;
   };
-  const highlightedEvents = recommendedEvents(cityEvents);
+  const highlightedEvents = recommendedEvents(cityEvents, undefined, favouriteCategories);
   const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.seeAll} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><CardCarousel className="featured-grid" count={highlightedEvents.length} labels={labels}>{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</CardCarousel></section>;
   const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => event.category === item).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
   const weekRange = dateRangeFor("week");
@@ -748,7 +750,7 @@ function SiteFooter({ language }: { language: Language }) {
     <div className="site-footer-inner">
       <div><strong>Plan Cerca</strong><p>{labels.footerTagline}</p><p>{labels.footerAcademic}</p></div>
       <nav className="site-footer-legal" aria-label={legalCopy[language].footerNav}><ul>{([["legalNotice", LEGAL_PATHS.legalNotice], ["privacy", LEGAL_PATHS.privacy], ["cookies", LEGAL_PATHS.cookies], ["terms", LEGAL_PATHS.terms], ["accessibility", LEGAL_PATHS.accessibility], ["yourData", LEGAL_PATHS.yourData]] as const).map(([key, path]) => <li key={path}><Link to={path}>{legalCopy[language][key]}</Link></li>)}</ul></nav>
-      <div className="site-footer-meta"><button ref={triggerRef} type="button" className="site-footer-link" onClick={() => setAboutOpen(true)}>{labels.aboutLink}</button><small>© 2026 Plan Cerca</small></div>
+      <div className="site-footer-meta"><Link className="site-footer-link" to="/perfil">{profileCopy[language].navLabel}</Link><button ref={triggerRef} type="button" className="site-footer-link" onClick={() => setAboutOpen(true)}>{labels.aboutLink}</button><small>© 2026 Plan Cerca</small></div>
     </div>
     {aboutOpen && <div className="about-backdrop" onClick={() => setAboutOpen(false)}><div ref={modalRef} className="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title" onClick={(e) => e.stopPropagation()}>
       <h2 id="about-title">{labels.aboutTitle}</h2>
@@ -814,7 +816,7 @@ export default function App() {
     focusedPath.current = pathname;
     focusMain(false);
   }, [pathname]);
-  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : LEGAL_PAGE_PATHS.includes(pathname) ? "legal" : "not-found";
+  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : pathname === "/perfil" ? "profile" : LEGAL_PAGE_PATHS.includes(pathname) ? "legal" : "not-found";
   const [language, setLanguageState] = useState<Language>(readLanguage);
   useEffect(() => {
     document.documentElement.lang = language;
@@ -829,6 +831,9 @@ export default function App() {
     }
   };
   const [searchQuery, setSearchQuery] = useState(() => new URLSearchParams(window.location.search).get("q") ?? "");
+  const [profile, setProfileState] = useState<Profile>(readProfile);
+  // Written only when the person changes something on the profile page.
+  const setProfile = (next: Profile) => { setProfileState(next); writeProfile(next); };
   const [saved, setSaved] = useState<number[]>(readSavedEvents);
   const savedChanged = useRef(false);
   useEffect(() => {
@@ -933,11 +938,12 @@ export default function App() {
   };
   const clearFilters = () => navigate(withParams((params) => { for (const key of ["cat", "when", "franja", "filters"]) params.delete(key); }), { replace: true });
   const setSlots = (slots: TimeSlot[]) => navigate(withParams((params) => slotsParam(params, slots)), { replace: true });
-  const homePage = <Home selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
-  return <NearMeProvider><div className="app-shell"><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
+  const homePage = <Home favouriteCategories={profile.categories} selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
+  return <NearMeProvider><div className="app-shell"><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={homePage} />
+      <Route path="/perfil" element={<ProfilePage profile={profile} setProfile={setProfile} language={language} setLanguage={setLanguage} categoryNames={t.categoryNames} />} />
       <Route path="/favorites" element={<Saved saved={saved} toggleSaved={toggleSaved} addSaved={addSaved} explore={goToEvents} title={interfaceText[language].favourites} language={language} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />
