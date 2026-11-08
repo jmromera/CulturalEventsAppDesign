@@ -415,3 +415,23 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   | Deportes | `#00792f` | 5,56:1 | `#a0dcac` | 9,93:1 |
 
 - **Pruebas:** `tests/palette.test.ts` lee los tokens de `src/index.css` y falla si algún color baja de 4,5:1. axe sin problemas (108 comprobaciones). Captura: `docs/capturas/despues/paleta-categorias-1440.jpg`.
+
+### Iteración P2.3 · De franja de datos a accesos directos
+
+- **Qué:**
+  - La franja «Tendencias en Valencia: Música · Deportes · Teatro / Esta semana: N eventos» solo se podía leer.
+  - Ahora se titula «Lo que más hay en Valencia» y cada elemento es un botón con su recuento («Música 49», «Deportes 13», «Esta semana 8»).
+  - Al pulsarlo se aplica ese filtro (la categoría sola, sustituyendo a las que hubiera) y la página baja hasta la lista.
+  - El título dice lo que es: las categorías con más eventos, no una «tendencia» que no medimos.
+- **Por qué:**
+  - **Eficiencia (Nielsen 7):** el camino más común (ver los conciertos, ver lo de esta semana) se queda en un toque.
+  - **Coincidencia con el mundo real (Nielsen 2):** el texto ya no sugiere datos de popularidad que no tenemos.
+- **Accesibilidad:**
+  - Es una región con título `h2`, y los botones miden 44 px y usan `aria-pressed`.
+  - El desplazamiento es suave solo si no se ha pedido «reducir movimiento».
+  - El recuento de la lista se anuncia en la región `status` que ya existía.
+- **Problemas encontrados:** la primera versión quitaba los filtros y luego añadía la categoría en dos navegaciones seguidas, y la segunda leía la URL antigua. Ahora es una sola navegación.
+- **Pruebas:**
+  - `tests/shortcuts.test.tsx`: el atajo deja solo esa categoría y queda marcado.
+  - En navegador real: el clic aplica `cat=Música` y lleva a la lista (49 eventos en Valencia), y axe no encuentra problemas.
+  - Capturas: `docs/capturas/despues/accesos-directos-390.jpg`, `accesos-directos-1440.jpg`.

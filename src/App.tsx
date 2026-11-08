@@ -86,6 +86,12 @@ function SaveButton({ active, onClick, t, name, compact = false }: { active: boo
   return <button className={`save-button ${active ? "active" : ""} ${compact ? "compact" : ""}`} onClick={onClick} aria-label={`${label}: ${name}`} aria-pressed={active} title={label}><Icon name="heart" filled={active} /><span>{label}</span></button>;
 }
 
+const shortcutsCopy: Record<Language, { title: string }> = {
+  es: { title: "Lo que más hay en {city}" },
+  en: { title: "Most on in {city}" },
+  fr: { title: "Le plus à l’affiche à {city}" },
+};
+
 const untilLabel: Record<string, string> = { "es-ES": "hasta", "en-GB": "until", "fr-FR": "jusqu’au" };
 
 // Card titles are h3 under a section h2; pages whose list sits right under the h1 pass headingLevel={2}.
@@ -407,7 +413,7 @@ function eventInRange(event: EventItem, range: [string, string] | null): boolean
 const PAGE_SIZE = 12;
 const visibleCounts = new Map<string, number>();
 
-function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categories, when, setWhen, slots, setSlots, toggleCategory, goFilters, filtersOpen, closeFilters, applyFilters, clearFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; slots: TimeSlot[]; setSlots: (slots: TimeSlot[]) => void; toggleCategory: (category: string | null) => void; goFilters: () => void; filtersOpen: boolean; closeFilters: () => void; applyFilters: (draft: FilterDraft) => void; clearFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; favouriteCategories: string[]; t: typeof copy.es }) {
+function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categories, when, setWhen, slots, setSlots, toggleCategory, onlyCategory, goFilters, filtersOpen, closeFilters, applyFilters, clearFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; slots: TimeSlot[]; setSlots: (slots: TimeSlot[]) => void; toggleCategory: (category: string | null) => void; onlyCategory: (category: string) => void; goFilters: () => void; filtersOpen: boolean; closeFilters: () => void; applyFilters: (draft: FilterDraft) => void; clearFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; favouriteCategories: string[]; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const dateRange = dateRangeFor(when);
   const activeFilterCount = categories.length + (dateRange ? 1 : 0) + slots.length;
@@ -465,7 +471,10 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
   const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => event.category === item).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
   const weekRange = dateRangeFor("week");
   const weekCount = cityEvents.filter((event) => eventInRange(event, weekRange)).length;
-  const discovery = topCategories.length > 0 && <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("{city}", selectedCity)}</small><strong>{topCategories.map(([item]) => t.categoryNames[item]).join(" · ")}</strong></span></div>{weekCount > 0 && <div><Icon name="calendar" /><span><small>{t.thisWeek}</small><strong>{eventCountLabel(weekCount, labels)}</strong></span></div>}</section>;
+  // Shortcuts (P2.3): each one applies a filter and takes you to the list, instead of a strip of figures you could only read.
+  const goToList = () => window.setTimeout(() => document.getElementById("catalogue")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }), 0);
+  const shortcutText = shortcutsCopy[language];
+  const discovery = topCategories.length > 0 && <section className="discovery-strip discovery-strip--shortcuts" aria-labelledby="shortcuts-title"><h2 id="shortcuts-title" className="discovery-title"><Icon name="trending" />{shortcutText.title.replace("{city}", selectedCity)}</h2><div className="discovery-shortcuts">{topCategories.map(([item, count]) => <button key={item} type="button" data-cat={categoryKeys[item]} aria-pressed={categories.length === 1 && categories[0] === item} onClick={() => { onlyCategory(item); goToList(); }}><span>{t.categoryNames[item]}</span><small>{count}</small></button>)}{weekCount > 0 && <button type="button" aria-pressed={when === "week"} onClick={() => { setWhen("week"); goToList(); }}><Icon name="calendar" /><span>{t.thisWeek}</span><small>{weekCount}</small></button>}</div></section>;
   const whenLabel = when === null ? null : (WHEN_SHORTCUTS as readonly string[]).includes(when)
     ? filterText.whenNames[when as (typeof WHEN_SHORTCUTS)[number]]
     : new Intl.DateTimeFormat(language, { day: "numeric", month: "long" }).format(new Date(`${when}T12:00:00`));
@@ -951,8 +960,9 @@ export default function App() {
     }), { replace: true });
   };
   const clearFilters = () => navigate(withParams((params) => { for (const key of ["cat", "when", "franja", "filters"]) params.delete(key); }), { replace: true });
+  const onlyCategory = (category: string) => navigate(withParams((params) => params.set("cat", category)), { replace: true });
   const setSlots = (slots: TimeSlot[]) => navigate(withParams((params) => slotsParam(params, slots)), { replace: true });
-  const homePage = <Home favouriteCategories={profile.categories} selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
+  const homePage = <Home favouriteCategories={profile.categories} selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} onlyCategory={onlyCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
   return <NearMeProvider><div className="app-shell"><p className="sr-only" role="status" aria-live="polite">{savedAnnouncement}</p><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />

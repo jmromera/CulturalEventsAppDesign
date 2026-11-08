@@ -888,3 +888,19 @@ a.guest-profile>span .icon{width:20px;height:20px}
 [data-cat="museums"]{--cat:var(--cat-museums);--cat-light:var(--cat-museums-light)}
 [data-cat="sports"]{--cat:var(--cat-sports);--cat-light:var(--cat-sports-light)}
 [data-cat]{--cat-soft:color-mix(in srgb,var(--cat) 14%,#fff)}
+
+/* P2.3 · "Most on in {city}" shortcuts: each chip applies a filter and scrolls to the list. */
+.discovery-strip.discovery-strip--shortcuts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:18px 22px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.discovery-strip--shortcuts .discovery-title{display:flex;align-items:center;gap:10px;margin:0;font-size:15px;font-weight:700}
+.discovery-strip--shortcuts .discovery-title .icon{width:18px;height:18px;color:var(--accent-text)}
+.discovery-shortcuts{display:flex;flex-wrap:wrap;gap:8px}
+.discovery-shortcuts button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 8px 0 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.discovery-shortcuts button .icon{width:16px;height:16px}
+.discovery-shortcuts button small{display:grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:999px;background:var(--surface-sunken,rgba(255,255,255,.06));color:var(--muted);font-size:12px}
+.discovery-shortcuts button[data-cat]{border-color:color-mix(in srgb,var(--cat-light) 45%,transparent)}
+.discovery-shortcuts button[data-cat] span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:var(--cat-light)}
+.discovery-shortcuts button[aria-pressed="true"]{border-color:var(--accent-text);background:var(--accent-tint);color:var(--accent-text-hover)}
+.discovery-shortcuts button:hover{border-color:var(--accent-text)}
+.discovery-shortcuts button:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+@media(max-width:650px){.discovery-strip.discovery-strip--shortcuts{padding:16px}.discovery-shortcuts{width:100%}}
+.discovery-shortcuts button span{display:inline-flex;align-items:center}
