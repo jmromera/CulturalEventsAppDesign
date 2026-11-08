@@ -949,3 +949,4 @@ button.guest-profile[aria-expanded="true"]{color:var(--accent-text)}
 @media(max-width:650px){.home-content{padding-bottom:48px}.site-footer-legal ul{row-gap:0}}
 .app-shell>.main-shell{display:flex;flex-direction:column}
 .main-shell>main{flex:1 0 auto}
+.main-shell>*{min-width:0;max-width:100%}

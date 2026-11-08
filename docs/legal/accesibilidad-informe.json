@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T13:14:49.437Z",
+  "date": "2026-11-08T13:22:13.013Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -350,14 +350,7 @@
     },
     {
       "page": "privacidad-primera-visita · zoom 200 %",
-      "violations": [
-        {
-          "id": "reflow",
-          "impact": "serious",
-          "help": "Horizontal scroll of 122px at 200 % zoom",
-          "nodes": []
-        }
-      ]
+      "violations": []
     },
     {
       "page": "busqueda · zoom 200 %",
@@ -441,25 +434,11 @@
     },
     {
       "page": "privacidad · zoom 200 %",
-      "violations": [
-        {
-          "id": "reflow",
-          "impact": "serious",
-          "help": "Horizontal scroll of 122px at 200 % zoom",
-          "nodes": []
-        }
-      ]
+      "violations": []
     },
     {
       "page": "cookies · zoom 200 %",
-      "violations": [
-        {
-          "id": "reflow",
-          "impact": "serious",
-          "help": "Horizontal scroll of 122px at 200 % zoom",
-          "nodes": []
-        }
-      ]
+      "violations": []
     },
     {
       "page": "terminos · zoom 200 %",
@@ -471,25 +450,11 @@
     },
     {
       "page": "tus-datos · zoom 200 %",
-      "violations": [
-        {
-          "id": "reflow",
-          "impact": "serious",
-          "help": "Horizontal scroll of 122px at 200 % zoom",
-          "nodes": []
-        }
-      ]
+      "violations": []
     },
     {
       "page": "tus-datos-vacio · zoom 200 %",
-      "violations": [
-        {
-          "id": "reflow",
-          "impact": "serious",
-          "help": "Horizontal scroll of 122px at 200 % zoom",
-          "nodes": []
-        }
-      ]
+      "violations": []
     }
   ]
 }

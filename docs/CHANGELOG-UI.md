@@ -488,6 +488,7 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - **Enlaces del pie:** «Tu perfil» y «Acerca de» van en una sola fila, alineados con el texto y con el ©.
 - **Por qué:** **Estética y diseño minimalista (Nielsen 8)** y **proximidad (Gestalt):** lo que va junto se ve junto, y el pie no parece desconectado del contenido.
 - **Problemas encontrados:** el pie está dentro del contenedor de la página, no a su mismo nivel. Por eso el primer intento dejaba espacio libre debajo del pie, y el reparto de altura se movió a ese contenedor.
+  - Al convertir ese contenedor en una columna flexible, las páginas con tablas anchas (privacidad, cookies, «Tus datos») dejaron de encogerse: había 46 px de scroll horizontal a 768 px y 372 px a 390 px, y axe marcaba `reflow` con zoom del 200 %. Lo detectaron `pnpm check:responsive` y axe; ese commit se hizo sin esperar a su resultado y se corrigió en el siguiente limitando el ancho de los hijos del contenedor (`min-width: 0`).
 - **Pruebas:**
   - En navegador real, a 1440 × 900, el borde inferior del pie coincide con el de la pantalla en favoritos vacío y al final de la portada.
   - axe sin problemas (112 comprobaciones), responsive y sin terceros.
