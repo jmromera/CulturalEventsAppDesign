@@ -15,6 +15,7 @@
     "check:a11y": "node scripts/a11y.mjs",
     "check:contraste": "node scripts/hero-contrast.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
+    "check:pie": "node scripts/check-footer.mjs",
     "check:responsive": "node scripts/responsive.mjs",
     "images:variants": "node scripts/image-variants.mjs",
     "images:fetch": "node scripts/fetch-event-images.mjs"

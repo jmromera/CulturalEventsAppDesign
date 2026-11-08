@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, Route, Routes, useLocation, useNavigate, useNavigationType, useParams } from "react-router-dom";
 import { entityFor, relatedEntities } from "./data/entities";
-import { cityEventCounts, cityImages, endedEvents, eventImage, events, isBigEvent, recommendedEvents, relatedEventsByEntity } from "./data/event-catalog";
+import { cityEventCounts, cityImages, dayKey, endedEvents, eventImage, events, isBigEvent, recommendedEvents, relatedEventsByEntity } from "./data/event-catalog";
 import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } from "./data/artist-preferences";
 import { LANGUAGE_KEY, readLanguage, type Language } from "./data/language";
 import { STORAGE_KEYS } from "./data/storage-keys";
@@ -15,6 +15,7 @@ import CitySelector from "./components/CitySelector";
 import NearMePanel from "./components/NearMePanel";
 import FiltersDrawer, { filtersCopy, WHEN_SHORTCUTS, type FilterDraft } from "./components/FiltersDrawer";
 import ProfilePage, { profileCopy } from "./components/ProfilePage";
+import ProfileMenu from "./components/ProfileMenu";
 import BookingPage, { bookingCopy, canBook } from "./components/BookingPage";
 import { readProfile, writeProfile, type Profile } from "./data/profile";
 import { buildCalendar, downloadTextFile, type CalendarEntry } from "./lib/ics";
@@ -59,7 +60,7 @@ function Button({ children, onClick, variant = "primary", disabled = false }: { 
   return <button className={`button button--${variant}`} onClick={onClick} disabled={disabled}>{children}</button>;
 }
 
-function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, onSearch, profile, t }: { page: Page; city: City; language: Language; setLanguage: (language: Language) => void; searchQuery: string; setSearchQuery: (query: string) => void; onSearch: (query: string) => void; profile: Profile; t: typeof copy.es }) {
+function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, onSearch, profile, savedCount, t }: { page: Page; city: City; language: Language; setLanguage: (language: Language) => void; searchQuery: string; setSearchQuery: (query: string) => void; onSearch: (query: string) => void; profile: Profile; savedCount: number; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const activePage = page === "detail" || page === "search" || page === "booking" ? "home" : page === "venue-detail" ? "venues" : page;
   const item = (target: Page, path: string, icon: IconName, label: string) => <Link className={`primary-nav-item ${activePage === target ? "active" : ""}`} to={cityPath(path, city)} aria-current={activePage === target ? "page" : undefined} key={target}><Icon name={icon} /><span>{label}</span></Link>;
@@ -67,7 +68,7 @@ function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, o
     <Logo to={cityPath("/", city)} label={labels.logoHome} />
     <form className="global-search" role="search" onSubmit={(event) => { event.preventDefault(); onSearch(searchQuery); }}><Icon name="search" /><input name="q" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder={t.searchPlaceholder} aria-label={t.searchPlaceholder} />{searchQuery && <button type="button" className="global-search-clear" aria-label={labels.clearSearch} title={labels.clearSearch} onClick={(event) => { const input = event.currentTarget.form?.querySelector("input"); onSearch(""); input?.focus(); }}><Icon name="close" /></button>}<button type="submit" aria-label={labels.searchResults}><Icon name="search" /></button></form>
     <nav className="primary-nav" aria-label={labels.events}>{item("home", "/", "calendar", labels.events)}{item("venues", "/venues", "location", labels.venues)}{item("favorites", "/favorites", "heart", labels.favourites)}</nav>
-    <div className="header-actions"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div><Link className={`guest-profile ${page === "profile" ? "active" : ""}`} to={cityPath("/perfil", city)} aria-current={page === "profile" ? "page" : undefined}><span><Icon name={profile.avatar} /></span><strong>{profileCopy[language].navLabel}</strong></Link></div>
+    <div className="header-actions"><div className="header-preferences"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div></div><ProfileMenu avatar={profile.avatar} language={language} savedCount={savedCount} profilePath={cityPath("/perfil", city)} favouritesPath={cityPath("/favorites", city)} active={page === "profile"} /></div>
   </div></header>;
 }
 
@@ -86,19 +87,36 @@ function SaveButton({ active, onClick, t, name, compact = false }: { active: boo
   return <button className={`save-button ${active ? "active" : ""} ${compact ? "compact" : ""}`} onClick={onClick} aria-label={`${label}: ${name}`} aria-pressed={active} title={label}><Icon name="heart" filled={active} /><span>{label}</span></button>;
 }
 
+const shortcutsCopy: Record<Language, { title: string }> = {
+  es: { title: "Lo que más hay en {city}" },
+  en: { title: "Most on in {city}" },
+  fr: { title: "Le plus à l’affiche à {city}" },
+};
+
+const untilLabel: Record<string, string> = { "es-ES": "hasta", "en-GB": "until", "fr-FR": "jusqu’au" };
+
 // Card titles are h3 under a section h2; pages whose list sits right under the h1 pass headingLevel={2}.
 function EventCard({ event, saved, onSave, t, featured = false, distance, headingLevel = 3 }: { event: EventItem; saved: boolean; onSave: () => void; t: typeof copy.es; featured?: boolean; distance?: string; headingLevel?: 2 | 3 }) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   const venue = venueFor(event.venueId);
   const eventPath = cityPath(`/event/${event.id}`, venue.city);
-  return <article className={`event-card ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
-    <Link className="event-image" to={eventPath} aria-hidden="true" tabIndex={-1}><FallbackImage src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}</Link>
+  const isRange = Boolean(event.endDate && event.endDate !== event.startDate);
+  // A run that has already started shows "until" and its last day instead of a start date in the past.
+  const running = isRange && Boolean(event.startDate) && event.startDate! < dayKey(new Date());
+  const badgeKey = running ? event.endDate! : event.startDate;
+  const start = badgeKey && /^\d{4}-\d{2}-\d{2}$/.test(badgeKey) ? new Date(`${badgeKey}T12:00:00`) : null;
+  const clock = /^\d{1,2}:\d{2}$/.test(event.time) ? event.time : null;
+  const price = /\d/.test(event.price) ? event.price : null;
+  const soldOut = isSoldOut(event);
+  // Compact card (P2.1): the title link covers the whole card, so the card is one big target; the heart sits above it.
+  return <article className={`event-card event-card--compact ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
+    <div className="event-image"><FallbackImage src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}
+      {start && <span className="date-badge" aria-hidden="true"><small>{running ? untilLabel[t.locale] : new Intl.DateTimeFormat(t.locale, { weekday: "short" }).format(start).replace(".", "")}</small><strong>{start.getDate()}</strong><small>{new Intl.DateTimeFormat(t.locale, { month: "short" }).format(start).replace(".", "")}</small></span>}
+    </div>
     <div className="event-body"><div className="event-title-row"><Heading className="event-title-heading"><Link className="event-title" to={eventPath}>{event.title}</Link></Heading><SaveButton active={saved} onClick={onSave} t={t} name={event.title} compact /></div>
-      <p className="event-description">{event.description}</p>
-      <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name}{distance && <strong className="event-distance"> · {distance}</strong>}</span><span><Icon name="time" />{event.duration}</span></div>
-      <div className="tag-row">{visibleTags(event, venue.city).slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}</div>
-      <div className="event-footer"><div><small>{event.organizer}</small><strong className={/\d/.test(event.price) ? "" : "price--none"}>{event.price}</strong></div><Link className="button button--secondary" to={eventPath}>{t.details}<Icon name="chevron" /></Link></div>
-      <div className={`availability ${availabilityTone(event)}`}><i />{event.availability}</div>
+      <p className={`event-when ${start && !isRange ? "sr-only" : ""}`}>{event.date}</p>
+      <p className="event-where"><Icon name="location" /><span>{venue.name}{clock && ` · ${clock}`}{distance && <strong className="event-distance"> · {distance}</strong>}</span></p>
+      {(price || soldOut) && <p className={`event-price ${soldOut ? "event-price--soldout" : ""}`}>{soldOut ? event.availability : price}</p>}
     </div>
   </article>;
 }
@@ -396,16 +414,16 @@ function eventInRange(event: EventItem, range: [string, string] | null): boolean
 const PAGE_SIZE = 12;
 const visibleCounts = new Map<string, number>();
 
-function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categories, when, setWhen, slots, setSlots, toggleCategory, goFilters, filtersOpen, closeFilters, applyFilters, clearFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; slots: TimeSlot[]; setSlots: (slots: TimeSlot[]) => void; toggleCategory: (category: string | null) => void; goFilters: () => void; filtersOpen: boolean; closeFilters: () => void; applyFilters: (draft: FilterDraft) => void; clearFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; favouriteCategories: string[]; t: typeof copy.es }) {
+function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categories, when, setWhen, slots, setSlots, toggleCategory, onlyCategory, goFilters, filtersOpen, closeFilters, applyFilters, clearFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; slots: TimeSlot[]; setSlots: (slots: TimeSlot[]) => void; toggleCategory: (category: string | null) => void; onlyCategory: (category: string) => void; goFilters: () => void; filtersOpen: boolean; closeFilters: () => void; applyFilters: (draft: FilterDraft) => void; clearFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; favouriteCategories: string[]; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const dateRange = dateRangeFor(when);
   const activeFilterCount = categories.length + (dateRange ? 1 : 0) + slots.length;
   const filterText = filtersCopy[language];
   const cityEvents = events.filter((event) => venueFor(event.venueId).city === selectedCity);
   const query = normalizeSearch(searchQuery.trim());
-  const matchesSearch = (event: EventItem, range = dateRange, eventSlots = slots) => {
+  const matchesSearch = (event: EventItem, range = dateRange, eventSlots = slots, eventCategories: string[] = categories) => {
     const venue = venueFor(event.venueId);
-    const matchesCategory = !categories.length || categories.includes(event.category);
+    const matchesCategory = !eventCategories.length || eventCategories.includes(event.category);
     const matchesQuery = !query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query);
     return matchesCategory && matchesQuery && eventInRange(event, range) && matchesSlots(event, eventSlots);
   };
@@ -417,8 +435,8 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
   };
   const inRadius = (event: EventItem) => !nearMe.position || nearMe.radiusKm === null || (distanceTo(event) ?? Infinity) <= nearMe.radiusKm;
   // One predicate for the list, the live count in the filters panel and the calendar dots, so the three always agree.
-  const matchesList = (event: EventItem, city: City, range: typeof dateRange, eventSlots: TimeSlot[]) =>
-    venueFor(event.venueId).city === city && matchesSearch(event, range, eventSlots) && inRadius(event);
+  const matchesList = (event: EventItem, city: City, range: typeof dateRange, eventSlots: TimeSlot[], eventCategories: string[] = categories) =>
+    venueFor(event.venueId).city === city && matchesSearch(event, range, eventSlots, eventCategories) && inRadius(event);
   const countResults = (draft: FilterDraft) => events.filter((event) => matchesList(event, draft.city, dateRangeFor(draft.when), draft.slots)).length;
   const countForDay = (city: City, key: string, daySlots: TimeSlot[]) => events.filter((event) => matchesList(event, city, [key, key], daySlots)).length;
   const matched = cityEvents.filter((event) => matchesSearch(event));
@@ -451,10 +469,14 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
   };
   const highlightedEvents = recommendedEvents(cityEvents, undefined, favouriteCategories);
   const recommendations = <section><SectionTitle kicker={`${labels.cityScope} ${selectedCity}`} title={t.recommended} action={t.seeAll} onAction={() => document.getElementById("catalogue")?.scrollIntoView()} /><CardCarousel className="featured-grid" count={highlightedEvents.length} labels={labels}>{highlightedEvents.map((event) => <EventCard featured key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} />)}</CardCarousel></section>;
-  const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => event.category === item).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  // Each shortcut shows exactly what the list will show once pressed (same predicate, with that category or this week).
+  const topCategories = eventCategories.map((item) => [item, cityEvents.filter((event) => matchesList(event, selectedCity, dateRange, slots, [item])).length] as const).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
   const weekRange = dateRangeFor("week");
-  const weekCount = cityEvents.filter((event) => eventInRange(event, weekRange)).length;
-  const discovery = topCategories.length > 0 && <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("{city}", selectedCity)}</small><strong>{topCategories.map(([item]) => t.categoryNames[item]).join(" · ")}</strong></span></div>{weekCount > 0 && <div><Icon name="calendar" /><span><small>{t.thisWeek}</small><strong>{eventCountLabel(weekCount, labels)}</strong></span></div>}</section>;
+  const weekCount = cityEvents.filter((event) => matchesList(event, selectedCity, weekRange, slots)).length;
+  // Shortcuts (P2.3): each one applies a filter and takes you to the list, instead of a strip of figures you could only read.
+  const goToList = () => window.setTimeout(() => document.getElementById("catalogue")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }), 0);
+  const shortcutText = shortcutsCopy[language];
+  const discovery = topCategories.length > 0 && <section className="discovery-strip discovery-strip--shortcuts" aria-labelledby="shortcuts-title"><h2 id="shortcuts-title" className="discovery-title"><Icon name="trending" />{shortcutText.title.replace("{city}", selectedCity)}</h2><div className="discovery-shortcuts">{topCategories.map(([item, count]) => <button key={item} type="button" data-cat={categoryKeys[item]} aria-pressed={categories.length === 1 && categories[0] === item} onClick={() => { onlyCategory(item); goToList(); }}><span>{t.categoryNames[item]}</span><small>{count}</small></button>)}{weekCount > 0 && <button type="button" aria-pressed={when === "week"} onClick={() => { setWhen("week"); goToList(); }}><Icon name="calendar" /><span>{t.thisWeek}</span><small>{weekCount}</small></button>}</div></section>;
   const whenLabel = when === null ? null : (WHEN_SHORTCUTS as readonly string[]).includes(when)
     ? filterText.whenNames[when as (typeof WHEN_SHORTCUTS)[number]]
     : new Intl.DateTimeFormat(language, { day: "numeric", month: "long" }).format(new Date(`${when}T12:00:00`));
@@ -521,6 +543,19 @@ function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: 
   const actionLabels = eventActionCopy[language];
   const [copyConfirmed, setCopyConfirmed] = useState(false);
   const calendarTiming = calendarTimingFor(event);
+  // Mobile: once the purchase card's "buy" button scrolls out of view, a fixed bar keeps the same action at hand.
+  const heroCta = useRef<HTMLAnchorElement>(null);
+  const [heroCtaHidden, setHeroCtaHidden] = useState(false);
+  useEffect(() => {
+    // A scroll listener (one check per frame) rather than IntersectionObserver: a fast jump from below the
+    // button to above it never crosses the viewport, so an observer would not report it.
+    let frame = 0;
+    const check = () => { frame = 0; const node = heroCta.current; setHeroCtaHidden(Boolean(node) && node!.getBoundingClientRect().bottom < 0); };
+    const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(check); };
+    check();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.removeEventListener("scroll", onScroll); if (frame) window.cancelAnimationFrame(frame); };
+  }, [event.id]);
   const calendarUrl = calendarTiming ? googleCalendarUrl(event, venue, calendarTiming) : null;
   const entity = event.relatedEntityId ? relatedEntities[event.relatedEntityId] : undefined;
   const entityEvents = event.relatedEntityId ? relatedEventsByEntity(event.relatedEntityId, event.id) : [];
@@ -548,16 +583,17 @@ function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: 
     await copyEventLink();
   };
   return <main id="main-content" tabIndex={-1} className="detail-page">{structuredEvent && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredEvent) }} />}<div className="detail-top detail-top--event"><button onClick={back}><Icon name="arrow" /><span>{t.back}</span></button><div className="detail-actions"><DetailActionButton icon="share" label={actionLabels.share} onClick={() => { void shareEvent(); }} /><DetailActionButton icon="heart" label={saved ? t.savedLabel : t.save} onClick={toggleSaved} active={saved} /><DetailActionButton icon={copyConfirmed ? "check" : "copy"} label={copyConfirmed ? actionLabels.copied : actionLabels.copyLink} onClick={() => { void copyEventLink(); }} /><CalendarAction labels={actionLabels} url={calendarUrl} onDownload={() => { if (calendarTiming) downloadEventCalendar(event, venue, calendarTiming); }} /></div></div>
-    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><FallbackImage className="gallery-main" src={eventImage(event)} alt={interfaceText[language].eventImageAlt.replace("{title}", event.title)} icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={1200} height={675} lazy={false} />{!event.image && <PhotoCredit credit={venue.imageCredit} />}</div><div className="detail-intro"><span className="category">{t.categoryNames[event.category]}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span><span><Icon name="time" />{event.duration}</span></div><div className="detail-social">{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}{tags.length > 0 && <span>{tags.join(" · ")}</span>}</div><p className="detail-lead">{event.description}</p>{!ended && !soldOut && <div className="detail-cta">{/\d/.test(event.price) && <strong className="detail-cta-price">{event.price}</strong>}<a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a></div>}</div></section>
+    <section className="detail-hero" data-cat={categoryKeys[event.category]}><div className="detail-gallery"><FallbackImage className="gallery-main" src={eventImage(event)} alt={interfaceText[language].eventImageAlt.replace("{title}", event.title)} icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={1200} height={675} lazy={false} />{!event.image && <PhotoCredit credit={venue.imageCredit} />}</div><div className="detail-intro"><span className="category">{t.categoryNames[event.category]}</span><h1>{event.title}</h1><div className="detail-intro-facts"><span><Icon name="calendar" />{event.date} · {/^\d{1,2}:\d{2}$/.test(event.time) ? event.time : event.time === "Por confirmar" ? bookingCopy[language].timeTbc : event.time}</span><span><Icon name="location" />{venue.name} · {venue.city}</span>{event.duration !== "Por confirmar" && <span><Icon name="time" />{event.duration}</span>}</div><div className="detail-social">{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}{tags.length > 0 && <span>{tags.join(" · ")}</span>}</div><p className="detail-lead">{event.description}</p>{!ended && !soldOut && <div className="detail-cta">{/\d/.test(event.price) && <strong className="detail-cta-price">{event.price}</strong>}<a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a></div>}</div></section>
     <div className="detail-content"><div className="detail-main">
       <section><h2>{t.description}</h2><p>{event.fullDescription}</p></section>
       {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}><FallbackImage src={entity.image} alt="" icon="profile" width={124} height={124} /><div className="artist-profile-copy"><div className="artist-profile-head"><h3>{entity.name}</h3><span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></div><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}
       <section><h2>{t.practical}</h2><div className="info-grid"><div className="info-item info-item--location"><span><Icon name="location" /></span><div><small>{t.location}</small><strong>{venue.name}</strong><p>{venue.address}</p>{venue.mapsUrl && <a href={venue.mapsUrl} target="_blank" rel="noreferrer">{t.openInMaps}<Icon name="chevron" /></a>}</div></div><Info icon="profile" label={t.organizer} value={event.organizer} /></div></section>
-    </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className={`stock ${soldOut ? "stock--soldout" : ""}`}><i />{event.availability}</div>{ended ? <p className="purchase-provider">{t.eventEnded}</p> : soldOut ? null : <>{/\d/.test(event.price) ? <p className="purchase-price">{event.price}</p> : <p className="purchase-provider">{t.ticketsAt.replace("{provider}", event.organizer)}</p>}<p>{event.confirmed ? (event.time === "Por confirmar" ? t.confirmedTimePending : t.confirmed) : t.pending}</p><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small>{canBook(event) && <Link className="button button--secondary booking-cta" to={`/event/${event.id}/reservar?city=${encodeURIComponent(venue.city)}`}>{bookingCopy[language].cta}</Link>}</>}<SaveButton active={saved} onClick={toggleSaved} t={t} name={event.title} /></aside></div>
+    </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className={`stock ${soldOut ? "stock--soldout" : ""}`}><i />{event.availability}</div>{ended ? <p className="purchase-provider">{t.eventEnded}</p> : soldOut ? null : <>{/\d/.test(event.price) ? <p className="purchase-price">{event.price}</p> : <p className="purchase-provider">{t.ticketsAt.replace("{provider}", event.organizer)}</p>}<p>{event.confirmed ? t.confirmed : t.pending}</p><a ref={heroCta} className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small>{canBook(event) && <Link className="button button--secondary booking-cta" to={`/event/${event.id}/reservar?city=${encodeURIComponent(venue.city)}`}>{bookingCopy[language].cta}</Link>}</>}</aside></div>
     <section className="venue-overview"><div className={`venue-info-card ${venue.image ? "" : "venue-info-card--text-only"}`}>{venue.image && <FallbackImage className="venue-about-image" src={venue.image} alt={venueAlt(venue.name, language)} icon="location" category={venueCategoryKey(venue.kind.es)} width={640} height={360} />}<div className="venue-about-copy"><span className="kicker">{t.venueAbout}</span><span className="venue-kind"><BrandMark className="venue-kind-mark" />{venue.city} · {venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p>{(venue.websiteUrl || venue.programmeUrl) && <div className="venue-info-footer">{venue.websiteUrl && <a href={venue.websiteUrl} target="_blank" rel="noreferrer">{venueLinkLabels.website}<Icon name="chevron" /></a>}{venue.programmeUrl && venue.programmeLabel && <a href={venue.programmeUrl} target="_blank" rel="noreferrer">{venue.programmeLabel[language]}<Icon name="chevron" /></a>}</div>}</div></div></section>
     {entity && <RelatedEventsSection entity={entity} relatedEvents={entityEvents} title={entity.relatedEventsTitle[language]} t={t} />}
     {venueEvents.length > 0 && <section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} /><div className="venue-event-grid">{venueEvents.map((item) => <EventCard key={item.id} event={item} saved={savedIds.includes(item.id)} onSave={() => toggleSavedId(item.id)} t={t} />)}</div></div></section>}
     {related.length > 0 && <section className="related"><SectionTitle kicker={t.categoryNames[event.category]} title={t.related} /><CardCarousel className="related-grid" count={related.length} labels={interfaceText[language]}>{related.map((item) => <EventCard key={item.id} event={item} saved={savedIds.includes(item.id)} onSave={() => toggleSavedId(item.id)} t={t} />)}</CardCarousel></section>}
+    {!ended && !soldOut && <div className={`detail-mobile-cta ${heroCtaHidden ? "visible" : ""}`} aria-hidden={!heroCtaHidden}><div><strong>{event.title}</strong><small>{/\d/.test(event.price) ? event.price : t.ticketsAt.replace("{provider}", event.organizer)}</small></div><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer" tabIndex={heroCtaHidden ? undefined : -1}><Icon name="ticket" />{t.buy}</a></div>}
   </main>;
 }
 
@@ -940,9 +976,10 @@ export default function App() {
     }), { replace: true });
   };
   const clearFilters = () => navigate(withParams((params) => { for (const key of ["cat", "when", "franja", "filters"]) params.delete(key); }), { replace: true });
+  const onlyCategory = (category: string) => navigate(withParams((params) => params.set("cat", category)), { replace: true });
   const setSlots = (slots: TimeSlot[]) => navigate(withParams((params) => slotsParam(params, slots)), { replace: true });
-  const homePage = <Home favouriteCategories={profile.categories} selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
-  return <NearMeProvider><div className="app-shell"><p className="sr-only" role="status" aria-live="polite">{savedAnnouncement}</p><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} /><div className="main-shell">
+  const homePage = <Home favouriteCategories={profile.categories} selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} onlyCategory={onlyCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
+  return <NearMeProvider><div className="app-shell"><p className="sr-only" role="status" aria-live="polite">{savedAnnouncement}</p><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} savedCount={saved.length} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={homePage} />
