@@ -21,8 +21,6 @@ const interactions = [
   { name: "chips-filtros", route: "inicio", act: async (page) => { await page.getByRole("button", { name: /^Filtros/ }).click(); await page.getByRole("button", { name: /^Tarde/ }).click(); await page.getByRole("button", { name: /^Ver \d+ resultado/ }).click(); } },
   { name: "favorito-quitado", route: "favoritos", act: async (page) => { await page.locator(".saved-page article .save-button").first().click(); await page.getByRole("button", { name: "Deshacer" }).waitFor(); } },
   { name: "cerca-de-mi", route: "inicio", act: (page) => page.getByRole("button", { name: "Cerca de mí" }).click() },
-  { name: "mapa-abierto", route: "inicio", act: async (page) => { await page.getByRole("button", { name: "Mapa" }).click(); await page.locator(".leaflet-marker-icon").first().waitFor(); await page.waitForTimeout(1500); } },
-  { name: "mapa-detalle", route: "evento", act: async (page) => { await page.getByRole("button", { name: "Ver en el mapa" }).click(); await page.locator(".leaflet-marker-icon").first().waitFor(); await page.waitForTimeout(1500); } },
 ];
 
 const { url: base, stop } = await startPreview({ build: !process.argv.includes("--no-build") });

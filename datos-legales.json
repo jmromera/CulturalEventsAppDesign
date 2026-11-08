@@ -28,16 +28,6 @@
       "garantiaTransferencia": "Las que establece el acuerdo de tratamiento de datos (DPA) de Vercel",
       "dpa": "https://vercel.com/legal/dpa",
       "verificado": false
-    },
-    {
-      "nombre": "OpenStreetMap Foundation",
-      "finalidad": "Imágenes del mapa (teselas), solo si la persona abre el mapa",
-      "datos": "Dirección IP y zona del mapa solicitada",
-      "region": "Reino Unido",
-      "transferenciaFueraUE": true,
-      "garantiaTransferencia": "Decisión de adecuación de la Comisión Europea para el Reino Unido",
-      "dpa": "https://osmfoundation.org/wiki/Privacy_Policy",
-      "verificado": false
     }
   ],
   "plazos": {

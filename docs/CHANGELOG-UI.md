@@ -273,3 +273,30 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/catalog-dates.test.ts`: las reglas de Recomendados se comprueban ahora con 6 conjuntos de favoritas × 3 fechas × 6 ciudades, y además se comprueba que la favorita aparece cuando cabe.
   - En navegador real: 100 comprobaciones de axe sin problemas, sin peticiones a terceros, responsive correcto.
   - Capturas: `docs/capturas/despues/perfil-320.jpg`, `perfil-390.jpg`, `perfil-1440.jpg`, `recomendados-con-perfil-1440.jpg`.
+
+### Iteración P1.4c · Se retira el mapa (OpenStreetMap bloqueaba las teselas) y se arregla la barra del catálogo en móvil
+
+- **Qué pasó:**
+  - Al abrir «Mapa» en «Explorar todos», OpenStreetMap devolvía en cada tesela una imagen de «403 Access blocked — App is not following the tile usage policy».
+  - En nuestras pruebas automáticas cargaban bien, pero en el navegador de la persona que lo probó no.
+  - Los servidores públicos de OpenStreetMap son de voluntarios y pueden bloquear según el navegador, la red o la cabecera `Referer`. Además, el navegador muestra la imagen de bloqueo como una tesela más, así que la web no puede detectarlo ni avisar.
+- **Alternativas valoradas:**
+  - **CARTO:** ahora exige clave de API. Sin ella pinta «API KEY REQUIRED» en cada tesela (comprobado).
+  - **MapTiler, Stadia y similares:** necesitan registro y una clave ligada a una cuenta personal, con cuota mensual.
+  - **Dejar OpenStreetMap con un aviso:** no evita la imagen rota.
+- **Decisión** (acordada con el autor): quitar la vista Mapa del catálogo y el mini mapa de la ficha.
+  - Se mantiene lo que pide el enunciado sobre cercanía: **«Cerca de mí»** ordena y filtra por distancia y muestra los kilómetros en cada tarjeta.
+  - Cada ficha conserva «Abrir en Google Maps».
+- **Efectos:**
+  - **Sin terceros:** la web vuelve a no contactar con ningún tercero. La CSP vuelve a `img-src 'self' data: blob:`.
+  - **Textos legales:** desaparecen la fila de OpenStreetMap de la política de privacidad y el proveedor de `datos-legales.json`.
+  - **Peso:** fuera la dependencia Leaflet (44 KB comprimidos) y su CSS.
+  - **Pruebas:** `pnpm check:terceros` vuelve a exigir cero peticiones externas en todas las páginas.
+- **Barra del catálogo en móvil** (fallo previo, visto en las capturas):
+  - Por debajo de 650 px, la fila de acciones ocupaba todo el ancho y dejaba las pestañas de categoría en unos 20 px: no se veían y la fila de «Cerca de mí» salía desplazada.
+  - Ahora las categorías van en su propia fila deslizable encima de las acciones.
+  - Principios: **Visibilidad del estado (Nielsen 1)** y **Reconocer mejor que recordar (Nielsen 6)**, porque el filtro principal vuelve a estar a la vista.
+- **Pruebas:**
+  - 255 tests: se retira `tests/map.test.tsx` y `security.test.ts` vuelve a exigir una CSP sin orígenes remotos.
+  - En navegador real: 96 comprobaciones de axe sin problemas, sin peticiones a terceros, responsive correcto.
+  - Capturas: `docs/capturas/despues/catalogo-barra-320.jpg`, `catalogo-barra-390.jpg`, `catalogo-barra-1440.jpg`.

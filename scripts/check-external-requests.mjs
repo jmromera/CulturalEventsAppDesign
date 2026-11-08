@@ -5,9 +5,7 @@ import { chromium } from "playwright";
 import { routes, viewports } from "./lib/routes.mjs";
 import { startPreview } from "./lib/preview-server.mjs";
 
-// Keep in sync with src/legal/third-parties.ts. Map tiles are allowed only after pressing "Map".
-const onDemand = ["tile.openstreetmap.org"];
-const declared = [...onDemand];
+const declared = []; // keep in sync with src/legal/third-parties.ts (empty: everything is self-hosted)
 
 // vite preview ignores vercel.json, so its security headers are applied here to catch CSP breakage.
 const vercel = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
@@ -32,8 +30,6 @@ try {
       const { hostname, protocol } = new URL(request.url());
       if (protocol === "data:" || protocol === "blob:" || hostname === "localhost") return;
       if (!declared.includes(hostname)) offending.add(`${hostname} (${request.url().slice(0, 90)})`);
-      // No page may contact an on-demand host just by loading: the visits below never open the map.
-      else if (onDemand.includes(hostname) && !page.mapOpened) offending.add(`${hostname} contacted without opening the map`);
     });
     for (const route of routes) {
       await page.goto(base);
@@ -42,12 +38,6 @@ try {
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       await page.waitForTimeout(400);
     }
-    // Opening the map: only the declared tile server may be contacted.
-    page.mapOpened = true;
-    await page.goto(base + "/?city=Valencia", { waitUntil: "networkidle" });
-    await page.getByRole("button", { name: "Mapa" }).click();
-    await page.waitForTimeout(2500);
-    page.mapOpened = false;
     const cookies = await context.cookies();
     if (cookies.length) offending.add(`cookies set: ${cookies.map((cookie) => cookie.name).join(", ")}`);
     await context.close();
