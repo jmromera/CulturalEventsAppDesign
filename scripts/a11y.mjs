@@ -21,6 +21,7 @@ const interactions = [
   { name: "chips-filtros", route: "inicio", act: async (page) => { await page.getByRole("button", { name: /^Filtros/ }).click(); await page.getByRole("button", { name: /^Tarde/ }).click(); await page.getByRole("button", { name: /^Ver \d+ resultado/ }).click(); } },
   { name: "favorito-quitado", route: "favoritos", act: async (page) => { await page.locator(".saved-page article .save-button").first().click(); await page.getByRole("button", { name: "Deshacer" }).waitFor(); } },
   { name: "menu-perfil", route: "inicio", act: (page) => page.locator("button.guest-profile").click() },
+  { name: "ficha-barra-compra", route: "evento", act: async (page) => { await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2)); await page.waitForTimeout(400); } },
   { name: "cerca-de-mi", route: "inicio", act: (page) => page.getByRole("button", { name: "Cerca de mí" }).click() },
 ];
 

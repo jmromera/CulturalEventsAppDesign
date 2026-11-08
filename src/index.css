@@ -919,3 +919,19 @@ button.guest-profile[aria-expanded="true"]{color:var(--accent-text)}
 .profile-menu-list a[aria-current="page"]{color:var(--accent-text)}
 @media(max-width:650px){.header-preferences{display:contents}.profile-menu{grid-column:4;grid-row:1}}
 @media(max-width:650px){.profile-menu-list{position:fixed;left:14px;right:14px;top:60px;min-width:0}}
+
+/* P2.5 · Event page: the purchase card stays below the sticky header on desktop; on mobile a fixed "buy" bar
+   appears once the hero button has scrolled away. */
+@media(min-width:901px){.detail-content .purchase-card{position:sticky;top:100px;align-self:start}}
+.detail-mobile-cta{display:none}
+@media(max-width:650px){
+  .detail-mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface-raised);box-shadow:0 -10px 30px rgba(0,0,0,.35);transform:translateY(110%);visibility:hidden;transition:transform 200ms var(--ease-out,ease),visibility 0s linear 200ms}
+  .detail-mobile-cta.visible{transform:none;visibility:visible;transition:transform 200ms var(--ease-out,ease)}
+  .detail-mobile-cta>div{display:grid;min-width:0;flex:1}
+  .detail-mobile-cta strong{overflow:hidden;font-size:14px;white-space:nowrap;text-overflow:ellipsis}
+  .detail-mobile-cta small{overflow:hidden;color:var(--muted);font-size:12px;white-space:nowrap;text-overflow:ellipsis}
+  .detail-mobile-cta .button{flex:none;min-height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 14px;font-size:14px}
+  .detail-mobile-cta .button .icon{width:16px;height:16px}
+  .detail-page{padding-bottom:84px}
+}
+@media(prefers-reduced-motion:reduce){.detail-mobile-cta,.detail-mobile-cta.visible{transition:none}}

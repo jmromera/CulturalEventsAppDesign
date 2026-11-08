@@ -458,3 +458,24 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/profile.test.tsx`: menú con recuento de favoritos, Esc con retorno del foco, acceso al perfil sin diálogo de bienvenida.
   - En navegador real: 110 comprobaciones de axe sin problemas (nueva: menú abierto), responsive correcto.
   - Capturas: `docs/capturas/despues/cabecera-menu-320.jpg`, `cabecera-menu-390.jpg`, `cabecera-menu-1440.jpg`.
+
+### Iteración P2.5 · Ficha del evento: sin repeticiones y la compra siempre a mano
+
+- **Qué:**
+  - **Un solo «Guardar»**, el de la barra de acciones de arriba. Antes también aparecía en la tarjeta de compra.
+  - **«Hora por confirmar» una sola vez**, en el encabezado. Antes salía «… · Por confirmar» arriba y «Fecha confirmada · hora por confirmar» en la tarjeta. Si la duración no se conoce, ya no se muestra la línea «Por confirmar».
+  - **Escritorio:** la tarjeta de compra se queda fija bajo la cabecera al hacer scroll. Antes se fijaba a 25 px del borde y quedaba debajo de la cabecera.
+  - **Móvil:** cuando el botón de compra sale de la pantalla aparece una barra inferior con el título, el precio o el vendedor, y «Comprar en la web oficial». Al volver arriba desaparece. La página reserva espacio para que la barra no tape el pie.
+- **Por qué:**
+  - **Estética y diseño minimalista (Nielsen 8):** cada dato aparece una vez.
+  - **Eficiencia (Nielsen 7):** la acción principal está siempre a un toque, también al final de una ficha larga.
+- **Accesibilidad:**
+  - Mientras está oculta, la barra lleva `aria-hidden` y su enlace sale del orden de tabulación, así que no se puede llegar con teclado a un botón invisible (WCAG 2.4.3, 4.1.2).
+  - Su animación se quita con «reducir movimiento».
+- **Problemas encontrados:**
+  - En móvil, el botón del encabezado está oculto. Se vigila el de la tarjeta de compra.
+  - La primera versión usaba `IntersectionObserver`, pero un salto rápido de debajo a encima del botón no pasa por la pantalla y no llegaba a avisar. Se cambió por una comprobación por fotograma al hacer scroll.
+- **Pruebas:**
+  - `tests/detail.test.tsx`: un solo «Guardar», «por confirmar» una vez y barra fuera del orden de tabulación mientras está oculta.
+  - En navegador real: la barra aparece al bajar y desaparece al subir, 112 comprobaciones de axe sin problemas (nueva: ficha con la barra visible), responsive correcto.
+  - Capturas: `docs/capturas/despues/ficha-390.jpg`, `ficha-barra-compra-390.jpg`, `ficha-tarjeta-fija-1440.jpg`.

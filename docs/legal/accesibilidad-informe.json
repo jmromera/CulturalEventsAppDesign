@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T12:56:23.042Z",
+  "date": "2026-11-08T13:09:33.712Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -165,6 +165,10 @@
       "violations": []
     },
     {
+      "page": "ficha-barra-compra · movil",
+      "violations": []
+    },
+    {
       "page": "cerca-de-mi · movil",
       "violations": []
     },
@@ -322,6 +326,10 @@
     },
     {
       "page": "menu-perfil · escritorio",
+      "violations": []
+    },
+    {
+      "page": "ficha-barra-compra · escritorio",
       "violations": []
     },
     {
