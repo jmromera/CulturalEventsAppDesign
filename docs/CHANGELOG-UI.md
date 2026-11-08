@@ -347,3 +347,26 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/booking.test.tsx`: sesiones disponibles según la fecha, entrada desde la ficha, recorrido completo con foco y sin almacenamiento ni campos de datos, límite de entradas e importe orientativo, enlace con sesión inválida y evento agotado.
   - En navegador real: 108 comprobaciones de axe sin problemas (nuevas rutas: sesión, revisar y confirmación), sin peticiones a terceros, responsive correcto.
   - Capturas: `docs/capturas/despues/reserva-sesion-390.jpg`, `reserva-sesion-1440.jpg`, `reserva-confirmada-390.jpg`, `reserva-confirmada-1440.jpg`.
+
+### Iteración P1.6 · Accesibilidad: encabezados, avisos, foco y áreas táctiles
+
+- **Encabezados (WCAG 1.3.1 y 2.4.6):**
+  - Hay un solo `h1` por página.
+  - Los títulos de las tarjetas pasan a ser `h3` bajo el `h2` de su sección. En la búsqueda y en la lista compartida, donde la lista va justo debajo del `h1`, son `h2`.
+  - En la ficha de artista, el rótulo de la sección de eventos es ahora un `h2`. Antes se saltaba del `h1` al `h3`.
+  - `scripts/a11y.mjs` comprueba además las reglas `heading-order` y `page-has-heading-one` de axe en las 36 rutas y estados, así que un salto de nivel hace fallar la comprobación.
+- **Corazón de favoritos (2.4.6, 4.1.2 y 2.5.3):**
+  - Su nombre incluye el evento («Guardar: Fedora» / «Guardado: Fedora»). Antes, con varias tarjetas, el lector de pantalla oía «Guardar, Guardar, Guardar…».
+  - Mantiene `aria-pressed`, y la palabra visible sigue formando parte del nombre.
+- **Avisos al guardar (4.1.3):** al añadir o quitar un favorito desde cualquier tarjeta o ficha se anuncia «"Fedora" añadido a favoritos» en una región `role="status"`. En la página de favoritos se usa su propio aviso con «Deshacer», para no anunciar dos veces.
+- **«Mostrar más» (2.4.3):** el foco pasa al título de la primera tarjeta nueva. Así, con teclado o lector de pantalla se sigue justo donde creció la lista, en vez de quedarse en el botón, que se ha desplazado hacia abajo.
+- **Áreas táctiles en móvil (2.5.5):**
+  - Se midieron con un navegador real a 390 px en todas las rutas.
+  - Pasan a 44 px: enlace «Saltar al contenido», opciones del selector de ciudad, idioma, buscador, «Ahora no», opciones de calendario, enlaces de recinto y artista («Web oficial», «Eventos», «Cómo llegar», «Ver ficha completa»), «Seguir artista», «Volver» y «Ver eventos».
+  - **Excepción documentada:** los títulos de tarjeta miden 25 px de alto, por encima de los 24 px del nivel AA (2.5.8). Cada tarjeta tiene además el botón «Ver detalle» de 44 px hacia la misma ficha, que cuenta como alternativa equivalente para 2.5.5. No se les añade relleno porque llevan un recorte a dos líneas y asomaría la tercera.
+- **Paneles:**
+  - Los modales (filtros, «Acerca de», bienvenida) atrapan el foco, se cierran con Esc y devuelven el foco al botón que los abrió.
+  - Los desplegables no modales («Cerca de mí», ciudad) se cierran con Esc y devuelven el foco. A propósito no lo atrapan, porque no bloquean el resto de la página.
+- **Pruebas:**
+  - `tests/a11y-p16.test.tsx`: un `h1` y tarjetas `h3`, nombre del corazón con el evento y aviso hablado al añadir y quitar, foco tras «Mostrar más».
+  - En navegador real: 108 comprobaciones de axe sin problemas (incluidas las nuevas reglas de estructura), sin peticiones a terceros, responsive y contraste correctos.

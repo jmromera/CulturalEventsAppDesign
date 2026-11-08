@@ -37,7 +37,9 @@ async function open(page, route) {
 
 async function audit(page, label) {
   const result = await new AxeBuilder({ page }).withTags(TAGS).analyze();
-  const violations = result.violations.map((violation) => ({
+  // Structure rules outside the WCAG tags: one h1 per page and no skipped heading levels.
+  const structure = await new AxeBuilder({ page }).withRules(["heading-order", "page-has-heading-one"]).analyze();
+  const violations = [...result.violations, ...structure.violations].map((violation) => ({
     id: violation.id,
     impact: violation.impact,
     help: violation.help,

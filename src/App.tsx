@@ -81,17 +81,19 @@ const visibleTags = (event: EventItem, city: string) => event.tags.filter((tag) 
 const isSoldOut = (event: EventItem) => /agotad/i.test(event.availability);
 const availabilityTone = (event: EventItem) => isSoldOut(event) ? "soldout" : !event.confirmed ? "pending" : /^consult/i.test(event.availability) ? "neutral" : "";
 
-function SaveButton({ active, onClick, t, compact = false }: { active: boolean; onClick: () => void; t: typeof copy.es; compact?: boolean }) {
+function SaveButton({ active, onClick, t, name, compact = false }: { active: boolean; onClick: () => void; t: typeof copy.es; name: string; compact?: boolean }) {
   const label = active ? t.savedLabel : t.save;
-  return <button className={`save-button ${active ? "active" : ""} ${compact ? "compact" : ""}`} onClick={onClick} aria-label={label} aria-pressed={active} title={label}><Icon name="heart" filled={active} /><span>{label}</span></button>;
+  return <button className={`save-button ${active ? "active" : ""} ${compact ? "compact" : ""}`} onClick={onClick} aria-label={`${label}: ${name}`} aria-pressed={active} title={label}><Icon name="heart" filled={active} /><span>{label}</span></button>;
 }
 
-function EventCard({ event, saved, onSave, t, featured = false, distance }: { event: EventItem; saved: boolean; onSave: () => void; t: typeof copy.es; featured?: boolean; distance?: string }) {
+// Card titles are h3 under a section h2; pages whose list sits right under the h1 pass headingLevel={2}.
+function EventCard({ event, saved, onSave, t, featured = false, distance, headingLevel = 3 }: { event: EventItem; saved: boolean; onSave: () => void; t: typeof copy.es; featured?: boolean; distance?: string; headingLevel?: 2 | 3 }) {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
   const venue = venueFor(event.venueId);
   const eventPath = cityPath(`/event/${event.id}`, venue.city);
   return <article className={`event-card ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
     <Link className="event-image" to={eventPath} aria-hidden="true" tabIndex={-1}><FallbackImage src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}</Link>
-    <div className="event-body"><div className="event-title-row"><Link className="event-title" to={eventPath}>{event.title}</Link><SaveButton active={saved} onClick={onSave} t={t} compact /></div>
+    <div className="event-body"><div className="event-title-row"><Heading className="event-title-heading"><Link className="event-title" to={eventPath}>{event.title}</Link></Heading><SaveButton active={saved} onClick={onSave} t={t} name={event.title} compact /></div>
       <p className="event-description">{event.description}</p>
       <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name}{distance && <strong className="event-distance"> · {distance}</strong>}</span><span><Icon name="time" />{event.duration}</span></div>
       <div className="tag-row">{visibleTags(event, venue.city).slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}</div>
@@ -119,7 +121,7 @@ function RelatedEventsSection({ entity, relatedEvents, title, t, showCount = tru
   const countTemplate = relatedEvents.length === 1 ? t.oneRelatedEvent : t.manyRelatedEvents;
   const countLabel = countTemplate.replace("{count}", String(relatedEvents.length));
   return <section className="artist-events-section">
-    <div className="artist-events-heading"><div><span className="kicker">{title}</span>{showCount && <h2>{countLabel}</h2>}</div>{showProfileLink && <Link to={`/entity/${entity.id}`} className="artist-profile-link">{t.viewEntity}<Icon name="chevron" /></Link>}</div>
+    <div className="artist-events-heading"><div>{showCount ? <><span className="kicker">{title}</span><h2>{countLabel}</h2></> : <h2 className="kicker artist-events-kicker">{title}</h2>}</div>{showProfileLink && <Link to={`/entity/${entity.id}`} className="artist-profile-link">{t.viewEntity}<Icon name="chevron" /></Link>}</div>
     <div className="artist-events-grid">{relatedEvents.map((relatedEvent) => <RelatedEventCard key={relatedEvent.id} event={relatedEvent} />)}</div>
   </section>;
 }
@@ -426,7 +428,14 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
   const listKey = [selectedCity, categories.join(","), when ?? "", slots.join(","), query, nearMe.position ? `near-${nearMe.radiusKm}` : ""].join("|");
   const [shown, setShown] = useState({ key: listKey, count: visibleCounts.get(listKey) ?? PAGE_SIZE });
   const visibleCount = shown.key === listKey ? shown.count : visibleCounts.get(listKey) ?? PAGE_SIZE;
+  const firstNewCard = useRef<number | null>(null);
+  useEffect(() => {
+    if (firstNewCard.current === null) return;
+    document.querySelectorAll<HTMLElement>("#catalogue .event-grid a.event-title")[firstNewCard.current]?.focus();
+    firstNewCard.current = null;
+  });
   const showMore = () => {
+    firstNewCard.current = visibleCount;
     const count = visibleCount + PAGE_SIZE;
     visibleCounts.set(listKey, count);
     setShown({ key: listKey, count });
@@ -457,7 +466,7 @@ function Home({ favouriteCategories, selectedCity, saved, toggleSaved, categorie
     ...(nearMe.position && nearMe.radiusKm !== null ? [{ key: "radius", label: `≤ ${nearMe.radiusKm} km`, remove: () => nearMe.setRadiusKm(null) }] : []),
   ];
   const clearAllFilters = () => { nearMe.setRadiusKm(null); clearFilters(); };
-  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><div className="catalogue-actions"><NearMePanel language={language} /><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters} aria-haspopup="dialog"><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div></div>{activeChips.length > 0 && <div className="active-filters" role="group" aria-label={filterText.activeFilters}>{activeChips.map((chip) => <button key={chip.key} type="button" className="active-filter" aria-label={filterText.removeFilter(chip.label)} onClick={chip.remove}>{chip.label}<span aria-hidden="true">×</span></button>)}{activeChips.length > 1 && <button type="button" className="active-filter-clear" onClick={clearAllFilters}>{filterText.clearAll}</button>}</div>}{filtered.length ? <><div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} distance={distanceLabel(event)} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : nearMe.position && nearMe.radiusKm !== null && matched.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={() => nearMe.setRadiusKm(null)}>{labels.viewAllEvents}</Button></div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
+  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><div className="catalogue-actions"><NearMePanel language={language} /><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters} aria-haspopup="dialog"><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div></div>{activeChips.length > 0 && <div className="active-filters" role="group" aria-label={filterText.activeFilters}>{activeChips.map((chip) => <button key={chip.key} type="button" className="active-filter" aria-label={filterText.removeFilter(chip.label)} onClick={chip.remove}>{chip.label}<span aria-hidden="true">×</span></button>)}{activeChips.length > 1 && <button type="button" className="active-filter-clear" onClick={clearAllFilters}>{filterText.clearAll}</button>}</div>}{filtered.length ? <><div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} distance={distanceLabel(event)} headingLevel={query ? 2 : 3} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : nearMe.position && nearMe.radiusKm !== null && matched.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={() => nearMe.setRadiusKm(null)}>{labels.viewAllEvents}</Button></div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
   const isSearching = query.length > 0;
   // Atajos de fecha del hero: cada uno muestra cuántos eventos hay y se desactiva si no hay ninguno.
   const whenNames: Record<(typeof whenOptions)[number], string> = { today: labels.whenToday, tomorrow: labels.whenTomorrow, week: t.thisWeek, month: labels.whenMonth };
@@ -544,7 +553,7 @@ function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: 
       <section><h2>{t.description}</h2><p>{event.fullDescription}</p></section>
       {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}><FallbackImage src={entity.image} alt="" icon="profile" width={124} height={124} /><div className="artist-profile-copy"><div className="artist-profile-head"><h3>{entity.name}</h3><span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></div><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}
       <section><h2>{t.practical}</h2><div className="info-grid"><div className="info-item info-item--location"><span><Icon name="location" /></span><div><small>{t.location}</small><strong>{venue.name}</strong><p>{venue.address}</p>{venue.mapsUrl && <a href={venue.mapsUrl} target="_blank" rel="noreferrer">{t.openInMaps}<Icon name="chevron" /></a>}</div></div><Info icon="profile" label={t.organizer} value={event.organizer} /></div></section>
-    </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className={`stock ${soldOut ? "stock--soldout" : ""}`}><i />{event.availability}</div>{ended ? <p className="purchase-provider">{t.eventEnded}</p> : soldOut ? null : <>{/\d/.test(event.price) ? <p className="purchase-price">{event.price}</p> : <p className="purchase-provider">{t.ticketsAt.replace("{provider}", event.organizer)}</p>}<p>{event.confirmed ? (event.time === "Por confirmar" ? t.confirmedTimePending : t.confirmed) : t.pending}</p><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small>{canBook(event) && <Link className="button button--secondary booking-cta" to={`/event/${event.id}/reservar?city=${encodeURIComponent(venue.city)}`}>{bookingCopy[language].cta}</Link>}</>}<SaveButton active={saved} onClick={toggleSaved} t={t} /></aside></div>
+    </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className={`stock ${soldOut ? "stock--soldout" : ""}`}><i />{event.availability}</div>{ended ? <p className="purchase-provider">{t.eventEnded}</p> : soldOut ? null : <>{/\d/.test(event.price) ? <p className="purchase-price">{event.price}</p> : <p className="purchase-provider">{t.ticketsAt.replace("{provider}", event.organizer)}</p>}<p>{event.confirmed ? (event.time === "Por confirmar" ? t.confirmedTimePending : t.confirmed) : t.pending}</p><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small>{canBook(event) && <Link className="button button--secondary booking-cta" to={`/event/${event.id}/reservar?city=${encodeURIComponent(venue.city)}`}>{bookingCopy[language].cta}</Link>}</>}<SaveButton active={saved} onClick={toggleSaved} t={t} name={event.title} /></aside></div>
     <section className="venue-overview"><div className={`venue-info-card ${venue.image ? "" : "venue-info-card--text-only"}`}>{venue.image && <FallbackImage className="venue-about-image" src={venue.image} alt={venueAlt(venue.name, language)} icon="location" category={venueCategoryKey(venue.kind.es)} width={640} height={360} />}<div className="venue-about-copy"><span className="kicker">{t.venueAbout}</span><span className="venue-kind"><BrandMark className="venue-kind-mark" />{venue.city} · {venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p>{(venue.websiteUrl || venue.programmeUrl) && <div className="venue-info-footer">{venue.websiteUrl && <a href={venue.websiteUrl} target="_blank" rel="noreferrer">{venueLinkLabels.website}<Icon name="chevron" /></a>}{venue.programmeUrl && venue.programmeLabel && <a href={venue.programmeUrl} target="_blank" rel="noreferrer">{venue.programmeLabel[language]}<Icon name="chevron" /></a>}</div>}</div></div></section>
     {entity && <RelatedEventsSection entity={entity} relatedEvents={entityEvents} title={entity.relatedEventsTitle[language]} t={t} />}
     {venueEvents.length > 0 && <section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} /><div className="venue-event-grid">{venueEvents.map((item) => <EventCard key={item.id} event={item} saved={savedIds.includes(item.id)} onSave={() => toggleSavedId(item.id)} t={t} />)}</div></div></section>}
@@ -557,13 +566,13 @@ function Info({ icon, label, value }: { icon: IconName; label: string; value: st
 }
 
 const favouritesCopy: Record<Language, {
-  upcoming: string; past: string; pastHint: string; remove: (title: string) => string; removed: (title: string) => string; undo: string;
+  upcoming: string; past: string; pastHint: string; remove: (title: string) => string; removed: (title: string) => string; added: (title: string) => string; undo: string;
   removePast: string; removedPast: (n: number) => string; addAllToCalendar: string; calendarDone: (n: number, skipped: number) => string; share: string; shareTitle: string; linkCopied: string;
   sharedTitle: string; sharedText: string; saveAll: (n: number) => string; savedAll: (n: number) => string; seeMine: string; sharedEmpty: string;
 }> = {
   es: {
     upcoming: "Próximos", past: "Pasados", pastHint: "Estos eventos ya se han celebrado. Puedes quitarlos de tu lista.",
-    remove: (title) => `Quitar «${title}» de favoritos`, removed: (title) => `«${title}» quitado de favoritos.`, undo: "Deshacer",
+    remove: (title) => `Quitar «${title}» de favoritos`, removed: (title) => `«${title}» quitado de favoritos.`, added: (title) => `«${title}» añadido a favoritos.`, undo: "Deshacer",
     removePast: "Quitar todos los pasados", removedPast: (n) => `${n} ${n === 1 ? "evento pasado quitado" : "eventos pasados quitados"} de favoritos.`, addAllToCalendar: "Añadir todos al calendario",
     calendarDone: (n, skipped) => `Descargado un calendario con ${n} ${n === 1 ? "evento" : "eventos"}.${skipped ? ` ${skipped} sin fecha u hora cerrada no se han incluido.` : ""}`,
     share: "Compartir lista", shareTitle: "Mis planes en Plan Cerca", linkCopied: "Enlace a la lista copiado.",
@@ -573,7 +582,7 @@ const favouritesCopy: Record<Language, {
   },
   en: {
     upcoming: "Upcoming", past: "Past", pastHint: "These events have already taken place. You can remove them from your list.",
-    remove: (title) => `Remove “${title}” from favourites`, removed: (title) => `“${title}” removed from favourites.`, undo: "Undo",
+    remove: (title) => `Remove “${title}” from favourites`, removed: (title) => `“${title}” removed from favourites.`, added: (title) => `“${title}” added to favourites.`, undo: "Undo",
     removePast: "Remove all past events", removedPast: (n) => `${n} past ${n === 1 ? "event" : "events"} removed from favourites.`, addAllToCalendar: "Add all to calendar",
     calendarDone: (n, skipped) => `Downloaded a calendar with ${n} ${n === 1 ? "event" : "events"}.${skipped ? ` ${skipped} without a fixed date or time were left out.` : ""}`,
     share: "Share list", shareTitle: "My plans on Plan Cerca", linkCopied: "Link to the list copied.",
@@ -583,7 +592,7 @@ const favouritesCopy: Record<Language, {
   },
   fr: {
     upcoming: "À venir", past: "Passés", pastHint: "Ces événements ont déjà eu lieu. Vous pouvez les retirer de votre liste.",
-    remove: (title) => `Retirer « ${title} » des favoris`, removed: (title) => `« ${title} » retiré des favoris.`, undo: "Annuler",
+    remove: (title) => `Retirer « ${title} » des favoris`, removed: (title) => `« ${title} » retiré des favoris.`, added: (title) => `« ${title} » ajouté aux favoris.`, undo: "Annuler",
     removePast: "Retirer tous les événements passés", removedPast: (n) => `${n} ${n === 1 ? "événement passé retiré" : "événements passés retirés"} des favoris.`, addAllToCalendar: "Tout ajouter au calendrier",
     calendarDone: (n, skipped) => `Calendrier téléchargé avec ${n} ${n === 1 ? "événement" : "événements"}.${skipped ? ` ${skipped} sans date ou heure fixe n’ont pas été inclus.` : ""}`,
     share: "Partager la liste", shareTitle: "Mes sorties sur Plan Cerca", linkCopied: "Lien vers la liste copié.",
@@ -655,7 +664,7 @@ function Saved({ saved, toggleSaved, addSaved, explore, title, language, t }: { 
   };
   const toSave = upcoming.filter((event) => !saved.includes(event.id)).map((event) => event.id);
   const saveShared = () => { addSaved(toSave); setNotice({ message: text.savedAll(toSave.length) }); };
-  const cards = (list: EventItem[]) => <div className="event-grid">{list.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => (isShared ? toggleSaved(event.id) : remove(event))} t={t} />)}</div>;
+  const cards = (list: EventItem[]) => <div className="event-grid">{list.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => (isShared ? toggleSaved(event.id) : remove(event))} t={t} headingLevel={isShared ? 2 : 3} />)}</div>;
 
   const live = <div className="saved-notice" role="status" aria-live="polite">{notice && <><span>{notice.message}</span>{notice.undoId !== undefined && <button ref={undoButton} type="button" onClick={undo}>{text.undo}</button>}</>}</div>;
 
@@ -872,7 +881,14 @@ export default function App() {
   };
   const goToEvents = () => { setSearchQuery(""); navigateWithCity("/"); };
   const addSaved = (ids: number[]) => { savedChanged.current = true; setSaved((current) => [...current, ...ids.filter((id) => !current.includes(id))]); };
-  const toggleSaved = (id: number) => { savedChanged.current = true; setSaved((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]); };
+  const [savedAnnouncement, setSavedAnnouncement] = useState("");
+  const announceSaved = (id: number, added: boolean) => {
+    const title = [...events, ...endedEvents].find((event) => event.id === id)?.title ?? "";
+    setSavedAnnouncement(added ? favouritesCopy[language].added(title) : favouritesCopy[language].removed(title));
+  };
+  const toggleSaved = (id: number) => {
+    // The favourites page shows its own notice with «Deshacer».
+    if (pathname !== "/favorites") announceSaved(id, !saved.includes(id)); savedChanged.current = true; setSaved((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]); };
   const goBack = () => {
     const historyIndex = window.history.state?.idx;
     if (typeof historyIndex === "number" && historyIndex > 0) navigate(-1);
@@ -926,7 +942,7 @@ export default function App() {
   const clearFilters = () => navigate(withParams((params) => { for (const key of ["cat", "when", "franja", "filters"]) params.delete(key); }), { replace: true });
   const setSlots = (slots: TimeSlot[]) => navigate(withParams((params) => slotsParam(params, slots)), { replace: true });
   const homePage = <Home favouriteCategories={profile.categories} selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
-  return <NearMeProvider><div className="app-shell"><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} /><div className="main-shell">
+  return <NearMeProvider><div className="app-shell"><p className="sr-only" role="status" aria-live="polite">{savedAnnouncement}</p><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={homePage} />

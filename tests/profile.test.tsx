@@ -34,7 +34,7 @@ describe("Profile page", () => {
     fireEvent.click(within(categories).getByRole("button", { name: "Teatro" }));
     expect(stored()).toEqual({ avatar: "mask", categories: ["Teatro"] });
     expect(within(categories).getByRole("button", { name: "Teatro" }).getAttribute("aria-pressed")).toBe("true");
-    expect(screen.getByRole("status").textContent).toBe("Cambios guardados en este navegador.");
+    expect(document.querySelector(".profile-status")!.textContent).toBe("Cambios guardados en este navegador.");
     // The data tools export (and delete) the profile too.
     expect(exportStoredData()[STORAGE_KEYS.profile]).toEqual({ avatar: "mask", categories: ["Teatro"] });
   });

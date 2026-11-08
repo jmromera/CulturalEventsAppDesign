@@ -826,3 +826,17 @@ a.guest-profile>span .icon{width:20px;height:20px}
 .booking-page h1,.profile-page h1{font-size:clamp(32px,7vw,48px);line-height:1.1}
 .booking-panel>p{margin:0 0 12px}
 .booking-code{margin:16px 0!important}
+
+/* P1.6 · Touch targets of at least 44 × 44 px on mobile (brief; WCAG 2.5.5). Text links inside sentences are exempt. */
+@media(max-width:650px){
+  .skip-link,.header-city-option,.city-onboarding-dismiss,.detail-calendar-option,.venue-name-link,.artist-profile-link,.artist-action,
+  .artist-profile-links>a,.venue-info-footer>a,.detail-top>button,.venue-detail-address>a,.artist-actions-links>a,.venue-directory-card .button{min-height:44px;display:inline-flex;align-items:center}
+  .site-header .language-select,.site-header .language-select select{min-height:44px}
+  .global-search input{min-height:44px}
+  .legal-article dd>a{display:inline-block;padding:11px 0}
+}
+/* Card titles are h3 (one h1 per page, h2 per section); the heading keeps the link's look. */
+.event-title-heading{flex:1;min-width:0;margin:0;font:inherit;letter-spacing:inherit}
+.event-title-heading .event-title{display:-webkit-box}
+/* Section label promoted to h2 (heading order) keeps the small "kicker" look. */
+.artist-events-heading h2.artist-events-kicker{margin:0;font-size:12px;line-height:1.4;letter-spacing:inherit}

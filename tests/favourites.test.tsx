@@ -32,9 +32,9 @@ describe("Favourites page", () => {
     visit("/favorites", [89, 99]);
     const card = screen.getAllByRole("article")[0];
     const title = within(card).getByRole("link", { name: /Muse|TINI/ }).textContent!;
-    fireEvent.click(within(card).getByRole("button", { name: "Guardado" }));
+    fireEvent.click(within(card).getByRole("button", { name: `Guardado: ${title}` }));
     expect(screen.getAllByRole("article")).toHaveLength(1);
-    expect(screen.getByRole("status").textContent).toContain(`«${title}» quitado de favoritos`);
+    expect(document.querySelector(".saved-notice")!.textContent).toContain(`«${title}» quitado de favoritos`);
     const undo = screen.getByRole("button", { name: "Deshacer" });
     expect(document.activeElement).toBe(undo);
     fireEvent.click(undo);
@@ -63,7 +63,7 @@ describe("Favourites page", () => {
     expect(new Set(uids).size).toBe(3);
     for (const id of [89, 99, 104]) expect(ics).toContain(`URL:${window.location.origin}/event/${id}`);
     expect(ics).not.toContain("/event/16");
-    expect(screen.getByRole("status").textContent).toContain("3 eventos");
+    expect(document.querySelector(".saved-notice")!.textContent).toContain("3 eventos");
   });
 });
 
