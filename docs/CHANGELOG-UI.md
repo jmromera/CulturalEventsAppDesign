@@ -195,7 +195,10 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - La trampa de foco contaba como tabulables los días del calendario con `tabindex="-1"`, así que el Tab recorría los 42 días. Se excluyen del selector.
   - El mes salía como «Noviembre De 2026» por el `text-transform: capitalize`; ahora solo se pone en mayúscula la primera letra.
   - «Quitar todos» encadenaba dos navegaciones y la segunda pisaba la primera; ahora es una sola.
+  - Con «Cerca de mí» activo, el recuento del panel no aplicaba el radio: podía prometer «Ver 44 resultados» y la lista mostrar 12. Ahora la lista, el recuento y los puntos del calendario usan la misma función de filtrado, y un test comprueba que el número prometido es el que sale.
+  - Cerrar el panel con × o Esc dejaba una entrada repetida en el historial y el primer «Atrás» no hacía nada. Ahora, si el panel se abrió con el botón, al cerrarlo se vuelve atrás en el historial.
+  - El mes del calendario era un `h4` dentro de un diálogo con `h2`; ahora es `h3`, sin saltos de nivel.
 - **Pruebas:**
-  - `tests/filters-drawer.test.tsx`: franjas (límites 14:00 y 20:00, horas sin confirmar), lectura de `franja`, trampa de foco y Esc, recuento en vivo, chip que se quita, «Quitar todos», botón desactivado con 0 resultados, calendario con flechas y AvPág.
+  - `tests/filters-drawer.test.tsx`: franjas (límites 14:00 y 20:00, horas sin confirmar), lectura de `franja`, trampa de foco y Esc, recuento en vivo, chip que se quita, «Quitar todos», botón desactivado con 0 resultados (día posterior al catálogo), número prometido igual al de la lista con radio de 1 km, calendario con flechas y AvPág.
   - En navegador real: 89 comprobaciones de axe sin problemas (panel abierto, calendario con teclado y chips aplicados), sin peticiones a terceros, responsive y contraste correctos.
   - Capturas: `docs/capturas/despues/filtros-panel-390.jpg`, `filtros-panel-1440.jpg`, `filtros-chips-390.jpg`, `filtros-chips-1440.jpg`.

@@ -727,8 +727,8 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 /* Month calendar inside the filters panel. */
 .month-calendar{max-width:340px}
 .month-calendar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.month-calendar-head h4{margin:0;font-size:15px}
-.month-calendar-head h4::first-letter{text-transform:uppercase}
+.month-calendar-head h3{margin:0;font-size:15px}
+.month-calendar-head h3::first-letter{text-transform:uppercase}
 .month-calendar-head button{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit;font-size:20px;cursor:pointer}
 .month-calendar-head button:disabled{opacity:.35;cursor:not-allowed}
 .month-calendar table{width:100%;border-collapse:collapse;table-layout:fixed}

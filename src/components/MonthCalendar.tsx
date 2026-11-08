@@ -60,7 +60,7 @@ export default function MonthCalendar({ selected, onSelect, countFor, language, 
   return <div className="month-calendar">
     <div className="month-calendar-head">
       <button type="button" aria-label={text.previous} onClick={() => move(new Date(month.getFullYear(), month.getMonth() - 1, 1))} disabled={month <= new Date(today.getFullYear(), today.getMonth(), 1)}>‹</button>
-      <h4 id="calendar-month" aria-live="polite">{monthName}</h4>
+      <h3 id="calendar-month" aria-live="polite">{monthName}</h3>
       <button type="button" aria-label={text.next} onClick={() => move(new Date(month.getFullYear(), month.getMonth() + 1, 1))}>›</button>
     </div>
     <table ref={gridRef} role="grid" aria-labelledby="calendar-month">

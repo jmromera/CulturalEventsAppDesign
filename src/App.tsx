@@ -434,20 +434,12 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, slo
   const filterText = filtersCopy[language];
   const cityEvents = events.filter((event) => venueFor(event.venueId).city === selectedCity);
   const query = normalizeSearch(searchQuery.trim());
-  const matchesSearch = (event: EventItem) => {
+  const matchesSearch = (event: EventItem, range = dateRange, eventSlots = slots) => {
     const venue = venueFor(event.venueId);
     const matchesCategory = !categories.length || categories.includes(event.category);
     const matchesQuery = !query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query);
-    return matchesCategory && matchesQuery && eventInRange(event, dateRange) && matchesSlots(event, slots);
+    return matchesCategory && matchesQuery && eventInRange(event, range) && matchesSlots(event, eventSlots);
   };
-  // Live count for the filters panel: same rules as the list, with the draft city, date and time slots.
-  const countResults = (draft: FilterDraft) => events.filter((event) => {
-    const venue = venueFor(event.venueId);
-    return venue.city === draft.city && (!categories.length || categories.includes(event.category))
-      && (!query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query))
-      && eventInRange(event, dateRangeFor(draft.when)) && matchesSlots(event, draft.slots);
-  }).length;
-  const countForDay = (city: City, key: string) => events.filter((event) => venueFor(event.venueId).city === city && (!categories.length || categories.includes(event.category)) && eventInRange(event, [key, key])).length;
   const nearMe = useNearMe();
   // List or map. Kept in memory (not in the URL) so a shared link never opens the map without a click.
   const [view, setView] = useState<"list" | "map">("list");
@@ -457,12 +449,15 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, slo
     const venue = venueFor(event.venueId);
     return nearMe.position && venue.lat != null && venue.lng != null ? distanceKm(nearMe.position, { lat: venue.lat, lng: venue.lng }) : null;
   };
-  const matched = cityEvents.filter(matchesSearch);
-  const filtered = nearMe.position
-    ? matched
-      .filter((event) => nearMe.radiusKm === null || (distanceTo(event) ?? Infinity) <= nearMe.radiusKm)
-      .sort((a, b) => (distanceTo(a) ?? Infinity) - (distanceTo(b) ?? Infinity) || (a.startDate ?? "").localeCompare(b.startDate ?? ""))
-    : matched;
+  const inRadius = (event: EventItem) => !nearMe.position || nearMe.radiusKm === null || (distanceTo(event) ?? Infinity) <= nearMe.radiusKm;
+  // One predicate for the list, the live count in the filters panel and the calendar dots, so the three always agree.
+  const matchesList = (event: EventItem, city: City, range: typeof dateRange, eventSlots: TimeSlot[]) =>
+    venueFor(event.venueId).city === city && matchesSearch(event, range, eventSlots) && inRadius(event);
+  const countResults = (draft: FilterDraft) => events.filter((event) => matchesList(event, draft.city, dateRangeFor(draft.when), draft.slots)).length;
+  const countForDay = (city: City, key: string, daySlots: TimeSlot[]) => events.filter((event) => matchesList(event, city, [key, key], daySlots)).length;
+  const matched = cityEvents.filter((event) => matchesSearch(event));
+  const filtered = cityEvents.filter((event) => matchesList(event, selectedCity, dateRange, slots));
+  if (nearMe.position) filtered.sort((a, b) => (distanceTo(a) ?? Infinity) - (distanceTo(b) ?? Infinity) || (a.startDate ?? "").localeCompare(b.startDate ?? ""));
   const distanceLabel = (event: EventItem) => { const km = distanceTo(event); return km === null ? undefined : formatDistance(km, language); };
   const listKey = [selectedCity, categories.join(","), when ?? "", slots.join(","), query, nearMe.position ? `near-${nearMe.radiusKm}` : ""].join("|");
   const [shown, setShown] = useState({ key: listKey, count: visibleCounts.get(listKey) ?? PAGE_SIZE });
@@ -809,9 +804,15 @@ export default function App() {
     if (slots.length) params.set("franja", slots.map((slot) => SLOT_URL_NAMES[slot]).join(","));
     else params.delete("franja");
   };
-  const goFilters = () => navigate(withParams((params) => params.set("filters", "1")));
-  const closeFilters = () => navigate(withParams((params) => params.delete("filters")), { replace: true });
+  // Opening pushes a history entry, so closing goes back to it (Back then works as expected); a direct link to the panel is replaced instead.
+  const filtersPushed = useRef(false);
+  const goFilters = () => { filtersPushed.current = true; navigate(withParams((params) => params.set("filters", "1"))); };
+  const closeFilters = () => {
+    if (filtersPushed.current) { filtersPushed.current = false; navigate(-1); }
+    else navigate(withParams((params) => params.delete("filters")), { replace: true });
+  };
   const applyFilters = ({ city, when, slots }: FilterDraft) => {
+    filtersPushed.current = false;
     navigate(withParams((params) => {
       params.delete("filters");
       params.set("city", city);

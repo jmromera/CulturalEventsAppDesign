@@ -1,6 +1,6 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import App from "../src/App";
 import MonthCalendar from "../src/components/MonthCalendar";
 import { PreferredCityProvider } from "../src/context/PreferredCityContext";
@@ -87,11 +87,29 @@ describe("Filters panel", () => {
   it("disables the apply button when nothing matches", () => {
     renderHome();
     const dialog = openFilters();
-    fireEvent.click(within(dialog).getByRole("button", { name: /^Mañana \(/ }));
-    fireEvent.click(within(dialog).getByRole("button", { name: "Hoy" }));
-    const button = applyButton(dialog);
-    if (countOf(dialog) === 0) expect((button as HTMLButtonElement).disabled).toBe(true);
-    else expect((button as HTMLButtonElement).disabled).toBe(false);
+    // A day well after the end of the catalogue (March 2027) never has events, whatever today is.
+    for (let month = 0; month < 14; month += 1) fireEvent.keyDown(within(dialog).getByRole("grid").querySelector("button[tabindex='0']")!, { key: "PageDown" });
+    fireEvent.click(within(dialog).getByRole("grid").querySelector<HTMLButtonElement>("button[tabindex='0']")!);
+    const button = applyButton(dialog) as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
+    expect(button.textContent).toBe("Sin resultados con estos filtros");
+  });
+
+  it("promises exactly the results the list then shows, also with a «Cerca de mí» radius", async () => {
+    Object.defineProperty(navigator, "geolocation", { configurable: true, value: { getCurrentPosition: vi.fn((success: PositionCallback) => success({ coords: { latitude: 39.46975, longitude: -0.37739, accuracy: 30 }, timestamp: Date.now() } as unknown as GeolocationPosition)) } });
+    renderHome();
+    const listCount = () => Number(document.querySelector("#catalogue")!.textContent!.match(/VALENCIA · (\d+)/)![1]);
+    const total = listCount();
+    fireEvent.click(screen.getByRole("button", { name: "Cerca de mí" }));
+    fireEvent.click(screen.getByRole("button", { name: "Usar mi ubicación" }));
+    await waitFor(() => expect(screen.getByRole("button", { name: "1 km" })).toBeTruthy());
+    fireEvent.click(screen.getByRole("button", { name: "1 km" }));
+    expect(listCount()).toBeLessThan(total);
+    const dialog = openFilters();
+    const promised = countOf(dialog);
+    expect(promised).toBe(listCount());
+    fireEvent.click(applyButton(dialog));
+    expect(listCount()).toBe(promised);
   });
 });
 

@@ -44,7 +44,7 @@ export const filtersCopy: Record<Language, {
 
 export default function FiltersDrawer({ initial, language, onClose, onApply, countResults, countForDay }: {
   initial: FilterDraft; language: Language; onClose: () => void; onApply: (draft: FilterDraft) => void;
-  countResults: (draft: FilterDraft) => number; countForDay: (city: City, key: string) => number;
+  countResults: (draft: FilterDraft) => number; countForDay: (city: City, key: string, slots: TimeSlot[]) => number;
 }) {
   const text = filtersCopy[language];
   const [draft, setDraft] = useState<FilterDraft>(initial);
@@ -75,7 +75,7 @@ export default function FiltersDrawer({ initial, language, onClose, onApply, cou
             {WHEN_SHORTCUTS.map((option) => <button key={option} type="button" aria-pressed={draft.when === option} onClick={() => setDraft({ ...draft, when: draft.when === option ? null : option })}>{text.whenNames[option]}</button>)}
           </div>
           <p className="drawer-sublabel">{text.orPickDay}</p>
-          <MonthCalendar language={language} selected={isDay ? draft.when : null} onSelect={(key) => setDraft({ ...draft, when: draft.when === key ? null : key })} countFor={(key) => countForDay(draft.city, key)} />
+          <MonthCalendar language={language} selected={isDay ? draft.when : null} onSelect={(key) => setDraft({ ...draft, when: draft.when === key ? null : key })} countFor={(key) => countForDay(draft.city, key, draft.slots)} />
         </fieldset>
         <fieldset>
           <legend className="drawer-label">{text.slots}</legend>
