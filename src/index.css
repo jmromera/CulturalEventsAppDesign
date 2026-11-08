@@ -935,3 +935,17 @@ button.guest-profile[aria-expanded="true"]{color:var(--accent-text)}
   .detail-page{padding-bottom:84px}
 }
 @media(prefers-reduced-motion:reduce){.detail-mobile-cta,.detail-mobile-cta.visible{transition:none}}
+
+/* P2.6 · Footer: the page shell fills the screen so short pages do not need min-height:100vh (which pushed the
+   footer a full screen down), no stacked gaps before the footer, and the footer's own links on one row. */
+.app-shell{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+.app-shell>.main-shell{flex:1 0 auto}
+.subpage{min-height:0}
+.home-content{padding-bottom:64px}
+.home-content>section:last-child{margin-bottom:0}
+.site-footer{margin-top:0}
+.site-footer .site-footer-meta{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 22px}
+.site-footer .site-footer-meta small{flex-basis:100%;margin-top:6px}
+@media(max-width:650px){.home-content{padding-bottom:48px}.site-footer-legal ul{row-gap:0}}
+.app-shell>.main-shell{display:flex;flex-direction:column}
+.main-shell>main{flex:1 0 auto}

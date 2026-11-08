@@ -479,3 +479,16 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/detail.test.tsx`: un solo «Guardar», «por confirmar» una vez y barra fuera del orden de tabulación mientras está oculta.
   - En navegador real: la barra aparece al bajar y desaparece al subir, 112 comprobaciones de axe sin problemas (nueva: ficha con la barra visible), responsive correcto.
   - Capturas: `docs/capturas/despues/ficha-390.jpg`, `ficha-barra-compra-390.jpg`, `ficha-tarjeta-fija-1440.jpg`.
+
+### Iteración P2.6 · Pie sin huecos
+
+- **Qué:**
+  - **Páginas cortas:** el contenido ya no reserva una pantalla entera (`min-height: 100vh`). Ahora el contenedor de la página ocupa la altura de la pantalla y el pie se queda abajo del todo, sin dejar media pantalla vacía (favoritos vacío, perfil, páginas legales) ni espacio libre debajo.
+  - **Portada:** desaparece el hueco de unos 220 px que se acumulaba entre «Mostrar más» y el pie (margen de la última sección, más relleno inferior, más margen del pie).
+  - **Enlaces del pie:** «Tu perfil» y «Acerca de» van en una sola fila, alineados con el texto y con el ©.
+- **Por qué:** **Estética y diseño minimalista (Nielsen 8)** y **proximidad (Gestalt):** lo que va junto se ve junto, y el pie no parece desconectado del contenido.
+- **Problemas encontrados:** el pie está dentro del contenedor de la página, no a su mismo nivel. Por eso el primer intento dejaba espacio libre debajo del pie, y el reparto de altura se movió a ese contenedor.
+- **Pruebas:**
+  - En navegador real, a 1440 × 900, el borde inferior del pie coincide con el de la pantalla en favoritos vacío y al final de la portada.
+  - axe sin problemas (112 comprobaciones), responsive y sin terceros.
+  - Capturas: `docs/capturas/despues/pie-vacio-1440.jpg`, `pie-inicio-390.jpg`, `pie-inicio-1440.jpg`.
