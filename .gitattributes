@@ -144,3 +144,7 @@
 *.stl                filter=lfs diff=lfs merge=lfs -text
 *.nc                 filter=lfs diff=lfs merge=lfs -text
 *.mat                filter=lfs diff=lfs merge=lfs -text
+
+# Images served by the website must be real files in git (not LFS pointers), so the
+# deploy works even if the hosting provider does not fetch LFS objects.
+public/images/** -filter binary

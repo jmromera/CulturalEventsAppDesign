@@ -5,24 +5,52 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/generate-sitemap.mjs && vite build",
     "preview": "vite preview",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check:terceros": "node scripts/check-external-requests.mjs",
+    "images:self-host": "node scripts/self-host-images.mjs",
+    "check:a11y": "node scripts/a11y.mjs",
+    "check:contraste": "node scripts/hero-contrast.mjs",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "check:pie": "node scripts/check-footer.mjs",
+    "check:responsive": "node scripts/responsive.mjs",
+    "images:variants": "node scripts/image-variants.mjs",
+    "images:fetch": "node scripts/fetch-event-images.mjs"
   },
   "dependencies": {
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/manrope": "^5.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^6.0.0",
+    "jsdom": "^31.0.0",
     "oxfmt": "^0.2.0",
+    "playwright": "^1.65.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0",
-    "vite": "^8.0.5"
-  }
+    "vite": "^8.3.6",
+    "vitest": "^4.1.12"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": ">=8.5.23",
+      "nanoid@<4": ">=3.3.18 <4",
+      "source-map-js": ">=1.2.2"
+    }
+  },
+  "packageManager": "pnpm@10.34.7"
 }

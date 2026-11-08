@@ -1,0 +1,67 @@
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { describe, expect, it } from "vitest";
+import App from "../src/App";
+import { PreferredCityProvider } from "../src/context/PreferredCityContext";
+import { DEFAULT_PROFILE, readProfile } from "../src/data/profile";
+import { exportStoredData, STORAGE_KEYS } from "../src/data/storage-keys";
+
+const visit = (path: string) => render(<MemoryRouter initialEntries={[path]}><PreferredCityProvider><App /></PreferredCityProvider></MemoryRouter>);
+const stored = () => JSON.parse(window.localStorage.getItem(STORAGE_KEYS.profile) ?? "null");
+
+describe("Profile page", () => {
+  it("stores nothing just by visiting it", () => {
+    visit("/perfil");
+    expect(screen.getByRole("heading", { level: 1, name: "Tu perfil" })).toBeTruthy();
+    expect(Object.keys(window.localStorage)).toEqual([]);
+  });
+
+  it("is reachable from the avatar menu, which closes with Esc and returns focus", () => {
+    window.localStorage.setItem(STORAGE_KEYS.onboardingDismissed, "true");
+    window.localStorage.setItem(STORAGE_KEYS.savedEvents, "[89,99]");
+    visit("/?city=Valencia");
+    const button = screen.getByRole("button", { name: "Tu perfil" });
+    expect(button.getAttribute("aria-expanded")).toBe("false");
+    fireEvent.click(button);
+    expect(button.getAttribute("aria-expanded")).toBe("true");
+    expect(screen.getByRole("link", { name: "Favoritos (2)" })).toBeTruthy();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByRole("link", { name: "Favoritos (2)" })).toBeNull();
+    expect(document.activeElement).toBe(button);
+    fireEvent.click(button);
+    fireEvent.click(within(document.getElementById("profile-menu-list")!).getByRole("link", { name: "Tu perfil" }));
+    expect(screen.getByRole("heading", { level: 1, name: "Tu perfil" })).toBeTruthy();
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("saves the avatar and favourite categories only when they change, and confirms it", () => {
+    window.localStorage.setItem(STORAGE_KEYS.onboardingDismissed, "true");
+    visit("/perfil");
+    fireEvent.click(screen.getByRole("radio", { name: "Máscaras de teatro" }));
+    const categories = screen.getByRole("group", { name: "Categorías favoritas" });
+    fireEvent.click(within(categories).getByRole("button", { name: "Teatro" }));
+    expect(stored()).toEqual({ avatar: "mask", categories: ["Teatro"] });
+    expect(within(categories).getByRole("button", { name: "Teatro" }).getAttribute("aria-pressed")).toBe("true");
+    expect(document.querySelector(".profile-status")!.textContent).toBe("Cambios guardados en este navegador.");
+    // The data tools export (and delete) the profile too.
+    expect(exportStoredData()[STORAGE_KEYS.profile]).toEqual({ avatar: "mask", categories: ["Teatro"] });
+  });
+
+  it("remembers the default city and the language from the same page", () => {
+    window.localStorage.setItem(STORAGE_KEYS.onboardingDismissed, "true");
+    visit("/perfil");
+    fireEvent.change(screen.getByRole("combobox", { name: "Ciudad por defecto" }), { target: { value: "Bilbao" } });
+    expect(window.localStorage.getItem(STORAGE_KEYS.preferredCity)).toBe("Bilbao");
+    expect(screen.getByRole("heading", { level: 1, name: "Tu perfil" })).toBeTruthy();
+    fireEvent.change(screen.getByRole("combobox", { name: "Idioma" }), { target: { value: "en" } });
+    expect(window.localStorage.getItem(STORAGE_KEYS.language)).toBe("en");
+    expect(screen.getByRole("heading", { level: 1, name: "Your profile" })).toBeTruthy();
+  });
+
+  it("falls back to the defaults when the stored profile is broken or unknown", () => {
+    window.localStorage.setItem(STORAGE_KEYS.profile, "{not json");
+    expect(readProfile()).toEqual(DEFAULT_PROFILE);
+    window.localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify({ avatar: "<img>", categories: ["Teatro", "Nope", "Teatro"] }));
+    expect(readProfile()).toEqual({ avatar: "profile", categories: ["Teatro"] });
+  });
+});

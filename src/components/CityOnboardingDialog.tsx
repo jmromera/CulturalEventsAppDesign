@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { LEGAL_PATHS } from "../legal/legal-copy";
 import { onboardingCopy } from "../data/translations";
 import { cities, type City } from "../types/Event";
 import { usePreferredCity } from "../context/PreferredCityContext";
@@ -6,7 +8,13 @@ import { usePreferredCity } from "../context/PreferredCityContext";
 type Language = keyof typeof onboardingCopy;
 
 export default function CityOnboardingDialog({ language }: { language: Language }) {
-  const { selectedCity, detectedCity, status, onboardingOpen, selectCity, requestLocation, dismissOnboarding } = usePreferredCity();
+  const { selectedCity, detectedCity, status, onboardingOpen: requested, selectCity, requestLocation, dismissOnboarding } = usePreferredCity();
+  // Never cover the legal pages or the "your data" page: people go there to read or delete, not to share their location.
+  // Nor a shared favourites list: it mixes cities and the person came to see that list.
+  const { pathname, search } = useLocation();
+  const isSharedList = pathname === "/favorites" && new URLSearchParams(search).has("lista");
+  // Nor the profile page, which has its own default-city selector.
+  const onboardingOpen = requested && !isSharedList && pathname !== "/perfil" && !(Object.values(LEGAL_PATHS) as string[]).includes(pathname);
   const [manualSelection, setManualSelection] = useState(false);
   const [manualCity, setManualCity] = useState<City>(detectedCity ?? selectedCity);
   const dialogRef = useRef<HTMLElement>(null);
@@ -71,7 +79,8 @@ export default function CityOnboardingDialog({ language }: { language: Language 
           {cities.map((city) => <option value={city} key={city}>{city}</option>)}
         </select>
         <button type="button" className="button button--primary" onClick={() => selectCity(manualCity)}>{labels.viewEvents.replace("{city}", manualCity)}</button>
-        <button type="button" className="button button--secondary" onClick={requestLocation} disabled={status === "loading"}>{status === "loading" ? labels.locating : labels.useLocation}</button>
+        <button type="button" className="button button--secondary" onClick={requestLocation} disabled={status === "loading"} aria-describedby="location-privacy">{status === "loading" ? labels.locating : labels.useLocation}</button>
+        <p id="location-privacy" className="city-onboarding-privacy">{labels.locationPrivacy}</p>
       </div>}
       <button type="button" className="city-onboarding-dismiss" onClick={dismissOnboarding}>{labels.notNow}</button>
     </section>

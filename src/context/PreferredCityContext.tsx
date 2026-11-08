@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import cityCoordinates from "../data/city-coordinates.json";
+import { STORAGE_KEYS } from "../data/storage-keys";
 import { cities, type City } from "../types/Event";
 
 export type CityResolutionStatus = "idle" | "loading" | "location-detected" | "location-failed" | "city-selected" | "city-not-found";
@@ -11,7 +12,8 @@ type PreferredCityContextValue = {
   detectedCity: City | null;
   status: CityResolutionStatus;
   onboardingOpen: boolean;
-  selectCity: (city: City, destinationPath?: string) => void;
+  /** `persist: false` uses the city for this visit only (e.g. it came in a shared link) without storing it. */
+  selectCity: (city: City, destinationPath?: string, persist?: boolean) => void;
   requestLocation: () => void;
   dismissOnboarding: () => void;
 };
@@ -19,11 +21,11 @@ type PreferredCityContextValue = {
 type CityCoordinates = { latitude: number; longitude: number; radiusKm: number };
 
 const PreferredCityContext = createContext<PreferredCityContextValue | null>(null);
-const PREFERRED_CITY_KEY = "plan-cerca.preferred-city";
+const PREFERRED_CITY_KEY = STORAGE_KEYS.preferredCity;
 const LOCATION_TIMEOUT_MS = 10_000;
-const GEOLOCATION_STATUS_KEY = "plan-cerca.geolocation-status";
-const DETECTED_CITY_KEY = "plan-cerca.detected-city";
-const ONBOARDING_DISMISSED_KEY = "plan-cerca.city-onboarding-dismissed";
+const GEOLOCATION_STATUS_KEY = STORAGE_KEYS.geolocationStatus;
+const DETECTED_CITY_KEY = STORAGE_KEYS.detectedCity;
+const ONBOARDING_DISMISSED_KEY = STORAGE_KEYS.onboardingDismissed;
 const DEFAULT_CITY: City = cities[0] ?? "Madrid";
 
 function readStorage(key: string): string | null {
@@ -110,16 +112,19 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
     navigate({ pathname: location.pathname, search: params.size ? `?${params.toString()}` : "" }, { replace: true });
   }, [location.pathname, location.search, navigate]);
 
-  const selectCity = useCallback((city: City, destinationPath?: string) => {
+  const selectCity = useCallback((city: City, destinationPath?: string, persist = true) => {
     currentPreferredCity.current = city;
     setPreferredCity(city);
     setSelectedCity(city);
     setDetectedCity(null);
     setStatus("city-selected");
     setOnboardingOpen(false);
-    writeStorage(PREFERRED_CITY_KEY, city);
-    writeStorage(GEOLOCATION_STATUS_KEY, "city-selected");
-    try { window.localStorage.removeItem(DETECTED_CITY_KEY); } catch { /* Optional cached suggestion. */ }
+    // Only a city the person chose is remembered; one that arrived in the URL stays in memory.
+    if (persist) {
+      writeStorage(PREFERRED_CITY_KEY, city);
+      writeStorage(GEOLOCATION_STATUS_KEY, "city-selected");
+      try { window.localStorage.removeItem(DETECTED_CITY_KEY); } catch { /* Optional cached suggestion. */ }
+    }
     if (destinationPath) pendingDestinationPath.current = destinationPath;
     syncCityInUrl(city, false, destinationPath);
   }, [syncCityInUrl]);
@@ -178,14 +183,14 @@ export function PreferredCityProvider({ children }: { children: ReactNode }) {
       }
       if (isEntityRoute) return;
       // Un ?city= nuevo en la URL (enlace compartido, atrás/adelante) manda sobre la ciudad guardada.
-      if (routeCity && routeCityChanged && routeCity !== currentPreferredCity.current) selectCity(routeCity);
+      if (routeCity && routeCityChanged && routeCity !== currentPreferredCity.current) selectCity(routeCity, undefined, false);
       else if (currentPreferredCity.current && routeCity !== currentPreferredCity.current) syncCityInUrl(currentPreferredCity.current, true);
       return;
     }
     initialized.current = true;
 
     if (routeCity) {
-      selectCity(routeCity);
+      selectCity(routeCity, undefined, false);
       return;
     }
 

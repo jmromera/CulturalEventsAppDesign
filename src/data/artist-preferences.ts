@@ -1,3 +1,4 @@
+import { STORAGE_KEYS } from "./storage-keys";
 export type ArtistPreferenceState = {
   following: boolean;
   eventAlerts: boolean;
@@ -10,7 +11,7 @@ type PreferenceDocument = {
 
 type PreferenceKey = keyof ArtistPreferenceState;
 
-const storageKey = "plancerca.artist-preferences";
+const storageKey = STORAGE_KEYS.artistPreferences;
 const defaultPreference: ArtistPreferenceState = { following: false, eventAlerts: false };
 
 function readDocument(): PreferenceDocument {
