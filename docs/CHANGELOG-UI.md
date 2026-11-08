@@ -371,3 +371,131 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/a11y-p16.test.tsx`: un `h1` y tarjetas `h3`, nombre del corazón con el evento y aviso hablado al añadir y quitar, foco tras «Mostrar más».
   - **Fecha fija en los tests:** `tests/setup.ts` fija el día en el 20/12/2026, el primer día de la evaluación, que se puede cambiar con `TEST_TODAY=AAAA-MM-DD pnpm test`. Antes, varios tests usaban la fecha real y habrían fallado en enero, cuando pasaran las sesiones que usan como ejemplo. Las demás fechas de la evaluación (01/01 y 31/01) las cubre `catalog-dates.test.ts` de forma explícita.
   - En navegador real: 108 comprobaciones de axe sin problemas (incluidas las nuevas reglas de estructura), sin peticiones a terceros, responsive y contraste correctos.
+
+## P2 · Consistencia y jerarquía
+
+### Iteración P2.1 · Tarjeta de evento compacta
+
+- **Qué:**
+  - Cada tarjeta tiene ahora solo lo que sirve para decidir: imagen, **fecha tipo calendario** («SÁB 5 DIC»), categoría, «Gran evento» si lo es, título, lugar · hora, precio solo si la web oficial lo publica (o «Agotado») y el corazón.
+  - Se quitan la descripción, las etiquetas, la duración, el organizador, «Consultar precio oficial», «Precio pendiente de publicación», la franja de disponibilidad y el botón «Ver detalle».
+  - Toda la tarjeta lleva a la ficha: el enlace del título se extiende sobre ella, y el corazón queda por encima.
+  - En temporadas que ya han empezado (exposiciones, musicales), el calendario muestra «HASTA 8 MAR» en vez de una fecha de inicio pasada.
+- **Por qué:**
+  - **Estética y diseño minimalista (Nielsen 8):** cada dato extra compite con los importantes. Antes una tarjeta tenía 11 elementos de texto y 3 enlaces a la misma ficha.
+  - **Reconocer mejor que recordar (Nielsen 6):** la fecha se lee de un vistazo, como en un calendario.
+  - **Consistencia (Nielsen 4):** la misma tarjeta en Recomendados, catálogo, favoritos y búsqueda.
+- **Accesibilidad:**
+  - Cada tarjeta tiene un solo enlace y un solo botón. Antes, con teclado, había que pasar por la imagen, el título y «Ver detalle», todos con el mismo destino (2.4.4).
+  - Toda la tarjeta es zona de pulsación, así que el título ya no necesita la excepción de 44 px de P1.6.
+  - El calendario es decorativo (`aria-hidden`), y la fecha completa sigue en el texto (visible en temporadas y oculta solo visualmente en fechas sueltas).
+  - El foco se ve en el contorno de toda la tarjeta.
+  - El movimiento al pasar el ratón se quita con «reducir movimiento».
+- **Pruebas:**
+  - `tests/event-card.test.tsx`: un enlace y un botón por tarjeta, sin textos de relleno, precio solo con cifra y fecha completa disponible.
+  - En navegador real: axe sin problemas (108 comprobaciones), responsive y contraste correctos.
+  - Capturas: `docs/capturas/despues/tarjeta-compacta-390.jpg`, `tarjeta-compacta-1440.jpg`.
+
+### Iteración P2.2 · Paleta de categorías armónica
+
+- **Qué:** los siete colores de categoría se han rehecho con la **misma luminosidad y saturación** en OKLCH (L 0,50 · C 0,15); solo cambia el tono. Música pasa de azul a un violeta que entona con el acento de la web. Ahora son tokens en `:root` (`--cat-music`, `--cat-music-light`…), y el resto de reglas los reutilizan.
+- **Por qué:**
+  - **Consistencia (Nielsen 4):** antes el verde de Deportes y el azul de Música pesaban más que Danza u Ópera, y parecía que unas categorías importaban más que otras.
+  - **Estética:** los colores comparten familia con el morado de la marca.
+- **Contraste medido (WCAG 1.4.3):**
+
+  | Categoría | Color | Texto blanco | Variante clara | Sobre la superficie oscura |
+  |---|---|---|---|---|
+  | Música | `#6b4cae` | 6,42:1 | `#cebfff` | 9,32:1 |
+  | Ópera | `#a53458` | 6,50:1 | `#feb2c3` | 9,21:1 |
+  | Teatro | `#a8372a` | 6,47:1 | `#ffb5a8` | 9,25:1 |
+  | Danza | `#943b84` | 6,53:1 | `#f0b5e2` | 9,24:1 |
+  | Exposiciones | `#006aaf` | 5,71:1 | `#94d3ff` | 9,70:1 |
+  | Museos | `#007b7e` | 5,08:1 | `#7fdddd` | 9,90:1 |
+  | Deportes | `#00792f` | 5,56:1 | `#a0dcac` | 9,93:1 |
+
+- **Pruebas:** `tests/palette.test.ts` lee los tokens de `src/index.css` y falla si algún color baja de 4,5:1. axe sin problemas (108 comprobaciones). Captura: `docs/capturas/despues/paleta-categorias-1440.jpg`.
+
+### Iteración P2.3 · De franja de datos a accesos directos
+
+- **Qué:**
+  - La franja «Tendencias en Valencia: Música · Deportes · Teatro / Esta semana: N eventos» solo se podía leer.
+  - Ahora se titula «Lo que más hay en Valencia» y cada elemento es un botón con su recuento («Música 49», «Deportes 13»).
+  - Al pulsarlo se aplica ese filtro (la categoría sola, sustituyendo a las que hubiera) y la página baja hasta la lista.
+  - El título dice lo que es: las categorías con más eventos, no una «tendencia» que no medimos.
+  - **El número es exactamente lo que mostrará la lista:** se cuenta con la misma función de filtrado que la lista, respetando la fecha, la franja, la búsqueda y el radio que haya activos. Antes ponía el total de la ciudad (por ejemplo «Música 49») aunque, con «Próximos 30 días» y «Por la noche» activos, la lista fuese a enseñar muchos menos; era el mismo error de número prometido que se corrigió en P1.3.
+- **Por qué:**
+  - **Eficiencia (Nielsen 7):** el camino más común (ver los conciertos, ver lo de esta semana) se queda en un toque.
+  - **Coincidencia con el mundo real (Nielsen 2):** el texto ya no sugiere datos de popularidad que no tenemos.
+- **Accesibilidad:**
+  - Es una región con título `h2`, y los botones miden 44 px y usan `aria-pressed`.
+  - El desplazamiento es suave solo si no se ha pedido «reducir movimiento».
+  - El recuento de la lista se anuncia en la región `status` que ya existía.
+- **Problemas encontrados:** la primera versión quitaba los filtros y luego añadía la categoría en dos navegaciones seguidas, y la segunda leía la URL antigua. Ahora es una sola navegación.
+- **Pruebas:**
+  - `tests/shortcuts.test.tsx`: el atajo deja solo esa categoría y queda marcado; con otros filtros activos, el número del atajo (categoría y «Esta semana») es igual al de la lista tras pulsarlo.
+  - En navegador real: el clic aplica `cat=Música` y lleva a la lista (49 eventos en Valencia), y axe no encuentra problemas.
+  - Capturas: `docs/capturas/despues/accesos-directos-390.jpg`, `accesos-directos-1440.jpg`.
+
+### Iteración P2.4 · Cabecera: preferencias agrupadas y menú del avatar
+
+- **Qué:**
+  - **Preferencias agrupadas:** en escritorio, ciudad e idioma van juntos en una sola caja, porque son preferencias y no destinos.
+  - **Menú del avatar:** el avatar abre un menú corto con «Tu perfil», «Favoritos (N)» y «Tus datos».
+  - **Móvil:** se mantiene la colocación de siempre, y el menú ocupa todo el ancho bajo la cabecera.
+  - **Pantallas de menos de 375 px:** el avatar sigue cediendo el sitio a la ciudad, y el perfil está en el pie.
+  - **Bienvenida:** el diálogo ya no aparece sobre `/perfil`, que tiene su propio selector de ciudad. Se vio al comprobar producción tras P1.
+  - **Tema:** la opción del menú llegará con el modo claro (P3).
+- **Por qué:**
+  - **Consistencia y estándares (Nielsen 4):** el avatar arriba a la derecha con un menú personal es un patrón conocido.
+  - **Visibilidad del estado (Nielsen 1):** el menú muestra cuántos favoritos hay.
+  - **Estética (Nielsen 8):** la cabecera pasa de cinco controles sueltos a tres bloques (buscar, navegar, preferencias y perfil).
+- **Accesibilidad:**
+  - **Patrón de despliegue:** botón con `aria-expanded` y `aria-controls`.
+  - **Cierre:**
+    - con Esc, y el foco vuelve al botón;
+    - con un toque fuera (`pointerdown`, que también funciona en iPhone, donde tocar en una zona no interactiva no genera `mousedown`);
+    - cuando el foco sale del menú con Tab, para que no quede un panel abierto tapando la página.
+  - **Enlaces:** los del menú miden 44 px.
+- **Problemas encontrados:** en móvil, el menú tapaba en parte el enlace «Recintos» y dejaba visible una franja de menos de 24 px (axe: `target-size`). Ahora el menú cubre la fila entera.
+- **Pruebas:**
+  - `tests/profile.test.tsx`: menú con recuento de favoritos, Esc con retorno del foco, acceso al perfil sin diálogo de bienvenida.
+  - En navegador real: 110 comprobaciones de axe sin problemas (nueva: menú abierto), responsive correcto.
+  - Capturas: `docs/capturas/despues/cabecera-menu-320.jpg`, `cabecera-menu-390.jpg`, `cabecera-menu-1440.jpg`.
+
+### Iteración P2.5 · Ficha del evento: sin repeticiones y la compra siempre a mano
+
+- **Qué:**
+  - **Un solo «Guardar»**, el de la barra de acciones de arriba. Antes también aparecía en la tarjeta de compra.
+  - **«Hora por confirmar» una sola vez**, en el encabezado. Antes salía «… · Por confirmar» arriba y «Fecha confirmada · hora por confirmar» en la tarjeta. Si la duración no se conoce, ya no se muestra la línea «Por confirmar».
+  - **Escritorio:** la tarjeta de compra se queda fija bajo la cabecera al hacer scroll. Antes se fijaba a 25 px del borde y quedaba debajo de la cabecera.
+  - **Móvil:** cuando el botón de compra sale de la pantalla aparece una barra inferior con el título, el precio o el vendedor, y «Comprar en la web oficial». Al volver arriba desaparece.
+  - **Espacio reservado bajo el pie:** así la barra no tapa los últimos enlaces. Comprobado a 390 px al final de la ficha: el pie termina en 761 px y la barra empieza en 779 px. La primera versión reservaba el espacio dentro de la página, antes del pie, y la barra tapaba «Tu perfil», «Acerca de» y el ©.
+  - **Margen de desplazamiento:** `scroll-padding-top` para la cabecera fija y `scroll-padding-bottom` mientras la barra está visible. Así, al tabular o al saltar a un ancla, el elemento con el foco no queda oculto bajo la cabecera ni bajo la barra (WCAG 2.4.11).
+- **Por qué:**
+  - **Estética y diseño minimalista (Nielsen 8):** cada dato aparece una vez.
+  - **Eficiencia (Nielsen 7):** la acción principal está siempre a un toque, también al final de una ficha larga.
+- **Accesibilidad:**
+  - Mientras está oculta, la barra lleva `aria-hidden` y su enlace sale del orden de tabulación, así que no se puede llegar con teclado a un botón invisible (WCAG 2.4.3, 4.1.2).
+  - Su animación se quita con «reducir movimiento».
+- **Problemas encontrados:**
+  - En móvil, el botón del encabezado está oculto. Se vigila el de la tarjeta de compra.
+  - La primera versión usaba `IntersectionObserver`, pero un salto rápido de debajo a encima del botón no pasa por la pantalla y no llegaba a avisar. Se cambió por una comprobación por fotograma al hacer scroll.
+- **Pruebas:**
+  - `tests/detail.test.tsx`: un solo «Guardar», «por confirmar» una vez y barra fuera del orden de tabulación mientras está oculta.
+  - En navegador real: la barra aparece al bajar y desaparece al subir, 112 comprobaciones de axe sin problemas (nueva: ficha con la barra visible), responsive correcto.
+  - Capturas: `docs/capturas/despues/ficha-390.jpg`, `ficha-barra-compra-390.jpg`, `ficha-tarjeta-fija-1440.jpg`.
+
+### Iteración P2.6 · Pie sin huecos
+
+- **Qué:**
+  - **Páginas cortas:** el contenido ya no reserva una pantalla entera (`min-height: 100vh`). Ahora el contenedor de la página ocupa la altura de la pantalla y el pie se queda abajo del todo en todas las rutas, sin dejar media pantalla vacía ni espacio libre debajo.
+  - **Portada:** desaparece el hueco de unos 220 px que se acumulaba entre «Mostrar más» y el pie (margen de la última sección, más relleno inferior, más margen del pie).
+  - **Enlaces del pie:** «Tu perfil» y «Acerca de» van en una sola fila, alineados con el texto y con el ©.
+- **Por qué:** **Estética y diseño minimalista (Nielsen 8)** y **proximidad (Gestalt):** lo que va junto se ve junto, y el pie no parece desconectado del contenido.
+- **Problemas encontrados:** el pie está dentro del contenedor de la página, no a su mismo nivel. Por eso el primer intento dejaba espacio libre debajo del pie, y el reparto de altura se movió a ese contenedor.
+  - Al convertir ese contenedor en una columna flexible, las páginas con tablas anchas (privacidad, cookies, «Tus datos») dejaron de encogerse: había 46 px de scroll horizontal a 768 px y 372 px a 390 px, y axe marcaba `reflow` con zoom del 200 %. Lo detectaron `pnpm check:responsive` y axe; ese commit se hizo sin esperar a su resultado y se corrigió en el siguiente limitando el ancho de los hijos del contenedor (`min-width: 0`).
+- **Pruebas:**
+  - Nuevo `pnpm check:pie` (`scripts/check-footer.mjs`): recorre las 30 rutas a 1440 × 900 y falla si alguna deja espacio libre bajo el pie. Las 30 pasan.
+  - axe sin problemas (112 comprobaciones), responsive y sin terceros.
+  - Capturas: `docs/capturas/despues/pie-vacio-1440.jpg`, `pie-inicio-390.jpg`, `pie-inicio-1440.jpg`.

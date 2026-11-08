@@ -16,14 +16,22 @@ describe("Profile page", () => {
     expect(Object.keys(window.localStorage)).toEqual([]);
   });
 
-  it("is reachable from the header link", () => {
+  it("is reachable from the avatar menu, which closes with Esc and returns focus", () => {
     window.localStorage.setItem(STORAGE_KEYS.onboardingDismissed, "true");
+    window.localStorage.setItem(STORAGE_KEYS.savedEvents, "[89,99]");
     visit("/?city=Valencia");
-    const headerLink = () => document.querySelector<HTMLAnchorElement>(".site-header a.guest-profile")!;
-    expect(headerLink().textContent).toBe("Tu perfil");
-    fireEvent.click(headerLink());
+    const button = screen.getByRole("button", { name: "Tu perfil" });
+    expect(button.getAttribute("aria-expanded")).toBe("false");
+    fireEvent.click(button);
+    expect(button.getAttribute("aria-expanded")).toBe("true");
+    expect(screen.getByRole("link", { name: "Favoritos (2)" })).toBeTruthy();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByRole("link", { name: "Favoritos (2)" })).toBeNull();
+    expect(document.activeElement).toBe(button);
+    fireEvent.click(button);
+    fireEvent.click(within(document.getElementById("profile-menu-list")!).getByRole("link", { name: "Tu perfil" }));
     expect(screen.getByRole("heading", { level: 1, name: "Tu perfil" })).toBeTruthy();
-    expect(headerLink().getAttribute("aria-current")).toBe("page");
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 
   it("saves the avatar and favourite categories only when they change, and confirms it", () => {
