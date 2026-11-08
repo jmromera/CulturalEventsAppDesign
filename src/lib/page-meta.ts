@@ -19,5 +19,6 @@ export function updatePageMeta(pathname: string, search: string, notFound: boole
   const ogUrl = upsert('meta[property="og:url"]', () => { const meta = document.createElement("meta"); meta.setAttribute("property", "og:url"); return meta; });
   ogUrl.setAttribute("content", canonical);
   const robots = upsert('meta[name="robots"]', () => Object.assign(document.createElement("meta"), { name: "robots" }));
-  robots.setAttribute("content", notFound || NOINDEX_PAGES.has(pathname) ? "noindex, follow" : "index, follow");
+  const noindex = notFound || NOINDEX_PAGES.has(pathname) || /\/reservar$/.test(pathname);
+  robots.setAttribute("content", noindex ? "noindex, follow" : "index, follow");
 }

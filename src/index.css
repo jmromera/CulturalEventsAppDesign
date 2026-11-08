@@ -775,3 +775,54 @@ a.guest-profile>span .icon{width:20px;height:20px}
 .profile-heading h1{font-size:clamp(32px,7vw,48px);line-height:1.1}
 /* Mobile: categories on their own scrollable row above the actions (they were squeezed to zero width). */
 @media(max-width:650px){.catalogue-toolbar{flex-direction:column;align-items:stretch;gap:12px}.category-tabs{flex:none;width:100%;padding-bottom:4px}.catalogue-actions{flex-wrap:nowrap}}
+
+/* Demo booking (P1.5). */
+.booking-cta{width:100%;justify-content:center;min-height:44px;margin-top:10px}
+.booking-page{max-width:760px}
+.booking-back-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--muted);font-weight:600;text-decoration:none}
+.booking-back-link .icon{width:16px;height:16px}
+.booking-back-link:hover{color:var(--accent-text)}
+.booking-page h1{margin:6px 0 18px}
+.booking-demo{display:flex;gap:12px;align-items:flex-start;margin:0 0 24px;padding:14px 16px;border:1px solid var(--pending,#f59e0b);border-radius:14px;background:var(--pending-tint,rgba(245,158,11,.12))}
+.booking-demo .icon{flex:none;width:20px;height:20px;margin-top:2px}
+.booking-demo p{margin:0;line-height:1.5}
+.booking-steps{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 20px;padding:0;list-style:none;counter-reset:none}
+.booking-steps li{display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:600;font-size:14px}
+.booking-steps li span{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;font-size:13px}
+.booking-steps li.current{color:var(--ink)}
+.booking-steps li.current span{border-color:var(--accent);background:var(--accent);color:#fff}
+.booking-steps li.done span{border-color:var(--accent-text);color:var(--accent-text)}
+.booking-panel{padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.booking-panel h2{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:22px}
+.booking-panel h2 .icon{width:22px;height:22px;color:var(--success)}
+.booking-panel h2:focus{outline:none}
+.booking-panel h2:focus-visible{outline:3px solid var(--accent-text);outline-offset:4px}
+.booking-step-count{margin:0 0 4px;color:var(--muted);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.booking-hint{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.5}
+.booking-sessions{margin:0;padding:0;border:0;display:grid;gap:8px}
+.booking-option{display:flex;align-items:center;gap:12px;min-height:48px;padding:0 14px;border:1px solid var(--line);border-radius:12px;cursor:pointer;text-transform:none}
+.booking-option:has(input:checked){border-color:var(--accent-text);background:var(--accent-tint)}
+.booking-option input{width:20px;height:20px;accent-color:var(--accent)}
+.booking-option span::first-letter{text-transform:uppercase}
+.booking-tickets{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;font-weight:700}
+.booking-stepper{display:flex;align-items:center;gap:12px}
+.booking-stepper button{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit;font-size:22px;cursor:pointer}
+.booking-stepper button:disabled{opacity:.4;cursor:not-allowed}
+.booking-stepper output{min-width:96px;text-align:center}
+.booking-summary{display:grid;gap:10px;margin:0 0 16px}
+.booking-summary div{display:grid;grid-template-columns:120px 1fr;gap:12px}
+.booking-summary dt{color:var(--muted)}
+.booking-summary dd{margin:0;font-weight:600}
+.booking-summary dd::first-letter{text-transform:uppercase}
+.booking-code{font-size:15px}
+.booking-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.booking-actions .button{min-height:48px;display:inline-flex;align-items:center;gap:8px}
+.booking-actions .button .icon{width:16px;height:16px}
+.booking-unavailable{font-weight:600}
+.booking-stepper button:focus-visible,.booking-option:has(input:focus-visible){outline:3px solid var(--accent-text);outline-offset:2px}
+@media(max-width:650px){.booking-panel{padding:16px}.booking-summary div{grid-template-columns:1fr;gap:2px}.booking-actions .button{flex:1 1 100%;justify-content:center}}
+/* Footer meta column: left-aligned at every width (right alignment staggered links of different widths). */
+.site-footer .site-footer-meta{align-items:flex-start}
+.booking-page h1,.profile-page h1{font-size:clamp(32px,7vw,48px);line-height:1.1}
+.booking-panel>p{margin:0 0 12px}
+.booking-code{margin:16px 0!important}

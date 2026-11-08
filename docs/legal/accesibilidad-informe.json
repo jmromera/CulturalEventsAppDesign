@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T11:52:03.526Z",
+  "date": "2026-11-08T12:00:18.587Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -62,6 +62,18 @@
     },
     {
       "page": "favoritos · movil",
+      "violations": []
+    },
+    {
+      "page": "reserva-sesion · movil",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · movil",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · movil",
       "violations": []
     },
     {
@@ -209,6 +221,18 @@
       "violations": []
     },
     {
+      "page": "reserva-sesion · escritorio",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · escritorio",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · escritorio",
+      "violations": []
+    },
+    {
       "page": "favoritos-compartidos · escritorio",
       "violations": []
     },
@@ -350,6 +374,18 @@
     },
     {
       "page": "favoritos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "reserva-sesion · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · zoom 200 %",
       "violations": []
     },
     {

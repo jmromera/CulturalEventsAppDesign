@@ -15,6 +15,7 @@ import CitySelector from "./components/CitySelector";
 import NearMePanel from "./components/NearMePanel";
 import FiltersDrawer, { filtersCopy, WHEN_SHORTCUTS, type FilterDraft } from "./components/FiltersDrawer";
 import ProfilePage, { profileCopy } from "./components/ProfilePage";
+import BookingPage, { bookingCopy, canBook } from "./components/BookingPage";
 import { readProfile, writeProfile, type Profile } from "./data/profile";
 import { buildCalendar, downloadTextFile, type CalendarEntry } from "./lib/ics";
 import { parseSharedList, sharedListPath } from "./lib/shared-list";
@@ -30,7 +31,7 @@ import { legalCopy, LEGAL_PATHS } from "./legal/legal-copy";
 import { usePreferredCity } from "./context/PreferredCityContext";
 import { cities, eventCategories, type City, type EventCategory, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
 
-type Page = "home" | "search" | "detail" | "favorites" | "venues" | "venue-detail" | "entity" | "profile" | "legal" | "not-found";
+type Page = "home" | "search" | "detail" | "booking" | "favorites" | "venues" | "venue-detail" | "entity" | "profile" | "legal" | "not-found";
 
 // Pages that set their own document title.
 const LEGAL_PAGE_PATHS: string[] = Object.values(LEGAL_PATHS);
@@ -60,7 +61,7 @@ function Button({ children, onClick, variant = "primary", disabled = false }: { 
 
 function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, onSearch, profile, t }: { page: Page; city: City; language: Language; setLanguage: (language: Language) => void; searchQuery: string; setSearchQuery: (query: string) => void; onSearch: (query: string) => void; profile: Profile; t: typeof copy.es }) {
   const labels = interfaceText[language];
-  const activePage = page === "detail" || page === "search" ? "home" : page === "venue-detail" ? "venues" : page;
+  const activePage = page === "detail" || page === "search" || page === "booking" ? "home" : page === "venue-detail" ? "venues" : page;
   const item = (target: Page, path: string, icon: IconName, label: string) => <Link className={`primary-nav-item ${activePage === target ? "active" : ""}`} to={cityPath(path, city)} aria-current={activePage === target ? "page" : undefined} key={target}><Icon name={icon} /><span>{label}</span></Link>;
   return <header className={`site-header ${page === "detail" ? "site-header--event-detail" : ""}`}><div className="site-header-inner">
     <Logo to={cityPath("/", city)} label={labels.logoHome} />
@@ -543,7 +544,7 @@ function Detail({ event, savedIds, toggleSavedId, back, language, t }: { event: 
       <section><h2>{t.description}</h2><p>{event.fullDescription}</p></section>
       {entity && <section className="artist-profile"><h2>{entity.aboutTitle[language]}</h2><Link className="artist-profile-main" to={`/entity/${entity.id}`}><FallbackImage src={entity.image} alt="" icon="profile" width={124} height={124} /><div className="artist-profile-copy"><div className="artist-profile-head"><h3>{entity.name}</h3><span className="artist-profile-cta">{t.viewEntity}<Icon name="chevron" /></span></div><p>{entity.description}</p></div></Link>{entity.links.length > 0 && <div className="artist-profile-links">{entity.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer">{link.label[language]}</a>)}</div>}</section>}
       <section><h2>{t.practical}</h2><div className="info-grid"><div className="info-item info-item--location"><span><Icon name="location" /></span><div><small>{t.location}</small><strong>{venue.name}</strong><p>{venue.address}</p>{venue.mapsUrl && <a href={venue.mapsUrl} target="_blank" rel="noreferrer">{t.openInMaps}<Icon name="chevron" /></a>}</div></div><Info icon="profile" label={t.organizer} value={event.organizer} /></div></section>
-    </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className={`stock ${soldOut ? "stock--soldout" : ""}`}><i />{event.availability}</div>{ended ? <p className="purchase-provider">{t.eventEnded}</p> : soldOut ? null : <>{/\d/.test(event.price) ? <p className="purchase-price">{event.price}</p> : <p className="purchase-provider">{t.ticketsAt.replace("{provider}", event.organizer)}</p>}<p>{event.confirmed ? (event.time === "Por confirmar" ? t.confirmedTimePending : t.confirmed) : t.pending}</p><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small></>}<SaveButton active={saved} onClick={toggleSaved} t={t} /></aside></div>
+    </div><aside className="purchase-card"><span className="kicker">{t.availability}</span><div className={`stock ${soldOut ? "stock--soldout" : ""}`}><i />{event.availability}</div>{ended ? <p className="purchase-provider">{t.eventEnded}</p> : soldOut ? null : <>{/\d/.test(event.price) ? <p className="purchase-price">{event.price}</p> : <p className="purchase-provider">{t.ticketsAt.replace("{provider}", event.organizer)}</p>}<p>{event.confirmed ? (event.time === "Por confirmar" ? t.confirmedTimePending : t.confirmed) : t.pending}</p><a className="button button--primary" href={event.ticketUrl} target="_blank" rel="noreferrer"><Icon name="ticket" />{t.buy}</a><small><Icon name="check" />{t.external}</small>{canBook(event) && <Link className="button button--secondary booking-cta" to={`/event/${event.id}/reservar?city=${encodeURIComponent(venue.city)}`}>{bookingCopy[language].cta}</Link>}</>}<SaveButton active={saved} onClick={toggleSaved} t={t} /></aside></div>
     <section className="venue-overview"><div className={`venue-info-card ${venue.image ? "" : "venue-info-card--text-only"}`}>{venue.image && <FallbackImage className="venue-about-image" src={venue.image} alt={venueAlt(venue.name, language)} icon="location" category={venueCategoryKey(venue.kind.es)} width={640} height={360} />}<div className="venue-about-copy"><span className="kicker">{t.venueAbout}</span><span className="venue-kind"><BrandMark className="venue-kind-mark" />{venue.city} · {venue.kind[language]}</span><h2><Link className="venue-name-link" to={cityPath(`/venues/${venue.id}`, venue.city)}>{venue.name}</Link></h2><p>{venue.description[language]}</p>{(venue.websiteUrl || venue.programmeUrl) && <div className="venue-info-footer">{venue.websiteUrl && <a href={venue.websiteUrl} target="_blank" rel="noreferrer">{venueLinkLabels.website}<Icon name="chevron" /></a>}{venue.programmeUrl && venue.programmeLabel && <a href={venue.programmeUrl} target="_blank" rel="noreferrer">{venue.programmeLabel[language]}<Icon name="chevron" /></a>}</div>}</div></div></section>
     {entity && <RelatedEventsSection entity={entity} relatedEvents={entityEvents} title={entity.relatedEventsTitle[language]} t={t} />}
     {venueEvents.length > 0 && <section className="venue-upcoming"><div className="venue-upcoming-inner"><SectionTitle kicker={`${venue.city} · ${venue.name}`} title={t.venueEvents} /><div className="venue-event-grid">{venueEvents.map((item) => <EventCard key={item.id} event={item} saved={savedIds.includes(item.id)} onSave={() => toggleSavedId(item.id)} t={t} />)}</div></div></section>}
@@ -686,6 +687,17 @@ function Saved({ saved, toggleSaved, addSaved, explore, title, language, t }: { 
   </main>;
 }
 
+function BookingRoute({ language, t }: { language: Language; t: typeof copy.es }) {
+  const { id } = useParams();
+  const event = events.find((item) => item.id === Number(id));
+  if (!event) return <NotFound t={t} />;
+  const addToCalendar = (session: EventItem) => {
+    const timing = calendarTimingFor(session);
+    if (timing) downloadEventCalendar(session, venueFor(session.venueId), timing);
+  };
+  return <BookingPage event={event} language={language} onAddToCalendar={addToCalendar} />;
+}
+
 function EventRoute({ saved, toggleSaved, goBack, language, t }: { saved: number[]; toggleSaved: (id: number) => void; goBack: () => void; language: Language; t: typeof copy.es }) {
   const { id } = useParams();
   const event = events.find((item) => item.id === Number(id));
@@ -791,7 +803,7 @@ export default function App() {
     focusedPath.current = pathname;
     focusMain(false);
   }, [pathname]);
-  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : pathname === "/perfil" ? "profile" : LEGAL_PAGE_PATHS.includes(pathname) ? "legal" : "not-found";
+  const page: Page = pathname === "/" ? "home" : pathname === "/search" ? "search" : pathname === "/favorites" ? "favorites" : pathname === "/venues" ? "venues" : pathname.startsWith("/venues/") ? "venue-detail" : /^\/event\/\d+\/reservar$/.test(pathname) ? "booking" : pathname.startsWith("/event/") ? "detail" : isEntityPath ? "entity" : pathname === "/perfil" ? "profile" : LEGAL_PAGE_PATHS.includes(pathname) ? "legal" : "not-found";
   const [language, setLanguageState] = useState<Language>(readLanguage);
   useEffect(() => {
     document.documentElement.lang = language;
@@ -922,6 +934,7 @@ export default function App() {
       <Route path="/favorites" element={<Saved saved={saved} toggleSaved={toggleSaved} addSaved={addSaved} explore={goToEvents} title={interfaceText[language].favourites} language={language} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />
+      <Route path="/event/:id/reservar" element={<BookingRoute language={language} t={t} />} />
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />
       <Route path="/entity/:slug" element={<EntityRoute back={goBack} language={language} t={t} />} />
       <Route path="/artist/:slug" element={<EntityRoute back={goBack} language={language} t={t} />} />

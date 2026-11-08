@@ -19,6 +19,9 @@ export const routes = [
   { name: "recinto", path: "/venues/valencia-roig-arena?city=Valencia", storage: withCity },
   { name: "artista", path: "/artist/muse", storage: withCity },
   { name: "favoritos", path: "/favorites?city=Valencia", storage: withFavourites },
+  { name: "reserva-sesion", path: "/event/3/reservar?city=Madrid", storage: withCity },
+  { name: "reserva-revisar", path: "/event/12/reservar?city=Madrid&sesion=2027-07-04&entradas=2&paso=3", storage: withCity },
+  { name: "reserva-confirmada", path: "/event/3/reservar?city=Madrid&sesion=2027-01-08&entradas=2&paso=4", storage: withCity },
   { name: "favoritos-compartidos", path: "/favorites?lista=89,99,104&city=Valencia", storage: withCity },
   // Exactly the link "Compartir lista" creates, opened by someone who has never visited the site.
   { name: "lista-compartida-primera-visita", path: "/favorites?lista=89,99,104", storage: {} },

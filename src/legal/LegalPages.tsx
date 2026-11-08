@@ -167,6 +167,8 @@ export function TermsPage({ language }: { language: Language }) {
     </ul>
     <h2>Cómo avisar de un error</h2>
     <p>Si ves un dato incorrecto, un evento cancelado o un contenido que te pertenece y no debería estar, escríbenos a <Mail to={d.contacto.emailErrores} /> indicando el enlace de la ficha. Responderemos en un plazo de {d.contacto.plazoRespuestaErrores.toLocaleLowerCase("es")}.</p>
+    <h2>Reservas de demostración</h2>
+    <p>En la ficha de algunos eventos puedes «Probar la reserva». Es una <strong>demostración del proceso</strong> hecha para un proyecto académico: <strong>no se realiza ningún pago, no se reserva ninguna entrada real</strong> y no te pedimos nombre, correo ni datos de tarjeta. El código que aparece al final no tiene validez y no se guarda nada en tu navegador. Para comprar entradas de verdad usa el enlace a la web oficial de venta.</p>
     <h2>Uso permitido</h2>
     <p>Puedes consultar y compartir las fichas para uso personal. No está permitido copiar el catálogo de forma masiva ni usar la web para fines ilícitos o que la dañen.</p>
     <h2>Contenido de usuarios</h2>

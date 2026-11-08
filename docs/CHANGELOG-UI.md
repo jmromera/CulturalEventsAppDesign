@@ -245,13 +245,19 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - **Categorías favoritas:** alimentan «Recomendados para ti».
   - **Idioma:** el mismo selector de la cabecera, también aquí.
   - Cada cambio se confirma con «Cambios guardados en este navegador».
-- **Recomendados con categorías favoritas:**
-  - Las reglas que fijaste no cambian: al menos 2 conciertos de cada 3, como mucho 1 evento deportivo y nunca dos seguidos, y sin repetir artista, equipo ni recinto.
-  - Las favoritas tienen prioridad **dentro** de esas reglas: van primero en cada grupo, y una favorita de escena, danza, ópera o exposiciones ocupa el hueco que no está reservado a conciertos.
-  - **Deportes** como favorita solo cambia el orden dentro de los deportes. No se adelanta al teatro ni a los musicales, porque la regla dice «rellenar con musical o teatro antes que con deporte».
-  - Ejemplo en Madrid con Danza y Teatro: Melendi, Karol G y la Compañía Nacional de Danza.
-  - Sin favoritas, el resultado es idéntico al anterior. Se comprobó comparando con la versión previa en 4 fechas × 6 ciudades.
-  - **Pendiente de decidir:** si prefieres que las favoritas manden sobre la regla de «2 de cada 3 conciertos» (por ejemplo, alguien que solo marca Teatro), es un cambio de una línea, pero contradice la regla que pediste y no lo he hecho sin preguntarte.
+- **Recomendados con categorías favoritas** (regla decidida por el autor):
+  - **Sin nada marcado**, todo sigue igual, sobre todo conciertos:
+    - al menos 2 de cada 3 son conciertos;
+    - como mucho 1 evento deportivo y nunca dos seguidos;
+    - sin repetir artista, equipo ni recinto;
+    - los huecos se rellenan con musical o teatro antes que con deporte.
+  - **Con categorías marcadas, manda la elección de la persona:**
+    - Recomendados muestra solo esas categorías y las alterna, para que todas aparezcan. Quien marca solo Teatro ve solo teatro, y quien marca solo Deportes ve solo deporte.
+    - Se mantiene no repetir artista, equipo ni recinto. Por eso, en Madrid, Danza y Ópera no salen juntas cuando las dos son en el Teatro Real.
+    - Solo si la ciudad no tiene suficientes eventos de esas categorías, los huecos restantes se completan con la regla general.
+  - **Pruebas:**
+    - Se comprueba con 5 combinaciones de favoritas en 3 fechas y 6 ciudades: primero solo favoritas, otras categorías solo cuando ya no cabe ninguna favorita, y cada categoría marcada aparece salvo choque de recinto o artista.
+    - Sin favoritas, el resultado es idéntico al anterior (comparado con la versión previa en 4 fechas × 6 ciudades).
 - **Por qué:**
   - **Flexibilidad y personalización (Nielsen 7):** ajustar la portada a los gustos de cada persona sin necesidad de cuenta.
   - **Consistencia (Nielsen 4):** la ciudad y el idioma son las mismas preferencias que en la cabecera, no una copia aparte.
@@ -272,7 +278,6 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - A 320 px el enlace de la cabecera volvía a aparecer y pisaba el logo. Se ha recuperado la ocultación por debajo de 375 px y se ha añadido el enlace en el pie.
 - **Pruebas:**
   - `tests/profile.test.tsx`: no guarda nada al visitar, enlace de cabecera, avatar y categorías, ciudad e idioma, valores estropeados, exportación en «Tus datos».
-  - `tests/catalog-dates.test.ts`: las reglas de Recomendados se comprueban ahora con 6 conjuntos de favoritas × 3 fechas × 6 ciudades, y además se comprueba que la favorita aparece cuando cabe.
   - En navegador real: 100 comprobaciones de axe sin problemas, sin peticiones a terceros, responsive correcto.
   - Capturas: `docs/capturas/despues/perfil-320.jpg`, `perfil-390.jpg`, `perfil-1440.jpg`, `recomendados-con-perfil-1440.jpg`.
 
@@ -302,3 +307,43 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - 255 tests: se retira `tests/map.test.tsx` y `security.test.ts` vuelve a exigir una CSP sin orígenes remotos.
   - En navegador real: 96 comprobaciones de axe sin problemas, sin peticiones a terceros, responsive correcto.
   - Capturas: `docs/capturas/despues/catalogo-barra-320.jpg`, `catalogo-barra-390.jpg`, `catalogo-barra-1440.jpg`.
+
+### Iteración P1.5 · Reserva de demostración
+
+- **Qué:**
+  - En la ficha de cada evento con fechas disponibles aparece «Probar la reserva (demostración)», debajo del botón de compra real.
+  - Lleva a `/event/:id/reservar`, un proceso de cuatro pasos:
+    1. **Sesión:** cada día de la temporada desde hoy, con la hora.
+    2. **Entradas:** de 1 a 6, con importe orientativo si la web oficial publica precio.
+    3. **Revisar.**
+    4. **Confirmación:** código de demostración, «Añadir al calendario» con la sesión elegida y enlace a la compra real.
+  - En todo el proceso se ve el aviso «Reserva de demostración: no se realiza ningún pago».
+  - **No se piden nombre, correo ni tarjeta.**
+  - Los eventos agotados o ya pasados no ofrecen reserva.
+  - Los términos de uso tienen una sección nueva, «Reservas de demostración».
+- **Por qué:**
+  - **Visibilidad del estado (Nielsen 1):** indicador de pasos con «Paso 2 de 4».
+  - **Control y libertad (Nielsen 3):** el paso y las elecciones van en la URL, así que «Atrás» del navegador y el botón «Atrás» vuelven al paso anterior sin perder nada.
+  - **Prevención de errores (Nielsen 5):**
+    - no se puede continuar sin sesión;
+    - el número de entradas está limitado;
+    - un enlace con una sesión inválida vuelve al primer paso;
+    - antes de confirmar se revisa todo.
+  - **Honestidad:** el aviso y el texto de confirmación dejan claro que no hay pago ni reserva real.
+- **Privacidad:**
+  - No se guarda nada en el navegador; un test lo comprueba recorriendo los cuatro pasos.
+  - El código de demostración se calcula a partir de lo elegido, sin datos aleatorios ni almacenados.
+  - `/event/:id/reservar` lleva `noindex`.
+- **Accesibilidad:**
+  - **Pasos:** son una lista con `aria-current="step"`.
+  - **Foco (2.4.3):** al cambiar de paso, el foco pasa al título del nuevo paso, que lector de pantalla anuncia.
+  - **Sesiones:** son radios con la fecha completa.
+  - **Contador de entradas:** botones «Una entrada más» y «Una entrada menos» de 44 px y un `output` con `aria-live`.
+  - **Aviso:** tiene `role="note"`.
+- **Otros arreglos vistos en las capturas:**
+  - Los `h1` de reserva y perfil salían del tamaño del texto normal.
+  - En el pie, «Tu perfil», «Acerca de» y el © quedaban escalonados porque la columna se alineaba a la derecha.
+- **Pruebas:**
+  - `tests/booking.test.tsx`: sesiones disponibles según la fecha, entrada desde la ficha, recorrido completo con foco y sin almacenamiento ni campos de datos, límite de entradas e importe orientativo, enlace con sesión inválida y evento agotado.
+  - En navegador real: 108 comprobaciones de axe sin problemas (nuevas rutas: sesión, revisar y confirmación), sin peticiones a terceros, responsive correcto.
+  - Capturas: `docs/capturas/despues/reserva-sesion-390.jpg`, `reserva-sesion-1440.jpg`, `reserva-confirmada-390.jpg`, `reserva-confirmada-1440.jpg`.
