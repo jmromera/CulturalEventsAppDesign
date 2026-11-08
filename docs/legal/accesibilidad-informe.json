@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T11:46:28.264Z",
+  "date": "2026-11-08T11:52:03.526Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -66,6 +66,10 @@
     },
     {
       "page": "favoritos-compartidos · movil",
+      "violations": []
+    },
+    {
+      "page": "lista-compartida-primera-visita · movil",
       "violations": []
     },
     {
@@ -209,6 +213,10 @@
       "violations": []
     },
     {
+      "page": "lista-compartida-primera-visita · escritorio",
+      "violations": []
+    },
+    {
       "page": "perfil · escritorio",
       "violations": []
     },
@@ -346,6 +354,10 @@
     },
     {
       "page": "favoritos-compartidos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "lista-compartida-primera-visita · zoom 200 %",
       "violations": []
     },
     {

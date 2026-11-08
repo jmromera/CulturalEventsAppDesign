@@ -229,6 +229,7 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 - **Problemas encontrados:**
   - El texto de cada evento en el `.ics` usaba la URL de la página actual. En un archivo descargado desde favoritos, todos los eventos habrían enlazado a `/favorites`, así que ahora cada uno lleva la URL de su ficha.
   - Para devolver el foco tras deshacer, un selector `href^="/event/12"` también habría encontrado `/event/123`. Ahora se compara la ruta exacta.
+  - Quien abría por primera vez un enlace de lista compartida (sin `city` en la URL ni nada guardado) la veía tapada por el diálogo de bienvenida. Ahora ese diálogo no aparece sobre una lista compartida, igual que no aparece sobre las páginas legales; una lista puede mezclar ciudades. Hay un test y una ruta de axe con exactamente el enlace que se comparte.
 - **Pruebas:**
   - `tests/favourites.test.tsx`: grupos y encabezados, deshacer con foco, quitar un pasado, `.ics` con 3 eventos, UID distintos, URL propias y sin pasados, lectura segura de `lista`, lista compartida que no guarda nada hasta pulsar, escape de texto en iCalendar.
   - `storage-on-visit`: añadida `/favorites?lista=…`.
@@ -246,7 +247,8 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - Cada cambio se confirma con «Cambios guardados en este navegador».
 - **Recomendados con categorías favoritas:**
   - Las reglas que fijaste no cambian: al menos 2 conciertos de cada 3, como mucho 1 evento deportivo y nunca dos seguidos, y sin repetir artista, equipo ni recinto.
-  - Las favoritas tienen prioridad **dentro** de esas reglas: van primero en cada grupo, y una favorita que no sea Música ocupa el hueco que no está reservado a conciertos.
+  - Las favoritas tienen prioridad **dentro** de esas reglas: van primero en cada grupo, y una favorita de escena, danza, ópera o exposiciones ocupa el hueco que no está reservado a conciertos.
+  - **Deportes** como favorita solo cambia el orden dentro de los deportes. No se adelanta al teatro ni a los musicales, porque la regla dice «rellenar con musical o teatro antes que con deporte».
   - Ejemplo en Madrid con Danza y Teatro: Melendi, Karol G y la Compañía Nacional de Danza.
   - Sin favoritas, el resultado es idéntico al anterior. Se comprobó comparando con la versión previa en 4 fechas × 6 ciudades.
   - **Pendiente de decidir:** si prefieres que las favoritas manden sobre la regla de «2 de cada 3 conciertos» (por ejemplo, alguien que solo marca Teatro), es un cambio de una línea, pero contradice la regla que pediste y no lo he hecho sin preguntarte.

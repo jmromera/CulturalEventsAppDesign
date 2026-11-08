@@ -82,6 +82,7 @@ describe("Shared favourites list", () => {
     fireEvent.click(screen.getByRole("button", { name: "Guardar en mis favoritos (2)" }));
     expect(storedSaved().sort()).toEqual([89, 99]);
     expect(document.querySelector(".saved-notice")?.textContent).toContain("2 eventos guardados");
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 });
 

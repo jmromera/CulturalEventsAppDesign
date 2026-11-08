@@ -43,8 +43,11 @@ describe.each(EVALUATION_DAYS)("on %s", (day) => {
       expect(new Set(recommended.map((event) => event.venueId)).size, summary).toBe(recommended.length);
       // Exhibitions never lead.
       expect(["Exposiciones", "Museos"]).not.toContain(recommended[0].category);
-      // A favourite outside music shows up whenever the city has one that fits the rules.
-      const others = favourites.filter((category) => category !== "Música");
+      // A favourite stage or exhibition category shows up whenever the city has one that fits the rules.
+      // Sport only moves up within its own group: stage shows still go before it ("teatro antes que deporte").
+      const others = favourites.filter((category) => !["Música", "Deportes"].includes(category));
+      // So a sport favourite on its own never changes which kind of event fills each slot.
+      if (favourites.length === 1 && favourites[0] === "Deportes") expect(recommended.map((event) => event.category), summary).toEqual(recommendedEvents(cityEvents).map((event) => event.category));
       const fits = cityEvents.some((event) => others.includes(event.category) && !recommended.slice(0, RECOMMENDATION_RULES.minMusic).some((pick) => pick.venueId === event.venueId || protagonistKey(pick) === protagonistKey(event)));
       if (others.length && fits) expect(recommended.some((event) => others.includes(event.category)), summary).toBe(true);
     });

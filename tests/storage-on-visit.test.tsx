@@ -32,7 +32,7 @@ describe("an explicit choice", () => {
 });
 
 describe("the welcome dialog", () => {
-  it.each(["/privacidad", "/aviso-legal", "/cookies", "/terminos", "/accesibilidad", "/tus-datos?borrado=1"])("does not cover %s", (path) => {
+  it.each(["/privacidad", "/aviso-legal", "/cookies", "/terminos", "/accesibilidad", "/tus-datos?borrado=1", "/favorites?lista=89,99,104"])("does not cover %s", (path) => {
     visit(path);
     expect(screen.queryByRole("dialog")).toBeNull();
   });

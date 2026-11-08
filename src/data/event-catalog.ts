@@ -71,7 +71,8 @@ export const RECOMMENDATION_RULES = { size: 3, minMusic: 2, maxSport: 1 } as con
  * - gaps are filled with theatre, musicals, opera or dance before sport; exhibitions only as a last resort.
  * Within each group: big events (venue capacity >= 10,000) first, then featured, then by date.
  * With favourite categories (profile), they come first inside each group and a favourite outside music takes
- * the slot that is not reserved for concerts; the rules above still apply.
+ * the slot that is not reserved for concerts (sport only moves up within its own group, so stage shows
+ * still come before sport); the rules above still apply.
  */
 export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOMMENDATION_RULES.size, favourites: readonly string[] = []): EventItem[] {
   const liked = (event: EventItem) => (favourites.includes(event.category) ? 0 : 1);
@@ -99,7 +100,7 @@ export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOM
       max -= 1;
     }
   };
-  const likedOthers = valid.filter((event) => event.category !== "Música" && favourites.includes(event.category));
+  const likedOthers = valid.filter((event) => !["Música", "Deportes"].includes(event.category) && favourites.includes(event.category));
   if (likedOthers.length) {
     take(music, Math.min(limit, RECOMMENDATION_RULES.minMusic)); // the concerts the rules require
     take(likedOthers, limit);                                     // then the person's favourite categories
