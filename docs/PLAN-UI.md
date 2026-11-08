@@ -70,7 +70,7 @@ Más hallazgos:
 | # | Tarea | Esfuerzo | Archivos |
 |---|---|---|---|
 | 1.1 | **Ubicación:** «Cerca de mí» (permiso solo al pulsar, cálculo en el dispositivo, aviso y alternativa si se deniega), radio de distancia y orden por distancia | M | `App.tsx`, `PreferredCityContext.tsx`, `lib/geo.ts`, privacidad |
-| 1.2 | **Mapa:** botón Lista / Mapa en el listado y mini mapa en el detalle, con Leaflet y OpenStreetMap cargados al pulsar. Marcadores manejables con teclado, lista siempre disponible y atribución de OSM | L | nuevo `components/EventMap.tsx`, CSP, privacidad, `third-parties.ts` |
+| 1.2 | ~~**Mapa:** botón Lista / Mapa en el listado y mini mapa en el detalle, con Leaflet y OpenStreetMap cargados al pulsar~~. **Retirado en P1.4c**: OpenStreetMap bloqueaba las teselas (ver CHANGELOG-UI) | L | — |
 | 1.3 | **Filtros:** cajón lateral en escritorio y hoja inferior en móvil; filtros activos como chips con ×; horario (mañana, tarde, noche); calendario visible; contador «Ver X resultados» en vivo; sin duplicar las categorías | L | `App.tsx` (sacar `Filters` a `components/FiltersPanel.tsx`) |
 | 1.4 | **Lista personal y perfil:** favoritos agrupados en Próximos y Pasados, quitar, añadir todos al calendario (un solo `.ics`), compartir la lista. Perfil con ciudad por defecto, categorías favoritas (que alimentan Recomendados), idioma y tema. Nuevas claves en el registro de almacenamiento y en la página de cookies | L | `pages/Favorites.tsx`, `pages/Profile.tsx`, `storage-keys.ts` |
 | 1.5 | **Reserva de demostración:** sesión, número de entradas, resumen y confirmación, con el aviso «Reserva de demostración: no se realiza ningún pago». Sin datos de tarjeta | M | `components/DemoBooking.tsx`, términos |
@@ -95,14 +95,14 @@ Más hallazgos:
 | 3.2 | Hero con buscador grande y chips con el estado activo bien marcado | S |
 | 3.3 | Recomendados como carrusel con scroll-snap, flechas y tarjetas grandes con el título sobre la imagen | M |
 | 3.4 | Secciones temáticas: «Este fin de semana», «Navidad y Fin de Año», «Cerca de ti» y «Gratis» si hay precio | M |
-| 3.5 | Barra inferior en móvil (Inicio, Buscar, Mapa, Favoritos, Perfil) y cabecera con efecto cristal al hacer scroll | M |
+| 3.5 | Barra inferior en móvil (Inicio, Buscar, Favoritos, Perfil) y cabecera con efecto cristal al hacer scroll | M |
 | 3.6 | Microinteracciones (corazón, elevación, zoom), transiciones con la View Transitions API (con alternativa y respetando «reducir movimiento») y estados vacíos ilustrados | M |
 | 3.7 | Fuente display autoalojada solo para titulares grandes | S |
 | 3.8 | Esqueletos de carga solo para imágenes: los datos se cargan con la página y no hay espera que mostrar | S |
 
 ## Dependencias nuevas
 
-- **Leaflet** (≈ 42 KB comprimido, sin claves ni cuotas). Es el mapa más ligero que cubre marcadores accesibles; cargado solo al abrir el mapa.
+- ~~**Leaflet**~~: añadido en P1.2 y retirado en P1.4c junto con el mapa. El proyecto vuelve a no tener dependencias de mapas.
 - **Una fuente display autoalojada** (`@fontsource`).
 - Nada más: componentes, paneles y transiciones con React y CSS.
 

@@ -1,6 +1,6 @@
 import cityImageData from "./city-images.json";
 import eventData from "./events.json";
-import { cities, type City, type EventItem } from "../types/Event";
+import { cities, eventCategories, type City, type EventItem } from "../types/Event";
 import { venueFor } from "./venue-catalog";
 
 export const cityImages = cityImageData as Record<City, string>;
@@ -64,14 +64,20 @@ export function protagonistKey(event: EventItem): string {
 export const RECOMMENDATION_RULES = { size: 3, minMusic: 2, maxSport: 1 } as const;
 
 /**
- * Recommendations for a city (see docs/CHANGELOG-UI.md):
+ * Recommendations for a city (see docs/CHANGELOG-UI.md).
+ *
+ * Without favourite categories (the default):
  * - at least 2 of every 3 are concerts (Música), big concerts in stadiums and arenas first;
  * - at most 1 sports event, so never two in a row;
  * - no two events with the same artist, team or venue;
  * - gaps are filled with theatre, musicals, opera or dance before sport; exhibitions only as a last resort.
  * Within each group: big events (venue capacity >= 10,000) first, then featured, then by date.
+ *
+ * With favourite categories (profile), the person's choice wins: recommendations come only from those
+ * categories, taking turns between them, still without repeating artist, team or venue. Only if the city
+ * has too few of them are the remaining slots filled with the default rules.
  */
-export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOMMENDATION_RULES.size): EventItem[] {
+export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOMMENDATION_RULES.size, favourites: readonly string[] = []): EventItem[] {
   const priority = (event: EventItem) => (isBigEvent(event) ? 0 : event.featured ? 1 : 2);
   const byPriority = (a: EventItem, b: EventItem) => priority(a) - priority(b) || (a.startDate ?? "9999").localeCompare(b.startDate ?? "9999");
   const valid = cityEvents.filter((event) => event.title?.trim()).sort(byPriority);
@@ -84,22 +90,44 @@ export function recommendedEvents(cityEvents: EventItem[], limit: number = RECOM
   const usedKeys = new Set<string>();
   const usedVenues = new Set<string>();
   let sports = 0;
+  const fits = (event: EventItem) => !picked.includes(event) && !usedKeys.has(protagonistKey(event)) && !usedVenues.has(event.venueId);
+  const pick = (event: EventItem) => {
+    picked.push(event);
+    usedKeys.add(protagonistKey(event));
+    usedVenues.add(event.venueId);
+    if (event.category === "Deportes") sports += 1;
+  };
   const take = (pool: EventItem[], max: number) => {
     for (const event of pool) {
       if (picked.length >= limit || max <= 0) return;
-      if (picked.includes(event) || usedKeys.has(protagonistKey(event)) || usedVenues.has(event.venueId)) continue;
+      if (!fits(event)) continue;
       if (event.category === "Deportes" && sports >= RECOMMENDATION_RULES.maxSport) continue;
-      picked.push(event);
-      usedKeys.add(protagonistKey(event));
-      usedVenues.add(event.venueId);
-      if (event.category === "Deportes") sports += 1;
+      pick(event);
       max -= 1;
     }
   };
+
+  const chosen = eventCategories.filter((category) => favourites.includes(category));
+  if (chosen.length) {
+    // One from each favourite category in turn, so every choice shows up.
+    const pools = chosen.map((category) => valid.filter((event) => event.category === category));
+    let added = true;
+    while (picked.length < limit && added) {
+      added = false;
+      for (const pool of pools) {
+        if (picked.length >= limit) break;
+        const next = pool.find(fits);
+        if (next) { pick(next); added = true; }
+      }
+    }
+    if (picked.length >= limit) return picked;
+  }
+
   take(music, limit);          // concerts fill as many slots as they can
   take(stage, limit);          // then a big musical, theatre, opera or dance
   take(sport, RECOMMENDATION_RULES.maxSport);
   take(longRunning, limit);
+  if (chosen.length) return picked; // favourites first, then the default fill
   // Concerts lead, then the rest; with at most one sports event there are never two in a row.
   return [...picked.filter((event) => event.category === "Música"), ...picked.filter((event) => event.category !== "Música")];
 }

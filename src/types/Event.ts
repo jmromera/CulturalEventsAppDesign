@@ -16,7 +16,7 @@ export type Venue = {
   capacitySource?: string | null;
   wikidata?: string | null;
   imageCredit?: { author: string; license: string; licenseUrl: string | null; source: string } | null;
-  /** Coordinates of the venue entrance, for distance and the map. */
+  /** Coordinates of the venue entrance, used for the "near me" distance. */
   lat?: number | null; lng?: number | null;
 };
 

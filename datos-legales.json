@@ -33,7 +33,7 @@
   "plazos": {
     "registrosServidor": "Los que conserve Vercel según su política; el responsable no los consulta ni los exporta",
     "datosNavegador": "Hasta que los borres desde «Tus datos» o desde tu navegador",
-    "ubicacion": "No se conserva: solo se guarda el nombre de la ciudad elegida",
+    "ubicacion": "No se conserva: para elegir ciudad solo se guarda su nombre; para «Cerca de mí», la posición (redondeada a unos 100 m) se usa en memoria y se olvida al cerrar la página",
     "comunicaciones": "El tiempo necesario para responderte; después se borran del buzón."
   },
   "autoridadControl": {

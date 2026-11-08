@@ -16,6 +16,11 @@ const interactions = [
   { name: "calendario-abierto", route: "evento", act: (page) => page.locator(".detail-calendar summary").click() },
   { name: "confirmar-borrado", route: "tus-datos", act: (page) => page.getByRole("button", { name: "Borrar mis datos" }).click() },
   { name: "acerca-de", route: "inicio", act: (page) => page.getByRole("button", { name: "Acerca de" }).click() },
+  { name: "filtros-noche", route: "inicio", act: async (page) => { await page.getByRole("button", { name: /^Filtros/ }).click(); await page.getByRole("button", { name: /^Noche/ }).click(); } },
+  { name: "filtros-calendario-teclado", route: "inicio", act: async (page) => { await page.getByRole("button", { name: /^Filtros/ }).click(); const day = page.locator(".month-calendar td button[tabindex='0']"); await day.focus(); await page.keyboard.press("ArrowRight"); await page.keyboard.press("Enter"); } },
+  { name: "chips-filtros", route: "inicio", act: async (page) => { await page.getByRole("button", { name: /^Filtros/ }).click(); await page.getByRole("button", { name: /^Tarde/ }).click(); await page.getByRole("button", { name: /^Ver \d+ resultado/ }).click(); } },
+  { name: "favorito-quitado", route: "favoritos", act: async (page) => { await page.locator(".saved-page article .save-button").first().click(); await page.getByRole("button", { name: "Deshacer" }).waitFor(); } },
+  { name: "cerca-de-mi", route: "inicio", act: (page) => page.getByRole("button", { name: "Cerca de mí" }).click() },
 ];
 
 const { url: base, stop } = await startPreview({ build: !process.argv.includes("--no-build") });
@@ -32,7 +37,9 @@ async function open(page, route) {
 
 async function audit(page, label) {
   const result = await new AxeBuilder({ page }).withTags(TAGS).analyze();
-  const violations = result.violations.map((violation) => ({
+  // Structure rules outside the WCAG tags: one h1 per page and no skipped heading levels.
+  const structure = await new AxeBuilder({ page }).withRules(["heading-order", "page-has-heading-one"]).analyze();
+  const violations = [...result.violations, ...structure.violations].map((violation) => ({
     id: violation.id,
     impact: violation.impact,
     help: violation.help,

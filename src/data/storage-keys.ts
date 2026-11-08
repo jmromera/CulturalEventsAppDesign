@@ -10,6 +10,7 @@ export const STORAGE_KEYS = {
   geolocationStatus: "plan-cerca.geolocation-status",
   onboardingDismissed: "plan-cerca.city-onboarding-dismissed",
   artistPreferences: "plancerca.artist-preferences",
+  profile: "plan-cerca.profile",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
@@ -32,6 +33,7 @@ export const STORAGE_REGISTRY: StorageEntry[] = [
   { key: STORAGE_KEYS.geolocationStatus, purpose: "Saber si ya elegiste ciudad o usaste la ubicación", content: "Un estado: ciudad elegida, ubicación detectada o sin ciudad cercana", createdWhen: "Al elegir ciudad o usar la ubicación" },
   { key: STORAGE_KEYS.onboardingDismissed, purpose: "No volver a mostrar el diálogo de bienvenida", content: "El valor «true»", createdWhen: "Al pulsar «Ahora no» en el diálogo de bienvenida" },
   { key: STORAGE_KEYS.artistPreferences, purpose: "Recordar los artistas que sigues", content: "Por cada artista: si lo sigues y si quieres avisos", createdWhen: "Al pulsar «Seguir artista» o «Avisarme»" },
+  { key: STORAGE_KEYS.profile, purpose: "Recordar tu perfil", content: "El avatar elegido (un dibujo de la web, nunca una foto) y tus categorías favoritas", createdWhen: "Al cambiar algo en «Tu perfil»" },
 ];
 
 function storage(): Storage | null {
