@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-07T22:11:05.997Z",
+  "date": "2026-11-08T11:01:01.419Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -114,6 +114,18 @@
     },
     {
       "page": "acerca-de · movil",
+      "violations": []
+    },
+    {
+      "page": "filtros-noche · movil",
+      "violations": []
+    },
+    {
+      "page": "filtros-calendario-teclado · movil",
+      "violations": []
+    },
+    {
+      "page": "chips-filtros · movil",
       "violations": []
     },
     {
@@ -234,6 +246,18 @@
     },
     {
       "page": "acerca-de · escritorio",
+      "violations": []
+    },
+    {
+      "page": "filtros-noche · escritorio",
+      "violations": []
+    },
+    {
+      "page": "filtros-calendario-teclado · escritorio",
+      "violations": []
+    },
+    {
+      "page": "chips-filtros · escritorio",
       "violations": []
     },
     {

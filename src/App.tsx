@@ -14,6 +14,8 @@ import CityOnboardingDialog from "./components/CityOnboardingDialog";
 import CitySelector from "./components/CitySelector";
 import NearMePanel from "./components/NearMePanel";
 import MapView, { mapCopy } from "./components/MapView";
+import FiltersDrawer, { filtersCopy, WHEN_SHORTCUTS, type FilterDraft } from "./components/FiltersDrawer";
+import { matchesSlots, parseSlots, SLOT_URL_NAMES, type TimeSlot } from "./lib/time-slot";
 import type { MapPoint } from "./components/EventMap";
 import cityCoordinates from "./data/city-coordinates.json";
 import { NearMeProvider, useNearMe } from "./context/NearMeContext";
@@ -425,18 +427,27 @@ function eventInRange(event: EventItem, range: [string, string] | null): boolean
 const PAGE_SIZE = 12;
 const visibleCounts = new Map<string, number>();
 
-function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, toggleCategory, goFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; toggleCategory: (category: string | null) => void; goFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; t: typeof copy.es }) {
+function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, slots, setSlots, toggleCategory, goFilters, filtersOpen, closeFilters, applyFilters, clearFilters, resetSearch, searchQuery, language, t }: { selectedCity: City; saved: number[]; toggleSaved: (id: number) => void; categories: string[]; when: string | null; setWhen: (when: string | null) => void; slots: TimeSlot[]; setSlots: (slots: TimeSlot[]) => void; toggleCategory: (category: string | null) => void; goFilters: () => void; filtersOpen: boolean; closeFilters: () => void; applyFilters: (draft: FilterDraft) => void; clearFilters: () => void; resetSearch: () => void; searchQuery: string; language: Language; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const dateRange = dateRangeFor(when);
-  const activeFilterCount = categories.length + (dateRange ? 1 : 0);
+  const activeFilterCount = categories.length + (dateRange ? 1 : 0) + slots.length;
+  const filterText = filtersCopy[language];
   const cityEvents = events.filter((event) => venueFor(event.venueId).city === selectedCity);
   const query = normalizeSearch(searchQuery.trim());
   const matchesSearch = (event: EventItem) => {
     const venue = venueFor(event.venueId);
     const matchesCategory = !categories.length || categories.includes(event.category);
     const matchesQuery = !query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query);
-    return matchesCategory && matchesQuery && eventInRange(event, dateRange);
+    return matchesCategory && matchesQuery && eventInRange(event, dateRange) && matchesSlots(event, slots);
   };
+  // Live count for the filters panel: same rules as the list, with the draft city, date and time slots.
+  const countResults = (draft: FilterDraft) => events.filter((event) => {
+    const venue = venueFor(event.venueId);
+    return venue.city === draft.city && (!categories.length || categories.includes(event.category))
+      && (!query || normalizeSearch([event.title, event.category, event.description, event.organizer, venue.name, venue.address, ...event.tags].join(" ")).includes(query))
+      && eventInRange(event, dateRangeFor(draft.when)) && matchesSlots(event, draft.slots);
+  }).length;
+  const countForDay = (city: City, key: string) => events.filter((event) => venueFor(event.venueId).city === city && (!categories.length || categories.includes(event.category)) && eventInRange(event, [key, key])).length;
   const nearMe = useNearMe();
   // List or map. Kept in memory (not in the URL) so a shared link never opens the map without a click.
   const [view, setView] = useState<"list" | "map">("list");
@@ -453,7 +464,7 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
       .sort((a, b) => (distanceTo(a) ?? Infinity) - (distanceTo(b) ?? Infinity) || (a.startDate ?? "").localeCompare(b.startDate ?? ""))
     : matched;
   const distanceLabel = (event: EventItem) => { const km = distanceTo(event); return km === null ? undefined : formatDistance(km, language); };
-  const listKey = [selectedCity, categories.join(","), when ?? "", query, nearMe.position ? `near-${nearMe.radiusKm}` : ""].join("|");
+  const listKey = [selectedCity, categories.join(","), when ?? "", slots.join(","), query, nearMe.position ? `near-${nearMe.radiusKm}` : ""].join("|");
   const [shown, setShown] = useState({ key: listKey, count: visibleCounts.get(listKey) ?? PAGE_SIZE });
   const visibleCount = shown.key === listKey ? shown.count : visibleCounts.get(listKey) ?? PAGE_SIZE;
   const showMore = () => {
@@ -476,7 +487,18 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
   const weekRange = dateRangeFor("week");
   const weekCount = cityEvents.filter((event) => eventInRange(event, weekRange)).length;
   const discovery = topCategories.length > 0 && <section className="discovery-strip"><div><Icon name="trending" /><span><small>{t.trending.replace("{city}", selectedCity)}</small><strong>{topCategories.map(([item]) => t.categoryNames[item]).join(" · ")}</strong></span></div>{weekCount > 0 && <div><Icon name="calendar" /><span><small>{t.thisWeek}</small><strong>{eventCountLabel(weekCount, labels)}</strong></span></div>}</section>;
-  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><div className="catalogue-actions"><div className="view-toggle" role="group" aria-label={mapText.view}>{(["list", "map"] as const).map((option) => <button key={option} type="button" aria-pressed={view === option} className={view === option ? "active" : ""} onClick={() => setView(option)}><Icon name={option === "list" ? "calendar" : "location"} />{option === "list" ? mapText.list : mapText.map}</button>)}</div><NearMePanel language={language} /><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters}><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div></div>{filtered.length ? <>{view === "map" && <MapView points={mapPointsFor(filtered)} language={language} center={nearMe.position ?? cityCenter(selectedCity)} />}<div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} distance={distanceLabel(event)} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : nearMe.position && nearMe.radiusKm !== null && matched.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={() => nearMe.setRadiusKm(null)}>{labels.viewAllEvents}</Button></div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
+  const whenLabel = when === null ? null : (WHEN_SHORTCUTS as readonly string[]).includes(when)
+    ? filterText.whenNames[when as (typeof WHEN_SHORTCUTS)[number]]
+    : new Intl.DateTimeFormat(language, { day: "numeric", month: "long" }).format(new Date(`${when}T12:00:00`));
+  // Active filters as removable chips above the results.
+  const activeChips = [
+    ...categories.map((category) => ({ key: `cat-${category}`, label: t.categoryNames[category as EventCategory], remove: () => toggleCategory(category) })),
+    ...(whenLabel ? [{ key: "when", label: whenLabel, remove: () => setWhen(null) }] : []),
+    ...slots.map((slot) => ({ key: `slot-${slot}`, label: filterText.slotChips[slot], remove: () => setSlots(slots.filter((item) => item !== slot)) })),
+    ...(nearMe.position && nearMe.radiusKm !== null ? [{ key: "radius", label: `≤ ${nearMe.radiusKm} km`, remove: () => nearMe.setRadiusKm(null) }] : []),
+  ];
+  const clearAllFilters = () => { nearMe.setRadiusKm(null); clearFilters(); };
+  const catalogue = <section id="catalogue"><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(filtered.length, labels)}</p><SectionTitle kicker={`${selectedCity.toLocaleUpperCase()} · ${filtered.length}`} title={query ? `${labels.searchResults}: ${searchQuery.trim()}` : t.all} level={query ? 1 : 2} /><div className="catalogue-toolbar"><div className="category-tabs">{["Todos", ...eventCategories].map((item) => { const active = item === "Todos" ? !categories.length : categories.includes(item); return <button className={active ? "active" : ""} aria-pressed={active} data-cat={categoryKeys[item]} onClick={() => toggleCategory(item === "Todos" ? null : item)} key={item}>{item === "Todos" ? t.allCategories : t.categoryNames[item as EventCategory]}</button>; })}</div><div className="catalogue-actions"><div className="view-toggle" role="group" aria-label={mapText.view}>{(["list", "map"] as const).map((option) => <button key={option} type="button" aria-pressed={view === option} className={view === option ? "active" : ""} onClick={() => setView(option)}><Icon name={option === "list" ? "calendar" : "location"} />{option === "list" ? mapText.list : mapText.map}</button>)}</div><NearMePanel language={language} /><button className={`filter-control ${activeFilterCount ? "active" : ""}`} onClick={goFilters} aria-haspopup="dialog"><Icon name="filter" />{t.filters}{activeFilterCount ? ` · ${activeFilterCount}` : ""}</button></div></div>{activeChips.length > 0 && <div className="active-filters" role="group" aria-label={filterText.activeFilters}>{activeChips.map((chip) => <button key={chip.key} type="button" className="active-filter" aria-label={filterText.removeFilter(chip.label)} onClick={chip.remove}>{chip.label}<span aria-hidden="true">×</span></button>)}{activeChips.length > 1 && <button type="button" className="active-filter-clear" onClick={clearAllFilters}>{filterText.clearAll}</button>}</div>}{filtered.length ? <>{view === "map" && <MapView points={mapPointsFor(filtered)} language={language} center={nearMe.position ?? cityCenter(selectedCity)} />}<div className="event-grid">{filtered.slice(0, visibleCount).map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => toggleSaved(event.id)} t={t} distance={distanceLabel(event)} />)}</div>{filtered.length > visibleCount && <div className="catalogue-more"><p role="status">{t.showingCount.replace("{shown}", String(visibleCount)).replace("{total}", String(filtered.length))}</p><Button variant="secondary" onClick={showMore}>{t.showMore}</Button></div>}</> : otherCityResults.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.searchOtherCitiesTitle.replace("{query}", searchQuery.trim()).replace("{city}", selectedCity)}</h2><p>{labels.searchOtherCitiesText}</p><div className="search-other-cities">{otherCityResults.map(([city, count]) => <Link key={city} className="button button--secondary" to={searchPathIn(city)}>{city} · {count}</Link>)}</div></div> : nearMe.position && nearMe.radiusKm !== null && matched.length > 0 ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={() => nearMe.setRadiusKm(null)}>{labels.viewAllEvents}</Button></div></div> : query || activeFilterCount ? <div className="city-empty-state" role="status"><h2>{labels.noSearchResults}</h2><div className="search-other-cities"><Button variant="secondary" onClick={resetSearch}>{labels.viewAllEvents}</Button></div></div> : <p className="city-empty">{t.noCityEvents}</p>}</section>;
   const isSearching = query.length > 0;
   // Atajos de fecha del hero: cada uno muestra cuántos eventos hay y se desactiva si no hay ninguno.
   const whenNames: Record<(typeof whenOptions)[number], string> = { today: labels.whenToday, tomorrow: labels.whenTomorrow, week: t.thisWeek, month: labels.whenMonth };
@@ -491,29 +513,8 @@ function Home({ selectedCity, saved, toggleSaved, categories, when, setWhen, tog
     <div className="home-content">
       {isSearching ? <>{catalogue}{recommendations}{discovery}</> : <>{recommendations}{discovery}{catalogue}</>}
     </div>
+    {filtersOpen && <FiltersDrawer language={language} initial={{ city: selectedCity, when, slots }} onClose={closeFilters} onApply={applyFilters} countResults={countResults} countForDay={countForDay} />}
   </main>;
-}
-
-const normalizeCity = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
-const extraCitySuggestions = ["Cuenca", "Albacete", "Toledo", "Segovia", "Salamanca"];
-
-function Filters({ selectedCity, initialCategories, initialWhen, onApply, back, language, t }: { selectedCity: City; initialCategories: string[]; initialWhen: string | null; onApply: (city: City, categories: string[], when: string | null) => void; back: () => void; language: Language; t: typeof copy.es }) {
-  const labels = interfaceText[language];
-  const [selected, setSelected] = useState(initialCategories);
-  const [when, setWhen] = useState(initialWhen);
-  const [cityInput, setCityInput] = useState<string>(selectedCity);
-  const typedCity = cityInput.trim();
-  const matchedCity = cities.find((city) => normalizeCity(city) === normalizeCity(typedCity));
-  const hasEvents = !typedCity || (matchedCity !== undefined && cityEventCounts[matchedCity] > 0);
-  const resultCity = matchedCity ?? selectedCity;
-  const dateRange = dateRangeFor(when);
-  const resultCount = events.filter((event) => venueFor(event.venueId).city === resultCity && (!selected.length || selected.includes(event.category)) && eventInRange(event, dateRange)).length;
-  const suggestions = cities.filter((city) => city !== matchedCity && cityEventCounts[city] > 0);
-  const pickCity = (city: City) => setCityInput(city);
-  const toggle = (value: string) => setSelected((current) => current.includes(value) ? current.filter((item) => item !== value) : [...current, value]);
-  const whenLabels: Record<(typeof whenOptions)[number], string> = { today: labels.whenToday, tomorrow: labels.whenTomorrow, week: t.thisWeek, month: labels.whenMonth };
-  const customDate = when !== null && !(whenOptions as readonly string[]).includes(when);
-  return <main id="main-content" tabIndex={-1} className="subpage"><div className="subpage-top"><button onClick={back}><Icon name="arrow" />{t.back}</button><button onClick={() => { setSelected([]); setWhen(null); }}>{t.clear}</button></div><div className="filter-shell"><span className="kicker">{t.search}</span><h1>{t.filters}</h1><section><h2>{t.city}</h2><label className="filter-city-search"><BrandMark /><input type="text" name="city" list="filter-city-list" value={cityInput} onChange={(e) => setCityInput(e.target.value)} placeholder={labels.cityPlaceholder} aria-label={t.city} autoComplete="off" /></label><datalist id="filter-city-list">{[...new Set([...cities, ...extraCitySuggestions])].map((city) => <option key={city} value={city} />)}</datalist></section>{!hasEvents && <section className="city-empty-state" role="status"><h2>{labels.cityEmptyTitle.replace("{city}", typedCity)}</h2><p>{labels.cityEmptyText}</p><h3>{labels.citySuggestions}</h3><div className="option-grid">{suggestions.map((city) => <button key={city} type="button" onClick={() => pickCity(city)}>{city}<small>{cityEventCounts[city]} {labels.availableEvents}</small></button>)}</div></section>}<section><h2>{t.categories}</h2><div className="option-grid">{eventCategories.map((item) => <button className={selected.includes(item) ? "active" : ""} aria-pressed={selected.includes(item)} onClick={() => toggle(item)} key={item}>{t.categoryNames[item]}{selected.includes(item) && <Icon name="check" />}</button>)}</div></section><section><h2>{t.when}</h2><div className="option-grid dates">{whenOptions.map((item) => <button className={when === item ? "active" : ""} aria-pressed={when === item} onClick={() => setWhen(when === item ? null : item)} key={item}>{whenLabels[item]}</button>)}<button className={customDate ? "active" : ""} aria-pressed={customDate} onClick={() => setWhen(customDate ? null : localDateKey(new Date()))}>{labels.pickDate}</button></div>{customDate && <input className="new-list-input filter-date-input" type="date" name="when" value={when ?? ""} min={localDateKey(new Date())} onChange={(e) => setWhen(e.target.value || null)} aria-label={labels.pickDate} />}</section><p className="sr-only" role="status" aria-live="polite">{eventCountLabel(hasEvents ? resultCount : 0, labels)}</p><Button disabled={!hasEvents} onClick={() => onApply(resultCity, selected, when)}>{t.results} · {hasEvents ? resultCount : 0}</Button></div></main>;
 }
 
 function VenuesPage({ selectedCity, language, t }: { selectedCity: City; language: Language; t: typeof copy.es }) {
@@ -796,27 +797,35 @@ export default function App() {
     else params.delete("when");
     navigate({ pathname: location.pathname, search: `?${params.toString()}` }, { replace: true });
   };
-  const goFilters = () => {
+  const activeSlots = parseSlots(searchParams.get("franja"));
+  // The filters panel opens over the list (?filters=1), so the browser Back button also closes it.
+  const filtersOpen = searchParams.has("filters") || (location.pathname === "/search" && !searchParams.has("q"));
+  const withParams = (change: (params: URLSearchParams) => void) => {
     const params = new URLSearchParams(location.search);
-    params.set("filters", "1");
-    navigate({ pathname: "/search", search: `?${params.toString()}` });
+    change(params);
+    return { pathname: params.has("q") ? "/search" : "/", search: `?${params.toString()}` };
   };
-  const applyFilters = (city: City, categories: string[], when: string | null) => {
-    const params = new URLSearchParams(location.search);
-    params.delete("filters");
-    params.set("city", city);
-    if (categories.length) params.set("cat", categories.join(","));
-    else params.delete("cat");
-    if (when) params.set("when", when);
-    else params.delete("when");
-    navigate({ pathname: params.has("q") ? "/search" : "/", search: `?${params.toString()}` });
+  const slotsParam = (params: URLSearchParams, slots: TimeSlot[]) => {
+    if (slots.length) params.set("franja", slots.map((slot) => SLOT_URL_NAMES[slot]).join(","));
+    else params.delete("franja");
   };
-  const homePage = <Home selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} toggleCategory={toggleCategory} goFilters={goFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
-  const showFilters = searchParams.has("filters") || !searchParams.has("q");
+  const goFilters = () => navigate(withParams((params) => params.set("filters", "1")));
+  const closeFilters = () => navigate(withParams((params) => params.delete("filters")), { replace: true });
+  const applyFilters = ({ city, when, slots }: FilterDraft) => {
+    navigate(withParams((params) => {
+      params.delete("filters");
+      params.set("city", city);
+      if (when) params.set("when", when); else params.delete("when");
+      slotsParam(params, slots);
+    }), { replace: true });
+  };
+  const clearFilters = () => navigate(withParams((params) => { for (const key of ["cat", "when", "franja", "filters"]) params.delete(key); }), { replace: true });
+  const setSlots = (slots: TimeSlot[]) => navigate(withParams((params) => slotsParam(params, slots)), { replace: true });
+  const homePage = <Home selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
   return <NearMeProvider><div className="app-shell"><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
-      <Route path="/search" element={showFilters ? <Filters selectedCity={selectedCity} initialCategories={activeCategories} initialWhen={activeWhen} onApply={applyFilters} back={goBack} language={language} t={t} /> : homePage} />
+      <Route path="/search" element={homePage} />
       <Route path="/favorites" element={<Saved saved={saved} toggleSaved={toggleSaved} explore={goToEvents} title={interfaceText[language].favourites} language={language} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />

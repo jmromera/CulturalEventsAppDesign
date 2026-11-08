@@ -171,3 +171,31 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 - **Pruebas:**
   - `tests/map.test.tsx`: el mapa no se carga hasta pulsar, un marcador por recinto, la lista sigue disponible y el mini mapa del detalle se abre y se cierra.
   - En navegador real: 83 comprobaciones de axe con el mapa abierto, recorrido con teclado (marcador → globo → ficha) y teselas cargadas con estado 200.
+
+### Iteración P1.3 · Filtros en panel lateral (escritorio) y hoja inferior (móvil)
+
+- **Qué:**
+  - «Filtros» ya no lleva a otra página: abre un panel sobre la lista, a la derecha en escritorio y desde abajo en móvil.
+  - Dentro: ciudad, atajos de fecha («Hoy», «Mañana», «Esta semana», «Próximos 30 días»), un **calendario del mes siempre visible** y la **franja horaria** (mañana antes de 14:00, tarde 14:00–20:00, noche desde 20:00).
+  - El botón principal dice cuántos resultados saldrán («Ver 44 resultados») y se actualiza al tocar cualquier opción. Con 0 resultados se desactiva y dice «Sin resultados con estos filtros».
+  - Los filtros aplicados aparecen como chips encima de la lista («Música ×», «Por la noche ×», «≤ 5 km ×») y «Quitar todos» los borra de una vez.
+  - La franja va en la URL (`franja=tarde,noche`), así que un enlace compartido conserva el filtro. La página antigua de filtros se ha eliminado; `/search` sin búsqueda abre el panel.
+- **Por qué:**
+  - **Visibilidad del estado del sistema (Nielsen 1):** el recuento en vivo y los chips enseñan qué está filtrado y qué va a salir antes de aplicar.
+  - **Control y libertad (Nielsen 3):** cada filtro se quita con un toque, sin volver a abrir el panel. El botón Atrás del navegador también cierra el panel.
+  - **Prevención de errores (Nielsen 5):** no se puede aplicar una combinación vacía, y en el calendario cada día lleva un punto si tiene eventos.
+  - **Reconocer mejor que recordar (Nielsen 6):** el calendario a la vista sustituye a escribir o adivinar fechas.
+  - El chip de franja dice «Por la mañana» y no «Mañana», para no confundirlo con el atajo de fecha «Mañana».
+- **Accesibilidad:**
+  - **Panel modal:** `role="dialog"`, `aria-modal` y título. El foco entra en «Cerrar filtros», Tab y Mayús+Tab no salen del panel, Esc lo cierra y el foco vuelve al botón «Filtros» (WCAG 2.1.2, 2.4.3). «Filtros» lleva `aria-haspopup="dialog"`.
+  - **Calendario:** patrón *grid* de WAI-ARIA con un único día tabulable. Flechas mueven por días y semanas, Inicio/Fin al principio y final de la semana, RePág/AvPág cambian de mes. Cada día se anuncia con su fecha completa y su número de eventos («domingo, 27 de diciembre, 3 eventos»). Los días pasados están desactivados.
+  - **Recuento:** se anuncia en una región `aria-live` (WCAG 4.1.3, mensajes de estado).
+  - **Tamaños:** chips, días y botones miden 44 px en móvil (2.5.5). Los chips de opción usan `aria-pressed`. La animación de entrada se quita con «reducir movimiento».
+- **Problemas encontrados:**
+  - La trampa de foco contaba como tabulables los días del calendario con `tabindex="-1"`, así que el Tab recorría los 42 días. Se excluyen del selector.
+  - El mes salía como «Noviembre De 2026» por el `text-transform: capitalize`; ahora solo se pone en mayúscula la primera letra.
+  - «Quitar todos» encadenaba dos navegaciones y la segunda pisaba la primera; ahora es una sola.
+- **Pruebas:**
+  - `tests/filters-drawer.test.tsx`: franjas (límites 14:00 y 20:00, horas sin confirmar), lectura de `franja`, trampa de foco y Esc, recuento en vivo, chip que se quita, «Quitar todos», botón desactivado con 0 resultados, calendario con flechas y AvPág.
+  - En navegador real: 89 comprobaciones de axe sin problemas (panel abierto, calendario con teclado y chips aplicados), sin peticiones a terceros, responsive y contraste correctos.
+  - Capturas: `docs/capturas/despues/filtros-panel-390.jpg`, `filtros-panel-1440.jpg`, `filtros-chips-390.jpg`, `filtros-chips-1440.jpg`.
