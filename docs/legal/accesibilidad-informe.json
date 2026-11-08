@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T11:08:42.923Z",
+  "date": "2026-11-08T11:17:09.550Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -65,6 +65,10 @@
       "violations": []
     },
     {
+      "page": "favoritos-compartidos · movil",
+      "violations": []
+    },
+    {
       "page": "favoritos-vacio · movil",
       "violations": []
     },
@@ -126,6 +130,10 @@
     },
     {
       "page": "chips-filtros · movil",
+      "violations": []
+    },
+    {
+      "page": "favorito-quitado · movil",
       "violations": []
     },
     {
@@ -197,6 +205,10 @@
       "violations": []
     },
     {
+      "page": "favoritos-compartidos · escritorio",
+      "violations": []
+    },
+    {
       "page": "favoritos-vacio · escritorio",
       "violations": []
     },
@@ -258,6 +270,10 @@
     },
     {
       "page": "chips-filtros · escritorio",
+      "violations": []
+    },
+    {
+      "page": "favorito-quitado · escritorio",
       "violations": []
     },
     {
@@ -326,6 +342,10 @@
     },
     {
       "page": "favoritos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "favoritos-compartidos · zoom 200 %",
       "violations": []
     },
     {

@@ -15,6 +15,8 @@ import CitySelector from "./components/CitySelector";
 import NearMePanel from "./components/NearMePanel";
 import MapView, { mapCopy } from "./components/MapView";
 import FiltersDrawer, { filtersCopy, WHEN_SHORTCUTS, type FilterDraft } from "./components/FiltersDrawer";
+import { buildCalendar, downloadTextFile, type CalendarEntry } from "./lib/ics";
+import { parseSharedList, sharedListPath } from "./lib/shared-list";
 import { matchesSlots, parseSlots, SLOT_URL_NAMES, type TimeSlot } from "./lib/time-slot";
 import type { MapPoint } from "./components/EventMap";
 import cityCoordinates from "./data/city-coordinates.json";
@@ -335,31 +337,14 @@ function eventStructuredData(event: EventItem, venue: Venue): Record<string, unk
   };
 }
 
-function escapeCalendarText(value: string) {
-  return value.replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;");
+function calendarEntryFor(event: EventItem, venue: ReturnType<typeof venueFor>, timing: CalendarTiming, url: string): CalendarEntry {
+  return { uid: `${event.id}-${event.startDate}@plancerca`, ...timing, title: event.title, description: event.description, location: `${venue.name}, ${venue.address}, ${venue.city}`, url };
 }
 
+const fileSlug = (value: string) => normalizeSearch(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 function downloadEventCalendar(event: EventItem, venue: ReturnType<typeof venueFor>, timing: CalendarTiming) {
-  const dateFields = timing.allDay
-    ? [`DTSTART;VALUE=DATE:${timing.start}`, `DTEND;VALUE=DATE:${timing.end}`]
-    : [`DTSTART:${timing.start}`, `DTEND:${timing.end}`];
-  const calendar = [
-    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Plan Cerca//Event Calendar//ES", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT",
-    `UID:${event.id}-${event.startDate}@plancerca`, `DTSTAMP:${formatCalendarTimestamp(new Date())}`,
-    ...dateFields,
-    `SUMMARY:${escapeCalendarText(event.title)}`,
-    `DESCRIPTION:${escapeCalendarText(`${event.description}\n\n${window.location.href}`)}`,
-    `LOCATION:${escapeCalendarText(`${venue.name}, ${venue.address}, ${venue.city}`)}`,
-    "END:VEVENT", "END:VCALENDAR",
-  ].join("\r\n");
-  const fileUrl = URL.createObjectURL(new Blob([calendar], { type: "text/calendar;charset=utf-8" }));
-  const downloadLink = document.createElement("a");
-  downloadLink.href = fileUrl;
-  downloadLink.download = `${normalizeSearch(event.title).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}.ics`;
-  document.body.append(downloadLink);
-  downloadLink.click();
-  downloadLink.remove();
-  window.setTimeout(() => URL.revokeObjectURL(fileUrl), 1000);
+  downloadTextFile(buildCalendar([calendarEntryFor(event, venue, timing, window.location.href)]), `${fileSlug(event.title)}.ics`);
 }
 
 function googleCalendarUrl(event: EventItem, venue: ReturnType<typeof venueFor>, timing: CalendarTiming) {
@@ -593,10 +578,135 @@ function Info({ icon, label, value }: { icon: IconName; label: string; value: st
   return <div className="info-item"><span><Icon name={icon} /></span><div><small>{label}</small><strong>{value}</strong></div></div>;
 }
 
-function Saved({ saved, toggleSaved, explore, title, language, t }: { saved: number[]; toggleSaved: (id: number) => void; explore: () => void; title: string; language: Language; t: typeof copy.es }) {
-  // Por fecha: lo más próximo primero, que es lo que se necesita para planificar.
-  const savedEvents = events.filter((event) => saved.includes(event.id)).sort((a, b) => (a.startDate ?? "9999").localeCompare(b.startDate ?? "9999"));
-  return <main id="main-content" tabIndex={-1} className="subpage saved-page"><div className="saved-heading"><div><h1>{title}</h1>{savedEvents.length > 0 && <p className="saved-count">{eventCountLabel(savedEvents.length, interfaceText[language])}</p>}</div></div>{savedEvents.length ? <div className="event-grid">{savedEvents.map((event) => <EventCard key={event.id} event={event} saved onSave={() => toggleSaved(event.id)} t={t} />)}</div> : <div className="empty"><Icon name="heart" /><h2>{t.favouritesEmptyTitle}</h2><p>{t.favouritesEmptyText}</p><Button onClick={explore}>{t.discover}</Button></div>}</main>;
+const favouritesCopy: Record<Language, {
+  upcoming: string; past: string; pastHint: string; remove: (title: string) => string; removed: (title: string) => string; undo: string;
+  removePast: string; removedPast: (n: number) => string; addAllToCalendar: string; calendarDone: (n: number, skipped: number) => string; share: string; shareTitle: string; linkCopied: string;
+  sharedTitle: string; sharedText: string; saveAll: (n: number) => string; savedAll: (n: number) => string; seeMine: string; sharedEmpty: string;
+}> = {
+  es: {
+    upcoming: "Próximos", past: "Pasados", pastHint: "Estos eventos ya se han celebrado. Puedes quitarlos de tu lista.",
+    remove: (title) => `Quitar «${title}» de favoritos`, removed: (title) => `«${title}» quitado de favoritos.`, undo: "Deshacer",
+    removePast: "Quitar todos los pasados", removedPast: (n) => `${n} ${n === 1 ? "evento pasado quitado" : "eventos pasados quitados"} de favoritos.`, addAllToCalendar: "Añadir todos al calendario",
+    calendarDone: (n, skipped) => `Descargado un calendario con ${n} ${n === 1 ? "evento" : "eventos"}.${skipped ? ` ${skipped} sin fecha u hora cerrada no se han incluido.` : ""}`,
+    share: "Compartir lista", shareTitle: "Mis planes en Plan Cerca", linkCopied: "Enlace a la lista copiado.",
+    sharedTitle: "Lista compartida", sharedText: "Alguien te ha pasado estos planes. No se guarda nada en tu navegador hasta que pulses el botón.",
+    saveAll: (n) => `Guardar en mis favoritos (${n})`, savedAll: (n) => `${n} ${n === 1 ? "evento guardado" : "eventos guardados"} en tus favoritos.`, seeMine: "Ver mis favoritos",
+    sharedEmpty: "Los eventos de esta lista ya han pasado o no existen.",
+  },
+  en: {
+    upcoming: "Upcoming", past: "Past", pastHint: "These events have already taken place. You can remove them from your list.",
+    remove: (title) => `Remove “${title}” from favourites`, removed: (title) => `“${title}” removed from favourites.`, undo: "Undo",
+    removePast: "Remove all past events", removedPast: (n) => `${n} past ${n === 1 ? "event" : "events"} removed from favourites.`, addAllToCalendar: "Add all to calendar",
+    calendarDone: (n, skipped) => `Downloaded a calendar with ${n} ${n === 1 ? "event" : "events"}.${skipped ? ` ${skipped} without a fixed date or time were left out.` : ""}`,
+    share: "Share list", shareTitle: "My plans on Plan Cerca", linkCopied: "Link to the list copied.",
+    sharedTitle: "Shared list", sharedText: "Someone sent you these plans. Nothing is stored in your browser until you press the button.",
+    saveAll: (n) => `Save to my favourites (${n})`, savedAll: (n) => `${n} ${n === 1 ? "event" : "events"} saved to your favourites.`, seeMine: "See my favourites",
+    sharedEmpty: "The events in this list have already happened or no longer exist.",
+  },
+  fr: {
+    upcoming: "À venir", past: "Passés", pastHint: "Ces événements ont déjà eu lieu. Vous pouvez les retirer de votre liste.",
+    remove: (title) => `Retirer « ${title} » des favoris`, removed: (title) => `« ${title} » retiré des favoris.`, undo: "Annuler",
+    removePast: "Retirer tous les événements passés", removedPast: (n) => `${n} ${n === 1 ? "événement passé retiré" : "événements passés retirés"} des favoris.`, addAllToCalendar: "Tout ajouter au calendrier",
+    calendarDone: (n, skipped) => `Calendrier téléchargé avec ${n} ${n === 1 ? "événement" : "événements"}.${skipped ? ` ${skipped} sans date ou heure fixe n’ont pas été inclus.` : ""}`,
+    share: "Partager la liste", shareTitle: "Mes sorties sur Plan Cerca", linkCopied: "Lien vers la liste copié.",
+    sharedTitle: "Liste partagée", sharedText: "Quelqu’un vous a envoyé ces sorties. Rien n’est enregistré dans votre navigateur avant d’appuyer sur le bouton.",
+    saveAll: (n) => `Enregistrer dans mes favoris (${n})`, savedAll: (n) => `${n} ${n === 1 ? "événement enregistré" : "événements enregistrés"} dans vos favoris.`, seeMine: "Voir mes favoris",
+    sharedEmpty: "Les événements de cette liste sont passés ou n’existent plus.",
+  },
+};
+
+const byStartDate = (a: EventItem, b: EventItem) => (a.startDate ?? "9999").localeCompare(b.startDate ?? "9999");
+
+function Saved({ saved, toggleSaved, addSaved, explore, title, language, t }: { saved: number[]; toggleSaved: (id: number) => void; addSaved: (ids: number[]) => void; explore: () => void; title: string; language: Language; t: typeof copy.es }) {
+  const text = favouritesCopy[language];
+  const location = useLocation();
+  const navigate = useNavigate();
+  const params = new URLSearchParams(location.search);
+  // A shared link (?lista=1,2,3) is shown read-only: nothing is stored until the person presses «Guardar».
+  const isShared = params.has("lista");
+  const ids = isShared ? parseSharedList(params.get("lista")) : saved;
+  // By date: the nearest first, which is what you need to plan.
+  const upcoming = events.filter((event) => ids.includes(event.id)).sort(byStartDate);
+  const past = isShared ? [] : endedEvents.filter((event) => ids.includes(event.id)).sort((a, b) => byStartDate(b, a));
+  const [notice, setNotice] = useState<{ message: string; undoId?: number } | null>(null);
+  const undoButton = useRef<HTMLButtonElement>(null);
+  const focusAfterUndo = useRef<number | null>(null);
+
+  useEffect(() => {
+    // The removed card disappears, so focus moves to «Deshacer» instead of getting lost (WCAG 2.4.3).
+    if (notice?.undoId !== undefined) undoButton.current?.focus();
+  }, [notice]);
+  useEffect(() => {
+    if (focusAfterUndo.current === null) return;
+    const id = focusAfterUndo.current;
+    [...document.querySelectorAll<HTMLAnchorElement>(".saved-page a.event-title, .saved-page .saved-past a")].find((link) => link.pathname === `/event/${id}`)?.focus();
+    focusAfterUndo.current = null;
+  }, [saved]);
+
+  const remove = (event: EventItem) => { toggleSaved(event.id); setNotice({ message: text.removed(event.title), undoId: event.id }); };
+  const undo = () => {
+    if (notice?.undoId === undefined) return;
+    focusAfterUndo.current = notice.undoId;
+    toggleSaved(notice.undoId);
+    setNotice(null);
+  };
+  const addAllToCalendar = () => {
+    const entries = upcoming.flatMap((event) => {
+      const timing = calendarTimingFor(event);
+      return timing ? [calendarEntryFor(event, venueFor(event.venueId), timing, `${window.location.origin}/event/${event.id}`)] : [];
+    });
+    if (entries.length) downloadTextFile(buildCalendar(entries), "plan-cerca-favoritos.ics");
+    setNotice({ message: text.calendarDone(entries.length, upcoming.length - entries.length) });
+  };
+  const shareList = async () => {
+    const url = `${window.location.origin}${sharedListPath(upcoming.map((event) => event.id))}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: text.shareTitle, url });
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+      }
+    }
+    try {
+      await copyTextToClipboard(url);
+      setNotice({ message: text.linkCopied });
+    } catch {
+      setNotice({ message: url });
+    }
+  };
+  const toSave = upcoming.filter((event) => !saved.includes(event.id)).map((event) => event.id);
+  const saveShared = () => { addSaved(toSave); setNotice({ message: text.savedAll(toSave.length) }); };
+  const cards = (list: EventItem[]) => <div className="event-grid">{list.map((event) => <EventCard key={event.id} event={event} saved={saved.includes(event.id)} onSave={() => (isShared ? toggleSaved(event.id) : remove(event))} t={t} />)}</div>;
+
+  const live = <div className="saved-notice" role="status" aria-live="polite">{notice && <><span>{notice.message}</span>{notice.undoId !== undefined && <button ref={undoButton} type="button" onClick={undo}>{text.undo}</button>}</>}</div>;
+
+  if (isShared) {
+    return <main id="main-content" tabIndex={-1} className="subpage saved-page">
+      <div className="saved-heading"><div><h1>{text.sharedTitle}</h1><p className="saved-count">{text.sharedText}</p></div></div>
+      {live}
+      {upcoming.length ? <>
+        <div className="saved-actions">{toSave.length > 0 && <Button onClick={saveShared}>{text.saveAll(toSave.length)}</Button>}<Button variant="secondary" onClick={() => navigate("/favorites")}>{text.seeMine}</Button></div>
+        {cards(upcoming)}
+      </> : <div className="empty"><Icon name="heart" /><h2>{text.sharedEmpty}</h2><Button onClick={explore}>{t.discover}</Button></div>}
+    </main>;
+  }
+
+  return <main id="main-content" tabIndex={-1} className="subpage saved-page">
+    <div className="saved-heading"><div><h1>{title}</h1>{upcoming.length > 0 && <p className="saved-count">{eventCountLabel(upcoming.length, interfaceText[language])}</p>}</div></div>
+    {live}
+    {upcoming.length || past.length ? <>
+      {upcoming.length > 0 && <section aria-labelledby="saved-upcoming">
+        <div className="saved-section-head"><h2 id="saved-upcoming">{text.upcoming}</h2><div className="saved-actions"><Button variant="secondary" onClick={addAllToCalendar}><Icon name="calendar" />{text.addAllToCalendar}</Button><Button variant="secondary" onClick={() => { void shareList(); }}><Icon name="share" />{text.share}</Button></div></div>
+        {cards(upcoming)}
+      </section>}
+      {past.length > 0 && <section className="saved-past" aria-labelledby="saved-past">
+        <div className="saved-section-head"><h2 id="saved-past">{text.past}</h2><button type="button" className="saved-link-button" onClick={() => { past.forEach((event) => toggleSaved(event.id)); setNotice({ message: text.removedPast(past.length) }); }}>{text.removePast}</button></div>
+        <p className="saved-past-hint">{text.pastHint}</p>
+        <ul>{past.map((event) => { const venue = venueFor(event.venueId); return <li key={event.id}><div><Link to={cityPath(`/event/${event.id}`, venue.city)}>{event.title}</Link><small>{event.date} · {venue.name}</small></div><button type="button" aria-label={text.remove(event.title)} onClick={() => remove(event)}><Icon name="close" /></button></li>; })}</ul>
+      </section>}
+    </> : <div className="empty"><Icon name="heart" /><h2>{t.favouritesEmptyTitle}</h2><p>{t.favouritesEmptyText}</p><Button onClick={explore}>{t.discover}</Button></div>}
+  </main>;
 }
 
 function EventRoute({ saved, toggleSaved, goBack, language, t }: { saved: number[]; toggleSaved: (id: number) => void; goBack: () => void; language: Language; t: typeof copy.es }) {
@@ -769,6 +879,7 @@ export default function App() {
     navigateWithCity(`/search?q=${encodeURIComponent(trimmed)}`);
   };
   const goToEvents = () => { setSearchQuery(""); navigateWithCity("/"); };
+  const addSaved = (ids: number[]) => { savedChanged.current = true; setSaved((current) => [...current, ...ids.filter((id) => !current.includes(id))]); };
   const toggleSaved = (id: number) => { savedChanged.current = true; setSaved((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]); };
   const goBack = () => {
     const historyIndex = window.history.state?.idx;
@@ -827,7 +938,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={homePage} />
-      <Route path="/favorites" element={<Saved saved={saved} toggleSaved={toggleSaved} explore={goToEvents} title={interfaceText[language].favourites} language={language} t={t} />} />
+      <Route path="/favorites" element={<Saved saved={saved} toggleSaved={toggleSaved} addSaved={addSaved} explore={goToEvents} title={interfaceText[language].favourites} language={language} t={t} />} />
       <Route path="/venues" element={<VenuesPage selectedCity={selectedCity} language={language} t={t} />} />
       <Route path="/venues/:id" element={<VenueRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />
       <Route path="/event/:id" element={<EventRoute saved={saved} toggleSaved={toggleSaved} goBack={goBack} language={language} t={t} />} />

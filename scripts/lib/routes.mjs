@@ -1,7 +1,7 @@
 // Pages and states visited by the automated browser checks (accessibility and third-party requests).
 // Each entry can prepare localStorage to reach a given state (with data, empty, error...).
 const withCity = { "plan-cerca.preferred-city": "Valencia", "plan-cerca.city-onboarding-dismissed": "true" };
-const withFavourites = { ...withCity, "plan-cerca.saved-events": "[89,99,104]" };
+const withFavourites = { ...withCity, "plan-cerca.saved-events": "[89,99,104,16]" };
 
 export const routes = [
   { name: "inicio", path: "/?city=Valencia", storage: withCity },
@@ -19,6 +19,7 @@ export const routes = [
   { name: "recinto", path: "/venues/valencia-roig-arena?city=Valencia", storage: withCity },
   { name: "artista", path: "/artist/muse", storage: withCity },
   { name: "favoritos", path: "/favorites?city=Valencia", storage: withFavourites },
+  { name: "favoritos-compartidos", path: "/favorites?lista=89,99,104&city=Valencia", storage: withCity },
   { name: "favoritos-vacio", path: "/favorites?city=Valencia", storage: withCity },
   { name: "404", path: "/no-existe", storage: withCity },
   { name: "aviso-legal", path: "/aviso-legal", storage: withCity },

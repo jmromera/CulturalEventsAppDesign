@@ -9,7 +9,7 @@ const visit = (path: string) => render(<MemoryRouter initialEntries={[path]}><Pr
 
 describe("a visit without interaction", () => {
   // Shared links, the sitemap and the app's own links all carry ?city=.
-  it.each(["/", "/?city=Valencia", "/event/89?city=Valencia", "/venues?city=Sevilla", "/privacidad"])("stores nothing and sets no cookies: %s", (path) => {
+  it.each(["/", "/?city=Valencia", "/event/89?city=Valencia", "/venues?city=Sevilla", "/privacidad", "/favorites?lista=89,99,104"])("stores nothing and sets no cookies: %s", (path) => {
     visit(path);
     expect(Object.keys(window.localStorage)).toEqual([]);
     expect(document.cookie).toBe("");

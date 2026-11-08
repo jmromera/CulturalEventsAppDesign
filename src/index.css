@@ -748,3 +748,25 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .active-filter span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;font-size:16px}
 .active-filter-clear{min-height:36px;padding:0 6px;border:0;background:none;color:var(--accent-text);font:inherit;font-size:14px;font-weight:600;text-decoration:underline;cursor:pointer}
 @media(max-width:650px){.active-filter,.active-filter-clear{min-height:44px}}
+
+/* Favourites (P1.4a): upcoming / past groups, bulk actions, undo notice. */
+.saved-section-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 18px}
+.saved-section-head h2{margin:0;font-size:24px}
+.saved-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.saved-section-head .saved-actions{margin:0}
+.saved-actions .button{min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.saved-actions .button .icon{width:16px;height:16px}
+.saved-notice{display:flex;flex-wrap:wrap;align-items:center;gap:12px;min-height:0;margin:0 0 18px;color:var(--ink);font-weight:600}
+.saved-notice:empty{margin:0}
+.saved-notice button,.saved-link-button{min-height:44px;padding:0 4px;border:0;background:none;color:var(--accent-text);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+.saved-past{margin-top:44px}
+.saved-past-hint{margin:-8px 0 14px;color:var(--muted)}
+.saved-past ul{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.saved-past li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.saved-past li div{display:grid;gap:2px;min-width:0}
+.saved-past li a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.saved-past li small{color:var(--muted)}
+.saved-past li button{flex:none;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit;cursor:pointer}
+.saved-past li button .icon{width:16px;height:16px}
+.saved-notice button:focus-visible,.saved-link-button:focus-visible,.saved-past li button:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+@media(max-width:650px){.saved-section-head .saved-actions{width:100%}.saved-section-head .saved-actions .button{flex:1;justify-content:center}}

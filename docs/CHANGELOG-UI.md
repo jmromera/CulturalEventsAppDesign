@@ -202,3 +202,35 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/filters-drawer.test.tsx`: franjas (límites 14:00 y 20:00, horas sin confirmar), lectura de `franja`, trampa de foco y Esc, recuento en vivo, chip que se quita, «Quitar todos», botón desactivado con 0 resultados (día posterior al catálogo), número prometido igual al de la lista con radio de 1 km, calendario con flechas y AvPág.
   - En navegador real: 89 comprobaciones de axe sin problemas (panel abierto, calendario con teclado y chips aplicados), sin peticiones a terceros, responsive y contraste correctos.
   - Capturas: `docs/capturas/despues/filtros-panel-390.jpg`, `filtros-panel-1440.jpg`, `filtros-chips-390.jpg`, `filtros-chips-1440.jpg`.
+
+### Iteración P1.4a · Favoritos: próximos y pasados, deshacer, calendario y lista compartida
+
+- **Qué:**
+  - Los favoritos se separan en **Próximos** (tarjetas, por fecha) y **Pasados** (filas sencillas con enlace a la ficha y botón para quitarlas, más «Quitar todos los pasados»). Antes los eventos pasados desaparecían sin más de la lista.
+  - Al quitar un favorito aparece «"X" quitado de favoritos · Deshacer».
+  - **«Añadir todos al calendario»** descarga un único `.ics` con todos los próximos. Cada evento enlaza a su propia ficha, no a la página de favoritos. Los que no tienen fecha cerrada («Varias funciones») se dejan fuera, y el aviso dice cuántos.
+  - **«Compartir lista»** usa el menú de compartir del móvil o copia un enlace `/favorites?lista=89,99,104`. Quien lo abre ve «Lista compartida» y puede pulsar «Guardar en mis favoritos (N)».
+  - El generador de calendario pasa a `src/lib/ics.ts` y lo usan tanto la ficha como los favoritos.
+- **Por qué:**
+  - **Control y libertad (Nielsen 3):** quitar se puede deshacer, así que un toque por error no cuesta nada.
+  - **Visibilidad del estado (Nielsen 1):** cada acción confirma lo que ha hecho («Descargado un calendario con 3 eventos»).
+  - **Eficiencia (Nielsen 7):** añadir o compartir todo con un clic en vez de evento a evento.
+- **Privacidad:**
+  - Abrir una lista compartida **no guarda nada**. Solo se escribe al pulsar «Guardar en mis favoritos», y hay un test que lo comprueba.
+  - El enlace solo lleva números de evento. Se aceptan como mucho 50, sin repetir, y se ignora cualquier valor que no sea un número.
+  - No hay clave de almacenamiento nueva.
+- **Accesibilidad:**
+  - **Encabezados:** un solo `h1` y un `h2` por grupo, y cada grupo es una región con nombre.
+  - **Aviso:** el aviso de cada acción está en una región `role="status"` (WCAG 4.1.3).
+  - **Foco al quitar (2.4.3):**
+    - Cuando la tarjeta desaparece, el foco pasa a «Deshacer» en vez de perderse en la página.
+    - Al deshacer, el foco vuelve al título del evento recuperado.
+  - **Tamaños y nombres:** los botones de las filas de pasados miden 44 px y su nombre incluye el evento («Quitar "Karmento — Fin de gira La Serrana" de favoritos»).
+- **Problemas encontrados:**
+  - El texto de cada evento en el `.ics` usaba la URL de la página actual. En un archivo descargado desde favoritos, todos los eventos habrían enlazado a `/favorites`, así que ahora cada uno lleva la URL de su ficha.
+  - Para devolver el foco tras deshacer, un selector `href^="/event/12"` también habría encontrado `/event/123`. Ahora se compara la ruta exacta.
+- **Pruebas:**
+  - `tests/favourites.test.tsx`: grupos y encabezados, deshacer con foco, quitar un pasado, `.ics` con 3 eventos, UID distintos, URL propias y sin pasados, lectura segura de `lista`, lista compartida que no guarda nada hasta pulsar, escape de texto en iCalendar.
+  - `storage-on-visit`: añadida `/favorites?lista=…`.
+  - En navegador real: 94 comprobaciones de axe sin problemas (nuevas rutas: favoritos con pasados, lista compartida y favorito quitado), sin peticiones a terceros.
+  - Capturas: `docs/capturas/despues/favoritos-390.jpg`, `favoritos-1440.jpg`, `favoritos-deshacer-390.jpg`, `favoritos-deshacer-1440.jpg`.
