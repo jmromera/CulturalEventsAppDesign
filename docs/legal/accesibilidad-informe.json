@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-07T21:47:20.337Z",
+  "date": "2026-11-08T12:23:19.074Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -65,6 +65,34 @@
       "violations": []
     },
     {
+      "page": "reserva-sesion · movil",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · movil",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · movil",
+      "violations": []
+    },
+    {
+      "page": "favoritos-compartidos · movil",
+      "violations": []
+    },
+    {
+      "page": "lista-compartida-primera-visita · movil",
+      "violations": []
+    },
+    {
+      "page": "perfil · movil",
+      "violations": []
+    },
+    {
+      "page": "perfil-vacio · movil",
+      "violations": []
+    },
+    {
       "page": "favoritos-vacio · movil",
       "violations": []
     },
@@ -114,6 +142,26 @@
     },
     {
       "page": "acerca-de · movil",
+      "violations": []
+    },
+    {
+      "page": "filtros-noche · movil",
+      "violations": []
+    },
+    {
+      "page": "filtros-calendario-teclado · movil",
+      "violations": []
+    },
+    {
+      "page": "chips-filtros · movil",
+      "violations": []
+    },
+    {
+      "page": "favorito-quitado · movil",
+      "violations": []
+    },
+    {
+      "page": "cerca-de-mi · movil",
       "violations": []
     },
     {
@@ -173,6 +221,34 @@
       "violations": []
     },
     {
+      "page": "reserva-sesion · escritorio",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · escritorio",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · escritorio",
+      "violations": []
+    },
+    {
+      "page": "favoritos-compartidos · escritorio",
+      "violations": []
+    },
+    {
+      "page": "lista-compartida-primera-visita · escritorio",
+      "violations": []
+    },
+    {
+      "page": "perfil · escritorio",
+      "violations": []
+    },
+    {
+      "page": "perfil-vacio · escritorio",
+      "violations": []
+    },
+    {
       "page": "favoritos-vacio · escritorio",
       "violations": []
     },
@@ -222,6 +298,26 @@
     },
     {
       "page": "acerca-de · escritorio",
+      "violations": []
+    },
+    {
+      "page": "filtros-noche · escritorio",
+      "violations": []
+    },
+    {
+      "page": "filtros-calendario-teclado · escritorio",
+      "violations": []
+    },
+    {
+      "page": "chips-filtros · escritorio",
+      "violations": []
+    },
+    {
+      "page": "favorito-quitado · escritorio",
+      "violations": []
+    },
+    {
+      "page": "cerca-de-mi · escritorio",
       "violations": []
     },
     {
@@ -278,6 +374,34 @@
     },
     {
       "page": "favoritos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "reserva-sesion · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "favoritos-compartidos · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "lista-compartida-primera-visita · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "perfil · zoom 200 %",
+      "violations": []
+    },
+    {
+      "page": "perfil-vacio · zoom 200 %",
       "violations": []
     },
     {

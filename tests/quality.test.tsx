@@ -21,7 +21,7 @@ describe("page metadata", () => {
   });
 
   it("tells search engines not to index personal pages and missing pages", () => {
-    for (const path of ["/search", "/favorites", "/tus-datos"]) {
+    for (const path of ["/search", "/favorites", "/tus-datos", "/perfil"]) {
       updatePageMeta(path, "", false);
       expect(robots(), path).toBe("noindex, follow");
     }
@@ -48,7 +48,7 @@ describe("sitemap", () => {
   });
 
   it("leaves out personal pages and events that already happened", () => {
-    expect(locs.some((loc) => /\/(search|favorites|tus-datos)/.test(loc))).toBe(false);
+    expect(locs.some((loc) => /\/(search|favorites|tus-datos|perfil)/.test(loc))).toBe(false);
     expect(locs).not.toContain("https://plancerca.com/event/16");
   });
 

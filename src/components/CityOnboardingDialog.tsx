@@ -10,8 +10,10 @@ type Language = keyof typeof onboardingCopy;
 export default function CityOnboardingDialog({ language }: { language: Language }) {
   const { selectedCity, detectedCity, status, onboardingOpen: requested, selectCity, requestLocation, dismissOnboarding } = usePreferredCity();
   // Never cover the legal pages or the "your data" page: people go there to read or delete, not to share their location.
-  const { pathname } = useLocation();
-  const onboardingOpen = requested && !(Object.values(LEGAL_PATHS) as string[]).includes(pathname);
+  // Nor a shared favourites list: it mixes cities and the person came to see that list.
+  const { pathname, search } = useLocation();
+  const isSharedList = pathname === "/favorites" && new URLSearchParams(search).has("lista");
+  const onboardingOpen = requested && !isSharedList && !(Object.values(LEGAL_PATHS) as string[]).includes(pathname);
   const [manualSelection, setManualSelection] = useState(false);
   const [manualCity, setManualCity] = useState<City>(detectedCity ?? selectedCity);
   const dialogRef = useRef<HTMLElement>(null);

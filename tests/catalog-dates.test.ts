@@ -41,6 +41,36 @@ describe.each(EVALUATION_DAYS)("on %s", (day) => {
     expect(["Exposiciones", "Museos"]).not.toContain(recommended[0].category);
   });
 
+  // With favourite categories in the profile, the person's choice wins over the default rules.
+  const FAVOURITE_SETS: string[][] = [["Teatro"], ["Deportes"], ["Exposiciones", "Museos"], ["Danza", "Ópera", "Teatro"], ["Música", "Teatro"]];
+  describe.each(FAVOURITE_SETS.map((set) => [set.join(", "), set] as const))("with favourites %s", (_, favourites) => {
+    it.each(cities)("%s recommends only those categories while the city has them", (city) => {
+      const cityEvents = catalog.events.filter((event) => venueFor(event.venueId).city === city);
+      const recommended = recommendedEvents(cityEvents, undefined, favourites);
+      const summary = recommended.map((event) => `${event.category}: ${event.title} @ ${event.venueId}`).join("\n");
+      expect(recommended, summary).toHaveLength(Math.min(RECOMMENDATION_RULES.size, cityEvents.length));
+      expect(new Set(recommended.map(protagonistKey)).size, summary).toBe(recommended.length);
+      expect(new Set(recommended.map((event) => event.venueId)).size, summary).toBe(recommended.length);
+      const isFavourite = (event: { category: string }) => favourites.includes(event.category);
+      const firstOther = recommended.findIndex((event) => !isFavourite(event));
+      if (firstOther >= 0) {
+        // Favourites come first; another category only fills in when no favourite fits any more.
+        expect(recommended.slice(firstOther).some(isFavourite), summary).toBe(false);
+        const picked = recommended.slice(0, firstOther);
+        const stillFits = cityEvents.some((event) => isFavourite(event) && !picked.some((pick) => pick.venueId === event.venueId || protagonistKey(pick) === protagonistKey(event)));
+        expect(stillFits, summary).toBe(false);
+      }
+      // Every chosen category shows up when there is room, unless all its events share a venue or artist with a pick.
+      if (favourites.length <= RECOMMENDATION_RULES.size) {
+        for (const category of favourites) {
+          if (recommended.some((event) => event.category === category)) continue;
+          const clashes = cityEvents.filter((event) => event.category === category).every((event) => recommended.some((pick) => pick.venueId === event.venueId || protagonistKey(pick) === protagonistKey(event)));
+          expect(clashes, `${category}\n${summary}`).toBe(true);
+        }
+      }
+    });
+  });
+
   it("hides events that already finished", () => {
     expect(catalog.endedEvents.every((event) => (event.endDate ?? event.startDate)! < day)).toBe(true);
   });
