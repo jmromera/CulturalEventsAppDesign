@@ -15,6 +15,7 @@ import CitySelector from "./components/CitySelector";
 import NearMePanel from "./components/NearMePanel";
 import FiltersDrawer, { filtersCopy, WHEN_SHORTCUTS, type FilterDraft } from "./components/FiltersDrawer";
 import ProfilePage, { profileCopy } from "./components/ProfilePage";
+import ProfileMenu from "./components/ProfileMenu";
 import BookingPage, { bookingCopy, canBook } from "./components/BookingPage";
 import { readProfile, writeProfile, type Profile } from "./data/profile";
 import { buildCalendar, downloadTextFile, type CalendarEntry } from "./lib/ics";
@@ -59,7 +60,7 @@ function Button({ children, onClick, variant = "primary", disabled = false }: { 
   return <button className={`button button--${variant}`} onClick={onClick} disabled={disabled}>{children}</button>;
 }
 
-function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, onSearch, profile, t }: { page: Page; city: City; language: Language; setLanguage: (language: Language) => void; searchQuery: string; setSearchQuery: (query: string) => void; onSearch: (query: string) => void; profile: Profile; t: typeof copy.es }) {
+function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, onSearch, profile, savedCount, t }: { page: Page; city: City; language: Language; setLanguage: (language: Language) => void; searchQuery: string; setSearchQuery: (query: string) => void; onSearch: (query: string) => void; profile: Profile; savedCount: number; t: typeof copy.es }) {
   const labels = interfaceText[language];
   const activePage = page === "detail" || page === "search" || page === "booking" ? "home" : page === "venue-detail" ? "venues" : page;
   const item = (target: Page, path: string, icon: IconName, label: string) => <Link className={`primary-nav-item ${activePage === target ? "active" : ""}`} to={cityPath(path, city)} aria-current={activePage === target ? "page" : undefined} key={target}><Icon name={icon} /><span>{label}</span></Link>;
@@ -67,7 +68,7 @@ function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, o
     <Logo to={cityPath("/", city)} label={labels.logoHome} />
     <form className="global-search" role="search" onSubmit={(event) => { event.preventDefault(); onSearch(searchQuery); }}><Icon name="search" /><input name="q" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder={t.searchPlaceholder} aria-label={t.searchPlaceholder} />{searchQuery && <button type="button" className="global-search-clear" aria-label={labels.clearSearch} title={labels.clearSearch} onClick={(event) => { const input = event.currentTarget.form?.querySelector("input"); onSearch(""); input?.focus(); }}><Icon name="close" /></button>}<button type="submit" aria-label={labels.searchResults}><Icon name="search" /></button></form>
     <nav className="primary-nav" aria-label={labels.events}>{item("home", "/", "calendar", labels.events)}{item("venues", "/venues", "location", labels.venues)}{item("favorites", "/favorites", "heart", labels.favourites)}</nav>
-    <div className="header-actions"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div><Link className={`guest-profile ${page === "profile" ? "active" : ""}`} to={cityPath("/perfil", city)} aria-current={page === "profile" ? "page" : undefined}><span><Icon name={profile.avatar} /></span><strong>{profileCopy[language].navLabel}</strong></Link></div>
+    <div className="header-actions"><div className="header-preferences"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div></div><ProfileMenu avatar={profile.avatar} language={language} savedCount={savedCount} profilePath={cityPath("/perfil", city)} favouritesPath={cityPath("/favorites", city)} active={page === "profile"} /></div>
   </div></header>;
 }
 
@@ -963,7 +964,7 @@ export default function App() {
   const onlyCategory = (category: string) => navigate(withParams((params) => params.set("cat", category)), { replace: true });
   const setSlots = (slots: TimeSlot[]) => navigate(withParams((params) => slotsParam(params, slots)), { replace: true });
   const homePage = <Home favouriteCategories={profile.categories} selectedCity={selectedCity} saved={saved} toggleSaved={toggleSaved} categories={activeCategories} when={activeWhen} setWhen={setWhen} slots={activeSlots} setSlots={setSlots} toggleCategory={toggleCategory} onlyCategory={onlyCategory} goFilters={goFilters} filtersOpen={filtersOpen} closeFilters={closeFilters} applyFilters={applyFilters} clearFilters={clearFilters} resetSearch={goToEvents} searchQuery={searchParams.get("q") ?? ""} language={language} t={t} />;
-  return <NearMeProvider><div className="app-shell"><p className="sr-only" role="status" aria-live="polite">{savedAnnouncement}</p><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} /><div className="main-shell">
+  return <NearMeProvider><div className="app-shell"><p className="sr-only" role="status" aria-live="polite">{savedAnnouncement}</p><a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); focusMain(true); }}>{interfaceText[language].skipToContent}</a><CityOnboardingDialog language={language} /><Nav page={page} city={selectedCity} language={language} setLanguage={setLanguage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={submitSearch} t={t} profile={profile} savedCount={saved.length} /><div className="main-shell">
     <Routes>
       <Route path="/" element={homePage} />
       <Route path="/search" element={homePage} />

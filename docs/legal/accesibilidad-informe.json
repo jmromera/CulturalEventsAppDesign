@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T12:47:57.795Z",
+  "date": "2026-11-08T12:56:23.042Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -161,6 +161,10 @@
       "violations": []
     },
     {
+      "page": "menu-perfil · movil",
+      "violations": []
+    },
+    {
       "page": "cerca-de-mi · movil",
       "violations": []
     },
@@ -314,6 +318,10 @@
     },
     {
       "page": "favorito-quitado · escritorio",
+      "violations": []
+    },
+    {
+      "page": "menu-perfil · escritorio",
       "violations": []
     },
     {

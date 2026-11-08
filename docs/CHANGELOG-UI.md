@@ -435,3 +435,26 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/shortcuts.test.tsx`: el atajo deja solo esa categoría y queda marcado.
   - En navegador real: el clic aplica `cat=Música` y lleva a la lista (49 eventos en Valencia), y axe no encuentra problemas.
   - Capturas: `docs/capturas/despues/accesos-directos-390.jpg`, `accesos-directos-1440.jpg`.
+
+### Iteración P2.4 · Cabecera: preferencias agrupadas y menú del avatar
+
+- **Qué:**
+  - **Preferencias agrupadas:** en escritorio, ciudad e idioma van juntos en una sola caja, porque son preferencias y no destinos.
+  - **Menú del avatar:** el avatar abre un menú corto con «Tu perfil», «Favoritos (N)» y «Tus datos».
+  - **Móvil:** se mantiene la colocación de siempre, y el menú ocupa todo el ancho bajo la cabecera.
+  - **Pantallas de menos de 375 px:** el avatar sigue cediendo el sitio a la ciudad, y el perfil está en el pie.
+  - **Bienvenida:** el diálogo ya no aparece sobre `/perfil`, que tiene su propio selector de ciudad. Se vio al comprobar producción tras P1.
+  - **Tema:** la opción del menú llegará con el modo claro (P3).
+- **Por qué:**
+  - **Consistencia y estándares (Nielsen 4):** el avatar arriba a la derecha con un menú personal es un patrón conocido.
+  - **Visibilidad del estado (Nielsen 1):** el menú muestra cuántos favoritos hay.
+  - **Estética (Nielsen 8):** la cabecera pasa de cinco controles sueltos a tres bloques (buscar, navegar, preferencias y perfil).
+- **Accesibilidad:**
+  - **Patrón de despliegue:** botón con `aria-expanded` y `aria-controls`.
+  - **Cierre:** con Esc o con un clic fuera. Con Esc, el foco vuelve al botón.
+  - **Enlaces:** los del menú miden 44 px.
+- **Problemas encontrados:** en móvil, el menú tapaba en parte el enlace «Recintos» y dejaba visible una franja de menos de 24 px (axe: `target-size`). Ahora el menú cubre la fila entera.
+- **Pruebas:**
+  - `tests/profile.test.tsx`: menú con recuento de favoritos, Esc con retorno del foco, acceso al perfil sin diálogo de bienvenida.
+  - En navegador real: 110 comprobaciones de axe sin problemas (nueva: menú abierto), responsive correcto.
+  - Capturas: `docs/capturas/despues/cabecera-menu-320.jpg`, `cabecera-menu-390.jpg`, `cabecera-menu-1440.jpg`.

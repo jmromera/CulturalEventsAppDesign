@@ -13,7 +13,8 @@ export default function CityOnboardingDialog({ language }: { language: Language 
   // Nor a shared favourites list: it mixes cities and the person came to see that list.
   const { pathname, search } = useLocation();
   const isSharedList = pathname === "/favorites" && new URLSearchParams(search).has("lista");
-  const onboardingOpen = requested && !isSharedList && !(Object.values(LEGAL_PATHS) as string[]).includes(pathname);
+  // Nor the profile page, which has its own default-city selector.
+  const onboardingOpen = requested && !isSharedList && pathname !== "/perfil" && !(Object.values(LEGAL_PATHS) as string[]).includes(pathname);
   const [manualSelection, setManualSelection] = useState(false);
   const [manualCity, setManualCity] = useState<City>(detectedCity ?? selectedCity);
   const dialogRef = useRef<HTMLElement>(null);
