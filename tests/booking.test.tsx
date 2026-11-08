@@ -7,7 +7,7 @@ import { PreferredCityProvider } from "../src/context/PreferredCityContext";
 import { events } from "../src/data/event-catalog";
 import { STORAGE_KEYS } from "../src/data/storage-keys";
 
-// 3: Fedora, 7–10 Jan 2027 (four sessions). 12: «Desde 13 €». 214: sold out.
+// Tests run on 20/12/2026 (tests/setup.ts). 3: Fedora, 7–10 Jan 2027 (four sessions). 12: «Desde 13 €». 243: Editors, sold out.
 const event = (id: number) => events.find((item) => item.id === id)!;
 function visit(path: string) {
   window.localStorage.setItem(STORAGE_KEYS.onboardingDismissed, "true");
@@ -72,9 +72,9 @@ describe("Demo booking", () => {
   });
 
   it("is not offered for sold-out events", () => {
-    visit("/event/214");
+    visit("/event/243");
     expect(screen.queryByRole("link", { name: "Probar la reserva (demostración)" })).toBeNull();
-    visit("/event/214/reservar");
+    visit("/event/243/reservar");
     expect(screen.getAllByText("Las entradas están agotadas.").length).toBeGreaterThan(0);
   });
 });

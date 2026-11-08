@@ -369,4 +369,5 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - Los desplegables no modales («Cerca de mí», ciudad) se cierran con Esc y devuelven el foco. A propósito no lo atrapan, porque no bloquean el resto de la página.
 - **Pruebas:**
   - `tests/a11y-p16.test.tsx`: un `h1` y tarjetas `h3`, nombre del corazón con el evento y aviso hablado al añadir y quitar, foco tras «Mostrar más».
+  - **Fecha fija en los tests:** `tests/setup.ts` fija el día en el 20/12/2026, el primer día de la evaluación, que se puede cambiar con `TEST_TODAY=AAAA-MM-DD pnpm test`. Antes, varios tests usaban la fecha real y habrían fallado en enero, cuando pasaran las sesiones que usan como ejemplo. Las demás fechas de la evaluación (01/01 y 31/01) las cubre `catalog-dates.test.ts` de forma explícita.
   - En navegador real: 108 comprobaciones de axe sin problemas (incluidas las nuevas reglas de estructura), sin peticiones a terceros, responsive y contraste correctos.
