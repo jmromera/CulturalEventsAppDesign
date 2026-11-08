@@ -371,3 +371,27 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/a11y-p16.test.tsx`: un `h1` y tarjetas `h3`, nombre del corazón con el evento y aviso hablado al añadir y quitar, foco tras «Mostrar más».
   - **Fecha fija en los tests:** `tests/setup.ts` fija el día en el 20/12/2026, el primer día de la evaluación, que se puede cambiar con `TEST_TODAY=AAAA-MM-DD pnpm test`. Antes, varios tests usaban la fecha real y habrían fallado en enero, cuando pasaran las sesiones que usan como ejemplo. Las demás fechas de la evaluación (01/01 y 31/01) las cubre `catalog-dates.test.ts` de forma explícita.
   - En navegador real: 108 comprobaciones de axe sin problemas (incluidas las nuevas reglas de estructura), sin peticiones a terceros, responsive y contraste correctos.
+
+## P2 · Consistencia y jerarquía
+
+### Iteración P2.1 · Tarjeta de evento compacta
+
+- **Qué:**
+  - Cada tarjeta tiene ahora solo lo que sirve para decidir: imagen, **fecha tipo calendario** («SÁB 5 DIC»), categoría, «Gran evento» si lo es, título, lugar · hora, precio solo si la web oficial lo publica (o «Agotado») y el corazón.
+  - Se quitan la descripción, las etiquetas, la duración, el organizador, «Consultar precio oficial», «Precio pendiente de publicación», la franja de disponibilidad y el botón «Ver detalle».
+  - Toda la tarjeta lleva a la ficha: el enlace del título se extiende sobre ella, y el corazón queda por encima.
+  - En temporadas que ya han empezado (exposiciones, musicales), el calendario muestra «HASTA 8 MAR» en vez de una fecha de inicio pasada.
+- **Por qué:**
+  - **Estética y diseño minimalista (Nielsen 8):** cada dato extra compite con los importantes. Antes una tarjeta tenía 11 elementos de texto y 3 enlaces a la misma ficha.
+  - **Reconocer mejor que recordar (Nielsen 6):** la fecha se lee de un vistazo, como en un calendario.
+  - **Consistencia (Nielsen 4):** la misma tarjeta en Recomendados, catálogo, favoritos y búsqueda.
+- **Accesibilidad:**
+  - Cada tarjeta tiene un solo enlace y un solo botón. Antes, con teclado, había que pasar por la imagen, el título y «Ver detalle», todos con el mismo destino (2.4.4).
+  - Toda la tarjeta es zona de pulsación, así que el título ya no necesita la excepción de 44 px de P1.6.
+  - El calendario es decorativo (`aria-hidden`), y la fecha completa sigue en el texto (visible en temporadas y oculta solo visualmente en fechas sueltas).
+  - El foco se ve en el contorno de toda la tarjeta.
+  - El movimiento al pasar el ratón se quita con «reducir movimiento».
+- **Pruebas:**
+  - `tests/event-card.test.tsx`: un enlace y un botón por tarjeta, sin textos de relleno, precio solo con cifra y fecha completa disponible.
+  - En navegador real: axe sin problemas (108 comprobaciones), responsive y contraste correctos.
+  - Capturas: `docs/capturas/despues/tarjeta-compacta-390.jpg`, `tarjeta-compacta-1440.jpg`.

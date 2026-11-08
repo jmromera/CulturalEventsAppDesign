@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, Route, Routes, useLocation, useNavigate, useNavigationType, useParams } from "react-router-dom";
 import { entityFor, relatedEntities } from "./data/entities";
-import { cityEventCounts, cityImages, endedEvents, eventImage, events, isBigEvent, recommendedEvents, relatedEventsByEntity } from "./data/event-catalog";
+import { cityEventCounts, cityImages, dayKey, endedEvents, eventImage, events, isBigEvent, recommendedEvents, relatedEventsByEntity } from "./data/event-catalog";
 import { getArtistPreference, setArtistPreference, type ArtistPreferenceState } from "./data/artist-preferences";
 import { LANGUAGE_KEY, readLanguage, type Language } from "./data/language";
 import { STORAGE_KEYS } from "./data/storage-keys";
@@ -86,19 +86,30 @@ function SaveButton({ active, onClick, t, name, compact = false }: { active: boo
   return <button className={`save-button ${active ? "active" : ""} ${compact ? "compact" : ""}`} onClick={onClick} aria-label={`${label}: ${name}`} aria-pressed={active} title={label}><Icon name="heart" filled={active} /><span>{label}</span></button>;
 }
 
+const untilLabel: Record<string, string> = { "es-ES": "hasta", "en-GB": "until", "fr-FR": "jusqu’au" };
+
 // Card titles are h3 under a section h2; pages whose list sits right under the h1 pass headingLevel={2}.
 function EventCard({ event, saved, onSave, t, featured = false, distance, headingLevel = 3 }: { event: EventItem; saved: boolean; onSave: () => void; t: typeof copy.es; featured?: boolean; distance?: string; headingLevel?: 2 | 3 }) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   const venue = venueFor(event.venueId);
   const eventPath = cityPath(`/event/${event.id}`, venue.city);
-  return <article className={`event-card ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
-    <Link className="event-image" to={eventPath} aria-hidden="true" tabIndex={-1}><FallbackImage src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}</Link>
+  const isRange = Boolean(event.endDate && event.endDate !== event.startDate);
+  // A run that has already started shows "until" and its last day instead of a start date in the past.
+  const running = isRange && Boolean(event.startDate) && event.startDate! < dayKey(new Date());
+  const badgeKey = running ? event.endDate! : event.startDate;
+  const start = badgeKey && /^\d{4}-\d{2}-\d{2}$/.test(badgeKey) ? new Date(`${badgeKey}T12:00:00`) : null;
+  const clock = /^\d{1,2}:\d{2}$/.test(event.time) ? event.time : null;
+  const price = /\d/.test(event.price) ? event.price : null;
+  const soldOut = isSoldOut(event);
+  // Compact card (P2.1): the title link covers the whole card, so the card is one big target; the heart sits above it.
+  return <article className={`event-card event-card--compact ${featured ? "featured" : ""}`} data-cat={categoryKeys[event.category]}>
+    <div className="event-image"><FallbackImage src={eventImage(event)} alt="" icon={eventFallbackIcon(event)} category={categoryKeys[event.category]} width={640} height={360} /><span className="category">{t.categoryNames[event.category]}</span>{isBigEvent(event) && <span className="big-event-badge">{t.bigEvent}</span>}
+      {start && <span className="date-badge" aria-hidden="true"><small>{running ? untilLabel[t.locale] : new Intl.DateTimeFormat(t.locale, { weekday: "short" }).format(start).replace(".", "")}</small><strong>{start.getDate()}</strong><small>{new Intl.DateTimeFormat(t.locale, { month: "short" }).format(start).replace(".", "")}</small></span>}
+    </div>
     <div className="event-body"><div className="event-title-row"><Heading className="event-title-heading"><Link className="event-title" to={eventPath}>{event.title}</Link></Heading><SaveButton active={saved} onClick={onSave} t={t} name={event.title} compact /></div>
-      <p className="event-description">{event.description}</p>
-      <div className="event-facts"><span><Icon name="calendar" />{event.date} · {event.time}</span><span><Icon name="location" />{venue.name}{distance && <strong className="event-distance"> · {distance}</strong>}</span><span><Icon name="time" />{event.duration}</span></div>
-      <div className="tag-row">{visibleTags(event, venue.city).slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}</div>
-      <div className="event-footer"><div><small>{event.organizer}</small><strong className={/\d/.test(event.price) ? "" : "price--none"}>{event.price}</strong></div><Link className="button button--secondary" to={eventPath}>{t.details}<Icon name="chevron" /></Link></div>
-      <div className={`availability ${availabilityTone(event)}`}><i />{event.availability}</div>
+      <p className={`event-when ${start && !isRange ? "sr-only" : ""}`}>{event.date}</p>
+      <p className="event-where"><Icon name="location" /><span>{venue.name}{clock && ` · ${clock}`}{distance && <strong className="event-distance"> · {distance}</strong>}</span></p>
+      {(price || soldOut) && <p className={`event-price ${soldOut ? "event-price--soldout" : ""}`}>{soldOut ? event.availability : price}</p>}
     </div>
   </article>;
 }

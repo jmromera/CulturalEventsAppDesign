@@ -840,3 +840,30 @@ a.guest-profile>span .icon{width:20px;height:20px}
 .event-title-heading .event-title{display:-webkit-box}
 /* Section label promoted to h2 (heading order) keeps the small "kicker" look. */
 .artist-events-heading h2.artist-events-kicker{margin:0;font-size:12px;line-height:1.4;letter-spacing:inherit}
+
+/* P2.1 · Compact event card: image with date badge, category, title (link over the whole card), place · time, price only if known, heart. */
+.event-card--compact{position:relative;transition:transform 160ms var(--ease-out,ease),border-color 160ms ease,box-shadow 160ms ease}
+.event-card--compact .event-image{position:relative;display:block;height:auto!important;aspect-ratio:16/10!important}
+.event-card--compact .event-image img{width:100%;height:100%;object-fit:cover}
+.event-card--compact .date-badge{position:absolute;right:12px;top:12px;display:grid;justify-items:center;min-width:52px;padding:6px 8px 7px;border-radius:12px;background:rgba(15,18,34,.86);color:#fff;line-height:1;text-transform:uppercase;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.event-card--compact .date-badge small{font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.85}
+.event-card--compact .date-badge strong{margin:3px 0 2px;font-size:22px;font-weight:800}
+.event-card--compact .category{position:absolute;left:12px;bottom:12px;top:auto}
+.event-card--compact .big-event-badge{position:absolute;right:12px;bottom:12px;top:auto;left:auto}
+.event-card--compact .event-body{display:grid;gap:8px;padding:16px 16px 18px}
+.event-card--compact .event-title-row{align-items:flex-start}
+.event-card--compact .event-title{font-size:18px;line-height:1.25}
+.event-card--compact .event-title::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit}
+.event-card--compact .save-button{position:relative;z-index:2}
+.event-card--compact .event-when,.event-card--compact .event-where,.event-card--compact .event-price{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
+.event-card--compact .event-when:first-letter{text-transform:uppercase}
+.event-card--compact .event-where{display:flex;align-items:flex-start;gap:6px}
+.event-card--compact .event-where .icon{flex:none;width:15px;height:15px;margin-top:2px}
+.event-card--compact .event-distance{color:var(--accent-text);font-weight:700}
+.event-card--compact .event-price{color:var(--ink);font-weight:700}
+.event-card--compact .event-price--soldout{color:#fca5a5}
+.event-card--compact:focus-within{border-color:var(--accent-text)}
+.event-card--compact .event-title:focus-visible{outline:none}
+.event-card--compact .event-title:focus-visible::after{outline:3px solid var(--accent-text);outline-offset:2px}
+@media(hover:hover) and (pointer:fine){.event-card--compact:hover{transform:translateY(-3px);border-color:var(--line-surface,var(--line));box-shadow:0 16px 36px rgba(0,0,0,.28)}.event-card--compact:hover .event-title{color:var(--accent-text)}}
+@media(prefers-reduced-motion:reduce){.event-card--compact,.event-card--compact:hover{transition:none;transform:none}}
