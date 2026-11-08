@@ -395,3 +395,23 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - `tests/event-card.test.tsx`: un enlace y un botón por tarjeta, sin textos de relleno, precio solo con cifra y fecha completa disponible.
   - En navegador real: axe sin problemas (108 comprobaciones), responsive y contraste correctos.
   - Capturas: `docs/capturas/despues/tarjeta-compacta-390.jpg`, `tarjeta-compacta-1440.jpg`.
+
+### Iteración P2.2 · Paleta de categorías armónica
+
+- **Qué:** los siete colores de categoría se han rehecho con la **misma luminosidad y saturación** en OKLCH (L 0,50 · C 0,15); solo cambia el tono. Música pasa de azul a un violeta que entona con el acento de la web. Ahora son tokens en `:root` (`--cat-music`, `--cat-music-light`…), y el resto de reglas los reutilizan.
+- **Por qué:**
+  - **Consistencia (Nielsen 4):** antes el verde de Deportes y el azul de Música pesaban más que Danza u Ópera, y parecía que unas categorías importaban más que otras.
+  - **Estética:** los colores comparten familia con el morado de la marca.
+- **Contraste medido (WCAG 1.4.3):**
+
+  | Categoría | Color | Texto blanco | Variante clara | Sobre la superficie oscura |
+  |---|---|---|---|---|
+  | Música | `#6b4cae` | 6,42:1 | `#cebfff` | 9,32:1 |
+  | Ópera | `#a53458` | 6,50:1 | `#feb2c3` | 9,21:1 |
+  | Teatro | `#a8372a` | 6,47:1 | `#ffb5a8` | 9,25:1 |
+  | Danza | `#943b84` | 6,53:1 | `#f0b5e2` | 9,24:1 |
+  | Exposiciones | `#006aaf` | 5,71:1 | `#94d3ff` | 9,70:1 |
+  | Museos | `#007b7e` | 5,08:1 | `#7fdddd` | 9,90:1 |
+  | Deportes | `#00792f` | 5,56:1 | `#a0dcac` | 9,93:1 |
+
+- **Pruebas:** `tests/palette.test.ts` lee los tokens de `src/index.css` y falla si algún color baja de 4,5:1. axe sin problemas (108 comprobaciones). Captura: `docs/capturas/despues/paleta-categorias-1440.jpg`.

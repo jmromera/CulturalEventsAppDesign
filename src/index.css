@@ -867,3 +867,24 @@ a.guest-profile>span .icon{width:20px;height:20px}
 .event-card--compact .event-title:focus-visible::after{outline:3px solid var(--accent-text);outline-offset:2px}
 @media(hover:hover) and (pointer:fine){.event-card--compact:hover{transform:translateY(-3px);border-color:var(--line-surface,var(--line));box-shadow:0 16px 36px rgba(0,0,0,.28)}.event-card--compact:hover .event-title{color:var(--accent-text)}}
 @media(prefers-reduced-motion:reduce){.event-card--compact,.event-card--compact:hover{transition:none;transform:none}}
+
+/* P2.2 · Category palette: same OKLCH lightness (0.50) and chroma (0.15) for every category, only the hue changes,
+   so no category shouts louder than another and all sit with the violet accent. White text ≥ 5:1 on every --cat;
+   --cat-light (L 0.84) ≥ 9:1 on the dark surface. Measured values in docs/CHANGELOG-UI.md (P2.2). */
+:root{
+  --cat-music:#6b4cae;--cat-music-light:#cebfff;
+  --cat-opera:#a53458;--cat-opera-light:#feb2c3;
+  --cat-theatre:#a8372a;--cat-theatre-light:#ffb5a8;
+  --cat-dance:#943b84;--cat-dance-light:#f0b5e2;
+  --cat-exhibitions:#006aaf;--cat-exhibitions-light:#94d3ff;
+  --cat-museums:#007b7e;--cat-museums-light:#7fdddd;
+  --cat-sports:#00792f;--cat-sports-light:#a0dcac;
+}
+[data-cat="music"]{--cat:var(--cat-music);--cat-light:var(--cat-music-light)}
+[data-cat="opera"]{--cat:var(--cat-opera);--cat-light:var(--cat-opera-light)}
+[data-cat="theatre"]{--cat:var(--cat-theatre);--cat-light:var(--cat-theatre-light)}
+[data-cat="dance"]{--cat:var(--cat-dance);--cat-light:var(--cat-dance-light)}
+[data-cat="exhibitions"]{--cat:var(--cat-exhibitions);--cat-light:var(--cat-exhibitions-light)}
+[data-cat="museums"]{--cat:var(--cat-museums);--cat-light:var(--cat-museums-light)}
+[data-cat="sports"]{--cat:var(--cat-sports);--cat-light:var(--cat-sports-light)}
+[data-cat]{--cat-soft:color-mix(in srgb,var(--cat) 14%,#fff)}
