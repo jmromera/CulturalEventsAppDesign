@@ -533,4 +533,9 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - Los alias antiguos (`--forest`, `--terracotta`…) se resuelven donde se declaran: dentro de las tarjetas seguían dando el ámbar claro de la página. Se repiten en el bloque de las tarjetas.
   - El ámbar claro se queda en 4,46:1 sobre el azul de la cabecera: la pestaña activa, «Guardado» y «Tu perfil» abierto pasan a blanco con subrayado ámbar. Lo detectó axe.
   - La cabecera de la ficha tenía el texto en blanco fijo para escritorio; ahora sigue al tema.
+  - En móviles de menos de 375 px la cabecera oculta el menú de perfil y no había forma de activar el modo noche: el interruptor está también en «Tu perfil», enlazado desde el pie.
+  - El texto de ejemplo del buscador se quedaba en 3,55:1 (axe no mide `::placeholder`): los campos de la cabecera azul se oscurecen un poco y pasa a 6,3:1 (6,6:1 en noche).
+  - La barra del navegador del móvil (`theme-color`) sigue al tema: azul `#0b4fd1` o grafito.
+  - Los textos de «Tus datos» y de la política de privacidad que enumeran lo guardado incluyen ya el modo noche.
+  - La página «Próximamente» (producción) se ve igual en los dos modos porque pinta su propio fondo.
 - **Pruebas:** 289 pruebas (nuevas: `tests/theme.test.tsx` y las parejas de contraste de cada modo en `tests/palette.test.ts`); `pnpm check:a11y` pasa ahora por los dos modos: sin problemas en 194 comprobaciones; `check:responsive`, `check:pie` y `check:contraste` correctos.

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { STORAGE_KEYS } from "../data/storage-keys";
 
-// Light is the default look; night mode is an option. public/theme-init.js sets the theme before the first
+// The blue look ("light") is the default; night mode is an option. public/theme-init.js sets the theme before the first
 // paint (inline scripts are blocked by the CSP) and must read the same key as STORAGE_KEYS.theme.
 
 export type Theme = "light" | "dark";
 
 const THEME_EVENT = "plan-cerca:theme";
-const THEME_COLOR: Record<Theme, string> = { light: "#ffffff", dark: "#0f0f10" };
+const THEME_COLOR: Record<Theme, string> = { light: "#0b4fd1", dark: "#0f0f10" };
 
 export function systemTheme(): Theme {
   try {

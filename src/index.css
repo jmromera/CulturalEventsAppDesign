@@ -1158,3 +1158,8 @@ h2{letter-spacing:-.01em;word-spacing:normal}
    Los menús que se abren dentro llevan sus propios tokens claros */
 :root:not([data-theme="dark"]) :is(.site-header,.detail-top){--accent-text:#fff;--accent-text-hover:#fff;--forest:#fff;--terracotta:#fff;--terracotta-dark:#fff}
 :root:not([data-theme="dark"]) .site-header .header-city-count{color:#fff}
+/* «Tu perfil»: el interruptor también aquí (en móviles de menos de 375 px la cabecera oculta el menú de perfil) */
+.profile-theme .theme-toggle{border:1px solid var(--line-strong);color:var(--ink);padding:0 16px}
+.profile-theme .theme-toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-tint)}
+/* Campos de la cabecera azul hundidos un poco: el texto de ejemplo del buscador pasa de 3,5:1 a más de 4,5:1 (axe no mide ::placeholder) */
+:root:not([data-theme="dark"]) .site-header{--chrome-field:rgba(0,0,0,.2)}
