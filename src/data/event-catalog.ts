@@ -22,6 +22,14 @@ export function isBigEvent(event: EventItem): boolean {
   return (venueFor(event.venueId).capacity ?? 0) >= BIG_EVENT_CAPACITY;
 }
 
+/** Placeholder stored in the data when the organiser is not known. */
+const UNKNOWN_ORGANIZER = "Consultar en la web de venta";
+
+/** The real organiser, or null when the data only holds the placeholder. */
+export function knownOrganizer(event: EventItem): string | null {
+  return event.organizer && event.organizer !== UNKNOWN_ORGANIZER ? event.organizer : null;
+}
+
 /** Event photo: its own image or, by default, the freely licensed photo of its venue. */
 export function eventImage(event: EventItem): string | null {
   return event.image ?? venueFor(event.venueId).image ?? null;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import type { Language } from "../data/language";
 import { clearStoredData, exportStoredData, STORAGE_REGISTRY } from "../data/storage-keys";
+import { applyTheme, systemTheme } from "../lib/theme";
 import { legalCopy, LEGAL_PATHS } from "./legal-copy";
 
 const copy: Record<Language, {
@@ -35,9 +36,9 @@ const copy: Record<Language, {
     download: "Descargar mis datos (JSON)",
     downloadHint: "Un archivo con todo lo guardado, para que lo revises o lo lleves a otro sitio.",
     delete: "Borrar mis datos",
-    deleteHint: "Borra favoritos, idioma, ciudad, artistas seguidos y perfil de este navegador.",
+    deleteHint: "Borra favoritos, idioma, ciudad, artistas seguidos, modo noche y perfil de este navegador.",
     confirmTitle: "¿Borrar tus datos de este navegador?",
-    confirmText: "Se borrarán tus favoritos, el idioma, la ciudad, los artistas que sigues y tu perfil. No se puede deshacer.",
+    confirmText: "Se borrarán tus favoritos, el idioma, la ciudad, los artistas que sigues, el modo noche y tu perfil. No se puede deshacer.",
     confirmYes: "Sí, borrar mis datos",
     confirmNo: "Cancelar",
     deleted: "Hemos borrado tus datos de este navegador.",
@@ -56,9 +57,9 @@ const copy: Record<Language, {
     download: "Download my data (JSON)",
     downloadHint: "A file with everything stored, so you can check it or take it elsewhere.",
     delete: "Delete my data",
-    deleteHint: "Deletes favourites, language, city, followed artists and profile from this browser.",
+    deleteHint: "Deletes favourites, language, city, followed artists, night mode and profile from this browser.",
     confirmTitle: "Delete your data from this browser?",
-    confirmText: "Your favourites, language, city, followed artists and profile will be deleted. This cannot be undone.",
+    confirmText: "Your favourites, language, city, followed artists, night mode and profile will be deleted. This cannot be undone.",
     confirmYes: "Yes, delete my data",
     confirmNo: "Cancel",
     deleted: "Your data has been deleted from this browser.",
@@ -77,9 +78,9 @@ const copy: Record<Language, {
     download: "Télécharger mes données (JSON)",
     downloadHint: "Un fichier avec tout ce qui est enregistré, pour le vérifier ou l’emporter ailleurs.",
     delete: "Supprimer mes données",
-    deleteHint: "Supprime les favoris, la langue, la ville, les artistes suivis et le profil de ce navigateur.",
+    deleteHint: "Supprime les favoris, la langue, la ville, les artistes suivis, le mode nuit et le profil de ce navigateur.",
     confirmTitle: "Supprimer vos données de ce navigateur ?",
-    confirmText: "Vos favoris, la langue, la ville, les artistes suivis et le profil seront supprimés. Cette action est irréversible.",
+    confirmText: "Vos favoris, la langue, la ville, les artistes suivis, le mode nuit et le profil seront supprimés. Cette action est irréversible.",
     confirmYes: "Oui, supprimer mes données",
     confirmNo: "Annuler",
     deleted: "Vos données ont été supprimées de ce navigateur.",
@@ -121,6 +122,7 @@ export default function YourDataPage({ language, onDeleted = reloadAfterDelete }
 
   const confirmDelete = () => {
     clearStoredData();
+    applyTheme(systemTheme());
     setStored(exportStoredData());
     setConfirming(false);
     onDeleted();

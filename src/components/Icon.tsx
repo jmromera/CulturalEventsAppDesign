@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type IconName = "arrow" | "bell" | "bookmark" | "calendar" | "check" | "chevron" | "close" | "copy" | "download" | "filter" | "frame" | "globe" | "heart" | "home" | "instagram" | "location" | "mask" | "mic" | "museum" | "music" | "play" | "profile" | "search" | "share" | "spark" | "spotify" | "star" | "ticket" | "time" | "trending" | "trophy" | "wind";
+export type IconName = "arrow" | "bell" | "bookmark" | "calendar" | "check" | "chevron" | "close" | "copy" | "download" | "filter" | "frame" | "globe" | "heart" | "home" | "instagram" | "location" | "mask" | "mic" | "moon" | "museum" | "music" | "play" | "profile" | "search" | "share" | "spark" | "spotify" | "star" | "sun" | "ticket" | "time" | "trending" | "trophy" | "wind";
 
 const icons: Record<IconName, ReactNode> = {
   home: <><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10M9 20v-6h6v6" /></>,
@@ -24,6 +24,8 @@ const icons: Record<IconName, ReactNode> = {
   check: <path d="m5 12 4 4L19 6" />, star: <path d="m12 2 3 6 6.5.9-4.7 4.6 1.1 6.5-5.9-3-5.9 3 1.1-6.5L2.5 9 9 8Z" />,
   time: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>, trending: <path d="m3 17 6-6 4 4 8-9M15 6h6v6" />,
   close: <path d="M6 6l12 12M18 6 6 18" />,
+  sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>,
+  moon: <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />,
   // Reserva de imagen por categoría
   music: <><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></>,
   mic: <><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8" /></>,

@@ -499,3 +499,43 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - Nuevo `pnpm check:pie` (`scripts/check-footer.mjs`): recorre las 30 rutas a 1440 × 900 y falla si alguna deja espacio libre bajo el pie. Las 30 pasan.
   - axe sin problemas (112 comprobaciones), responsive y sin terceros.
   - Capturas: `docs/capturas/despues/pie-vacio-1440.jpg`, `pie-inicio-390.jpg`, `pie-inicio-1440.jpg`.
+
+---
+
+## P3 · Pulido visual
+
+### Iteración P3.1 · «Cartelera de noche»: grafito, ámbar y categorías discretas
+
+- **Qué:** auditoría con la skill unslop (by @heydamir, CC BY 4.0) y pulido con la dirección «cartelera de noche»: el color lo ponen los carteles y el resto de la interfaz queda en segundo plano.
+  - **Fondos:** del azul marino (`#141b2d`, `#1c2540`) a grafito casi neutro (`#141415` fondo, `#19191b` tarjeta, `#232325` elevado). La profundidad la dan los escalones de superficie y las líneas finas, sin sombras de color.
+  - **Acento:** del morado `#7c3aed` al ámbar de marquesina `#f2a93b`, con texto oscuro encima. Se usa en la acción principal, la selección y los enlaces; el pie y la barra de acciones de la ficha pasan a gris.
+  - **Portada:** se quita el velo azul, violeta y ámbar de la foto. La sombra que asegura el contraste del texto se mantiene, ahora en negro neutro y con la misma opacidad.
+  - **Categorías:** de pastilla de color a un punto de su color con texto neutro. Se quita la raya de color de la tarjeta y la sombra de color al pasar el ratón. «Gran evento» se mantiene como dato, sin el amarillo.
+  - **Tipografía:** sin mayúsculas espaciadas (etiquetas, categoría, ficha de fecha, «MADRID · 75»), pesos 500 y 600, cifras tabulares y nada por debajo de 12 px.
+  - **Controles:** radio de 10 px en lugar de pastillas; las imágenes ya no se amplían al pasar el ratón.
+  - **Textos:** titular «Conciertos, teatro y deporte cerca de ti» y subtítulo sin «momentos únicos» (español, inglés y francés). El organizador de relleno «Consultar en la web de venta» (72 eventos) ya no se muestra como nombre: la caja de compra dice «Precio y entradas en la web oficial», la ficha omite «Organiza» y el JSON-LD omite `organizer`.
+- **Por qué:** **Estética y diseño minimalista (Nielsen 8)**: con 24 etiquetas de color en pantalla nada destacaba. Ahora destacan el cartel de cada evento y el botón de compra. **Consistencia (Nielsen 4)**: un solo acento y un solo radio de control.
+- **Contraste medido:** botón (texto `#141415` sobre `#f2a93b`) 9,2:1 y al pasar el ratón 10,7:1; ámbar como texto 9,2:1 sobre el fondo y 8,8:1 sobre la tarjeta; texto principal 15,0:1 y secundario 6,8:1 sobre la tarjeta.
+- **Problemas encontrados:** el blanco sobre ámbar se quedaba en 2:1. El calendario de filtros y los pasos de la reserva tenían el blanco escrito a mano y se corrigieron con `--on-accent`.
+- **Pruebas:** typecheck, 281 pruebas (dos se adaptan a «Valencia · N» en lugar de «VALENCIA · N»), build y `pnpm check:contraste` (peor caso: Bilbao a 1440 px, 5,19:1).
+
+### Iteración P3.2 · Modo azul por defecto y modo noche opcional
+
+- **Qué:**
+  - **Modo azul (por defecto):** cabecera, fondo y pie en azul (`#0b4fd1` y `#0a3fa8`), con las tarjetas, paneles, menús y diálogos en claro para que los carteles y los datos se lean. La foto de la ciudad sigue oscura arriba. Las categorías recuperan su color: etiqueta de color sobre la foto y etiqueta suave en la ficha y en las pestañas.
+  - **Modo noche:** el grafito con ámbar de P3.1, sin cambios.
+  - **Interruptor:** luna o sol en la cabecera (escritorio) y «Modo noche» en el menú de perfil (también en móvil), sincronizados y con `aria-pressed`. La elección se guarda en `plan-cerca.theme` solo al pulsar; si no hay elección, se sigue el modo del sistema. `public/theme-init.js` fija el tema antes de pintar (la CSP bloquea los scripts inline). Al borrar los datos, el tema vuelve al del sistema.
+  - **Logo:** la baldosa es siempre el azul del favicon (`#1d4ed8`); en la cabecera azul lleva un borde blanco fino para distinguirse. El nombre va en el color del texto.
+  - **Museos:** `--cat-museums` pasa de `#007b7e` a `#006e71` para llegar a 4,5:1 sobre su etiqueta suave.
+- **Por qué:** decisión del autor. Las webs de entradas (Ticketmaster, entradas.com) usan un color de marca fuerte en la navegación y fondos claros para el contenido; el negro queda como preferencia, no como imposición. **Control y libertad del usuario (Nielsen 3)**: el usuario elige el modo y se recuerda.
+- **Contraste medido (modo azul):** texto blanco 9,2:1 sobre el fondo y 6,9:1 sobre la cabecera; secundario `#c9d6f5` 6,3:1; enlaces en ámbar claro `#ffc766` 5,9:1 sobre el fondo; dentro de las tarjetas, texto `#1f1b16` y enlaces en ámbar oscuro `#9a5b00`.
+- **Problemas encontrados:**
+  - Los alias antiguos (`--forest`, `--terracotta`…) se resuelven donde se declaran: dentro de las tarjetas seguían dando el ámbar claro de la página. Se repiten en el bloque de las tarjetas.
+  - El ámbar claro se queda en 4,46:1 sobre el azul de la cabecera: la pestaña activa, «Guardado» y «Tu perfil» abierto pasan a blanco con subrayado ámbar. Lo detectó axe.
+  - La cabecera de la ficha tenía el texto en blanco fijo para escritorio; ahora sigue al tema.
+  - En móviles de menos de 375 px la cabecera oculta el menú de perfil y no había forma de activar el modo noche: el interruptor está también en «Tu perfil», enlazado desde el pie.
+  - El texto de ejemplo del buscador se quedaba en 3,55:1 (axe no mide `::placeholder`): los campos de la cabecera azul se oscurecen un poco y pasa a 6,3:1 (6,6:1 en noche).
+  - La barra del navegador del móvil (`theme-color`) sigue al tema: azul `#0b4fd1` o grafito.
+  - Los textos de «Tus datos» y de la política de privacidad que enumeran lo guardado incluyen ya el modo noche.
+  - La página «Próximamente» (producción) se ve igual en los dos modos porque pinta su propio fondo.
+- **Pruebas:** 289 pruebas (nuevas: `tests/theme.test.tsx` y las parejas de contraste de cada modo en `tests/palette.test.ts`); `pnpm check:a11y` pasa ahora por los dos modos: sin problemas en 194 comprobaciones; `check:responsive`, `check:pie` y `check:contraste` correctos.

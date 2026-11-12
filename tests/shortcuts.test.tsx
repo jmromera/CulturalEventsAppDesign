@@ -6,7 +6,7 @@ import { PreferredCityProvider } from "../src/context/PreferredCityContext";
 import { STORAGE_KEYS } from "../src/data/storage-keys";
 import { cities } from "../src/types/Event";
 
-const listCount = (city: string) => Number(document.querySelector("#catalogue")!.textContent!.match(new RegExp(`${city.toLocaleUpperCase()} · (\\d+)`))![1]);
+const listCount = (city: string) => Number(document.querySelector("#catalogue")!.textContent!.match(new RegExp(`${city} · (\\d+)`))![1]);
 
 describe("«Lo que más hay» shortcuts", () => {
   it("apply that category alone (replacing others) in one step", () => {

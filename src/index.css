@@ -228,45 +228,52 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
    ========================================================================== */
 :root{
 	color-scheme:dark;
-	/* Azul noche: cabecera, barra de acciones, hero y pie */
-	--chrome:#0f172a;
-	--chrome-end:#111827;
-	--chrome-field:rgba(255,255,255,.07);
-	--chrome-hover:rgba(255,255,255,.1);
-	/* Fondo general */
-	--canvas:#141b2d;
-	--canvas-raised:#182036;
-	/* Tarjetas y paneles: un punto más claros que el fondo */
-	--surface:#1c2540;
-	--surface-raised:#232e4f;
-	--surface-sunken:#161e35;
-	--line-surface:#313d60;
-	/* Texto y líneas */
-	--on-dark:#f1f5f9;
-	--on-dark-muted:#a8b3c7;
-	--line-dark:#2c3854;
-	/* Acento violeta: intenso para fondos de botón, claro para texto y enlaces */
-	--accent:#7c3aed;
-	--accent-hover:#6d28d9;
-	--on-accent:#fff;
-	--accent-text:#c4b5fd;
-	--accent-text-hover:#ddd6fe;
-	--accent-tint:rgba(167,139,250,.16);
+	/* Texto sobre foto u otra zona siempre oscura (portada, etiquetas sobre imagen): igual en los dos modos */
+	--on-dark:#ededed;
+	--on-dark-muted:#a1a1a6;
+	--on-image-bg:rgba(15,15,16,.84);
+	/* Marca: la baldosa del logo es siempre el azul del favicon */
+	--brand-blue:#1d4ed8;
+
+	/* Modo azul (por defecto): cabecera, fondo y pie en azul; las tarjetas y paneles son claros (bloque «Tarjetas claras») */
+	--chrome:#0b4fd1;
+	--chrome-end:#0b4fd1;
+	--chrome-field:rgba(255,255,255,.14);
+	--chrome-hover:rgba(255,255,255,.14);
+	--header-bg:#0b4fd1;
+	--canvas:#0a3fa8;
+	--canvas-raised:#0b46bb;
+	--surface:rgba(255,255,255,.1);
+	--surface-raised:#0b46bb;
+	--surface-sunken:rgba(0,0,0,.14);
+	--line-surface:rgba(255,255,255,.22);
+	--line-strong:rgba(255,255,255,.45);
+	/* Texto blanco sobre el azul (9,2:1); secundario #c9d6f5 (6,3:1) */
+	--ink:#ffffff;
+	--muted:#c9d6f5;
+	--line:rgba(255,255,255,.2);
+	/* Acento ámbar: botón con texto oscuro; como texto sobre el azul, ámbar claro (5,9:1) */
+	--accent:#f2a93b;
+	--accent-hover:#f5bb63;
+	--on-accent:#1f1b16;
+	--accent-text:#ffc766;
+	--accent-text-hover:#ffd994;
+	--accent-tint:rgba(255,199,102,.18);
 	/* Estados */
-	--positive:#6ee7b7;
-	--positive-tint:rgba(16,185,129,.14);
-	--pending:#fcd34d;
-	--pending-tint:rgba(245,158,11,.14);
-	--star:#fbbf24;
-	/* Sombras */
-	--shadow-card:0 8px 24px rgba(0,0,0,.28);
-	--shadow-pop:0 18px 44px rgba(0,0,0,.5);
+	--positive:#15803d;
+	--positive-tint:rgba(21,128,61,.1);
+	--pending:#9a5b00;
+	--pending-tint:rgba(242,169,59,.14);
+	--negative:#dc2626;
+	--negative-text:#b91c1c;
+	--star:#b7791f;
+	/* Sombras neutras, pequeñas */
+	--shadow-card:0 1px 2px rgba(31,27,22,.05);
+	--shadow-pop:0 8px 24px rgba(31,27,22,.12);
+	--shadow-bar:0 -6px 20px rgba(31,27,22,.1);
 
 	/* Variables del diseño anterior, apuntando a los tonos del tema */
 	--paper:var(--canvas);
-	--ink:var(--on-dark);
-	--muted:var(--on-dark-muted);
-	--line:var(--line-dark);
 	--forest:var(--accent-text);
 	--forest-2:var(--chrome);
 	--terracotta:var(--accent-text);
@@ -276,13 +283,52 @@ body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visib
 	--sage:var(--accent-tint);
 	--peach:var(--accent-tint);
 	--gold:var(--star);
-	--success:#34d399;
+	--success:var(--positive);
 	--success-strong:var(--positive);
 	--shadow:var(--shadow-pop);
 }
 
+/* Modo noche: grafito casi neutro y ámbar. El color lo ponen los carteles */
+:root[data-theme="dark"]{
+	color-scheme:dark;
+	--chrome:#0f0f10;
+	--chrome-end:#0f0f10;
+	--chrome-field:rgba(237,237,237,.06);
+	--chrome-hover:rgba(237,237,237,.1);
+	--header-bg:rgba(15,15,16,.94);
+	--canvas:#141415;
+	--canvas-raised:#171718;
+	--surface:#19191b;
+	--surface-raised:#232325;
+	--surface-sunken:#111112;
+	--line-surface:#2c2c2f;
+	--line-strong:#3a3a3e;
+	--ink:var(--on-dark);
+	--muted:var(--on-dark-muted);
+	--line:#262628;
+	/* Botón con texto oscuro (9,2:1) y ámbar como texto sobre grafito (9,2:1) */
+	--accent:#f2a93b;
+	--accent-hover:#f5bb63;
+	--on-accent:#141415;
+	--accent-text:#f2a93b;
+	--accent-text-hover:#f7c780;
+	--accent-tint:rgba(242,169,59,.12);
+	--positive:#4cc38a;
+	--positive-tint:rgba(76,195,138,.12);
+	--pending:#e8c27a;
+	--pending-tint:rgba(232,194,122,.12);
+	--negative:#f87171;
+	--negative-text:#fca5a5;
+	--star:#f2a93b;
+	--success:#34d399;
+	/* En oscuro la profundidad la dan los escalones de superficie y las líneas finas */
+	--shadow-card:none;
+	--shadow-pop:0 18px 44px rgba(0,0,0,.5);
+	--shadow-bar:0 -10px 30px rgba(0,0,0,.35);
+}
+
 /* Un color por categoría: --cat para fondos con texto blanco, --cat-light para texto sobre oscuro.
-   Música es azul (no violeta) para no confundirse con el acento. */
+   Desde el pulido final, la categoría se muestra como un punto de --cat-light junto a texto neutro. */
 [data-cat]{--cat:var(--accent);--cat-light:var(--accent-text)}
 [data-cat="music"]{--cat:#2563eb;--cat-light:#93c5fd}
 [data-cat="opera"]{--cat:#9f1239;--cat-light:#fda4af}
@@ -336,7 +382,7 @@ html{background:var(--canvas)}
 .global-search input::placeholder{color:var(--muted)}
 .global-search:focus-within{border-color:var(--accent-text);box-shadow:0 0 0 3px var(--accent-tint)}
 .language-select{background:var(--chrome-field);border-color:var(--line)}
-.language-select select option{background:var(--surface-raised);color:var(--on-dark)}
+.language-select select option{background:var(--surface-raised);color:var(--ink)}
 .header-city-trigger:hover,.header-city-picker[open]>.header-city-trigger,.header-city-option:hover,.header-city-option:focus-visible,.city-onboarding-link:hover,.city-onboarding-dismiss:hover{background:var(--chrome-hover)}
 .guest-profile>span{border-color:var(--line)}
 .detail-top>button:hover,.detail-top .detail-actions>.detail-action:hover,.detail-top .detail-calendar>summary:hover{background:var(--chrome-hover);border-color:var(--line);color:var(--ink)}
@@ -351,7 +397,7 @@ html{background:var(--canvas)}
 @media(hover:hover) and (pointer:fine){.artist-profile-main:hover,.artist-event-card:hover{border-color:var(--accent-text)}}
 .filter-control.active{border-color:var(--accent-text);color:var(--accent-text)}
 
-/* Ficha: el hero continúa el azul de la barra de acciones y la imagen ya no deja franjas grises */
+/* Ficha: la imagen ya no deja franjas grises (el fondo del hero se ajusta en el pulido final) */
 .detail-hero[data-cat]{background:linear-gradient(135deg,var(--chrome) 55%,color-mix(in srgb,var(--cat) 38%,var(--chrome-end)))}
 .detail-gallery{background:transparent}
 .detail-intro{background:transparent}
@@ -582,9 +628,9 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .artist-page .artist-events-section{max-width:none;padding-left:0;padding-right:0}
 
 /* Entradas agotadas: estado propio, nunca en verde */
-.availability.soldout{background:rgba(239,68,68,.14);color:#fca5a5}
-.availability.soldout i,.stock--soldout i{background:#f87171}
-.stock.stock--soldout{color:#fca5a5}
+.availability.soldout{background:rgba(239,68,68,.12);color:var(--negative-text)}
+.availability.soldout i,.stock--soldout i{background:var(--negative)}
+.stock.stock--soldout{color:var(--negative-text)}
 
 /* Legal pages, footer legal links and draft notice */
 .legal-page{max-width:900px}
@@ -861,7 +907,7 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 .event-card--compact .event-where .icon{flex:none;width:15px;height:15px;margin-top:2px}
 .event-card--compact .event-distance{color:var(--accent-text);font-weight:700}
 .event-card--compact .event-price{color:var(--ink);font-weight:700}
-.event-card--compact .event-price--soldout{color:#fca5a5}
+.event-card--compact .event-price--soldout{color:var(--negative-text)}
 .event-card--compact:focus-within{border-color:var(--accent-text)}
 .event-card--compact .event-title:focus-visible{outline:none}
 .event-card--compact .event-title:focus-visible::after{outline:3px solid var(--accent-text);outline-offset:2px}
@@ -869,7 +915,7 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
 @media(prefers-reduced-motion:reduce){.event-card--compact,.event-card--compact:hover{transition:none;transform:none}}
 
 /* P2.2 · Category palette: same OKLCH lightness (0.50) and chroma (0.15) for every category, only the hue changes,
-   so no category shouts louder than another and all sit with the violet accent. White text ≥ 5:1 on every --cat;
+   so no category shouts louder than another (the accent is now amber, see the final polish block). White text ≥ 5:1 on every --cat;
    --cat-light (L 0.84) ≥ 9:1 on the dark surface. Measured values in docs/CHANGELOG-UI.md (P2.2). */
 :root{
   --cat-music:#6b4cae;--cat-music-light:#cebfff;
@@ -877,7 +923,7 @@ h1,h2{letter-spacing:-.02em;word-spacing:.08em}
   --cat-theatre:#a8372a;--cat-theatre-light:#ffb5a8;
   --cat-dance:#943b84;--cat-dance-light:#f0b5e2;
   --cat-exhibitions:#006aaf;--cat-exhibitions-light:#94d3ff;
-  --cat-museums:#007b7e;--cat-museums-light:#7fdddd;
+  --cat-museums:#006e71;--cat-museums-light:#7fdddd;
   --cat-sports:#00792f;--cat-sports-light:#a0dcac;
 }
 [data-cat="music"]{--cat:var(--cat-music);--cat-light:var(--cat-music-light)}
@@ -925,7 +971,7 @@ button.guest-profile[aria-expanded="true"]{color:var(--accent-text)}
 @media(min-width:901px){.detail-content .purchase-card{position:sticky;top:100px;align-self:start}}
 .detail-mobile-cta{display:none}
 @media(max-width:650px){
-  .detail-mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface-raised);box-shadow:0 -10px 30px rgba(0,0,0,.35);transform:translateY(110%);visibility:hidden;transition:transform 200ms var(--ease-out,ease),visibility 0s linear 200ms}
+  .detail-mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface-raised);box-shadow:var(--shadow-bar);transform:translateY(110%);visibility:hidden;transition:transform 200ms var(--ease-out,ease),visibility 0s linear 200ms}
   .detail-mobile-cta.visible{transform:none;visibility:visible;transition:transform 200ms var(--ease-out,ease)}
   .detail-mobile-cta>div{display:grid;min-width:0;flex:1}
   .detail-mobile-cta strong{overflow:hidden;font-size:14px;white-space:nowrap;text-overflow:ellipsis}
@@ -959,3 +1005,161 @@ html{scroll-padding-top:90px}
   html:has(.detail-mobile-cta.visible){scroll-padding-bottom:84px}
   .main-shell:has(.detail-mobile-cta:not(.disabled)) .site-footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 }
+
+/* ==========================================================================
+   Pulido final, dirección «cartelera de noche» (skill unslop by @heydamir, CC BY 4.0).
+   Grafito casi neutro, ámbar de marquesina como único acento, el color lo ponen los
+   carteles; categorías como punto + texto, sin mayúsculas espaciadas ni pastillas.
+   Va al final para mandar sobre las capas anteriores.
+   ========================================================================== */
+
+/* Cromo y fondos sin tinte azul */
+.site-header{background:var(--header-bg)}
+.city-onboarding-backdrop,.about-backdrop,.drawer-backdrop{background:rgba(8,8,9,.66)}
+.detail-hero[data-cat]{background:var(--canvas-raised)}
+.image-fallback{background:var(--surface-sunken);color:var(--muted)}
+.photo-credit{background:rgba(15,15,16,.82);color:#d4d4d6}
+.photo-credit a{color:var(--accent-text)}
+.info-item>span{background:var(--surface-sunken);color:var(--muted)}
+
+/* Portada: la foto de la ciudad sin velo de color. La sombra neutra mantiene el 4,5:1 del texto (DECISIONES.md) */
+.hero::before{content:none}
+@media(max-width:650px){.hero-shade{background:linear-gradient(180deg,rgba(10,10,11,.6),rgba(10,10,11,.94))}}
+@media(min-width:651px){.hero-shade{background:linear-gradient(90deg,rgba(10,10,11,.9),rgba(10,10,11,.82) 40%,rgba(10,10,11,.5) 60%,rgba(10,10,11,.08))}}
+.hero-city-name{font-weight:600}
+.hero-city-count{color:#d4d4d6;font-weight:500}
+.hero-chip{border-color:rgba(237,237,237,.28);border-radius:10px;background:rgba(15,15,16,.6);font-weight:500}
+.hero-chip:hover:not(:disabled){border-color:rgba(237,237,237,.6);background:rgba(15,15,16,.85)}
+.hero-chip>span{border-radius:6px;font-weight:500;font-variant-numeric:tabular-nums}
+.hero-chip.active{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.hero-chip.active>span{background:rgba(20,20,21,.16)}
+.hero-hint button{color:var(--accent-text);font-weight:600}
+.hero-hint button:focus-visible{outline-color:var(--accent-text)}
+
+/* Tipografía: pesos 500/600, sin mayúsculas espaciadas, nada por debajo de 12 px */
+h1{letter-spacing:-.02em;word-spacing:normal}
+h2{letter-spacing:-.01em;word-spacing:normal}
+.logo{font-weight:600;letter-spacing:-.01em}
+.hero-copy>span,.section-title>div>span,.kicker,.category,.rating,.availability,.info-item small,.venue-directory-kind,.booking-step-count,.gallery-card span,.event-card--compact .date-badge,.event-card--compact .date-badge small{text-transform:none;letter-spacing:0}
+.section-title>div>span,.kicker{color:var(--muted);font-size:13px;font-weight:500}
+.info-item small{color:var(--muted);font-size:12px}
+.header-city-count{font-size:12px}
+.event-title,.event-card--compact .event-title,.artist-event-title{font-weight:600}
+.purchase-card>.purchase-price,.detail-cta-price{font-weight:600;letter-spacing:-.01em}
+.purchase-card>.purchase-provider,.purchase-card h2.purchase-provider{font-weight:500;letter-spacing:0}
+.button{font-weight:600}
+.category-tabs button,.filter-control,.discovery-shortcuts button,.discovery-strip--shortcuts .discovery-title,.drawer-chips button,.near-me-radius button,.active-filter,.guest-profile,.primary-nav-item,.detail-action,.info-item a,.site-footer-legal a,.saved-notice button,.saved-link-button,.near-me-stop,.active-filter-clear{font-weight:500}
+.event-card--compact .event-price,.event-footer strong,.saved-past li a{font-weight:600}
+.event-card--compact .event-price,.purchase-price,.detail-cta-price,.hero-chip>span,.discovery-shortcuts button small,.header-city-count{font-variant-numeric:tabular-nums}
+
+/* Firma: la ficha de fecha con forma de entrada, sobria */
+.event-card--compact .date-badge{border-radius:8px;background:rgba(15,15,16,.86);box-shadow:none}
+.event-card--compact .date-badge small{font-size:12px;font-weight:500;opacity:.8}
+.event-card--compact .date-badge strong{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* Categoría: un punto de su color y texto neutro, en lugar de una pastilla de color */
+.category,.event-card[data-cat] .event-image .category,.artist-event-image .category{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:6px;background:var(--on-image-bg);color:var(--on-dark);font-size:12px;font-weight:500}
+.category::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--cat-light,var(--accent-text))}
+.detail-hero[data-cat] .category,.tag-row span.tag-category{padding:0;border:0;background:transparent;color:var(--muted)}
+.event-card[data-cat] .event-body{border-top:0}
+
+/* «Gran evento»: el dato se queda, sin amarillo */
+.big-event-badge,.event-card--compact .big-event-badge{padding:4px 8px;border-radius:6px;background:var(--on-image-bg);color:var(--on-dark);font-weight:500;letter-spacing:0}
+.detail-social .big-event-badge,.detail-hero[data-cat] .detail-social .big-event-badge,.detail-hero[data-cat] .detail-social>span.big-event-badge:first-child{padding:0;background:transparent;color:var(--ink)}
+
+/* Controles: radio de control en vez de pastilla; la selección usa el acento */
+.category-tabs button,.filter-control,.near-me-radius button,.drawer-chips button,.active-filter,.discovery-shortcuts button,.tag-row span{border-radius:10px}
+.discovery-shortcuts button small{border-radius:6px}
+.discovery-shortcuts button[data-cat]{border-color:var(--line)}
+.category-tabs button[data-cat]:hover{border-color:var(--line-strong);color:var(--ink)}
+.category-tabs button.active:not([data-cat]),.category-tabs button[data-cat].active,.category-tabs button[data-cat].active:hover{border-color:var(--accent);background:var(--accent-tint);color:var(--accent-text)}
+
+/* Texto oscuro sobre el ámbar (el blanco se quedaría en 2:1) */
+.month-calendar td button.selected{color:var(--on-accent)}
+.month-calendar td button.selected::after{background:var(--on-accent)}
+.booking-steps li.current span{color:var(--on-accent)}
+
+/* Tarjetas: al pasar el ratón solo cambia el borde, sin sombra de color ni zoom de la imagen */
+@media(hover:hover) and (pointer:fine){
+	.event-card[data-cat]:hover,.event-card--compact:hover,.venue-directory-card:hover{border-color:var(--line-strong);box-shadow:var(--shadow-card);transform:none}
+	.event-card:hover img,.venue-directory-image:hover img,.artist-event-image:hover img{transform:none}
+}
+
+/* Pie: los enlaces legales en gris; el ámbar queda para la acción y la selección */
+.site-footer-legal a,.site-footer-link{color:var(--muted);font-weight:500}
+.site-footer-legal a:hover,.site-footer-link:hover{color:var(--ink)}
+/* Barra de acciones de la ficha: iconos neutros; el ámbar solo marca «Guardado» */
+.detail-action-icon{background:var(--surface-sunken);color:var(--muted)}
+.detail-action.active .detail-action-icon{background:var(--accent-tint);color:var(--accent-text)}
+
+/* ==========================================================================
+   Modo azul por defecto y modo noche opcional. Lo que va sobre foto (portada,
+   etiquetas sobre imagen, ficha de fecha) es igual en los dos modos.
+   ========================================================================== */
+
+/* La portada es siempre oscura: la foto de la ciudad con su sombra; recupera los tonos de noche */
+.hero{--ink:var(--on-dark);--muted:var(--on-dark-muted);--accent-text:#f2a93b;--accent-text-hover:#f7c780;--forest:var(--accent-text);--terracotta-dark:var(--accent-text)}
+
+/* Logo: la baldosa siempre en el azul del favicon; el nombre en el color del texto */
+.brand-mark,.logo .logo-mark{background:var(--brand-blue);color:#fff}
+.logo span:last-child{color:var(--ink)}
+
+/* Modo azul, más color: cada categoría con su tono (texto blanco ≥ 4,5:1 sobre --cat, ver palette.test.ts) */
+:root:not([data-theme="dark"]) [data-cat]{--cat-light:var(--cat)}
+:root:not([data-theme="dark"]) .event-card[data-cat] .event-image .category,:root:not([data-theme="dark"]) .artist-event-image .category{background:var(--cat);color:#fff}
+:root:not([data-theme="dark"]) .event-card[data-cat] .event-image .category::before,:root:not([data-theme="dark"]) .artist-event-image .category::before{display:none}
+:root:not([data-theme="dark"]) .detail-hero[data-cat] .category,:root:not([data-theme="dark"]) .tag-row span.tag-category{padding:4px 10px;border-radius:6px;background:var(--cat-soft);color:var(--cat)}
+:root:not([data-theme="dark"]) .detail-hero[data-cat] .category::before{display:none}
+:root:not([data-theme="dark"]) .category-tabs button[data-cat].active,:root:not([data-theme="dark"]) .category-tabs button[data-cat].active:hover{border-color:var(--cat);background:var(--cat-soft);color:var(--cat)}
+:root:not([data-theme="dark"]) .category-tabs button[data-cat]:hover{border-color:var(--cat);color:var(--cat)}
+
+/* Interruptor de modo noche: icono en la cabecera (escritorio) y fila con texto en el menú de perfil */
+.theme-toggle{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border:0;border-radius:10px;background:transparent;color:var(--muted);font:inherit;font-weight:500;cursor:pointer;transition:background-color 160ms ease,color 160ms ease}
+.theme-toggle .icon{width:18px;height:18px}
+.theme-toggle:hover{background:var(--chrome-hover);color:var(--ink)}
+.theme-toggle:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+.theme-toggle--compact{width:44px;padding:0;justify-content:center}
+@media(max-width:650px){.theme-toggle--compact{display:none}}
+.profile-menu-theme{margin-top:4px;padding-top:4px;border-top:1px solid var(--line)}
+.profile-menu-theme .theme-toggle{width:100%;color:var(--ink);font-weight:600}
+.profile-menu-theme .theme-toggle .icon{width:16px;height:16px;color:var(--muted)}
+.profile-menu-theme .theme-toggle:hover{background:var(--accent-tint);color:var(--accent-text-hover)}
+
+/* Cabecera de la ficha y del recinto: el texto sigue al tema (antes era blanco fijo sobre un degradado oscuro) */
+.detail-hero[data-cat],.venue-detail-page .venue-detail-hero{color:var(--ink)}
+.detail-hero[data-cat] .detail-intro h1,.detail-hero[data-cat] .detail-intro-facts,.detail-hero[data-cat] .detail-social>span:first-child,.venue-detail-page .venue-detail-copy h1{color:var(--ink)}
+.detail-hero[data-cat] .detail-social,.detail-hero[data-cat] .detail-lead,.venue-detail-page .venue-detail-copy>p{color:var(--muted)}
+.detail-hero[data-cat] .detail-social>span:first-child .icon{color:var(--star)}
+.venue-detail-page .venue-detail-address .icon,.venue-detail-page .venue-detail-address>a{color:var(--accent-text)}
+.venue-detail-page .venue-detail-address>a:hover{color:var(--accent-text-hover)}
+
+/* Tarjetas claras: en el modo azul, tarjetas, paneles, menús y diálogos llevan fondo claro y texto oscuro
+   para que los carteles y los datos se lean bien. En modo noche no se aplica */
+:root:not([data-theme="dark"]) :is(.event-card,.purchase-card,.venue-info-card,.venue-directory-card,.info-item,.artist-event-card,.artist-profile-main,.empty,.city-empty-state,.status-page-card,.header-city-menu,.detail-calendar-menu,.city-onboarding-dialog,.about-modal,.profile-menu-list,.near-me-panel,.filters-drawer,.discovery-strip--shortcuts,.legal-summary,.booking-panel,.saved-past li,.your-data-confirm,.category-tabs button,.filter-control){
+	color-scheme:light;
+	--ink:#1f1b16;--muted:#5e554a;--line:#e7e1d6;--line-surface:#e7e1d6;--line-strong:#cfc6b8;
+	--accent-text:#9a5b00;--accent-text-hover:#7a4800;--accent-tint:rgba(242,169,59,.16);
+	--surface:#ffffff;--surface-raised:#ffffff;--surface-sunken:#f3efe8;--chrome-hover:rgba(31,27,22,.06);
+	--positive:#15803d;--positive-tint:rgba(21,128,61,.1);--pending:#9a5b00;--pending-tint:rgba(242,169,59,.14);
+	--negative:#dc2626;--negative-text:#b91c1c;--star:#b7791f;
+	/* Los alias antiguos se resuelven donde se declaran: hay que repetirlos aquí para que sigan a los tokens claros */
+	--forest:var(--accent-text);--terracotta:var(--accent-text);--terracotta-dark:var(--accent-text);--action-hover:var(--accent-text-hover);
+	--sky:var(--accent-tint);--sage:var(--accent-tint);--peach:var(--accent-tint);--gold:var(--star);--success:var(--positive);--success-strong:var(--positive);
+	color:var(--ink);
+}
+:root:not([data-theme="dark"]) :is(.category-tabs button,.filter-control){background:#fff;border-color:transparent}
+:root:not([data-theme="dark"]) .category-tabs button.active:not([data-cat]){background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+/* Logo: siempre el azul del favicon; un borde blanco fino lo separa de la cabecera azul */
+:root:not([data-theme="dark"]) .brand-mark,:root:not([data-theme="dark"]) .logo .logo-mark{box-shadow:0 0 0 1.5px #fff}
+/* Cabecera azul: la pestaña activa en blanco con subrayado ámbar (el ámbar claro se queda en 4,46:1 sobre #0b4fd1) */
+:root:not([data-theme="dark"]) .primary-nav-item:hover,:root:not([data-theme="dark"]) .primary-nav-item.active{color:#fff}
+:root:not([data-theme="dark"]) .primary-nav-item.active{border-bottom-color:var(--accent)}
+/* Cabecera y barra de acciones azules: estados activos y recuentos en blanco (el ámbar claro y el gris azulado no llegan a 4,5:1 sobre #0b4fd1).
+   Los menús que se abren dentro llevan sus propios tokens claros */
+:root:not([data-theme="dark"]) :is(.site-header,.detail-top){--accent-text:#fff;--accent-text-hover:#fff;--forest:#fff;--terracotta:#fff;--terracotta-dark:#fff}
+:root:not([data-theme="dark"]) .site-header .header-city-count{color:#fff}
+/* «Tu perfil»: el interruptor también aquí (en móviles de menos de 375 px la cabecera oculta el menú de perfil) */
+.profile-theme .theme-toggle{border:1px solid var(--line-strong);color:var(--ink);padding:0 16px}
+.profile-theme .theme-toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-tint)}
+/* Campos de la cabecera azul hundidos un poco: el texto de ejemplo del buscador pasa de 3,5:1 a más de 4,5:1 (axe no mide ::placeholder) */
+:root:not([data-theme="dark"]) .site-header{--chrome-field:rgba(0,0,0,.2)}
