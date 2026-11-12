@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T13:30:34.677Z",
+  "date": "2026-11-12T18:44:19.608Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -334,6 +334,334 @@
     },
     {
       "page": "cerca-de-mi · escritorio",
+      "violations": []
+    },
+    {
+      "page": "inicio · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "bienvenida · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "enlace-compartido · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "privacidad-primera-visita · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "busqueda · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "busqueda-sin-resultados · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "busqueda-otra-ciudad · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "filtros · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "evento · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "evento-pasado · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "recintos · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "recinto · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "artista · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "favoritos · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "reserva-sesion · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "favoritos-compartidos · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "lista-compartida-primera-visita · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "perfil · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "perfil-vacio · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "favoritos-vacio · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "404 · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "aviso-legal · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "privacidad · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "cookies · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "terminos · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "accesibilidad · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "tus-datos · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "tus-datos-vacio · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "selector-ciudad-abierto · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "calendario-abierto · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "confirmar-borrado · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "acerca-de · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "filtros-noche · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "filtros-calendario-teclado · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "chips-filtros · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "favorito-quitado · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "menu-perfil · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "ficha-barra-compra · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "cerca-de-mi · movil · noche",
+      "violations": []
+    },
+    {
+      "page": "inicio · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "bienvenida · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "enlace-compartido · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "privacidad-primera-visita · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "busqueda · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "busqueda-sin-resultados · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "busqueda-otra-ciudad · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "filtros · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "evento · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "evento-pasado · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "recintos · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "recinto · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "artista · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "favoritos · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "reserva-sesion · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "reserva-revisar · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "reserva-confirmada · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "favoritos-compartidos · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "lista-compartida-primera-visita · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "perfil · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "perfil-vacio · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "favoritos-vacio · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "404 · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "aviso-legal · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "privacidad · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "cookies · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "terminos · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "accesibilidad · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "tus-datos · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "tus-datos-vacio · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "selector-ciudad-abierto · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "calendario-abierto · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "confirmar-borrado · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "acerca-de · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "filtros-noche · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "filtros-calendario-teclado · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "chips-filtros · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "favorito-quitado · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "menu-perfil · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "ficha-barra-compra · escritorio · noche",
+      "violations": []
+    },
+    {
+      "page": "cerca-de-mi · escritorio · noche",
       "violations": []
     },
     {

@@ -518,3 +518,19 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 - **Contraste medido:** botón (texto `#141415` sobre `#f2a93b`) 9,2:1 y al pasar el ratón 10,7:1; ámbar como texto 9,2:1 sobre el fondo y 8,8:1 sobre la tarjeta; texto principal 15,0:1 y secundario 6,8:1 sobre la tarjeta.
 - **Problemas encontrados:** el blanco sobre ámbar se quedaba en 2:1. El calendario de filtros y los pasos de la reserva tenían el blanco escrito a mano y se corrigieron con `--on-accent`.
 - **Pruebas:** typecheck, 281 pruebas (dos se adaptan a «Valencia · N» en lugar de «VALENCIA · N»), build y `pnpm check:contraste` (peor caso: Bilbao a 1440 px, 5,19:1).
+
+### Iteración P3.2 · Modo azul por defecto y modo noche opcional
+
+- **Qué:**
+  - **Modo azul (por defecto):** cabecera, fondo y pie en azul (`#0b4fd1` y `#0a3fa8`), con las tarjetas, paneles, menús y diálogos en claro para que los carteles y los datos se lean. La foto de la ciudad sigue oscura arriba. Las categorías recuperan su color: etiqueta de color sobre la foto y etiqueta suave en la ficha y en las pestañas.
+  - **Modo noche:** el grafito con ámbar de P3.1, sin cambios.
+  - **Interruptor:** luna o sol en la cabecera (escritorio) y «Modo noche» en el menú de perfil (también en móvil), sincronizados y con `aria-pressed`. La elección se guarda en `plan-cerca.theme` solo al pulsar; si no hay elección, se sigue el modo del sistema. `public/theme-init.js` fija el tema antes de pintar (la CSP bloquea los scripts inline). Al borrar los datos, el tema vuelve al del sistema.
+  - **Logo:** la baldosa es siempre el azul del favicon (`#1d4ed8`); en la cabecera azul lleva un borde blanco fino para distinguirse. El nombre va en el color del texto.
+  - **Museos:** `--cat-museums` pasa de `#007b7e` a `#006e71` para llegar a 4,5:1 sobre su etiqueta suave.
+- **Por qué:** decisión del autor. Las webs de entradas (Ticketmaster, entradas.com) usan un color de marca fuerte en la navegación y fondos claros para el contenido; el negro queda como preferencia, no como imposición. **Control y libertad del usuario (Nielsen 3)**: el usuario elige el modo y se recuerda.
+- **Contraste medido (modo azul):** texto blanco 9,2:1 sobre el fondo y 6,9:1 sobre la cabecera; secundario `#c9d6f5` 6,3:1; enlaces en ámbar claro `#ffc766` 5,9:1 sobre el fondo; dentro de las tarjetas, texto `#1f1b16` y enlaces en ámbar oscuro `#9a5b00`.
+- **Problemas encontrados:**
+  - Los alias antiguos (`--forest`, `--terracotta`…) se resuelven donde se declaran: dentro de las tarjetas seguían dando el ámbar claro de la página. Se repiten en el bloque de las tarjetas.
+  - El ámbar claro se queda en 4,46:1 sobre el azul de la cabecera: la pestaña activa, «Guardado» y «Tu perfil» abierto pasan a blanco con subrayado ámbar. Lo detectó axe.
+  - La cabecera de la ficha tenía el texto en blanco fijo para escritorio; ahora sigue al tema.
+- **Pruebas:** 289 pruebas (nuevas: `tests/theme.test.tsx` y las parejas de contraste de cada modo en `tests/palette.test.ts`); `pnpm check:a11y` pasa ahora por los dos modos: sin problemas en 194 comprobaciones; `check:responsive`, `check:pie` y `check:contraste` correctos.

@@ -37,13 +37,13 @@ Hoy es un segundo botón en la tarjeta de compra, justo debajo de «Comprar en l
 
 ### D3. ¿Cambiamos también los colores de la página «Próximamente»?
 
-`src/components/ComingSoonPage.css` es la página que hoy ve el público, y sigue con la paleta anterior.
+`src/components/ComingSoonPage.css` es la página que hoy ve el público.
 
 - **A. Pasarla a grafito y ámbar en una rama aparte, y publicarla cuando lo apruebes** (mi propuesta): la página pública coincide con la web que se lanzará en diciembre.
 - B. Dejarla como está hasta el lanzamiento: es temporal y ya funciona.
 
 **Bloquea:** nada
-**Estado:** Abierta
+**Estado:** Descartada (12/11/2026): la premisa era errónea. La página ya es clara y usa el azul `#1d4ed8` del logo, que coincide con el nuevo modo azul.
 
 ## Tus manos
 
@@ -58,6 +58,7 @@ Lo que solo puedes hacer tú:
 | #  | Paso | Estado | Depende de | Comprobación |
 |----|------|--------|------------|--------------|
 | P1 | Pulido «cartelera de noche» (grafito, ámbar, categorías como punto, textos rotos) | Hecho y comprobado | – | typecheck, 281 tests, build, axe sin problemas (112 comprobaciones), contraste de portada ≥ 5,19:1 y capturas a 1440 y 390 |
+| P1b | Modo azul por defecto y modo noche con interruptor que se recuerda | Hecho y comprobado | P1 | 289 tests, axe sin problemas en los dos modos (194 comprobaciones), responsive, pie y contraste de portada |
 | P2 | Fusionar `feat/unslop` en `develop` y en `main` | Esperando tus manos | P1 | PR revisado; Vercel publica y plancerca.com sigue mostrando «Próximamente» |
 | P3 | Datos legales reales y `esEjemplo: false` | Esperando tus manos | – | `tests/legal-data.test.ts` pasa con `esEjemplo: false` |
 | P4 | Lanzamiento: `LAUNCHED = true` | No empezado | P2, P3 | plancerca.com muestra la app |
@@ -66,7 +67,7 @@ Estados: `No empezado` · `Esperando <Dn / tus manos>` · `En curso` · `Hecho y
 
 ## Definición de terminado
 
-- [ ] plancerca.com muestra la app con la paleta grafito y ámbar.
+- [ ] plancerca.com muestra la app en modo azul, con el modo noche disponible.
 - [ ] axe sin problemas y contraste de la portada ≥ 4,5:1 en las seis ciudades.
 - [ ] Páginas legales sin el aviso rojo de ejemplo.
 
@@ -84,3 +85,10 @@ Ideas y trabajo fuera del alcance actual:
 - Comprobado: typecheck, 281 tests y build; capturas de la portada (1440 y 390) y de la ficha de evento.
 - Decisiones nuevas: D1, D2 y D3.
 - Siguiente: terminar las comprobaciones de P1 y pedir la revisión de la rama.
+
+### 2026-11-12 (tarde)
+
+- Hecho: a petición del autor, el modo por defecto pasa a azul (tipo Ticketmaster) con tarjetas claras; el grafito con ámbar queda como modo noche, con interruptor en la cabecera y en el menú de perfil. El logo es siempre el azul del favicon.
+- Comprobado: 289 tests, axe en los dos modos (194 comprobaciones sin problemas), responsive, pie y contraste de portada; capturas de portada, ficha y menú en móvil.
+- Decisiones: D3 descartada (la página «Próximamente» ya usa el azul del logo).
+- Siguiente: revisión de la rama `feat/unslop` por el autor (P2).
