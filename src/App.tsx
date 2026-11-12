@@ -28,6 +28,7 @@ import Icon, { type IconName } from "./components/Icon";
 import StatusPage from "./components/StatusPage";
 import { AccessibilityPage, CookiePolicyPage, LegalNoticePage, PrivacyPolicyPage, TermsPage } from "./legal/LegalPages";
 import YourDataPage from "./legal/YourDataPage";
+import ThemeToggle from "./components/ThemeToggle";
 import { legalCopy, LEGAL_PATHS } from "./legal/legal-copy";
 import { usePreferredCity } from "./context/PreferredCityContext";
 import { cities, eventCategories, type City, type EventCategory, type EventItem, type RelatedEntity, type Venue } from "./types/Event";
@@ -68,7 +69,7 @@ function Nav({ page, city, language, setLanguage, searchQuery, setSearchQuery, o
     <Logo to={cityPath("/", city)} label={labels.logoHome} />
     <form className="global-search" role="search" onSubmit={(event) => { event.preventDefault(); onSearch(searchQuery); }}><Icon name="search" /><input name="q" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder={t.searchPlaceholder} aria-label={t.searchPlaceholder} />{searchQuery && <button type="button" className="global-search-clear" aria-label={labels.clearSearch} title={labels.clearSearch} onClick={(event) => { const input = event.currentTarget.form?.querySelector("input"); onSearch(""); input?.focus(); }}><Icon name="close" /></button>}<button type="submit" aria-label={labels.searchResults}><Icon name="search" /></button></form>
     <nav className="primary-nav" aria-label={labels.events}>{item("home", "/", "calendar", labels.events)}{item("venues", "/venues", "location", labels.venues)}{item("favorites", "/favorites", "heart", labels.favourites)}</nav>
-    <div className="header-actions"><div className="header-preferences"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div></div><ProfileMenu avatar={profile.avatar} language={language} savedCount={savedCount} profilePath={cityPath("/perfil", city)} favouritesPath={cityPath("/favorites", city)} active={page === "profile"} /></div>
+    <div className="header-actions"><div className="header-preferences"><CitySelector language={language} /><div className="header-language"><LanguageSelect value={language} onChange={setLanguage} /></div></div><ThemeToggle language={language} compact /><ProfileMenu avatar={profile.avatar} language={language} savedCount={savedCount} profilePath={cityPath("/perfil", city)} favouritesPath={cityPath("/favorites", city)} active={page === "profile"} /></div>
   </div></header>;
 }
 

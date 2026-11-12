@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import type { Language } from "../data/language";
 import { clearStoredData, exportStoredData, STORAGE_REGISTRY } from "../data/storage-keys";
+import { applyTheme, systemTheme } from "../lib/theme";
 import { legalCopy, LEGAL_PATHS } from "./legal-copy";
 
 const copy: Record<Language, {
@@ -121,6 +122,7 @@ export default function YourDataPage({ language, onDeleted = reloadAfterDelete }
 
   const confirmDelete = () => {
     clearStoredData();
+    applyTheme(systemTheme());
     setStored(exportStoredData());
     setConfirming(false);
     onDeleted();

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import type { Language } from "../data/language";
 import type { Avatar } from "../data/profile";
 import Icon from "./Icon";
+import ThemeToggle from "./ThemeToggle";
 
 export const profileMenuCopy: Record<Language, { button: string; profile: string; favourites: (n: number) => string; yourData: string }> = {
   es: { button: "Tu perfil", profile: "Tu perfil", favourites: (n) => `Favoritos (${n})`, yourData: "Tus datos" },
@@ -45,6 +46,7 @@ export default function ProfileMenu({ avatar, language, savedCount, profilePath,
       <li><Link to={profilePath} aria-current={active ? "page" : undefined}><Icon name="profile" />{text.profile}</Link></li>
       <li><Link to={favouritesPath}><Icon name="heart" />{text.favourites(savedCount)}</Link></li>
       <li><Link to="/tus-datos"><Icon name="download" />{text.yourData}</Link></li>
+      <li className="profile-menu-theme"><ThemeToggle language={language} /></li>
     </ul>}
   </div>;
 }
