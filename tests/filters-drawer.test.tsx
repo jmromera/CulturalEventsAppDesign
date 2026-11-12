@@ -98,7 +98,7 @@ describe("Filters panel", () => {
   it("promises exactly the results the list then shows, also with a «Cerca de mí» radius", async () => {
     Object.defineProperty(navigator, "geolocation", { configurable: true, value: { getCurrentPosition: vi.fn((success: PositionCallback) => success({ coords: { latitude: 39.46975, longitude: -0.37739, accuracy: 30 }, timestamp: Date.now() } as unknown as GeolocationPosition)) } });
     renderHome();
-    const listCount = () => Number(document.querySelector("#catalogue")!.textContent!.match(/VALENCIA · (\d+)/)![1]);
+    const listCount = () => Number(document.querySelector("#catalogue")!.textContent!.match(/Valencia · (\d+)/)![1]);
     const total = listCount();
     fireEvent.click(screen.getByRole("button", { name: "Cerca de mí" }));
     fireEvent.click(screen.getByRole("button", { name: "Usar mi ubicación" }));

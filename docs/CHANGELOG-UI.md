@@ -499,3 +499,22 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - Nuevo `pnpm check:pie` (`scripts/check-footer.mjs`): recorre las 30 rutas a 1440 × 900 y falla si alguna deja espacio libre bajo el pie. Las 30 pasan.
   - axe sin problemas (112 comprobaciones), responsive y sin terceros.
   - Capturas: `docs/capturas/despues/pie-vacio-1440.jpg`, `pie-inicio-390.jpg`, `pie-inicio-1440.jpg`.
+
+---
+
+## P3 · Pulido visual
+
+### Iteración P3.1 · «Cartelera de noche»: grafito, ámbar y categorías discretas
+
+- **Qué:** auditoría con la skill unslop (by @heydamir, CC BY 4.0) y pulido con la dirección «cartelera de noche»: el color lo ponen los carteles y el resto de la interfaz queda en segundo plano.
+  - **Fondos:** del azul marino (`#141b2d`, `#1c2540`) a grafito casi neutro (`#141415` fondo, `#19191b` tarjeta, `#232325` elevado). La profundidad la dan los escalones de superficie y las líneas finas, sin sombras de color.
+  - **Acento:** del morado `#7c3aed` al ámbar de marquesina `#f2a93b`, con texto oscuro encima. Se usa en la acción principal, la selección y los enlaces; el pie y la barra de acciones de la ficha pasan a gris.
+  - **Portada:** se quita el velo azul, violeta y ámbar de la foto. La sombra que asegura el contraste del texto se mantiene, ahora en negro neutro y con la misma opacidad.
+  - **Categorías:** de pastilla de color a un punto de su color con texto neutro. Se quita la raya de color de la tarjeta y la sombra de color al pasar el ratón. «Gran evento» se mantiene como dato, sin el amarillo.
+  - **Tipografía:** sin mayúsculas espaciadas (etiquetas, categoría, ficha de fecha, «MADRID · 75»), pesos 500 y 600, cifras tabulares y nada por debajo de 12 px.
+  - **Controles:** radio de 10 px en lugar de pastillas; las imágenes ya no se amplían al pasar el ratón.
+  - **Textos:** titular «Conciertos, teatro y deporte cerca de ti» y subtítulo sin «momentos únicos» (español, inglés y francés). El organizador de relleno «Consultar en la web de venta» (72 eventos) ya no se muestra como nombre: la caja de compra dice «Precio y entradas en la web oficial», la ficha omite «Organiza» y el JSON-LD omite `organizer`.
+- **Por qué:** **Estética y diseño minimalista (Nielsen 8)**: con 24 etiquetas de color en pantalla nada destacaba. Ahora destacan el cartel de cada evento y el botón de compra. **Consistencia (Nielsen 4)**: un solo acento y un solo radio de control.
+- **Contraste medido:** botón (texto `#141415` sobre `#f2a93b`) 9,2:1 y al pasar el ratón 10,7:1; ámbar como texto 9,2:1 sobre el fondo y 8,8:1 sobre la tarjeta; texto principal 15,0:1 y secundario 6,8:1 sobre la tarjeta.
+- **Problemas encontrados:** el blanco sobre ámbar se quedaba en 2:1. El calendario de filtros y los pasos de la reserva tenían el blanco escrito a mano y se corrigieron con `--on-accent`.
+- **Pruebas:** typecheck, 281 pruebas (dos se adaptan a «Valencia · N» en lugar de «VALENCIA · N»), build y `pnpm check:contraste` (peor caso: Bilbao a 1440 px, 5,19:1).

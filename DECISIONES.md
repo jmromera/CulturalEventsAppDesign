@@ -64,3 +64,4 @@ Decisiones tomadas sin consultar durante la preparación para el lanzamiento (7 
 - **Sin filtro «Gratis / De pago»**: casi ningún evento publica su precio y ninguno es gratuito con certeza.
 - **Recomendados con mayoría de conciertos y como mucho un evento deportivo**, sin repetir artista, equipo ni recinto (criterio en `docs/CHANGELOG-UI.md`).
 - **«Gran evento» = recinto con aforo ≥ 10.000 personas**, con el aforo tomado de Wikidata o de la web oficial del recinto.
+- **Pulido «cartelera de noche» (12/11/2026, rama `feat/unslop`)**: fondos en grafito casi neutro en lugar de azul marino, y ámbar de marquesina (`#f2a93b`, texto oscuro encima, 9,2:1) como único acento en lugar del morado, por decisión del autor. El color lo ponen los carteles. Las categorías pasan a ser un punto de color con texto neutro, «Gran evento» se queda como dato pero sin amarillo y desaparecen las mayúsculas espaciadas. Detalle en `docs/CHANGELOG-UI.md` (P3.1).
