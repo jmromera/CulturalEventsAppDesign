@@ -591,3 +591,11 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 - **Qué:** los 12 eventos de Barcelona de P3.5 pasan de la foto del recinto a la imagen oficial de cada producción: la imagen principal de su página en el Liceu, el TNC (web de entradas), el Palau de la Música o el MACBA. Se alojan en el propio dominio como el resto, con su origen en `docs/legal/ORIGEN-IMAGENES.json`. El enlace de compra del Liceu y del TNC apunta ahora a la página de cada obra.
 - **Por qué:** con la misma foto del recinto repetida en varias tarjetas, al navegar no se distinguía un evento de otro ni un evento de la ficha del recinto (reconocer mejor que recordar, N6).
 - **Pendiente:** Jay Wheeler en Barcelona y Bilbao sigue con la foto del recinto: Ticketmaster no deja descargar su imagen.
+
+### Iteración P3.8 · Exposiciones al final del catálogo y con su propia imagen
+
+- **Qué:**
+  - En «Explorar todos», las exposiciones y los museos van detrás de los eventos con fecha concreta. Como el catálogo se ordenaba por fecha de inicio, una exposición abierta hace semanas encabezaba la lista en Madrid, Sevilla, Bilbao y Albacete. Siguen en la pestaña Exposiciones y al pulsar «Mostrar más».
+  - Imagen oficial para las exposiciones que usaban el dibujo genérico o la foto del edificio: La Menesunda (Reina Sofía), Joana Vasconcelos (IVAM), Chonín Navarro (CAAC), Steve McQueen (Guggenheim) y Anna Moreno y Counter-Information (MACBA).
+  - Aurèlia Muñoz estaba dos veces (una ya existía y otra se añadió en P3.5). Se queda la ficha antigua, para que no se rompan sus enlaces, con las fechas oficiales actuales (hasta el 2 de mayo de 2027).
+- **Por qué:** **estética y diseño minimalista (N8)** y **reconocer mejor que recordar (N6)**: el primer pantallazo debe mostrar planes concretos con su imagen, no un dibujo genérico ni el mismo edificio repetido.

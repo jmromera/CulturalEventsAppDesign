@@ -11,7 +11,7 @@ Plan Cerca es un trabajo universitario de la asignatura «HCI: Desarrollo web y 
 
 ## Datos
 
-- **Catálogo estático.** Los 381 eventos, los recintos y las imágenes están en el propio proyecto y se actualizan a mano. No hay una API que añada eventos nuevos.
+- **Catálogo estático.** Los 380 eventos, los recintos y las imágenes están en el propio proyecto y se actualizan a mano. No hay una API que añada eventos nuevos.
 - **Cobertura.** Seis ciudades (Madrid, Barcelona, Valencia, Sevilla, Bilbao y Albacete). Cada ciudad tiene al menos 25 eventos entre el 20 de noviembre de 2026 y el 31 de enero de 2027; los eventos pasados se ocultan solos.
 - **Imágenes.** Los carteles y fotos oficiales se alojan en el propio proyecto para no enviar datos del visitante a terceros. Se usan con fines académicos, sin carácter comercial.
 

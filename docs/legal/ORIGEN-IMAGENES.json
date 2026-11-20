@@ -2175,8 +2175,50 @@
       "usedBy": [
         "event:387"
       ]
+    },
+    "/images/remote/3af595bbfcfa8c13.webp": {
+      "original": "https://img.macba.cat/wp-content/uploads/2025/10/DIG_A-VNO-0327_067_r_h.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:25"
+      ]
+    },
+    "/images/remote/0eb1fac62d3f65b8.webp": {
+      "original": "https://img.macba.cat/wp-content/uploads/2026/02/The-terminal-beach_web.png",
+      "kind": "event",
+      "usedBy": [
+        "event:26"
+      ]
+    },
+    "/images/remote/cb150ebf34c00fcd.webp": {
+      "original": "https://recursos.museoreinasofia.es/styles/large_landscape/public/Exposiciones/marta-minujin_img-ppal_85A8133.JPG.webp",
+      "kind": "event",
+      "usedBy": [
+        "event:176"
+      ]
+    },
+    "/images/remote/0a54dce929508ca8.webp": {
+      "original": "https://ivam.es/wp-content/uploads/exposiciones/joana-vasconcelos/imag-joana-vasconcelos-comunicacion.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:177"
+      ]
+    },
+    "/images/remote/aa1b46a02e5fa658.webp": {
+      "original": "https://cms.guggenheim-bilbao.eus/uploads/2025/12/013GalerIa-Steve-McQueen.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:178"
+      ]
+    },
+    "/images/remote/9e73c51225ee3c53.webp": {
+      "original": "https://www.caac.es/wp-content/uploads/2026/10/ExpoChoninNavarro01.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:179"
+      ]
     }
   },
   "failed": {},
-  "generatedAt": "2026-11-20T11:03:16.660Z"
+  "generatedAt": "2026-11-20T11:10:26.613Z"
 }

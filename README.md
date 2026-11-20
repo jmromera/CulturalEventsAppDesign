@@ -31,7 +31,7 @@ Plan Cerca es una agenda cultural y deportiva para seis ciudades de España: **M
 
 Es el trabajo de la asignatura **«HCI: Desarrollo web y móvil»**. Por eso este README empieza por el **diseño de la interfaz**: cómo se trabajó, qué se decidió y por qué. La parte técnica va después.
 
-> **En cifras (20 de noviembre de 2026):** 321 eventos próximos (381 en el catálogo), 51 recintos y 11 fichas de artista o espectáculo, en español, inglés y francés. Los eventos que ya han pasado se ocultan solos.
+> **En cifras (20 de noviembre de 2026):** 320 eventos próximos (380 en el catálogo), 51 recintos y 11 fichas de artista o espectáculo, en español, inglés y francés. Los eventos que ya han pasado se ocultan solos.
 >
 > **plancerca.com** muestra una página de «Próximamente» hasta el lanzamiento; la app completa se ve en local (`pnpm dev`) y en las vistas previas de Vercel.
 
