@@ -1,5 +1,6 @@
 // Screenshots of the key screens on mobile (390×844) and desktop (1440×900), visible area and full page.
-// Usage: node scripts/capture-screens.mjs <output-folder> [--no-build]   e.g. docs/capturas/antes
+// Usage: node scripts/capture-screens.mjs <output-folder> [--no-build] [--noche]   e.g. docs/capturas/antes
+// --noche captures night mode (stored theme "dark"); by default the blue default theme.
 import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 import { startPreview } from "./lib/preview-server.mjs";
@@ -7,7 +8,8 @@ import { startPreview } from "./lib/preview-server.mjs";
 const out = process.argv[2];
 if (!out) throw new Error("Usage: node scripts/capture-screens.mjs <output-folder>");
 mkdirSync(out, { recursive: true });
-const city = { "plan-cerca.preferred-city": "Valencia", "plan-cerca.city-onboarding-dismissed": "true" };
+const theme = process.argv.includes("--noche") ? { "plan-cerca.theme": "dark" } : {};
+const city = { "plan-cerca.preferred-city": "Valencia", "plan-cerca.city-onboarding-dismissed": "true", ...theme };
 const favourites = { ...city, "plan-cerca.saved-events": "[89,99,104,211,100]" };
 const screens = [
   ["1-inicio", "/?city=Valencia", city],
@@ -21,7 +23,7 @@ const { url, stop } = await startPreview({ build: !process.argv.includes("--no-b
 const browser = await chromium.launch();
 try {
   for (const [size, viewport] of [["movil", { width: 390, height: 844 }], ["escritorio", { width: 1440, height: 900 }]]) {
-    const context = await browser.newContext({ viewport, deviceScaleFactor: size === "movil" ? 2 : 1, reducedMotion: "reduce" });
+    const context = await browser.newContext({ viewport, deviceScaleFactor: size === "movil" ? 2 : 1, reducedMotion: "reduce", colorScheme: "light" });
     const page = await context.newPage();
     for (const [name, path, storage] of screens) {
       await page.goto(url);

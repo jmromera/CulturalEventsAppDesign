@@ -554,3 +554,8 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - A 320 px «Ver todos» se salía 19 px de la pantalla: ahora baja de línea.
   - El primer intento de aclarar las fotos dejaba Madrid y Bilbao en 2,4-2,7:1; concentrar la sombra detrás del texto lo resolvió.
 - **Pruebas:** `tests/hero.test.tsx` (sin atajos a 0 en ninguna ciudad, con la fecha fijada en un día sin eventos; falla sin el cambio); `pnpm check:contraste`: peor caso Madrid a 390 px, 5,55:1; cabecera medida a 320, 360, 390, 430 y 700 px sin solapes ni desbordes.
+
+### Iteración P3.4 · Capturas finales y limitaciones
+
+- **Qué:** capturas «después» de las mismas pantallas que `docs/capturas/antes`, en el modo azul (`docs/capturas/final`) y en el modo noche (`docs/capturas/final-noche`), a 390 y 1440 px, de la parte visible y de la página completa. `scripts/capture-screens.mjs` admite `--noche`. Las limitaciones conocidas (avisos, cuentas, compra, datos estáticos) quedan en `docs/LIMITACIONES.md`.
+- **Por qué:** material para la memoria en PDF: comparar antes y después, y explicar qué queda fuera del alcance de un trabajo universitario.
