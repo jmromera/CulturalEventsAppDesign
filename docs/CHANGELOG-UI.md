@@ -585,3 +585,9 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - Las 21 capturas de `docs/screenshots/` (guía visual, manual y README) se rehacen con el diseño actual mediante `scripts/capture-guide.mjs`. La guía visual corrige los textos que ya no coincidían (valoraciones, atajos desactivados, favoritos) y añade el modo noche. En el manual se actualizan las instrucciones de los filtros y el formato de los eventos.
   - Jay Wheeler en Barcelona y Bilbao usaba el cartel de Valencia («8 DIC · VALENCIA · ROIG ARENA»): ahora muestra la foto del recinto.
 - **Por qué:** el repositorio es parte de la entrega de una asignatura de interfaces, y el README es lo primero que se lee.
+
+### Iteración P3.7 · Imagen propia para los eventos nuevos de Barcelona
+
+- **Qué:** los 12 eventos de Barcelona de P3.5 pasan de la foto del recinto a la imagen oficial de cada producción: la imagen principal de su página en el Liceu, el TNC (web de entradas), el Palau de la Música o el MACBA. Se alojan en el propio dominio como el resto, con su origen en `docs/legal/ORIGEN-IMAGENES.json`. El enlace de compra del Liceu y del TNC apunta ahora a la página de cada obra.
+- **Por qué:** con la misma foto del recinto repetida en varias tarjetas, al navegar no se distinguía un evento de otro ni un evento de la ficha del recinto (reconocer mejor que recordar, N6).
+- **Pendiente:** Jay Wheeler en Barcelona y Bilbao sigue con la foto del recinto: Ticketmaster no deja descargar su imagen.

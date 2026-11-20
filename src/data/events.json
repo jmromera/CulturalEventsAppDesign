@@ -8994,8 +8994,8 @@
     "endDate": "2026-12-12",
     "time": "Consultar horarios",
     "venueId": "barcelona-gran-teatre-del-liceu",
-    "image": null,
-    "ticketUrl": "https://www.liceubarcelona.cat/ca/programa",
+    "image": "/images/remote/be0b623d82664870.webp",
+    "ticketUrl": "https://www.liceubarcelona.cat/ca/trencanous-2026",
     "duration": "Por confirmar",
     "price": "Consultar precio oficial",
     "availability": "Consultar disponibilidad oficial",
@@ -9008,7 +9008,7 @@
     "description": "El Ballet de Karlsruhe presenta en el Liceu The Girl and The Nutcracker, la versión de Bridget Breiner del clásico de Chaikovski, con orquesta en directo.",
     "fullDescription": "La coreógrafa Bridget Breiner ofrece una lectura íntima del cuento: la familia Stahlbaum ha perdido su fortuna y Clara Marie solo hereda el cascanueces de su excéntrico padrino Drosselmeyer. Cinco funciones del 8 al 12 de diciembre de 2026 en el Gran Teatre del Liceu. Consulta horarios y precios en la web del Liceu.",
     "confirmed": true,
-    "sourceUrl": "https://www.liceubarcelona.cat/sites/default/files/2026-04/Programa_Temporada_26_27_CAT.pdf"
+    "sourceUrl": "https://www.liceubarcelona.cat/ca/trencanous-2026"
   },
   {
     "id": 377,
@@ -9019,8 +9019,8 @@
     "endDate": "2027-01-18",
     "time": "19:30",
     "venueId": "barcelona-gran-teatre-del-liceu",
-    "image": null,
-    "ticketUrl": "https://www.liceubarcelona.cat/ca/programa",
+    "image": "/images/remote/ded733b78cf562be.webp",
+    "ticketUrl": "https://www.liceubarcelona.cat/ca/boheme",
     "duration": "2 h 30 min aprox.",
     "price": "De 15 a 351 €",
     "availability": "Consultar disponibilidad oficial",
@@ -9032,7 +9032,7 @@
     "description": "La ópera de Puccini vuelve al Liceu en la producción clásica del Teatro Regio di Torino, con dirección musical de Giacomo Sagripanti.",
     "fullDescription": "Trece funciones del 30 de diciembre de 2026 al 18 de enero de 2027, con un reparto que incluye a Pretty Yende, Ermonela Jaho, Freddie De Tommaso, Pene Pati, Roberto Alagna y Serena Sáenz. Dirección de escena de Paolo Gavazzeni y Piero Maranghi. La mayoría de funciones son a las 19:30; los sábados 9 y 16 de enero, a las 18 h, y el domingo 17, a las 17 h. Consulta el calendario en la web del Liceu.",
     "confirmed": true,
-    "sourceUrl": "https://www.liceubarcelona.cat/sites/default/files/2026-04/Programa_Temporada_26_27_CAT.pdf"
+    "sourceUrl": "https://www.liceubarcelona.cat/ca/boheme"
   },
   {
     "id": 378,
@@ -9042,7 +9042,7 @@
     "startDate": "2027-01-04",
     "time": "19:30",
     "venueId": "barcelona-gran-teatre-del-liceu",
-    "image": null,
+    "image": "/images/remote/6467d3d0c4616338.webp",
     "ticketUrl": "https://liceubarcelona.cat/ca/concert-dany-nou-2027",
     "duration": "Por confirmar",
     "price": "De 15 a 262 €",
@@ -9067,8 +9067,8 @@
     "endDate": "2027-01-03",
     "time": "Consultar horarios",
     "venueId": "barcelona-teatre-nacional-de-catalunya",
-    "image": null,
-    "ticketUrl": "https://www.tnc.cat/ca/programacio",
+    "image": "/images/remote/9da92089b0a02fcb.webp",
+    "ticketUrl": "https://entrades.tnc.cat/ca/lhostal-de-les-tres-camelies",
     "duration": "Por confirmar",
     "price": "Consultar precio oficial",
     "availability": "Consultar disponibilidad oficial",
@@ -9081,7 +9081,7 @@
     "description": "Carme Portaceli dirige en la Sala Gran del TNC la obra de Mercè Rodoreda, con dramaturgia de Pablo Ley y música en directo de Judit Farrés.",
     "fullDescription": "Bajo una capa de ruralismo catalán, L'hostal de les tres Camèlies esconde la mirada existencialista del mejor teatro europeo de posguerra. Con Judit Farrés, Isak Férriz, Xavier Frau, Cristina Genebat, Toni Gomila, Pepa López y Clara de Ramon. Sala Gran, del 26 de noviembre de 2026 al 3 de enero de 2027. Recomendada a partir de 16 años.",
     "confirmed": true,
-    "sourceUrl": "https://www.tnc.cat/img-tnc-cat/uploads/2026-05/TNC-Programa-Temporada-26-27-18-5_0.pdf"
+    "sourceUrl": "https://entrades.tnc.cat/ca/lhostal-de-les-tres-camelies"
   },
   {
     "id": 380,
@@ -9092,8 +9092,8 @@
     "endDate": "2026-12-20",
     "time": "Consultar horarios",
     "venueId": "barcelona-teatre-nacional-de-catalunya",
-    "image": null,
-    "ticketUrl": "https://www.tnc.cat/ca/programacio",
+    "image": "/images/remote/c309f9c296d3f79a.webp",
+    "ticketUrl": "https://entrades.tnc.cat/ca/lallau",
     "duration": "Por confirmar",
     "price": "Consultar precio oficial",
     "availability": "Consultar disponibilidad oficial",
@@ -9105,7 +9105,7 @@
     "description": "Àlex Serrano y Pau Palacios firman una pieza sobre el crecimiento sin límite, la pasividad y el colapso, en la Sala Petita del TNC.",
     "fullDescription": "Una obra sobre la avalancha global de exceso que se despliega ante nuestra mirada apática: ¿es inevitable el crecimiento? ¿Hay margen para la acción? Sala Petita, del 9 al 20 de diciembre de 2026. Función con subtítulos en inglés el 12 de diciembre. Recomendada a partir de 14 años.",
     "confirmed": true,
-    "sourceUrl": "https://www.tnc.cat/img-tnc-cat/uploads/2026-05/TNC-Programa-Temporada-26-27-18-5_0.pdf"
+    "sourceUrl": "https://entrades.tnc.cat/ca/lallau"
   },
   {
     "id": 381,
@@ -9116,8 +9116,8 @@
     "endDate": "2027-01-31",
     "time": "Consultar horarios",
     "venueId": "barcelona-teatre-nacional-de-catalunya",
-    "image": null,
-    "ticketUrl": "https://www.tnc.cat/ca/programacio",
+    "image": "/images/remote/8a5a0c6a2cf9db5b.webp",
+    "ticketUrl": "https://entrades.tnc.cat/ca/la-rabia",
     "duration": "Por confirmar",
     "price": "Consultar precio oficial",
     "availability": "Consultar disponibilidad oficial",
@@ -9129,7 +9129,7 @@
     "description": "Josep Julien escribe y dirige un drama sobre cuatro amigos de toda la vida y la radicalización de uno de ellos hacia la extrema derecha.",
     "fullDescription": "Basada en un caso real, La ràbia muestra cómo se pudre la relación entre cuatro amigos de un barrio popular de Barcelona. Con Joel Cojal, Abril Julien, Santa Salut y Jan Serra. Sala Tallers, del 9 al 31 de enero de 2027, dentro del Festival Zero. Recomendada a partir de 14 años.",
     "confirmed": true,
-    "sourceUrl": "https://www.tnc.cat/img-tnc-cat/uploads/2026-05/TNC-Programa-Temporada-26-27-18-5_0.pdf"
+    "sourceUrl": "https://entrades.tnc.cat/ca/la-rabia"
   },
   {
     "id": 382,
@@ -9140,8 +9140,8 @@
     "endDate": "2027-02-14",
     "time": "Consultar horarios",
     "venueId": "barcelona-teatre-nacional-de-catalunya",
-    "image": null,
-    "ticketUrl": "https://www.tnc.cat/ca/programacio",
+    "image": "/images/remote/197dc8eadf0c8c45.webp",
+    "ticketUrl": "https://entrades.tnc.cat/ca/roig-i-violeta",
     "duration": "Por confirmar",
     "price": "Consultar precio oficial",
     "availability": "Consultar disponibilidad oficial",
@@ -9154,7 +9154,7 @@
     "description": "Magda Puyo dirige una adaptación de El temps de les cireres y L'hora violeta, las dos novelas clave de Montserrat Roig.",
     "fullDescription": "Natàlia y Norma, protagonistas de las dos novelas, guían un viaje colectivo por los miedos, los sueños, el compromiso político y la búsqueda de una vida libre. Dramaturgia de Daniela Feixas y Magda Puyo. Sala Petita, del 14 de enero al 14 de febrero de 2027, con coloquio tras la función el 22 de enero. Recomendada a partir de 16 años.",
     "confirmed": true,
-    "sourceUrl": "https://www.tnc.cat/img-tnc-cat/uploads/2026-05/TNC-Programa-Temporada-26-27-18-5_0.pdf"
+    "sourceUrl": "https://entrades.tnc.cat/ca/roig-i-violeta"
   },
   {
     "id": 383,
@@ -9165,8 +9165,8 @@
     "endDate": "2027-02-28",
     "time": "Consultar horarios",
     "venueId": "barcelona-teatre-nacional-de-catalunya",
-    "image": null,
-    "ticketUrl": "https://www.tnc.cat/ca/programacio",
+    "image": "/images/remote/6780c8942884a8e6.webp",
+    "ticketUrl": "https://entrades.tnc.cat/ca/la-tercera-fuga",
     "duration": "Por confirmar",
     "price": "Consultar precio oficial",
     "availability": "Consultar disponibilidad oficial",
@@ -9178,7 +9178,7 @@
     "description": "Vuelve al TNC la fábula teatral de Victoria Szpunberg sobre una familia que huye de la guerra de Ucrania a Buenos Aires y Barcelona.",
     "fullDescription": "Basada en peripecias reales, La tercera fuga empieza en la Ucrania de los años veinte y llega hasta hoy pasando por Berdíchiv, Buenos Aires y Barcelona: una historia de exilios y, a la vez, una celebración. Texto de Victoria Szpunberg y Albert Pijuan. Sala Gran, del 28 de enero al 28 de febrero de 2027. Recomendada a partir de 16 años.",
     "confirmed": true,
-    "sourceUrl": "https://www.tnc.cat/img-tnc-cat/uploads/2026-05/TNC-Programa-Temporada-26-27-18-5_0.pdf"
+    "sourceUrl": "https://entrades.tnc.cat/ca/la-tercera-fuga"
   },
   {
     "id": 384,
@@ -9188,7 +9188,7 @@
     "startDate": "2026-12-09",
     "time": "20:00",
     "venueId": "barcelona-palau-de-la-musica-catalana",
-    "image": null,
+    "image": "/images/remote/79ae2e5d163992cc.webp",
     "ticketUrl": "https://www.palaumusica.cat/en/emmanuelle-haim-le-concert-d-astree_1585424",
     "duration": "Por confirmar",
     "price": "De 27 a 85 €",
@@ -9212,7 +9212,7 @@
     "startDate": "2027-01-06",
     "time": "19:00",
     "venueId": "barcelona-palau-de-la-musica-catalana",
-    "image": null,
+    "image": "/images/remote/72720261f5959641.webp",
     "ticketUrl": "https://www.palaumusica.cat/en/tribute-to-williams-and-zimmer_1623722",
     "duration": "70 min aprox.",
     "price": "De 45 a 68 €",
@@ -9235,7 +9235,7 @@
     "startDate": "2027-01-11",
     "time": "20:00",
     "venueId": "barcelona-palau-de-la-musica-catalana",
-    "image": null,
+    "image": "/images/remote/bcbd8e70f2cbc225.webp",
     "ticketUrl": "https://www.palaumusica.cat/en/ferrandez-gonzalez-monjas-musikkollegium-winterthur_1585493",
     "duration": "Por confirmar",
     "price": "Consultar precio oficial",
@@ -9259,7 +9259,7 @@
     "endDate": "2027-05-02",
     "time": "Horario del museo",
     "venueId": "barcelona-macba",
-    "image": null,
+    "image": "/images/remote/158f174a69b672fb.webp",
     "ticketUrl": "https://www.macba.cat/en/exhibitions/aurelia-munoz-beings/",
     "duration": "Visita libre",
     "price": "Consultar tarifa del museo",
