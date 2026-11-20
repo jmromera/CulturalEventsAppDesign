@@ -37,9 +37,11 @@ export function eventImage(event: EventItem): string | null {
 
 // Exhibitions and museums run for months: they are filler and must not lead the recommendations.
 const LONG_RUNNING = new Set(["Exposiciones", "Museos"]);
+const longRunningRank = (event: EventItem) => (LONG_RUNNING.has(event.category) ? 1 : 0);
 
 export type Catalog = {
-  /** Upcoming and ongoing events, by start date (undated events last). */
+  /** Upcoming and ongoing events, by start date (undated events last). Exhibitions and museums, which run
+   *  for months, go after the dated events so an exhibition that opened weeks ago does not lead the list. */
   events: EventItem[];
   /** Events that already finished: their page still exists and says so. */
   endedEvents: EventItem[];
@@ -52,7 +54,7 @@ export function catalogAt(now: Date): Catalog {
   const hasEnded = (event: EventItem) => Boolean(lastDay(event) && lastDay(event)! < today);
   const events = allEvents
     .filter((event) => !hasEnded(event))
-    .sort((a, b) => (a.startDate ?? "9999-12-31").localeCompare(b.startDate ?? "9999-12-31"));
+    .sort((a, b) => longRunningRank(a) - longRunningRank(b) || (a.startDate ?? "9999-12-31").localeCompare(b.startDate ?? "9999-12-31"));
   const cityEventCounts = Object.fromEntries(
     cities.map((city) => [city, events.filter((event) => venueFor(event.venueId).city === city).length]),
   ) as Record<City, number>;
