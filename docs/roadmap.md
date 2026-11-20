@@ -59,11 +59,11 @@ Lo que solo puedes hacer tú:
 | P1 | Pulido «cartelera de noche» (grafito, ámbar, categorías como punto, textos rotos) | Hecho y comprobado | – | typecheck, 281 tests, build, axe sin problemas (112 comprobaciones), contraste de portada ≥ 5,19:1 y capturas a 1440 y 390 |
 | P1b | Modo azul por defecto y modo noche con interruptor que se recuerda | Hecho y comprobado | P1 | 289 tests, axe sin problemas en los dos modos (194 comprobaciones), responsive, pie y contraste de portada |
 | P2 | Fusionar `feat/unslop` en `develop` y en `main` | En curso | P1 | En `develop` (PR #21). Falta `main`: Vercel publica y plancerca.com sigue mostrando «Próximamente» |
-| P5 | D1: ocultar los atajos de fecha a 0 de la portada | En curso | D1 | |
-| P6 | D2: «Probar la reserva» como enlace de texto | En curso | D2 | |
-| P7 | El interruptor de modo noche no desaparece al estrechar la ventana (también en móvil) | En curso | – | |
-| P8 | Modo azul: fotos de ciudad menos oscuras, manteniendo el texto de la portada ≥ 4,5:1 | En curso | – | |
-| P9 | Botón de modo día (sol) en ámbar, como la lupa del buscador | En curso | – | |
+| P5 | D1: ocultar los atajos de fecha a 0 de la portada | Hecho y comprobado | D1 | `tests/hero.test.tsx` (falla sin el cambio) |
+| P6 | D2: «Probar la reserva» como enlace de texto | Hecho y comprobado | D2 | Captura de la ficha; la prueba de reserva sigue encontrando el enlace |
+| P7 | El interruptor de modo noche no desaparece al estrechar la ventana (también en móvil) | Hecho y comprobado | – | Cabecera medida a 320, 360, 390, 430 y 700 px sin solapes; `check:responsive` |
+| P8 | Modo azul: fotos de ciudad menos oscuras, manteniendo el texto de la portada ≥ 4,5:1 | Hecho y comprobado | – | `check:contraste`: peor caso Madrid 390 px, 5,55:1 |
+| P9 | Botón de modo día (sol) en ámbar, como la lupa del buscador | Hecho y comprobado | – | Captura de la cabecera en modo noche; axe en los dos modos sin problemas |
 | P10 | Más eventos entre el 10/12/2026 y el 30/01/2027 | No empezado | – | |
 | P11 | Documentar las limitaciones no implementadas (avisos por correo, cuentas de usuario) en el documento del trabajo | No empezado | – | |
 | P3 | Datos legales reales y `esEjemplo: false` | Esperando tus manos | – | `tests/legal-data.test.ts` pasa con `esEjemplo: false` |
