@@ -2091,8 +2091,92 @@
       "usedBy": [
         "event:375"
       ]
+    },
+    "/images/remote/be0b623d82664870.webp": {
+      "original": "https://www.liceubarcelona.cat/sites/default/files/2026-03/Cap%C3%A7alera%20El%20Trencanous%202026.png",
+      "kind": "event",
+      "usedBy": [
+        "event:376"
+      ]
+    },
+    "/images/remote/ded733b78cf562be.webp": {
+      "original": "https://www.liceubarcelona.cat/sites/default/files/2026-03/Cap%C3%A7alera%20La%20Boheme.png",
+      "kind": "event",
+      "usedBy": [
+        "event:377"
+      ]
+    },
+    "/images/remote/6467d3d0c4616338.webp": {
+      "original": "https://liceubarcelona.cat/sites/default/files/2026-04/Cap%C3%A7alera%20concert%20any%20nou%202027%20ok.png",
+      "kind": "event",
+      "usedBy": [
+        "event:378"
+      ]
+    },
+    "/images/remote/9da92089b0a02fcb.webp": {
+      "original": "https://cache-c.koobin.com/eyJidWNrZXQiOiJsaXZlLWtvb2Jpbi1tZWRpYSIsImtleSI6Im1lZGlhL3RuYy9mb3Rvcy83NDB4NzQwLUxcdTIwMTlIT1NUQUwgREUgTEVTIFRSRVMgQ0FNRVx1MDMwMExJRVMuanBnIiwiZWRpdHMiOnsiYW5pbWF0ZWQiOnRydWUsInJvdGF0ZSI6bnVsbCwicmVzaXplIjp7IndpZHRoIjoxMjAwLCJoZWlnaHQiOjYzMCwiZml0IjoiY292ZXIiLCJwb3NpdGlvbiI6ImVudHJvcHkifX19?signature=81b02220dea71f4825f672cb55a08ed9c310a6703dec44ab91039b6f23d7e5bc",
+      "kind": "event",
+      "usedBy": [
+        "event:379"
+      ]
+    },
+    "/images/remote/c309f9c296d3f79a.webp": {
+      "original": "https://cache-c.koobin.com/eyJidWNrZXQiOiJsaXZlLWtvb2Jpbi1tZWRpYSIsImtleSI6Im1lZGlhL3RuYy9mb3Rvcy83NDB4NzQwLUxfQUxMQVUuanBnIiwiZWRpdHMiOnsiYW5pbWF0ZWQiOnRydWUsInJvdGF0ZSI6bnVsbCwicmVzaXplIjp7IndpZHRoIjoxMjAwLCJoZWlnaHQiOjYzMCwiZml0IjoiY292ZXIiLCJwb3NpdGlvbiI6ImVudHJvcHkifX19?signature=11b59fa2da157b5f27ca3dcdba04a5aa93aae7fafe057eb6e1febfff994a2a6b",
+      "kind": "event",
+      "usedBy": [
+        "event:380"
+      ]
+    },
+    "/images/remote/8a5a0c6a2cf9db5b.webp": {
+      "original": "https://cache-c.koobin.com/eyJidWNrZXQiOiJsaXZlLWtvb2Jpbi1tZWRpYSIsImtleSI6Im1lZGlhL3RuYy9mb3Rvcy83NDB4NzQwLUxBIFJBXHUwMzAwQklBLmpwZyIsImVkaXRzIjp7ImFuaW1hdGVkIjp0cnVlLCJyb3RhdGUiOm51bGwsInJlc2l6ZSI6eyJ3aWR0aCI6MTIwMCwiaGVpZ2h0Ijo2MzAsImZpdCI6ImNvdmVyIiwicG9zaXRpb24iOiJlbnRyb3B5In19fQ==?signature=f8de43238c78affce0df0c306d7e3a1fcac61ecdd60e6096c292ed4f41ba619e",
+      "kind": "event",
+      "usedBy": [
+        "event:381"
+      ]
+    },
+    "/images/remote/197dc8eadf0c8c45.webp": {
+      "original": "https://cache-c.koobin.com/eyJidWNrZXQiOiJsaXZlLWtvb2Jpbi1tZWRpYSIsImtleSI6Im1lZGlhL3RuYy9mb3Rvcy83NDB4NzQwLVJPSUcgSSBWSU9MRVRBLmpwZyIsImVkaXRzIjp7ImFuaW1hdGVkIjp0cnVlLCJyb3RhdGUiOm51bGwsInJlc2l6ZSI6eyJ3aWR0aCI6MTIwMCwiaGVpZ2h0Ijo2MzAsImZpdCI6ImNvdmVyIiwicG9zaXRpb24iOiJlbnRyb3B5In19fQ==?signature=2bd2f8bcd9ac1f340b3f2680eb7117e891040eb7149337e5c8298ba5a01af128",
+      "kind": "event",
+      "usedBy": [
+        "event:382"
+      ]
+    },
+    "/images/remote/6780c8942884a8e6.webp": {
+      "original": "https://cache-c.koobin.com/eyJidWNrZXQiOiJsaXZlLWtvb2Jpbi1tZWRpYSIsImtleSI6Im1lZGlhL3RuYy9mb3Rvcy8yNC0yNS8zNjB4MjA1LUxBIFRFUkNFUkEgRlVHQS5qcGciLCJlZGl0cyI6eyJhbmltYXRlZCI6dHJ1ZSwicm90YXRlIjpudWxsLCJyZXNpemUiOnsid2lkdGgiOjEyMDAsImhlaWdodCI6NjMwLCJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiZW50cm9weSJ9fX0=?signature=e6e80607c0467ebb34f44ea819b7112484bff38a14ffb5bf81d47853972e456f",
+      "kind": "event",
+      "usedBy": [
+        "event:383"
+      ]
+    },
+    "/images/remote/79ae2e5d163992cc.webp": {
+      "original": "https://www.palaumusica.cat/images/1585432/facebook.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:384"
+      ]
+    },
+    "/images/remote/72720261f5959641.webp": {
+      "original": "https://www.palaumusica.cat/images/1633929/facebook.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:385"
+      ]
+    },
+    "/images/remote/bcbd8e70f2cbc225.webp": {
+      "original": "https://www.palaumusica.cat/images/1585464/facebook.jpg",
+      "kind": "event",
+      "usedBy": [
+        "event:386"
+      ]
+    },
+    "/images/remote/158f174a69b672fb.webp": {
+      "original": "https://img.macba.cat/wp-content/uploads/2026/11/am-1.png",
+      "kind": "event",
+      "usedBy": [
+        "event:387"
+      ]
     }
   },
   "failed": {},
-  "generatedAt": "2026-11-07T21:45:33.473Z"
+  "generatedAt": "2026-11-20T11:03:16.660Z"
 }
