@@ -559,3 +559,14 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
 
 - **Qué:** capturas «después» de las mismas pantallas que `docs/capturas/antes`, en el modo azul (`docs/capturas/final`) y en el modo noche (`docs/capturas/final-noche`), a 390 y 1440 px, de la parte visible y de la página completa. `scripts/capture-screens.mjs` admite `--noche`. Las limitaciones conocidas (avisos, cuentas, compra, datos estáticos) quedan en `docs/LIMITACIONES.md`.
 - **Por qué:** material para la memoria en PDF: comparar antes y después, y explicar qué queda fuera del alcance de un trabajo universitario.
+
+### Iteración P3.5 · Más eventos en Barcelona
+
+- **Qué:** 12 eventos nuevos en Barcelona entre diciembre de 2026 y enero de 2027, sacados de los programas oficiales de temporada:
+  - **Liceu:** *El trencanous* (Ballet de Karlsruhe), *La bohème* y el Concierto de Año Nuevo.
+  - **TNC:** *L'hostal de les tres Camèlies*, *L'allau*, *La ràbia*, *Roig i violeta* y *La tercera fuga*.
+  - **Palau de la Música:** el *Mesías* con Le Concert d'Astrée, el tributo a Williams y Zimmer, y Pablo Ferrández con el Musikkollegium Winterthur.
+  - **MACBA:** la exposición *Aurèlia Muñoz. Éssers*.
+  
+  Sin imagen propia: usan la foto con licencia libre del recinto, con su crédito.
+- **Por qué:** Barcelona solo tenía música y deporte, y 19 eventos entre el 10 de diciembre y el 31 de enero. Ahora tiene 34 y suma ópera, danza, teatro y exposiciones.
