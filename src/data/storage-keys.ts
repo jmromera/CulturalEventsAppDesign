@@ -11,6 +11,7 @@ export const STORAGE_KEYS = {
   onboardingDismissed: "plan-cerca.city-onboarding-dismissed",
   artistPreferences: "plancerca.artist-preferences",
   profile: "plan-cerca.profile",
+  theme: "plan-cerca.theme",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
@@ -34,6 +35,7 @@ export const STORAGE_REGISTRY: StorageEntry[] = [
   { key: STORAGE_KEYS.onboardingDismissed, purpose: "No volver a mostrar el diálogo de bienvenida", content: "El valor «true»", createdWhen: "Al pulsar «Ahora no» en el diálogo de bienvenida" },
   { key: STORAGE_KEYS.artistPreferences, purpose: "Recordar los artistas que sigues", content: "Por cada artista: si lo sigues y si quieres avisos", createdWhen: "Al pulsar «Seguir artista» o «Avisarme»" },
   { key: STORAGE_KEYS.profile, purpose: "Recordar tu perfil", content: "El avatar elegido (un dibujo de la web, nunca una foto) y tus categorías favoritas", createdWhen: "Al cambiar algo en «Tu perfil»" },
+  { key: STORAGE_KEYS.theme, purpose: "Recordar si prefieres el modo noche", content: "«light» o «dark»", createdWhen: "Al pulsar «Modo noche» o «Modo claro»" },
 ];
 
 function storage(): Storage | null {

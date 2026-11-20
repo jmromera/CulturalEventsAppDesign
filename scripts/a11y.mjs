@@ -53,21 +53,25 @@ async function audit(page, label) {
 }
 
 try {
-  for (const [sizeName, viewport] of Object.entries(viewports)) {
-    const context = await browser.newContext({ viewport, reducedMotion: "reduce" });
-    const page = await context.newPage();
-    for (const route of routes) {
-      await open(page, route);
-      await audit(page, `${route.name} · ${sizeName}`);
+  // Both themes: the blue default and night mode. With no stored choice, theme-init.js follows the system
+  // colour scheme, so the browser context picks the theme.
+  for (const [themeName, colorScheme] of [["", "light"], [" · noche", "dark"]]) {
+    for (const [sizeName, viewport] of Object.entries(viewports)) {
+      const context = await browser.newContext({ viewport, reducedMotion: "reduce", colorScheme });
+      const page = await context.newPage();
+      for (const route of routes) {
+        await open(page, route);
+        await audit(page, `${route.name} · ${sizeName}${themeName}`);
+      }
+      for (const interaction of interactions) {
+        const route = routes.find((item) => item.name === interaction.route);
+        await open(page, route);
+        await interaction.act(page);
+        await page.waitForTimeout(300);
+        await audit(page, `${interaction.name} · ${sizeName}${themeName}`);
+      }
+      await context.close();
     }
-    for (const interaction of interactions) {
-      const route = routes.find((item) => item.name === interaction.route);
-      await open(page, route);
-      await interaction.act(page);
-      await page.waitForTimeout(300);
-      await audit(page, `${interaction.name} · ${sizeName}`);
-    }
-    await context.close();
   }
 
   // WCAG 1.4.10 reflow: 1280 px at 200 % zoom behaves like a 640 px wide window. No horizontal scroll allowed.

@@ -5,6 +5,7 @@ import type { Language } from "../data/language";
 import { AVATARS, type Avatar, type Profile } from "../data/profile";
 import { cities, eventCategories, type City, type EventCategory } from "../types/Event";
 import Icon from "./Icon";
+import ThemeToggle from "./ThemeToggle";
 
 const languageNames: Record<Language, string> = { es: "Español", en: "English", fr: "Français" };
 
@@ -84,6 +85,9 @@ export default function ProfilePage({ profile, setProfile, language, setLanguage
         {(Object.keys(languageNames) as Language[]).map((code) => <option key={code} value={code} lang={code}>{languageNames[code]}</option>)}
       </select>
     </div>
+
+    {/* Also here because on very narrow phones the header hides the profile menu */}
+    <div className="profile-section profile-theme"><ThemeToggle language={language} /></div>
 
     <p className="profile-privacy">{text.privacy} <Link to="/tus-datos">{text.yourData}</Link>.</p>
   </main>;
