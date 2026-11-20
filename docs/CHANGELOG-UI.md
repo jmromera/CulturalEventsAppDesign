@@ -539,3 +539,18 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   - Los textos de «Tus datos» y de la política de privacidad que enumeran lo guardado incluyen ya el modo noche.
   - La página «Próximamente» (producción) se ve igual en los dos modos porque pinta su propio fondo.
 - **Pruebas:** 289 pruebas (nuevas: `tests/theme.test.tsx` y las parejas de contraste de cada modo en `tests/palette.test.ts`); `pnpm check:a11y` pasa ahora por los dos modos: sin problemas en 194 comprobaciones; `check:responsive`, `check:pie` y `check:contraste` correctos.
+
+### Iteración P3.3 · Ajustes de portada, cabecera y ficha
+
+- **Qué:**
+  - **Atajos de fecha (D1):** los que no tienen eventos ya no aparecen; queda el aviso «No hay planes para estos días» con su enlace. El activo se mantiene para poder desactivarlo.
+  - **Reserva de demostración (D2):** pasa de segundo botón a enlace de texto bajo «Comprar en la web oficial».
+  - **Modo noche siempre a mano:** el botón sigue en la cabecera en móvil (entre el idioma y el perfil). Hasta 420 px el logo es solo la baldosa azul (el enlace conserva «Plan Cerca» como nombre accesible) y, por debajo de 375 px, el botón ocupa el sitio del perfil.
+  - **Sol en ámbar:** con el modo noche activo, el sol va en una baldosa ámbar con el icono oscuro, como la lupa del buscador.
+  - **Fotos de ciudad más claras en el modo azul:** la sombra se concentra solo detrás del texto (bloque de texto de 640 px como máximo) y la mitad derecha de la foto queda casi limpia.
+- **Por qué:** **Visibilidad del estado del sistema (Nielsen 1)** y **Control y libertad (Nielsen 3)**: el modo noche no desaparece al cambiar el tamaño. **Estética y diseño minimalista (Nielsen 8)**: sin botones que no llevan a nada y sin un segundo botón que compite con la compra.
+- **Problemas encontrados:**
+  - En móvil el logo y el selector de ciudad ya se solapaban (27 px a 390 px); al añadir el botón no cabía todo y se optó por mostrar solo la baldosa del logo hasta 420 px.
+  - A 320 px «Ver todos» se salía 19 px de la pantalla: ahora baja de línea.
+  - El primer intento de aclarar las fotos dejaba Madrid y Bilbao en 2,4-2,7:1; concentrar la sombra detrás del texto lo resolvió.
+- **Pruebas:** `tests/hero.test.tsx` (sin atajos a 0 en ninguna ciudad, con la fecha fijada en un día sin eventos; falla sin el cambio); `pnpm check:contraste`: peor caso Madrid a 390 px, 5,55:1; cabecera medida a 320, 360, 390, 430 y 700 px sin solapes ni desbordes.

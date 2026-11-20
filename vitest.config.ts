@@ -9,5 +9,7 @@ export default defineConfig({
     include: ["tests/**/*.test.{ts,tsx}"],
     restoreMocks: true,
     setupFiles: ["tests/setup.ts"],
+    // Many tests render the whole app; with all files in parallel the first render can pass 5 s on a busy machine.
+    testTimeout: 15000,
   },
 });

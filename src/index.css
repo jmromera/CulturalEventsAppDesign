@@ -1119,7 +1119,23 @@ h2{letter-spacing:-.01em;word-spacing:normal}
 .theme-toggle:hover{background:var(--chrome-hover);color:var(--ink)}
 .theme-toggle:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
 .theme-toggle--compact{width:44px;padding:0;justify-content:center}
-@media(max-width:650px){.theme-toggle--compact{display:none}}
+/* Móvil: el interruptor sigue en la cabecera, entre el idioma y el perfil. Por debajo de 375 px ocupa el sitio del perfil */
+@media(max-width:650px){
+	.site-header-inner{grid-template-columns:auto minmax(0,1fr) auto auto auto;column-gap:4px}
+	.site-header .theme-toggle--compact{grid-column:4;grid-row:1;width:40px;height:44px}
+	.profile-menu{grid-column:5;grid-row:1}
+}
+@media(max-width:374px){
+	.site-header-inner{grid-template-columns:auto minmax(0,1fr) auto auto}
+	.profile-menu{display:none}
+	/* «Ver todos» baja de línea en vez de salirse de la pantalla */
+	.section-title{flex-wrap:wrap;row-gap:4px}
+}
+/* Hasta 420 px el logo es solo la baldosa azul (el enlace conserva «Plan Cerca» como nombre accesible): así caben ciudad, idioma, modo noche y perfil */
+@media(max-width:420px){
+	.site-header .logo>span:not(.logo-mark){display:none}
+	.site-header .logo .logo-mark{margin-right:0}
+}
 .profile-menu-theme{margin-top:4px;padding-top:4px;border-top:1px solid var(--line)}
 .profile-menu-theme .theme-toggle{width:100%;color:var(--ink);font-weight:600}
 .profile-menu-theme .theme-toggle .icon{width:16px;height:16px;color:var(--muted)}
@@ -1163,3 +1179,15 @@ h2{letter-spacing:-.01em;word-spacing:normal}
 .profile-theme .theme-toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-tint)}
 /* Campos de la cabecera azul hundidos un poco: el texto de ejemplo del buscador pasa de 3,5:1 a más de 4,5:1 (axe no mide ::placeholder) */
 :root:not([data-theme="dark"]) .site-header{--chrome-field:rgba(0,0,0,.2)}
+/* Modo noche activo: el sol en una baldosa ámbar con el icono oscuro, como la lupa del buscador (el botón sigue midiendo 44 px) */
+.site-header .theme-toggle--compact[aria-pressed="true"] .icon{width:34px;height:34px;padding:8px;border-radius:8px;background:var(--accent);color:var(--on-accent);transition:background-color 160ms ease}
+.site-header .theme-toggle--compact[aria-pressed="true"]:hover{background:transparent}
+.site-header .theme-toggle--compact[aria-pressed="true"]:hover .icon{background:var(--accent-hover)}
+.profile-menu-theme .theme-toggle[aria-pressed="true"] .icon,.profile-theme .theme-toggle[aria-pressed="true"] .icon{color:var(--accent-text)}
+/* Modo azul: la foto de la ciudad más clara. La sombra solo se concentra donde va el texto (mínimo 4,5:1, ver check:contraste) */
+@media(max-width:650px){:root:not([data-theme="dark"]) .hero-shade{background:linear-gradient(180deg,rgba(10,10,11,.08) 0%,rgba(10,10,11,.4) 30%,rgba(10,10,11,.7) 60%,rgba(10,10,11,.8) 100%)}}
+@media(min-width:651px){:root:not([data-theme="dark"]) .hero-copy{max-width:640px}:root:not([data-theme="dark"]) .hero-shade{background:linear-gradient(90deg,rgba(10,10,11,.72) 0%,rgba(10,10,11,.66) 44%,rgba(10,10,11,.4) 54%,rgba(10,10,11,.08) 70%,rgba(10,10,11,0) 84%)}}
+/* Reserva de demostración: enlace de texto bajo la compra real, para que no compita con ella */
+.booking-link{display:inline-flex;align-items:center;min-height:44px;margin-top:4px;color:var(--accent-text);font-weight:500;text-decoration:underline;text-underline-offset:3px}
+.booking-link:hover{color:var(--accent-text-hover)}
+.booking-link:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}

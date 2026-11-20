@@ -1,4 +1,4 @@
-# Roadmap: Plan Cerca
+ Hecho y comprobado | Hecho y comprobado  Captura de la cabecera en modo noche; axe en los dos modos sin problemas || Hecho y comprobado  `check:contraste`: peor caso Madrid 390 px, 5,55:1 || Hecho y comprobado  Cabecera medida a 320, 360, 390, 430 y 700 px sin solapes; `check:responsive` || Hecho y comprobado  Captura de la ficha; la prueba de reserva sigue encontrando el enlace ||# Roadmap: Plan Cerca
 
 ## Objetivo
 
@@ -22,7 +22,7 @@ En Madrid, «Hoy 0 · Mañana 0 · Esta semana 0» aparecen desactivados, con el
 - C. Mostrar siempre los dos atajos con eventos más cercanos («Este fin de semana», «Próximos 30 días»): requiere cambiar la lógica y sus pruebas.
 
 **Bloquea:** nada (mejora opcional)
-**Estado:** Abierta
+**Estado:** Decidida: A (20/11/2026)
 
 ### D2. ¿Dónde va «Probar la reserva (demostración)»?
 
@@ -33,7 +33,7 @@ Hoy es un segundo botón en la tarjeta de compra, justo debajo de «Comprar en l
 - C. Quitarlo de la ficha y enlazarlo solo desde «Acerca de»: se limpia la ficha, pero la demostración queda escondida.
 
 **Bloquea:** nada (mejora opcional)
-**Estado:** Abierta
+**Estado:** Decidida: A (20/11/2026)
 
 ### D3. ¿Cambiamos también los colores de la página «Próximamente»?
 
@@ -49,17 +49,23 @@ Hoy es un segundo botón en la tarjeta de compra, justo debajo de «Comprar en l
 
 Lo que solo puedes hacer tú:
 
-- [ ] Revisar la rama `feat/unslop` en local (`pnpm dev`, http://localhost:8443) y aprobar la fusión (desbloquea P2).
 - [ ] Completar `datos-legales.json` (`[TU NOMBRE]`, `[UNIVERSIDAD]`) y revisar `docs/legal/PENDIENTE.md` y `docs/legal/TEXTOS-A-REVISAR.md` (desbloquea P3).
 - [ ] En diciembre, decidir el día del lanzamiento (desbloquea P4).
 
 ## Pasos
 
-| #  | Paso | Estado | Depende de | Comprobación |
+ `tests/hero.test.tsx` (falla sin el cambio) || #  | Paso | Estado | Depende de | Comprobación |
 |----|------|--------|------------|--------------|
 | P1 | Pulido «cartelera de noche» (grafito, ámbar, categorías como punto, textos rotos) | Hecho y comprobado | – | typecheck, 281 tests, build, axe sin problemas (112 comprobaciones), contraste de portada ≥ 5,19:1 y capturas a 1440 y 390 |
 | P1b | Modo azul por defecto y modo noche con interruptor que se recuerda | Hecho y comprobado | P1 | 289 tests, axe sin problemas en los dos modos (194 comprobaciones), responsive, pie y contraste de portada |
-| P2 | Fusionar `feat/unslop` en `develop` y en `main` | Esperando tus manos | P1 | PR revisado; Vercel publica y plancerca.com sigue mostrando «Próximamente» |
+| P2 | Fusionar `feat/unslop` en `develop` y en `main` | En curso | P1 | En `develop` (PR #21). Falta `main`: Vercel publica y plancerca.com sigue mostrando «Próximamente» |
+| P5 | D1: ocultar los atajos de fecha a 0 de la portada | Hecho y comprobado | D1 | `tests/hero.test.tsx` (falla sin el cambio) |
+| P6 | D2: «Probar la reserva» como enlace de texto | Hecho y comprobado | D2 | Captura de la ficha; la prueba de reserva sigue encontrando el enlace |
+| P7 | El interruptor de modo noche no desaparece al estrechar la ventana (también en móvil) | Hecho y comprobado | – | Cabecera medida a 320, 360, 390, 430 y 700 px sin solapes; `check:responsive` |
+| P8 | Modo azul: fotos de ciudad menos oscuras, manteniendo el texto de la portada ≥ 4,5:1 | Hecho y comprobado | – | `check:contraste`: peor caso Madrid 390 px, 5,55:1 |
+| P9 | Botón de modo día (sol) en ámbar, como la lupa del buscador | Hecho y comprobado | – | Captura de la cabecera en modo noche; axe en los dos modos sin problemas |
+| P10 | Más eventos entre el 10/12/2026 y el 30/01/2027 | No empezado | – | |
+| P11 | Documentar las limitaciones no implementadas (avisos por correo, cuentas de usuario) en el documento del trabajo | No empezado | – | |
 | P3 | Datos legales reales y `esEjemplo: false` | Esperando tus manos | – | `tests/legal-data.test.ts` pasa con `esEjemplo: false` |
 | P4 | Lanzamiento: `LAUNCHED = true` | No empezado | P2, P3 | plancerca.com muestra la app |
 
@@ -92,3 +98,8 @@ Ideas y trabajo fuera del alcance actual:
 - Comprobado: 289 tests, axe en los dos modos (194 comprobaciones sin problemas), responsive, pie y contraste de portada; capturas de portada, ficha y menú en móvil.
 - Decisiones: D3 descartada (la página «Próximamente» ya usa el azul del logo).
 - Siguiente: revisión de la rama `feat/unslop` por el autor (P2).
+
+### 2026-11-20
+
+- Decisiones: D1 y D2 decididas (A). Las funciones sin implementar («Avisarme», cuentas) se quedan y se explican como limitaciones de un trabajo universitario (P11).
+- Siguiente: P5 a P9 en la rama `feat/ajustes-portada`, luego P2 (`main`) y P10.
