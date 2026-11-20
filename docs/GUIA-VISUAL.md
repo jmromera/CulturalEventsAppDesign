@@ -8,7 +8,7 @@
 
 </div>
 
-> **Sobre estas capturas.** Están hechas el 7 de noviembre de 2026 con la app real funcionando en local, casi todas con **Valencia** como ciudad y tres conciertos guardados en favoritos. Los eventos que aparecen son los del catálogo en esa fecha; cuando pasen, la app los ocultará y las capturas se quedarán viejas.
+> **Sobre estas capturas.** Están hechas el 20 de noviembre de 2026 con la app real funcionando en local, en el **modo azul** (el de por defecto), casi todas con **Valencia** como ciudad y tres conciertos guardados en favoritos. Se rehacen con `node scripts/capture-guide.mjs`. Los eventos que aparecen son los del catálogo en esa fecha; cuando pasen, la app los ocultará.
 
 ---
 
@@ -37,13 +37,13 @@ Después, la ciudad se cambia desde la cabecera. Cada ciudad muestra cuántos ev
 
 ## 2. La portada: qué hay en tu ciudad
 
-Arriba, la ciudad con su foto y los **atajos de fecha**: Hoy, Mañana, Esta semana y Próximos 30 días. Cada uno dice cuántos planes hay y se desactiva si no hay ninguno. Debajo, tres **recomendados** (nunca dos fechas del mismo artista).
+Arriba, la ciudad con su foto y los **atajos de fecha**: Hoy, Mañana, Esta semana y Próximos 30 días. Cada uno dice cuántos planes hay, y los que no tienen ninguno no aparecen. Debajo, tres **recomendados**: sobre todo conciertos, sin repetir artista ni recinto.
 
 <div align="center">
 <img src="screenshots/home-desktop.jpg" alt="Portada de Valencia con atajos de fecha y recomendados" width="860">
 </div>
 
-Más abajo, una franja con lo que se mueve en la ciudad (categorías con más eventos y el mejor valorado) y el **catálogo completo**, filtrable por categoría con un toque.
+Más abajo, **«Lo que más hay»** en la ciudad (las categorías con más eventos, cada una filtra con un toque) y el **catálogo completo**, con una pestaña por categoría, «Cerca de mí» y Filtros.
 
 <div align="center">
 <img src="screenshots/catalogue-desktop.jpg" alt="Franja de tendencias y catálogo con pestañas de categoría" width="860">
@@ -65,7 +65,7 @@ Si lo que buscas no está en tu ciudad pero sí en otra, te lo dice y te lleva a
 <img src="screenshots/search-other-cities-desktop.jpg" alt="Sin resultados para «melendi» en Barcelona, con un botón a Valencia" width="860">
 </div>
 
-En **Filtros** puedes combinar ciudad, varias categorías y fecha (incluida una fecha concreta). El botón final dice cuántos resultados vas a ver antes de pulsarlo.
+En **Filtros** puedes combinar ciudad, varias categorías y fecha, o elegir un día en el calendario. El botón final dice cuántos resultados vas a ver antes de pulsarlo. En el móvil se abre como una hoja desde abajo; en el escritorio, como un panel lateral.
 
 <div align="center">
 <img src="screenshots/filters-mobile.jpg" alt="Pantalla de filtros en móvil" width="300">
@@ -75,7 +75,7 @@ En **Filtros** puedes combinar ciudad, varias categorías y fecha (incluida una 
 
 ## 4. La ficha de un evento
 
-Lo importante, arriba: **qué, cuándo, dónde y cuánto dura**, la valoración y el botón para comprar en la web oficial. En la barra superior: compartir, guardar, copiar el enlace y añadir al calendario.
+Lo importante, arriba: **qué, cuándo, dónde y cuánto dura**, el precio si se conoce y el botón para comprar en la web oficial. En la barra superior: compartir, guardar, copiar el enlace y añadir al calendario.
 
 <div align="center">
 <img src="screenshots/event-desktop.jpg" alt="Ficha de Muse en el Roig Arena" width="860">
@@ -88,7 +88,7 @@ Lo importante, arriba: **qué, cuándo, dónde y cuánto dura**, la valoración 
 </tr>
 <tr>
 <td align="center"><sub>📅 <b>Añadir al calendario</b>: Google Calendar o archivo <code>.ics</code> para Outlook y Apple</sub></td>
-<td align="center"><sub>ℹ️ <b>Más abajo</b>: el artista, cómo llegar, quién organiza y la disponibilidad</sub></td>
+<td align="center"><sub>ℹ️ <b>Más abajo</b>: la descripción, cómo llegar y la tarjeta de compra, que se queda fija al bajar</sub></td>
 </tr>
 </table>
 
@@ -129,7 +129,7 @@ Cada artista con ficha reúne sus fechas en todas las ciudades y sus enlaces ofi
 
 ## 7. Favoritos
 
-El corazón de cualquier tarjeta o ficha guarda el evento. En **Favoritos** aparecen ordenados por fecha, lo más próximo primero.
+El corazón de cualquier tarjeta o ficha guarda el evento. En **Favoritos** aparecen los próximos por fecha y, aparte, los que ya han pasado. Se pueden añadir todos al calendario o compartir la lista, y quitar uno se puede deshacer.
 
 <table>
 <tr>
@@ -142,7 +142,7 @@ El corazón de cualquier tarjeta o ficha guarda el evento. En **Favoritos** apar
 
 ## 8. En el móvil
 
-La app está pensada primero para el móvil: búsqueda y pestañas siempre arriba, carruseles que se deslizan con contador y botones grandes.
+La app está pensada primero para el móvil: búsqueda y pestañas siempre arriba, carruseles que se deslizan con contador y todo lo que se pulsa mide al menos 44 px. En la ficha, una barra inferior deja el botón de compra siempre a mano.
 
 <div align="center">
 <img src="screenshots/home-mobile.jpg" alt="Portada en móvil" width="240">
@@ -154,7 +154,17 @@ La app está pensada primero para el móvil: búsqueda y pestañas siempre arrib
 
 ---
 
-## 9. En tres idiomas
+## 9. Modo noche
+
+La luna de la cabecera (también en el menú de perfil y en «Tu perfil») cambia al **modo noche**: grafito y ámbar, con el sol en ámbar para volver. La app lo recuerda.
+
+<div align="center">
+<img src="capturas/final-noche/1-inicio-escritorio.jpg" alt="Portada de Valencia en el modo noche" width="860">
+</div>
+
+---
+
+## 10. En tres idiomas
 
 Español, inglés y francés, desde el selector de la cabecera. La app recuerda el idioma la próxima vez.
 
@@ -164,7 +174,7 @@ Español, inglés y francés, desde el selector de la cabecera. La app recuerda 
 
 ---
 
-## 10. Cuando algo no está
+## 11. Cuando algo no está
 
 Un evento que ya ha pasado no da error: avisa y propone tres parecidos.
 

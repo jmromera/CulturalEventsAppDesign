@@ -893,9 +893,14 @@ export default function App() {
     else if (page === "venues") document.title = `${interfaceText[language].venues} · ${selectedCity} · Plan Cerca`;
     else if (page === "favorites") document.title = `${interfaceText[language].favourites} · Plan Cerca`;
     else if (page === "search") document.title = `${t.search} · Plan Cerca`;
+    else if (page === "profile") document.title = `${profileCopy[language].title} · Plan Cerca`;
+    else if (page === "booking") {
+      const booked = events.find((item) => pathname === `/event/${item.id}/reservar`);
+      document.title = booked ? `${bookingCopy[language].title}: ${booked.title} · Plan Cerca` : `${bookingCopy[language].title} · Plan Cerca`;
+    }
     else if (page === "legal") return;
     else document.title = `${t.notFoundTitle} · Plan Cerca`;
-  }, [activeEntity, activeVenue, event, language, page, selectedCity, t.notFoundTitle, t.search]);
+  }, [activeEntity, activeVenue, event, language, page, pathname, selectedCity, t.notFoundTitle, t.search]);
   useEffect(() => {
     setSearchQuery(new URLSearchParams(location.search).get("q") ?? "");
   }, [location.pathname, location.search]);

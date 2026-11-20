@@ -39,13 +39,13 @@ Para cambiar de ciudad más tarde, pulsa su nombre en la cabecera (junto al núm
 
 ## Encontrar un plan
 
-**Para este fin de semana o esta semana.** En la portada, pulsa **«Esta semana»** (llega hasta el domingo) o **«Próximos 30 días»**. El número de cada botón dice cuántos planes hay; si es 0, el botón está desactivado.
+**Para este fin de semana o esta semana.** En la portada, pulsa **«Esta semana»** (llega hasta el domingo) o **«Próximos 30 días»**. El número de cada botón dice cuántos planes hay; si no hay ninguno, el botón no aparece.
 
 **Por tipo de plan.** Debajo de los recomendados está **«Explorar todos»**, con pestañas por categoría: Música, Ópera, Danza, Deportes, Teatro, Exposiciones y Museos. Puedes marcar varias a la vez; **«Todos»** las quita.
 
 **Por nombre.** Escribe en la barra de arriba un artista, un recinto o lo que buscas («rock», «flamenco», «ópera») y pulsa Intro. No hace falta poner tildes. Si en tu ciudad no hay nada pero sí en otra, te aparece un botón para ver los resultados allí.
 
-**Con varios criterios.** Pulsa **«Filtros»** para combinar ciudad, categorías y fecha. Con **«Elegir fecha»** puedes buscar un día concreto. El botón de abajo («Ver resultados · 12») te dice cuántos resultados vas a ver antes de aplicarlo, y **«Limpiar»** lo deja todo como estaba.
+**Con varios criterios.** Pulsa **«Filtros»** para combinar ciudad, categorías y fecha. En el calendario puedes elegir un día concreto; los días con eventos llevan un punto. El botón de abajo («Ver 12 resultados») te dice cuántos resultados vas a ver antes de aplicarlo, y **«Limpiar»** lo deja todo como estaba. Cada filtro activo aparece encima de la lista y se quita con un toque.
 
 **Mostrar más.** El catálogo enseña 12 eventos cada vez. Pulsa **«Mostrar más eventos»** para seguir; si entras en una ficha y vuelves atrás, sigues donde estabas.
 
@@ -148,14 +148,12 @@ Añade un objeto a [`src/data/events.json`](../src/data/events.json). Un ejemplo
   "venueId": "valencia-roig-arena",           // debe existir en venues.json
   "relatedEntityId": "muse",                  // opcional: ficha en related-entities.json
   "featured": true,                           // opcional: candidato a «Recomendados»
-  "image": "https://…",                       // pon la URL original: el paso siguiente la cambia por una copia local
+  "image": "https://…",                       // URL original (el paso siguiente la cambia por una copia local), o null para usar la foto del recinto
   "ticketUrl": "https://…",                   // venta oficial
   "price": "Consultar precio oficial",        // o "Desde 35 €"
   "availability": "Próximamente",             // "Entradas disponibles", "Agotado", "Consultar…"
   "confirmed": true,                          // false = fecha pendiente de confirmar
-  "organizer": "Live Nation",
-  "rating": 4.8,                              // opcional
-  "popularity": "95%",                        // opcional
+  "organizer": "Live Nation",                // si no se conoce: "Consultar en la web de venta" (no se muestra como nombre)
   "tags": ["Música", "Rock", "2027"],         // la categoría, la ciudad y el año no se muestran
   "description": "Una o dos frases para la tarjeta.",
   "fullDescription": "El texto largo de la ficha."
@@ -225,7 +223,7 @@ Las ramas de trabajo se fusionan en `develop` mediante PR, y de ahí a `main`. V
 
 ### Rehacer las capturas
 
-Las capturas de [`docs/screenshots/`](screenshots/) se hicieron con la app en local, Valencia seleccionada y tres favoritos guardados. Cuando pasen esos eventos, conviene rehacerlas con:
+Las capturas de [`docs/screenshots/`](screenshots/) se hicieron con la app en local, Valencia seleccionada y tres favoritos guardados. Cuando pasen esos eventos, se rehacen todas con `node scripts/capture-guide.mjs`, que usa:
 
 - Ventana de **1440 × 900** para escritorio y **390 × 844** para móvil.
 - Formato **JPG** de calidad 85, para que el repositorio no pese (el repo guarda las imágenes con Git LFS).

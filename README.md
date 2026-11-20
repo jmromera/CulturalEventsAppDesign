@@ -14,11 +14,12 @@
 ![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![React Router 7](https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-desplegado-000000?logo=vercel&logoColor=white)
-![Idiomas](https://img.shields.io/badge/idiomas-es%20%C2%B7%20en%20%C2%B7%20fr-7c3aed)
+![Idiomas](https://img.shields.io/badge/idiomas-es%20%C2%B7%20en%20%C2%B7%20fr-0b4fd1)
+![Accesibilidad](https://img.shields.io/badge/axe-0%20problemas%20%C2%B7%20WCAG%202.2%20AA-15803d)
 
 <img src="docs/screenshots/home-desktop.jpg" alt="Portada de Plan Cerca con la agenda de Valencia" width="860">
 
-**[🌐 Abrir plancerca.com](https://plancerca.com)** · **[📸 Ver la app con capturas →](docs/GUIA-VISUAL.md)** · **[📖 Manual de uso](docs/MANUAL-DE-USO.md)**
+**[🌐 plancerca.com](https://plancerca.com)** · **[📸 Guía visual](docs/GUIA-VISUAL.md)** · **[📖 Manual de uso](docs/MANUAL-DE-USO.md)** · **[📝 Registro de cambios de la interfaz](docs/CHANGELOG-UI.md)**
 
 </div>
 
@@ -28,46 +29,149 @@
 
 Plan Cerca es una agenda cultural y deportiva para seis ciudades de España: **Madrid, Barcelona, Valencia, Sevilla, Bilbao y Albacete**. Eliges ciudad, ves qué hay hoy, mañana o este mes, guardas lo que te interesa y, desde cada ficha, llegas a la web oficial para comprar la entrada.
 
-Es el proyecto de la asignatura **«HCI: Desarrollo web y móvil»**. Por eso pesan tanto la usabilidad, la accesibilidad y la jerarquía visual como las funciones: cada cambio importante salió de una revisión de uso.
+Es el trabajo de la asignatura **«HCI: Desarrollo web y móvil»**. Por eso este README empieza por el **diseño de la interfaz**: cómo se trabajó, qué se decidió y por qué. La parte técnica va después.
 
-> **En cifras (7 de noviembre de 2026):** 185 eventos próximos, 44 recintos y 11 fichas de artista o espectáculo. Los eventos que ya han pasado se ocultan solos.
-
-## Lo más interesante, en 30 segundos
-
-| | |
-|---|---|
-| 🗂️ **Sin backend** | Todo el catálogo son ficheros JSON dentro del repo y las preferencias van en `localStorage`. Se despliega como una web estática y no hay servidor que mantener. |
-| 📍 **Ciudad con criterio** | Manda el `?city=` de la URL; si no hay, la ciudad guardada; si tampoco, un diálogo de bienvenida que puede usar tu ubicación (distancia *haversine* al centro de cada ciudad, con un radio por ciudad). |
-| 🔗 **La URL es el estado** | Ciudad, búsqueda, categorías y fechas viven en la URL. Cualquier vista se puede compartir, y Atrás devuelve a la misma posición de la página. |
-| 🔍 **Búsqueda que perdona** | Ignora tildes y mayúsculas, busca en título, recinto, organizador y etiquetas, y si en tu ciudad no hay nada te dice en qué otras ciudades sí. |
-| 📅 **Ficha completa** | Añadir al calendario (Google o `.ics` con la hora de Madrid bien calculada), compartir con el menú nativo del móvil y datos estructurados de schema.org para buscadores. |
-| ♿ **Accesible de serie** | Enlace para saltar al contenido, foco gestionado al cambiar de página, diálogos con foco atrapado, `aria-pressed` y `aria-live`, y respeto a «reducir movimiento». |
-| 🔒 **Privacidad por diseño** | Sin cookies, sin analítica y sin terceros: fuentes e imágenes se sirven desde el propio dominio, la ubicación nunca sale del dispositivo y cada persona puede descargar o borrar sus datos en un clic. Lo comprueban pruebas automáticas. |
-| 🤖 **Legible por máquinas** | `llms.txt`, `ai-catalog.json` y un `sitemap.xml` generado en cada build; `robots.txt` deja fuera las páginas personales. |
-| 🌍 **Tres idiomas** | Español, inglés y francés, también en los textos de recintos y artistas. El atributo `lang` del documento cambia con el idioma. |
-
----
+> **En cifras (20 de noviembre de 2026):** 321 eventos próximos (381 en el catálogo), 51 recintos y 11 fichas de artista o espectáculo, en español, inglés y francés. Los eventos que ya han pasado se ocultan solos.
+>
+> **plancerca.com** muestra una página de «Próximamente» hasta el lanzamiento; la app completa se ve en local (`pnpm dev`) y en las vistas previas de Vercel.
 
 ## Índice
 
-1. [Arquitectura](#-arquitectura)
-2. [Qué pasa al abrir la app: elegir ciudad](#-qué-pasa-al-abrir-la-app-elegir-ciudad)
-3. [Herramientas](#-herramientas)
-4. [La URL como estado](#-la-url-como-estado)
-5. [Datos](#-datos)
-6. [Búsqueda, filtros y recomendaciones](#-búsqueda-filtros-y-recomendaciones)
-7. [La ficha de evento](#-la-ficha-de-evento)
-8. [Idiomas](#-idiomas)
-9. [Accesibilidad](#-accesibilidad)
-10. [Buscadores y agentes de IA](#-buscadores-y-agentes-de-ia)
-11. [Rendimiento](#-rendimiento)
-12. [Despliegue](#-despliegue)
-13. [Arrancarlo en local](#-arrancarlo-en-local)
-14. [Estructura del repositorio](#-estructura-del-repositorio)
-15. [Estado y qué falta](#-estado-y-qué-falta)
-16. [Créditos de las imágenes](#-créditos-de-las-imágenes)
+**Diseño de la interfaz**
+
+1. [Cómo se trabajó](#-cómo-se-trabajó)
+2. [Decisiones de diseño](#-decisiones-de-diseño)
+3. [Accesibilidad](#-accesibilidad)
+4. [Antes y después](#-antes-y-después)
+5. [Limitaciones](#-limitaciones)
+
+**Cómo está hecho**
+
+6. [Arquitectura](#-arquitectura)
+7. [Qué pasa al abrir la app: elegir ciudad](#-qué-pasa-al-abrir-la-app-elegir-ciudad)
+8. [Herramientas](#-herramientas)
+9. [La URL como estado](#-la-url-como-estado)
+10. [Datos](#-datos)
+11. [Búsqueda, filtros y recomendaciones](#-búsqueda-filtros-y-recomendaciones)
+12. [La ficha de evento](#-la-ficha-de-evento)
+13. [Idiomas](#-idiomas)
+14. [Buscadores y agentes de IA](#-buscadores-y-agentes-de-ia)
+15. [Rendimiento](#-rendimiento)
+16. [Despliegue](#-despliegue)
+17. [Arrancarlo en local](#-arrancarlo-en-local)
+18. [Estructura del repositorio](#-estructura-del-repositorio)
+19. [Créditos de las imágenes](#-créditos-de-las-imágenes)
 
 ---
+
+# Diseño de la interfaz
+
+## 🧭 Cómo se trabajó
+
+1. **Auditoría inicial (7 de noviembre de 2026).** Revisión automática con axe (reglas WCAG 2.0, 2.1 y 2.2, niveles A y AA) de las cuatro pantallas clave en móvil (390 px) y escritorio (1440 px), más medidas propias. axe no encontró errores, pero las medidas sí:
+   - entre 10 y 38 controles por pantalla medían menos de 44 px;
+   - las tarjetas no tenían encabezado, así que con un lector de pantalla no se podía saltar de una a otra;
+   - cada tarjeta medía hasta 614 px de alto, con 11 textos y 3 enlaces al mismo sitio;
+   - había valoraciones y «% de popularidad» sin ninguna fuente.
+
+   El resultado completo está en [docs/PLAN-UI.md](docs/PLAN-UI.md).
+2. **Iteraciones pequeñas, por prioridad:**
+   - P0, datos y despliegue;
+   - P1, lo que pide el enunciado y la accesibilidad;
+   - P2, consistencia y jerarquía;
+   - P3, pulido visual.
+
+   Cada iteración es un cambio coherente con su commit. Su porqué (la heurística de Nielsen o el criterio WCAG que lo justifica) queda en el [registro de cambios de la interfaz](docs/CHANGELOG-UI.md).
+3. **Comprobación tras cada cambio:**
+   - 295 pruebas automáticas;
+   - axe en todas las páginas y estados, en móvil y escritorio y en los dos modos de color;
+   - contraste del texto sobre las fotos de portada;
+   - tamaños de 320 a 1440 px;
+   - recorrido con teclado.
+4. **Auditoría visual final.** Una revisión buscó señales de interfaz genérica: 24 etiquetas de color compitiendo en la misma pantalla, mayúsculas espaciadas, degradados de color sobre las fotos. De ahí salió el pulido P3.
+5. **Capturas antes y después** de las mismas pantallas, en [docs/capturas/](docs/capturas/).
+
+Las decisiones de producto que no salen del código (por ejemplo, aceptar los carteles oficiales en un trabajo sin ánimo comercial) están en [DECISIONES.md](DECISIONES.md).
+
+## 🧩 Decisiones de diseño
+
+Las heurísticas se citan por su número en la lista de Nielsen: N1 visibilidad del estado del sistema, N3 control y libertad, N4 consistencia, N5 prevención de errores, N6 reconocer mejor que recordar, N7 flexibilidad y eficiencia, N8 diseño estético y minimalista, N9 ayudar a reconocer y recuperarse de errores.
+
+| Decisión | Qué se hizo | Por qué |
+|---|---|---|
+| **La ciudad, lo primero** | Un diálogo de bienvenida para elegirla. La ubicación solo se pide si se pulsa «Usar mi ubicación», y nunca sale del dispositivo | Todo lo que se ve depende de la ciudad (N1). La persona decide si comparte su ubicación (N3) |
+| **Atajos de fecha en la portada** | Hoy, Mañana, Esta semana y Próximos 30 días, con su recuento. Los que están a cero no aparecen; queda un aviso con un enlace a los próximos días | Un toque filtra el catálogo (N7). Sin botones que no llevan a ninguna parte (N8, N5) |
+| **Tarjeta de evento compacta** | Imagen con la fecha como en una entrada, título, lugar y hora, precio si se conoce y corazón. Un solo enlace y un solo botón por tarjeta | Antes tenía 11 textos y 3 enlaces al mismo destino (N8, WCAG 2.4.4). La fecha se lee de un vistazo, como en un calendario (N6) |
+| **Una misma tarjeta en toda la web** | La misma en Recomendados, catálogo, búsqueda, favoritos y ficha | Se aprende una vez y sirve en todas partes (N4) |
+| **Filtros con recuento en vivo** | Panel lateral en escritorio y hoja inferior en móvil. El botón dice cuántos resultados saldrán y cada filtro activo es un chip que se quita con un toque | Se ve qué está filtrado antes de aplicar (N1) y se deshace sin volver a abrir el panel (N3). No deja aplicar una combinación vacía (N5). El calendario marca los días con eventos (N6) |
+| **Búsqueda que perdona** | Ignora tildes y mayúsculas. Si no hay nada en tu ciudad, ofrece las ciudades donde sí | Prevenir el error y ofrecer una salida (N5, N9) |
+| **Ficha: lo importante arriba** | Qué, cuándo, dónde y precio en el primer pantallazo. La compra siempre a mano: tarjeta fija en escritorio y barra inferior en móvil. La reserva de demostración es un enlace para que no compita con la compra | Jerarquía visual: una sola acción principal por pantalla (N8) |
+| **Favoritos que perdonan** | Próximos y pasados por separado, deshacer al quitar, añadir todos al calendario y compartir la lista | Un toque por error no cuesta nada (N3). Cada acción confirma lo que ha hecho (N1) y se trabaja con todos a la vez (N7) |
+| **Datos honestos** | Se quitaron las valoraciones y el «% de popularidad», que no tenían fuente. «Gran evento» se basa en un dato verificable: aforo de 10.000 personas o más | Credibilidad. La escala del evento se reconoce de un vistazo (N6) |
+| **Errores con salida** | Un evento que ya ha pasado no da error: lo dice y propone tres parecidos. La página 404 está traducida y enlaza a la portada | Nunca un callejón sin salida (N9) |
+| **Color con significado** | Navegación en azul, un color de marca fuerte como el de las webs de venta de entradas (por ejemplo, Ticketmaster). Tarjetas claras para que mande el cartel. Un solo acento, ámbar, para la acción principal, y un color por categoría | Antes competían 24 etiquetas de color y nada destacaba (N8). Un mismo color significa siempre lo mismo (N4) |
+| **Modo noche opcional** | Grafito y ámbar. Se activa desde la cabecera (a cualquier ancho de pantalla), el menú de perfil o «Tu perfil», y se recuerda | La persona elige (N3). El negro es una preferencia, no una imposición |
+| **Fotos de ciudad legibles** | La sombra solo va detrás del texto y el resto de la foto queda a la vista. El contraste se mide en las seis ciudades | WCAG 1.4.3: el texto llega a 4,5:1 sobre el punto más claro de la foto |
+| **Móvil primero** | 44 px en todo lo que se pulsa. La cabecera mantiene la ciudad, el idioma y el modo noche hasta 320 px sin desbordar | WCAG 2.5.5 (nivel AAA, y lo que recomiendan Apple y Android) y 1.4.10 |
+| **Tres idiomas** | Español, inglés y francés. El idioma del documento cambia con la elección | Para quien visita la ciudad desde fuera. Los lectores de pantalla pronuncian bien (WCAG 3.1.1) |
+| **Privacidad por diseño** | Sin cookies ni servicios de terceros. Nada se guarda solo por visitar la web. «Tus datos» descarga o borra todo | Confianza y RGPD, sin patrones oscuros |
+
+## ♿ Accesibilidad
+
+El objetivo es **WCAG 2.2 AA**, más un área táctil de **44 px** (nivel AAA 2.5.5).
+
+**Resultado medido:**
+
+- **axe sin problemas en 194 comprobaciones:** todas las páginas y estados (menús, filtros, diálogos, reserva), en móvil y escritorio, en el modo azul y en el modo noche.
+- **Zoom al 200 %** sin desplazamiento horizontal en ninguna página (WCAG 1.4.10).
+- **Contraste:**
+  - en el modo azul, texto blanco sobre el fondo a 9,2:1 y texto de las tarjetas a 15:1;
+  - sobre las fotos de portada, 5,55:1 en el peor caso (Madrid, en móvil); `pnpm check:contraste` lo mide con el píxel más claro detrás del texto;
+  - unas pruebas automáticas comprueban la paleta de cada modo.
+
+**Cómo se consigue:**
+
+- **Navegación con teclado:**
+  - enlace «Saltar al contenido»;
+  - el foco pasa al `<main>` en cada cambio de página;
+  - el foco se ve siempre.
+- **Diálogos accesibles:** bienvenida, «Acerca de» y filtros.
+  - `role="dialog"` y `aria-modal`;
+  - el foco no se escapa a la página de detrás y se cierran con Escape;
+  - al cerrarse, el foco vuelve al botón que los abrió.
+- **Estados anunciados:**
+  - `aria-pressed` en guardar, categorías y modo noche;
+  - recuentos y avisos en regiones `aria-live` o `role="status"`.
+- **Encabezados:** un `h1` por página, un `h2` por sección y cada tarjeta con su encabezado, para poder recorrerlas con un lector de pantalla.
+- **Calendario de filtros:** patrón *grid* de WAI-ARIA, con flechas, Inicio y Fin. Cada día se anuncia con su número de eventos.
+- **Movimiento:** con «reducir movimiento» se quitan las animaciones y el desplazamiento suave.
+
+**Pendiente:** probarlo con un lector de pantalla real (NVDA o VoiceOver). La revisión automática no lo sustituye. Ver [docs/legal/ACCESIBILIDAD.md](docs/legal/ACCESIBILIDAD.md).
+
+## 🔄 Antes y después
+
+| | Antes (7 de noviembre) | Ahora |
+|---|---|---|
+| **Portada** | <img src="docs/capturas/antes/1-inicio-escritorio.jpg" alt="Portada antes del rediseño" width="420"> | <img src="docs/capturas/final/1-inicio-escritorio.jpg" alt="Portada en el modo azul" width="420"> |
+| **Ficha en móvil** | <img src="docs/capturas/antes/3-detalle-movil.jpg" alt="Ficha de evento en móvil antes del rediseño" width="200"> | <img src="docs/capturas/final/3-detalle-movil.jpg" alt="Ficha de evento en móvil en el modo azul" width="200"> |
+| **Modo noche** | — | <img src="docs/capturas/final-noche/1-inicio-escritorio.jpg" alt="Portada en el modo noche" width="420"> |
+
+Las mismas pantallas (inicio, filtros, búsqueda, ficha y favoritos, en móvil y escritorio y a página completa) están en [docs/capturas/antes](docs/capturas/antes/), [docs/capturas/final](docs/capturas/final/) y [docs/capturas/final-noche](docs/capturas/final-noche/).
+
+## 🚧 Limitaciones
+
+Plan Cerca es una web estática, sin servidor propio ni base de datos. Por eso:
+
+- **No hay avisos por correo.** «Seguir artista» y «Avisarme» guardan la preferencia, pero no envían nada.
+- **No hay cuentas.** El perfil y los favoritos se guardan en el navegador.
+- **No se venden entradas.** La compra se hace en la web oficial; «Probar la reserva» es una demostración.
+- **El catálogo se actualiza a mano.**
+
+El detalle, con lo que queda de rendimiento y accesibilidad, está en [docs/LIMITACIONES.md](docs/LIMITACIONES.md).
+
+---
+
+# Cómo está hecho
 
 ## 🧱 Arquitectura
 
@@ -148,7 +252,7 @@ flowchart TB
 | UI | **React 19** | Componentes y estado local; nada más hace falta |
 | Rutas | **React Router 7** | URLs reales, compartibles y con historial |
 | Lenguaje | **TypeScript 5.7** | Los JSON se leen con tipos propios (`EventItem`, `Venue`, `City`…), así que el código que los usa está comprobado |
-| Estilos | **Tailwind CSS 4** + CSS propio (`src/index.css`) | Tema oscuro con acento violeta, variables por categoría y *media queries* para móvil |
+| Estilos | **Tailwind CSS 4** + CSS propio (`src/index.css`) | Modo azul por defecto y modo noche con variables de color, un color por categoría y *media queries* para móvil |
 | Build | **Vite 8** | Arranque instantáneo y recarga en caliente |
 | Formato | **oxfmt** | Formateador rápido, sin configuración |
 | Tipografías | **DM Sans** y **Manrope** (`@fontsource`, autoalojadas) | Se sirven desde el propio dominio: ninguna petición a Google Fonts |
@@ -179,7 +283,10 @@ Todo lo que define «qué estoy viendo» está en la URL, así que copiar la bar
 | `/event/:id` | Ficha de evento (o aviso de «ya ha pasado») |
 | `/venues` · `/venues/:id` | Directorio y ficha de recinto |
 | `/artist/:slug` · `/entity/:slug` | Ficha de artista, musical o espectáculo |
-| `/favorites` | Favoritos |
+| `/favorites` | Favoritos (próximos y pasados) |
+| `/event/:id/reservar` | Reserva de demostración en cuatro pasos |
+| `/perfil` | «Tu perfil»: avatar, ciudad, categorías favoritas, idioma y modo noche |
+| `/tus-datos` · `/aviso-legal` · `/privacidad` · `/cookies` · `/terminos` · `/accesibilidad` | Zona legal y descarga o borrado de los datos guardados |
 | `*` | Página 404 traducida |
 
 **Detalles de navegación:**
@@ -251,10 +358,10 @@ erDiagram
 - **Búsqueda sin tildes.** Texto y consulta se normalizan (NFD, sin diacríticos, en minúsculas): «opera» encuentra «Ópera». Se busca en título, categoría, descripción, organizador, recinto, dirección y etiquetas.
 - **Si no hay nada aquí, mira allí.** Cuando la búsqueda no da resultados en tu ciudad pero sí en otras, se ofrecen botones «Valencia · 1» que repiten la búsqueda allí con los mismos filtros.
 - **Rangos de fecha por solapamiento.** Un evento de varios días entra en «Esta semana» si alguno de sus días cae dentro, no solo el primero.
-- **Atajos con recuento.** Hoy, Mañana, Esta semana y Próximos 30 días muestran cuántos planes hay y se desactivan cuando son cero, para no llevar a una lista vacía.
+- **Atajos con recuento.** Hoy, Mañana, Esta semana y Próximos 30 días muestran cuántos planes hay. Los que están a cero no se muestran, para no llevar a una lista vacía; queda un aviso con un enlace a los próximos días.
 - **Filtros que avisan antes.** El botón de la pantalla de filtros dice cuántos resultados vas a ver («Ver resultados · 12») y, si escribes una ciudad sin eventos, sugiere las que sí tienen.
-- **Recomendados sin repetir artista.** Los tres destacados priorizan los eventos marcados como `featured` y descartan un segundo concierto del mismo artista, para que no salgan tres fechas de la misma gira.
-- **Franja de descubrimiento.** Las tres categorías con más eventos en la ciudad, cuántos hay esta semana y el evento mejor valorado.
+- **Recomendados variados.** Los tres destacados son sobre todo conciertos, con como mucho un evento deportivo, y sin repetir artista, equipo ni recinto. Si en «Tu perfil» hay categorías favoritas, se alternan.
+- **«Lo que más hay».** Las categorías con más eventos en la ciudad, con su recuento; cada una filtra el catálogo con un toque.
 
 ---
 
@@ -290,20 +397,6 @@ Además, cada ficha incluye un bloque **JSON-LD de schema.org** (`Event`, `Place
 <div align="center">
 <img src="docs/screenshots/home-english-desktop.jpg" alt="Portada en inglés con la agenda de Sevilla" width="720">
 </div>
-
----
-
-## ♿ Accesibilidad
-
-Como proyecto de HCI, la accesibilidad se trató como requisito y no como repaso final:
-
-- **Enlace «Saltar al contenido»** y **foco movido al `<main>`** en cada cambio de página, para que el lector de pantalla no se quede en el menú.
-- **Diálogos accesibles.** El de bienvenida y el de «Acerca de» tienen `role="dialog"`, `aria-modal`, título enlazado, cierre con Escape y foco atrapado: Tab no se escapa a la página de detrás. Al cerrar «Acerca de», el foco vuelve al botón que lo abrió.
-- **Estados anunciados.** Botones de alternar con `aria-pressed` (guardar, categorías, seguir), contador del carrusel con `aria-live` y mensajes de «sin resultados» con `role="status"`.
-- **Reducir movimiento.** Con `prefers-reduced-motion` se quitan las animaciones y el desplazamiento suave, también en los botones del carrusel.
-- **Imágenes que no rompen la página.** `FallbackImage` pinta un fondo del tema con el icono de la categoría si una imagen externa falla, incluido el caso de que falle antes de que React la monte.
-- **Contraste revisado** en el tema oscuro, con especial cuidado en móvil.
-- **Selector de ciudad** con cierre por Escape o clic fuera y foco devuelto al botón.
 
 ---
 
@@ -354,7 +447,7 @@ El título, la descripción y el idioma del HTML se configuran en `.figma/make/s
    pnpm check:a11y && pnpm check:terceros   # opcional, recomendado
    ```
 2. Fusiona la rama de trabajo en `develop` y `develop` en `main` (con PR en GitHub). Vercel publica en producción lo que llega a `main` y crea una vista previa de cada rama.
-3. **Solo la primera vez:** `main` todavía muestra la página de «Próximamente» (`src/main.tsx` monta `ComingSoonPage`). Al fusionar `develop` en `main`, resuelve el conflicto de `src/main.tsx` quedándote con la versión de `develop`, que monta la app.
+3. **Lanzamiento:** mientras `LAUNCHED` sea `false` en `src/main.tsx`, plancerca.com muestra la página de «Próximamente» y la app solo se ve en local y en las vistas previas. Para lanzar, se cambia a `true` y se fusiona en `main`.
 4. Comprueba en la web publicada: que `/event/169` carga al recargar, que las cabeceras de seguridad aparecen en la respuesta y que Vercel tiene **pnpm** como gestor de paquetes.
 
 Para volver a publicar tras cambiar datos o código, repite los pasos 1, 2 y 4. Si prefieres no usar GitHub, con la CLI de Vercel basta con `vercel --prod` desde la raíz del proyecto.
@@ -393,6 +486,9 @@ pnpm dev          # http://localhost:8443 (o el puerto de la variable PORT)
 | `pnpm check:terceros` | Navegador real: ninguna petición a terceros, ninguna cookie, ninguna violación de la CSP |
 | `pnpm check:contraste` | Contraste del texto sobre las portadas de ciudad |
 | `pnpm check:responsive` | 360, 390 y 768 px, conexión 3G lenta y sin permiso de ubicación |
+| `pnpm check:pie` | Ninguna página deja espacio vacío bajo el pie |
+| `node scripts/capture-screens.mjs <carpeta> [--noche]` | Capturas de las pantallas clave (las de `docs/capturas/`) |
+| `node scripts/capture-guide.mjs` | Capturas de la guía visual y del README (`docs/screenshots/`) |
 
 No hace falta ninguna clave ni variable de entorno. Cómo añadir eventos, recintos o ciudades está en el **[manual de uso](docs/MANUAL-DE-USO.md#para-quien-mantiene-la-app)**.
 
@@ -404,10 +500,17 @@ No hace falta ninguna clave ni variable de entorno. Cómo añadir eventos, recin
 src/
 ├── App.tsx                      Rutas y páginas: portada, búsqueda, filtros, fichas, recintos, favoritos
 ├── main.tsx                     Arranque: ErrorBoundary → BrowserRouter → PreferredCityProvider → App
-├── index.css                    Tailwind, tema oscuro, categorías por color y diseño móvil
+├── index.css                    Tailwind, modo azul y modo noche, categorías por color y diseño móvil
 ├── components/
 │   ├── CityOnboardingDialog.tsx Diálogo de bienvenida y geolocalización
 │   ├── CitySelector.tsx         Selector de ciudad de la cabecera
+│   ├── FiltersDrawer.tsx        Panel de filtros (lateral en escritorio, hoja inferior en móvil)
+│   ├── MonthCalendar.tsx        Calendario accesible de los filtros
+│   ├── NearMePanel.tsx          «Cerca de mí»: ordenar y filtrar por distancia
+│   ├── ProfileMenu.tsx          Menú del avatar
+│   ├── ProfilePage.tsx          «Tu perfil»
+│   ├── BookingPage.tsx          Reserva de demostración
+│   ├── ThemeToggle.tsx          Interruptor de modo noche
 │   ├── FallbackImage.tsx        Imagen con reserva si falla la carga
 │   ├── ErrorBoundary.tsx        Página de error traducida
 │   ├── StatusPage.tsx           404 y «evento pasado»
@@ -424,36 +527,19 @@ src/
 │   └── *.ts                     Acceso tipado: catálogo, recintos, idioma, preferencias de artista
 ├── types/Event.ts               Tipos de evento, recinto, ciudad, categoría y ficha
 ├── legal/                       Páginas legales, «Tus datos» y textos de la zona legal
-└── lib/                         JSON-LD seguro, metadatos por página e imágenes responsive
-public/                          favicon, robots.txt, llms.txt, ai-catalog.json e images/ (imágenes autoalojadas)
+└── lib/                         JSON-LD seguro, metadatos por página, imágenes responsive y tema (theme.ts)
+public/                          favicon, theme-init.js (tema antes de pintar), robots.txt, llms.txt, ai-catalog.json e images/
 scripts/                         Imágenes, sitemap y comprobaciones en navegador (accesibilidad, terceros, tamaños)
 tests/                           Pruebas automáticas (pnpm test)
 datos-legales.json               Datos del titular y proveedores que leen las páginas legales
-docs/                            Guía visual, manual de uso, capturas y docs/legal/ (auditoría y checklist de lanzamiento)
+docs/                            Registro de cambios de la interfaz, plan de UI, limitaciones, roadmap, guía visual, manual, capturas y docs/legal/
 ```
-
----
-
-## 📌 Estado y qué falta
-
-**Hecho:** seis ciudades con portada nocturna propia · búsqueda y filtros por categoría y fecha · fichas de evento, recinto y artista · favoritos · calendario y compartir · tres idiomas · tema oscuro con animaciones que respetan «reducir movimiento» · accesibilidad revisada · datos para buscadores y agentes · despliegue en Vercel.
-
-**Pendiente o mejorable:**
-
-- **Datos legales de ejemplo.** `datos-legales.json` tiene `esEjemplo: true` y las páginas legales muestran un aviso rojo hasta completarlo. Lo que falta está en [`docs/legal/PENDIENTE.md`](docs/legal/PENDIENTE.md).
-- **Faltan pruebas de lógica** como los rangos de fecha o la hora de Madrid en el `.ics`; las pruebas actuales cubren privacidad, legal, seguridad y metadatos.
-- **«Seguir artista» y «Avisarme» solo guardan la preferencia** en el navegador. No hay notificaciones de verdad porque no hay backend que las envíe.
-- **«Invitado» es un marcador de posición.** No hay cuentas, así que los favoritos no pasan de un dispositivo a otro.
-- **Datos curados a mano.** Cada evento se añade editando `events.json`; precios y disponibilidad pueden quedarse atrás respecto a la web oficial.
-- **`App.tsx` y `index.css` son grandes** (unas 770 líneas y casi 100 KB). Separar páginas y estilos facilitaría el mantenimiento.
-- **Licencias de imágenes por revisar.** Las 210 imágenes están autoalojadas, pero la mayoría son carteles y fotos promocionales de terceros sin licencia documentada. Su origen está en [`docs/legal/ORIGEN-IMAGENES.json`](docs/legal/ORIGEN-IMAGENES.json).
-- **Valoraciones y «% de popularidad» sin fuente.** Ver [`docs/legal/TEXTOS-A-REVISAR.md`](docs/legal/TEXTOS-A-REVISAR.md).
 
 ---
 
 ## 📷 Créditos de las imágenes
 
-Las portadas de ciudad son fotos nocturnas elegidas para que encajen con el tema oscuro y violeta de la app.
+Las portadas de ciudad son fotos nocturnas: en la portada, el texto va sobre la parte oscura de la foto.
 
 | Ciudad | Foto | Autor y licencia |
 |---|---|---|

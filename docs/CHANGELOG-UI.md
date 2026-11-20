@@ -570,3 +570,18 @@ Por qué: la agenda es cultural (el enunciado habla de «conciertos, teatro, exp
   
   Sin imagen propia: usan la foto con licencia libre del recinto, con su crédito.
 - **Por qué:** Barcelona solo tenía música y deporte, y 19 eventos entre el 10 de diciembre y el 31 de enero. Ahora tiene 34 y suma ópera, danza, teatro y exposiciones.
+
+### Iteración P3.6 · README centrado en el diseño y capturas al día
+
+- **Qué:**
+  - El README empieza por el diseño de la interfaz:
+    - cómo se trabajó;
+    - una tabla de decisiones de diseño, cada una con su heurística de Nielsen o su criterio WCAG;
+    - los resultados de accesibilidad medidos;
+    - el antes y el después;
+    - las limitaciones.
+    
+    La parte técnica va detrás, con los datos al día (atajos, recomendados, rutas, despliegue y estructura).
+  - Las 21 capturas de `docs/screenshots/` (guía visual, manual y README) se rehacen con el diseño actual mediante `scripts/capture-guide.mjs`. La guía visual corrige los textos que ya no coincidían (valoraciones, atajos desactivados, favoritos) y añade el modo noche. En el manual se actualizan las instrucciones de los filtros y el formato de los eventos.
+  - Jay Wheeler en Barcelona y Bilbao usaba el cartel de Valencia («8 DIC · VALENCIA · ROIG ARENA»): ahora muestra la foto del recinto.
+- **Por qué:** el repositorio es parte de la entrega de una asignatura de interfaces, y el README es lo primero que se lee.
